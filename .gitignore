@@ -1,0 +1,14 @@
+.snakemake/
+scripts/.snakemake*
+snakemake.err
+snakemake.log
+rulegraph.svg
+dag.svg
+Rplots.pdf
+logs/*
+
+figure1/
+
+config.yaml
+
+!logs/.gitkeep

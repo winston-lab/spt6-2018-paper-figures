@@ -1,0 +1,9 @@
+__default__:
+    queue : "short"
+    time : 60
+    n : 1
+    mem : 8000
+    name : "{rule}.{wildcards}"
+    log : "logs/{rule}.log"
+    err : "logs/{rule}.err"
+
