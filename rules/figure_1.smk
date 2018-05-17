@@ -3,7 +3,7 @@
 #metagene of wild-type TSS-seq
 rule figure_one_b:
     input:
-        tss_data = config["figure_one"]["one_b"]["tss-seq_data"],
+        tss_data = config["figure_one"]["one_b"]["tss_data"],
         theme = config["theme_spec"]
     output:
         svg = "figure1/figure1B/spt6_2018_figure1B-TSS-seq-average-signal.svg",
@@ -11,7 +11,25 @@ rule figure_one_b:
         png = "figure1/figure1B/spt6_2018_figure1B-TSS-seq-average-signal.png",
         grob = "figure1/figure1B/spt6_2018_figure1B-TSS-seq-average-signal.Rdata",
     params:
-        height = config["figure_one"]["one_b"]["height"],
-        width = config["figure_one"]["one_b"]["width"],
+        height = eval(str(config["figure_one"]["one_b"]["height"])),
+        width = eval(str(config["figure_one"]["one_b"]["width"])),
     script:
         "../scripts/spt6_2018_figure1B.R"
+
+rule figure_one_c:
+    input:
+        sense_tss_data = config["figure_one"]["one_c"]["sense_tss_data"],
+        antisense_tss_data = config["figure_one"]["one_c"]["antisense_tss_data"],
+        annotation = config["figure_one"]["one_c"]["annotation"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure1/figure1C/spt6_2018_figure1C-TSS-seq-heatmaps.svg",
+        pdf = "figure1/figure1C/spt6_2018_figure1C-TSS-seq-heatmaps.pdf",
+        png = "figure1/figure1C/spt6_2018_figure1C-TSS-seq-heatmaps.png",
+        grob = "figure1/figure1C/spt6_2018_figure1C-TSS-seq-heatmaps.Rdata",
+    params:
+        height = eval(str(config["figure_one"]["one_c"]["height"])),
+        width = eval(str(config["figure_one"]["one_c"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure1C.R"
+

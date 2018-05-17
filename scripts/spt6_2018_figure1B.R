@@ -28,9 +28,11 @@ main = function(theme_spec, tss_seq_data,
         theme_default +
         theme(axis.title.x = element_blank())
 
+    fig_one_b %<>% add_label("b")
+
     ggsave(svg_out, plot=fig_one_b, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_one_b, width=fig_width, height=fig_height, units="cm")
-    ggsave(png_out, plot=fig_one_b, width=fig_width, height=fig_height, units="cm")
+    ggsave(png_out, plot=fig_one_b, width=fig_width, height=fig_height, units="cm", dpi=326)
     save(fig_one_b, file=grob_out)
 }
 
