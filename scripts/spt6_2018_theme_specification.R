@@ -1,4 +1,5 @@
 library(tidyverse)
+library(forcats)
 library(magrittr)
 library(ggthemes)
 library(viridis)

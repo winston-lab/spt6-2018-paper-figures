@@ -16,6 +16,7 @@ rule figure_one_b:
     script:
         "../scripts/spt6_2018_figure1B.R"
 
+# heatmaps of TSS-seq signal
 rule figure_one_c:
     input:
         sense_tss_data = config["figure_one"]["one_c"]["sense_tss_data"],
@@ -32,4 +33,20 @@ rule figure_one_c:
         width = eval(str(config["figure_one"]["one_c"]["width"])),
     script:
         "../scripts/spt6_2018_figure1C.R"
+
+# mosaic plot of TSS-seq differential expression
+rule figure_one_e:
+    input:
+        diffexp_data = config["figure_one"]["one_e"]["diffexp_data"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure1/figure1E/spt6_2018_figure1E-TSS-seq-diffexp-summary.svg",
+        pdf = "figure1/figure1E/spt6_2018_figure1E-TSS-seq-diffexp-summary.pdf",
+        png = "figure1/figure1E/spt6_2018_figure1E-TSS-seq-diffexp-summary.png",
+        grob = "figure1/figure1E/spt6_2018_figure1E-TSS-seq-diffexp-summary.Rdata",
+    params:
+        height = eval(str(config["figure_one"]["one_e"]["height"])),
+        width = eval(str(config["figure_one"]["one_e"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure1E.R"
 
