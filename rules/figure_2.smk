@@ -25,13 +25,30 @@ rule figure_two_b:
         annotation = config["figure_two"]["two_b"]["annotation"],
         theme = config["theme_spec"]
     output:
-        svg = "figure2/figure2B/spt6_2018_figure2B-NET-seq-average-signal.svg",
-        pdf = "figure2/figure2B/spt6_2018_figure2B-NET-seq-average-signal.pdf",
-        png = "figure2/figure2B/spt6_2018_figure2B-NET-seq-average-signal.png",
-        grob = "figure2/figure2B/spt6_2018_figure2B-NET-seq-average-signal.Rdata",
+        svg = "figure2/figure2B/spt6_2018_figure2B-MNase-seq-average-signal.svg",
+        pdf = "figure2/figure2B/spt6_2018_figure2B-MNase-seq-average-signal.pdf",
+        png = "figure2/figure2B/spt6_2018_figure2B-MNase-seq-average-signal.png",
+        grob = "figure2/figure2B/spt6_2018_figure2B-MNase-seq-average-signal.Rdata",
     params:
         height = eval(str(config["figure_two"]["two_b"]["height"])),
         width = eval(str(config["figure_two"]["two_b"]["width"])),
     script:
         "../scripts/spt6_2018_figure2B.R"
+
+rule figure_two_c:
+    input:
+        wt_mnase_quant = config["figure_two"]["two_c"]["wt_mnase_quant"],
+        spt6_mnase_quant = config["figure_two"]["two_c"]["spt6_mnase_quant"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure2/figure2C/spt6_2018_figure2C-Mnase-global-quantification.svg",
+        pdf = "figure2/figure2C/spt6_2018_figure2C-Mnase-global-quantification.pdf",
+        png = "figure2/figure2C/spt6_2018_figure2C-Mnase-global-quantification.png",
+        grob = "figure2/figure2C/spt6_2018_figure2C-Mnase-global-quantification.Rdata",
+    params:
+        height = eval(str(config["figure_two"]["two_c"]["height"])),
+        width = eval(str(config["figure_two"]["two_c"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure2C.R"
+
 

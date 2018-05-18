@@ -21,7 +21,9 @@ theme_default = theme_light() +
           legend.position = c(0.975, 1),
           legend.background = element_blank(),
           legend.box.margin = margin(0,0,0,0,"pt"),
-          legend.margin = margin(0,0,0,0,"pt"))
+          legend.margin = margin(0,0,0,0,"pt"),
+          strip.background = element_blank(),
+          strip.text = element_text(size=7, color="black", face="plain"))
 
 theme_heatmap = theme_minimal() +
     theme(text = element_text(size=9, color="black", face="plain"),

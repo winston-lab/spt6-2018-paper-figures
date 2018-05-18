@@ -1,9 +1,9 @@
 __default__:
-    queue : "short"
+    queue : short
     time : 60
     n : 1
-    mem : 8000
-    name : "{rule}.{wildcards}"
+    mem : 12000
+    name : "{rule}"
     log : "logs/{rule}.log"
     err : "logs/{rule}.err"
 
