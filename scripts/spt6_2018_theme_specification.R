@@ -11,7 +11,17 @@ theme_default = theme_light() +
           axis.text = element_text(size=7, color="black", face="plain"),
           axis.text.x = element_text(margin=margin(0,0,0,0,"pt")),
           axis.text.y = element_text(margin=margin(0,0.5,0,0,"pt")),
-          plot.title = element_text(size=9, color="black", face="plain", margin=margin(0,0,1,0,"pt")))
+          axis.title.x = element_text(size=7, margin=margin(1,0,0,0,"pt")),
+          axis.title.y = element_text(size=7, margin=margin(0,1,0,0,"pt")),
+          plot.title = element_text(size=9, color="black", face="plain", margin=margin(0,0,1,0,"pt")),
+          plot.margin = margin(11/2, 11, 11/2, 11/2, "pt"),
+          legend.title = element_blank(),
+          legend.text = element_text(size=9),
+          legend.justification = c(1,1),
+          legend.position = c(0.975, 1),
+          legend.background = element_blank(),
+          legend.box.margin = margin(0,0,0,0,"pt"),
+          legend.margin = margin(0,0,0,0,"pt"))
 
 theme_heatmap = theme_minimal() +
     theme(text = element_text(size=9, color="black", face="plain"),
