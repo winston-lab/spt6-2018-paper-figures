@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+#TSS-seq scatterplots
 rule supp_one_a:
     input:
         tss_data = config["figure_one"]["supp_a"]["tss_data"],
@@ -16,6 +17,7 @@ rule supp_one_a:
     script:
         "../scripts/spt6_2018_supp1A.R"
 
+#TSS-seq vs Malabat
 rule supp_one_b:
     input:
         tss_data = config["figure_one"]["supp_b"]["tss_data"],
@@ -30,3 +32,20 @@ rule supp_one_b:
         width = eval(str(config["figure_one"]["supp_b"]["width"])),
     script:
         "../scripts/spt6_2018_supp1B.R"
+
+# histogram of intragenic starts per ORF
+rule supp_one_d:
+    input:
+        intra_diffexp_data = config["figure_one"]["supp_d"]["intra_diffexp_data"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure1/supp1D/spt6_2018_supp1D-intra-TSS-per-ORF-histogram.svg",
+        pdf = "figure1/supp1D/spt6_2018_supp1D-intra-TSS-per-ORF-histogram.pdf",
+        png = "figure1/supp1D/spt6_2018_supp1D-intra-TSS-per-ORF-histogram.png",
+        grob = "figure1/supp1D/spt6_2018_supp1D-intra-TSS-per-ORF-histogram.Rdata",
+    params:
+        height = eval(str(config["figure_one"]["supp_d"]["height"])),
+        width = eval(str(config["figure_one"]["supp_d"]["width"])),
+    script:
+        "../scripts/spt6_2018_supp1D.R"
+

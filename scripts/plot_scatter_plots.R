@@ -4,24 +4,24 @@ library(viridis)
 
 import = function(path, sample_list){
     read_tsv(path) %>%
-        gather(key=sample, value=signal, -name) %>% 
-        filter(sample %in% sample_list) %>% 
+        gather(key=sample, value=signal, -name) %>%
+        filter(sample %in% sample_list) %>%
         mutate(sample = ordered(sample,
                                 levels = c("WT-37C-1", "WT-37C-2",
                                            "spt6-1004-37C-1", "spt6-1004-37C-2"),
                                 labels = c("\"WT 1\"", "\"WT 2\"",
                                            "italic(\"spt6-1004\") ~ 1",
-                                           "italic(\"spt6-1004\") ~ 2"))) %>% 
-        spread(sample, signal) %>% 
-        select(-name) %>% 
-        .[which(rowSums(.)>0),] %>% 
+                                           "italic(\"spt6-1004\") ~ 2"))) %>%
+        spread(sample, signal) %>%
+        select(-name) %>%
+        .[which(rowSums(.)>0),] %>%
         return()
 }
 
 plot_scatter = function(data_path, sample_list, title, pcount, genome_binsize, plot_binwidth){
 
     df = import(data_path, sample_list=sample_list)
-    
+
     cor_matrix = df %>% na_if(0) %>% log10() %>%
         cor(method="pearson", use="pairwise.complete.obs")
 
@@ -34,7 +34,7 @@ plot_scatter = function(data_path, sample_list, title, pcount, genome_binsize, p
         #for each row, indexed by j
         for (j in 1:ncol(df)) {
             idx = ncol(df)*(i-1)+j
-            
+
             if (i < j) {
                 #upper right (correlation)
                 cor_value = cor_matrix[i,j]
@@ -61,9 +61,9 @@ plot_scatter = function(data_path, sample_list, title, pcount, genome_binsize, p
             } else {
                 #bottom left (scatter)
                 sub_df = df %>%
-                    select(x_values=j, y_values=i) %>% 
+                    select(x_values=j, y_values=i) %>%
                     .[which(rowSums(.)>0),]
-                
+
                 plot = ggplot(data = sub_df,
                               aes(x=x_values+pcount, y=y_values+pcount)) +
                     geom_abline(intercept = 0, slope=1, color="grey80", size=.5) +
@@ -96,6 +96,6 @@ plot_scatter = function(data_path, sample_list, title, pcount, genome_binsize, p
               panel.spacing = unit(0, "pt"),
               panel.border = element_rect(size=0.5),
               panel.grid.minor = element_blank())
-    
+
     return(ggmatrix_gtable(all_plots))
 }
