@@ -23,10 +23,10 @@ rule figure_four_c:
         spt6_mnase_quant = config["figure_four"]["four_c"]["spt6_mnase_quant"],
         theme = config["theme_spec"]
     output:
-        svg = "figure4/figure4C/spt6_2018_figure4C-Mnase-global-quantification.svg",
-        pdf = "figure4/figure4C/spt6_2018_figure4C-Mnase-global-quantification.pdf",
-        png = "figure4/figure4C/spt6_2018_figure4C-Mnase-global-quantification.png",
-        grob = "figure4/figure4C/spt6_2018_figure4C-Mnase-global-quantification.Rdata",
+        svg = "figure4/figure4C/spt6_2018_figure4C-MNase-global-quantification.svg",
+        pdf = "figure4/figure4C/spt6_2018_figure4C-MNase-global-quantification.pdf",
+        png = "figure4/figure4C/spt6_2018_figure4C-MNase-global-quantification.png",
+        grob = "figure4/figure4C/spt6_2018_figure4C-MNase-global-quantification.Rdata",
     params:
         height = eval(str(config["figure_four"]["four_c"]["height"])),
         width = eval(str(config["figure_four"]["four_c"]["width"])),

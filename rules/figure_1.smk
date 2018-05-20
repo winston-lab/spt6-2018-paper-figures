@@ -4,7 +4,7 @@
 rule figure_one_b:
     input:
         tss_data = config["figure_one"]["one_b"]["tss_data"],
-        theme = config["theme_spec"]
+        theme = config["theme_spec"],
     output:
         svg = "figure1/figure1B/spt6_2018_figure1B-TSS-seq-average-signal.svg",
         pdf = "figure1/figure1B/spt6_2018_figure1B-TSS-seq-average-signal.pdf",
@@ -22,6 +22,7 @@ rule figure_one_c:
         sense_tss_data = config["figure_one"]["one_c"]["sense_tss_data"],
         antisense_tss_data = config["figure_one"]["one_c"]["antisense_tss_data"],
         annotation = config["figure_one"]["one_c"]["annotation"],
+        heatmap_scripts = "scripts/plot_heatmap.R",
         theme = config["theme_spec"]
     output:
         svg = "figure1/figure1C/spt6_2018_figure1C-TSS-seq-heatmaps.svg",

@@ -2,25 +2,43 @@ library(tidyverse)
 library(GGally)
 library(viridis)
 
-import = function(path, sample_list){
+import = function(path, sample_list, netseq=FALSE){
+    
     read_tsv(path) %>%
         gather(key=sample, value=signal, -name) %>%
         filter(sample %in% sample_list) %>%
         mutate(sample = ordered(sample,
-                                levels = c("WT-37C-1", "WT-37C-2",
-                                           "spt6-1004-37C-1", "spt6-1004-37C-2"),
-                                labels = c("\"WT 1\"", "\"WT 2\"",
+                                levels = if(netseq){
+                                    c("WT-37C-1", "WT-37C-2",
+                                      "spt6-1004-30C-1", "spt6-1004-30C-2",
+                                      "spt6-1004-37C-1", "spt6-1004-37C-2",
+                                      "set2D")
+                                } else {
+                                    c("WT-37C-1", "WT-37C-2",
+                                      "spt6-1004-37C-1", "spt6-1004-37C-2")
+                                    },
+                                labels = if(netseq){
+                                    c("\"WT\" ~ 37*degree ~ 1",
+                                      "\"WT\" ~ 37*degree ~ 2",
+                                      "italic(\"spt6-1004\") ~ 30*degree ~ 1",
+                                      "italic(\"spt6-1004\") ~ 30*degree ~ 2",
+                                      "italic(\"spt6-1004\") ~ 37*degree ~ 1",
+                                      "italic(\"spt6-1004\") ~ 37*degree ~ 2",
+                                      "italic(\"set2\"*Delta)")
+                                    } else {
+                                        c("\"WT 1\"", "\"WT 2\"",
                                            "italic(\"spt6-1004\") ~ 1",
-                                           "italic(\"spt6-1004\") ~ 2"))) %>%
+                                           "italic(\"spt6-1004\") ~ 2")
+                                        })) %>%
         spread(sample, signal) %>%
         select(-name) %>%
         .[which(rowSums(.)>0),] %>%
         return()
 }
 
-plot_scatter = function(data_path, sample_list, title, pcount, genome_binsize, plot_binwidth){
+plot_scatter = function(data_path, sample_list, title, pcount, genome_binsize, plot_binwidth, netseq=FALSE){
 
-    df = import(data_path, sample_list=sample_list)
+    df = import(data_path, sample_list=sample_list, netseq=netseq)
 
     cor_matrix = df %>% na_if(0) %>% log10() %>%
         cor(method="pearson", use="pairwise.complete.obs")
