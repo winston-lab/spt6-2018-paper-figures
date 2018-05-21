@@ -38,7 +38,10 @@ rule figure_one_c:
 # mosaic plot of TSS-seq differential expression
 rule figure_one_e:
     input:
-        diffexp_data = config["figure_one"]["one_e"]["diffexp_data"],
+        in_genic = config["figure_one"]["one_e"]["genic"],
+        in_intra = config["figure_one"]["one_e"]["intragenic"],
+        in_anti = config["figure_one"]["one_e"]["antisense"],
+        in_inter = config["figure_one"]["one_e"]["intergenic"],
         theme = config["theme_spec"]
     output:
         svg = "figure1/figure1E/spt6_2018_figure1E-TSS-seq-diffexp-summary.svg",
