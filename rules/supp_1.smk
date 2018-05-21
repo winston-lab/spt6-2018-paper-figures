@@ -37,6 +37,7 @@ rule supp_one_b:
 rule supp_one_d:
     input:
         intra_diffexp_data = config["figure_one"]["supp_d"]["intra_diffexp_data"],
+        orf_anno = config["figure_one"]["supp_d"]["orf_anno"],
         theme = config["theme_spec"]
     output:
         svg = "figure1/supp1D/spt6_2018_supp1D-intra-TSS-per-ORF-histogram.svg",
