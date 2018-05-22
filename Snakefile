@@ -14,6 +14,7 @@ rule all:
         "figure2/figure2B/spt6_2018_figure2B-TFIIB-ChIPnexus-VAM6-ChIPnexus-and-qPCR.png",
         "figure2/figure2D/spt6_2018_figure2D-TSS-seq-v-TFIIB-ChIPnexus-foldchange.png",
         "figure2/supp2A/spt6_2018_supp2A-TFIIB-ChIPnexus-scatterplots.png",
+        "figure2/supp2B/spt6_2018_supp2B-TFIIB-western.png",
         "figure3/figure3A/spt6_2018_figure3A-NET-seq-average-signal.png",
         "figure3/supp3A/spt6_2018_supp3A-NETseq-scatterplots.png",
         "figure4/figure4A/spt6_2018_figure4A-MNase-seq-average-signal.png",
