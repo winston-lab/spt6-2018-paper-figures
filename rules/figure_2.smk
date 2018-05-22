@@ -26,10 +26,10 @@ rule figure_two_b:
         annotation = config["figure_two"]["two_b"]["annotation"],
         theme = config["theme_spec"]
     output:
-        svg = "figure2/figure2B/spt6_2018_figure2B-TFIIB-ChIPnexus-VAM6-ChIPnexus-and-qPCR.svg",
-        pdf = "figure2/figure2B/spt6_2018_figure2B-TFIIB-ChIPnexus-VAM6-ChIPnexus-and-qPCR.pdf",
-        png = "figure2/figure2B/spt6_2018_figure2B-TFIIB-ChIPnexus-VAM6-ChIPnexus-and-qPCR.png",
-        grob = "figure2/figure2B/spt6_2018_figure2B-TFIIB-ChIPnexus-VAM6-ChIPnexus-and-qPCR.Rdata",
+        svg = "figure2/figure2B/spt6_2018_figure2B--VAM6-ChIPnexus-and-qPCR.svg",
+        pdf = "figure2/figure2B/spt6_2018_figure2B-VAM6-ChIPnexus-and-qPCR.pdf",
+        png = "figure2/figure2B/spt6_2018_figure2B-VAM6-ChIPnexus-and-qPCR.png",
+        grob = "figure2/figure2B/spt6_2018_figure2B-VAM6-ChIPnexus-and-qPCR.Rdata",
     params:
         height = eval(str(config["figure_two"]["two_b"]["height"])),
         width = eval(str(config["figure_two"]["two_b"]["width"])),
