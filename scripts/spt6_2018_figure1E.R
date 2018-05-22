@@ -54,14 +54,15 @@ main = function(theme_spec, in_genic, in_intra, in_anti, in_inter, alpha,
                       hjust = if_else(category=="genic", 1, 0),
                       y=y, label = category),
                   size=9/72*25.4) +
-        annotate(geom="text", x=max(summary_df[["upregulated"]])/2, y=-1500,
+        annotate(geom="text", x=max(summary_df[["upregulated"]])/2, y=-500,
                  hjust=0.5, vjust=0, label="upregulated TSSs", size=9/72*25.4) +
-        annotate(geom="text", x=max(summary_df[["downregulated"]])/-2, y=-1500,
+        annotate(geom="text", x=max(summary_df[["downregulated"]])/-2, y=-500,
                  hjust=0.5, vjust=0, label="downregulated TSSs", size=9/72*25.4) +
-        scale_y_reverse() +
+        scale_y_reverse(limits = c(max(summary_df[["ymax"]]), -2500),
+                        expand = c(0,0))+
         theme_void()
 
-    fig_one_e %<>% add_label("e")
+    fig_one_e %<>% add_label("E")
 
     ggsave(svg_out, plot=fig_one_e, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_one_e, width=fig_width, height=fig_height, units="cm")

@@ -11,6 +11,8 @@ rule all:
         "figure1/supp1B/spt6_2018_supp1B-TSS-seq-vs-malabat15.png",
         "figure1/supp1D/spt6_2018_supp1D-intra-TSS-per-ORF-histogram.png",
         "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps.png",
+        "figure2/figure2B/spt6_2018_figure2B-TFIIB-ChIPnexus-VAM6-ChIPnexus-and-qPCR.png",
+        "figure2/figure2D/spt6_2018_figure2D-TSS-seq-v-TFIIB-ChIPnexus-foldchange.png",
         "figure2/supp2A/spt6_2018_supp2A-TFIIB-ChIPnexus-scatterplots.png",
         "figure3/figure3A/spt6_2018_figure3A-NET-seq-average-signal.png",
         "figure3/supp3A/spt6_2018_supp3A-NETseq-scatterplots.png",
