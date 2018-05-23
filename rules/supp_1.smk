@@ -33,6 +33,22 @@ rule supp_one_b:
     script:
         "../scripts/spt6_2018_supp1B.R"
 
+#TSS-seq vs Malabat
+rule supp_one_c:
+    input:
+        data_path = config["figure_one"]["supp_c"]["data_path"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure1/supp1C/spt6_2018_supp1C-TSS-seq-vs-uwimana17-RNA-seq.svg",
+        pdf = "figure1/supp1C/spt6_2018_supp1C-TSS-seq-vs-uwimana17-RNA-seq.pdf",
+        png = "figure1/supp1C/spt6_2018_supp1C-TSS-seq-vs-uwimana17-RNA-seq.png",
+        grob = "figure1/supp1C/spt6_2018_supp1C-TSS-seq-vs-uwimana17-RNA-seq.Rdata",
+    params:
+        height = eval(str(config["figure_one"]["supp_c"]["height"])),
+        width = eval(str(config["figure_one"]["supp_c"]["width"])),
+    script:
+        "../scripts/spt6_2018_supp1C.R"
+
 # histogram of intragenic starts per ORF
 rule supp_one_d:
     input:
@@ -49,4 +65,23 @@ rule supp_one_d:
         width = eval(str(config["figure_one"]["supp_d"]["width"])),
     script:
         "../scripts/spt6_2018_supp1D.R"
+
+# bvenn of cheung09, uwimana17, tss-seq genes with intragenic starts
+rule supp_one_e:
+    input:
+        common_names = config["figure_one"]["supp_e"]["common_names"],
+        cheung_data = config["figure_one"]["supp_e"]["cheung_data"],
+        uwimana_data = config["figure_one"]["supp_e"]["uwimana_data"],
+        tss_data = config["figure_one"]["supp_e"]["tss_data"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure1/supp1E/spt6_2018_supp1E-genes-with-intragenic-TSS-vs-cheung08-uwimana17.svg",
+        pdf = "figure1/supp1E/spt6_2018_supp1E-genes-with-intragenic-TSS-vs-cheung08-uwimana17.pdf",
+        png = "figure1/supp1E/spt6_2018_supp1E-genes-with-intragenic-TSS-vs-cheung08-uwimana17.png",
+        grob = "figure1/supp1E/spt6_2018_supp1E-genes-with-intragenic-TSS-vs-cheung08-uwimana17.Rdata",
+    params:
+        height = eval(str(config["figure_one"]["supp_e"]["height"])),
+        width = eval(str(config["figure_one"]["supp_e"]["width"])),
+    script:
+        "../scripts/spt6_2018_supp1E.R"
 

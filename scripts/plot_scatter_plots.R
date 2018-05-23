@@ -3,7 +3,7 @@ library(GGally)
 library(viridis)
 
 import = function(path, sample_list, netseq=FALSE){
-    
+
     read_tsv(path) %>%
         gather(key=sample, value=signal, -name) %>%
         filter(sample %in% sample_list) %>%

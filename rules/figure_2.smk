@@ -8,10 +8,10 @@ rule figure_two_a:
         heatmap_scripts = "scripts/plot_heatmap.R",
         theme = config["theme_spec"]
     output:
-        svg = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps.svg",
-        pdf = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps.pdf",
-        png = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps.png",
-        grob = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps.Rdata",
+        svg = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps-nonoverlapping.svg",
+        pdf = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps-nonoverlapping.pdf",
+        png = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps-nonoverlapping.png",
+        grob = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps-nonoverlapping.Rdata",
     params:
         height = eval(str(config["figure_two"]["two_a"]["height"])),
         width = eval(str(config["figure_two"]["two_a"]["width"])),
