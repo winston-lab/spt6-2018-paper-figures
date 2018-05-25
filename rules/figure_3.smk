@@ -18,3 +18,19 @@ rule figure_three_a:
     script:
         "../scripts/spt6_2018_figure3A.R"
 
+# antisense scatterplots vs set2
+rule figure_three_b:
+    input:
+        data_path = config["figure_three"]["three_b"]["data_path"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure3/figure3B/spt6_2018_figure3B-spt6-v-set2-antisense-NET-seq.svg",
+        pdf = "figure3/figure3B/spt6_2018_figure3B-spt6-v-set2-antisense-NET-seq.pdf",
+        png = "figure3/figure3B/spt6_2018_figure3B-spt6-v-set2-antisense-NET-seq.png",
+        grob = "figure3/figure3B/spt6_2018_figure3B-spt6-v-set2-antisense-NET-seq.Rdata",
+    params:
+        height = eval(str(config["figure_three"]["three_b"]["height"])),
+        width = eval(str(config["figure_three"]["three_b"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure3B.R"
+

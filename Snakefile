@@ -21,6 +21,7 @@ rule all:
         "figure2/supp2D/spt6_2018_supp2D-TFIIB-western.png",
         "figure3/figure3A/spt6_2018_figure3A-NET-seq-average-signal.png",
         "figure3/supp3A/spt6_2018_supp3A-NETseq-scatterplots.png",
+        "figure3/figure3B/spt6_2018_figure3B-spt6-v-set2-antisense-NET-seq.png",
         "figure4/figure4A/spt6_2018_figure4A-MNase-seq-average-signal.png",
         "figure4/figure4B/spt6_2018_figure4B-VAM6-MNase-seq-and-H3-qPCR.png",
         "figure4/figure4C/spt6_2018_figure4C-MNase-global-quantification.png",
