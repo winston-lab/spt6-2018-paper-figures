@@ -71,10 +71,7 @@ main = function(theme_spec,
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         theme_default
 
-    fig_six_a %<>% add_label("a")
-
-    ggsave(png_out, plot=fig_six_a, width=8, height=10, units="cm", dpi=326)
-
+    fig_six_a %<>% add_label("A")
 
     ggsave(svg_out, plot=fig_six_a, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_six_a, width=fig_width, height=fig_height, units="cm")

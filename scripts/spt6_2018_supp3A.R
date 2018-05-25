@@ -12,7 +12,7 @@ main = function(theme_spec, scatterplot_script, netseq_data,
                               genome_binsize = "100nt bins",
                               plot_binwidth = 0.07,
                               netseq=TRUE) %>%
-        add_label("a")
+        add_label("A")
 
     ggsave(svg_out, plot=supp_three_a, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=supp_three_a, width=fig_width, height=fig_height, units="cm")

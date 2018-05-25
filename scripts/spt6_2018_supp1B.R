@@ -60,7 +60,6 @@ main = function(theme_spec,
     #     rowid_to_column(var="index")
 
     supp_one_b %<>% add_label("B")
-    ggsave('test.png', plot=supp_one_b, width=6, height=4.25, units="cm", dpi=300)
 
     ggsave(svg_out, plot=supp_one_b, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=supp_one_b, width=fig_width, height=fig_height, units="cm")

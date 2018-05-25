@@ -25,11 +25,11 @@ main = function(theme_spec, sense_netseq_data, antisense_netseq_data,
     #                 col_names = c('chrom', 'start', 'end', 'name', 'score', 'strand')) %>%
     #     rowid_to_column(var="index")
 
-    df = import(sense_netseq_data, sample_list=sample_list) %>% 
+    df = import(sense_netseq_data, sample_list=sample_list) %>%
         inner_join(import(antisense_netseq_data, sample_list=sample_list),
-                   by=c("group", "annotation", "position"), suffix=c("_sense", "_anti")) %>% 
+                   by=c("group", "annotation", "position"), suffix=c("_sense", "_anti")) %>%
         mutate_at(vars(-c(group, annotation, position)), funs(.*10))
-        
+
     fig_two_a = ggplot(data = df, aes(x=position, color=group, fill=group)) +
         geom_vline(xintercept = 0, size=0.4, color="grey65") +
         geom_ribbon(aes(ymin=low_sense, ymax=high_sense), size=0, alpha=0.2) +
@@ -52,7 +52,7 @@ main = function(theme_spec, sense_netseq_data, antisense_netseq_data,
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         theme_default
 
-    fig_two_a %<>% add_label("a")
+    fig_two_a %<>% add_label("A")
 
     ggsave(svg_out, plot=fig_two_a, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_two_a, width=fig_width, height=fig_height, units="cm")

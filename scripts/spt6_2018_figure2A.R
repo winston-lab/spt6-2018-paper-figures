@@ -19,7 +19,7 @@ main = function(theme_spec, heatmap_scripts,
 
     fig_two_a = plot_heatmap(df=df, max_length=3, add_ylabel=TRUE, cutoff_pct=0.90,
                              y_label = "coding genes", colorbar_title="TFIIB ChIP-nexus protection") %>%
-        add_label("a")
+        add_label("A")
 
     ggsave(svg_out, plot=fig_two_a, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_two_a, width=fig_width, height=fig_height, units="cm")

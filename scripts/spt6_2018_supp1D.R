@@ -19,7 +19,7 @@ main = function(theme_spec, intra_diffexp_data, orf_anno,
         theme(axis.title.y = element_blank(),
               axis.title.x = element_text(margin = margin(t=2, unit="pt")))
 
-    supp_one_d %<>% add_label("d")
+    supp_one_d %<>% add_label("D")
 
     ggsave(svg_out, plot=supp_one_d, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=supp_one_d, width=fig_width, height=fig_height, units="cm")

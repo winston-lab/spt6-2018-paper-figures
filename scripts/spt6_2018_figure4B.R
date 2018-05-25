@@ -122,7 +122,7 @@ main = function(theme_spec, seq_data_path, qpcr_data_path,
         scale_y_continuous(limits = c(0, NA),
                            breaks = scales::pretty_breaks(n=2),
                            name = "enrichment (AU)") +
-        ggtitle("TFIIB ChIP-qPCR") +
+        ggtitle("histone H3 ChIP-qPCR") +
         theme_default +
         theme(legend.position = c(0.8, 0.75),
               legend.justification = c(0.5, 0.5),

@@ -33,7 +33,7 @@ main = function(theme_spec, data_path,
         mutate(max_y = (group_mean_scaled+group_sd)*1.05) %>%
         pull(max_y) %>% max()
 
-    supp_two_b = ggplot() +
+    supp_two_d = ggplot() +
         geom_col(data = summary_df, aes(x=group, y=group_mean_scaled, fill=group), alpha=0.8) +
         geom_errorbar(data = summary_df, width=0.2,
                       aes(x=group, ymin=group_mean_scaled-group_sd,
@@ -56,12 +56,12 @@ main = function(theme_spec, data_path,
         theme(axis.text.x = element_text(margin=margin(t=3, unit="pt")),
               axis.title.x = element_blank())
 
-    supp_two_b %<>% add_label("B")
+    supp_two_d %<>% add_label("D")
 
-    ggsave(svg_out, plot=supp_two_b, width=fig_width, height=fig_height, units="cm")
-    ggsave(pdf_out, plot=supp_two_b, width=fig_width, height=fig_height, units="cm")
-    ggsave(png_out, plot=supp_two_b, width=fig_width, height=fig_height, units="cm", dpi=326)
-    save(supp_two_b, file=grob_out)
+    ggsave(svg_out, plot=supp_two_d, width=fig_width, height=fig_height, units="cm")
+    ggsave(pdf_out, plot=supp_two_d, width=fig_width, height=fig_height, units="cm")
+    ggsave(png_out, plot=supp_two_d, width=fig_width, height=fig_height, units="cm", dpi=326)
+    save(supp_two_d, file=grob_out)
 }
 
 main(theme_spec = snakemake@input[["theme"]],

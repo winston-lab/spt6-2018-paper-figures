@@ -28,7 +28,7 @@ main = function(theme_spec,
                   median_occ = median(occupancy),
                   median_fuzz = median(fuzziness))
 
-    fig_two_c = ggplot() +
+    fig_four_c = ggplot() +
         geom_segment(data = summary_df,
                      aes(x=median_fuzz, xend=median_fuzz,
                          y=0, yend=median_occ, color=group),
@@ -64,12 +64,12 @@ main = function(theme_spec,
               axis.line = element_line(color="grey65"),
               axis.title.x = element_text(size=7))
 
-    fig_two_c %<>% add_label("c")
+    fig_four_c %<>% add_label("C")
 
-    ggsave(svg_out, plot=fig_two_c, width=fig_width, height=fig_height, units="cm")
-    ggsave(pdf_out, plot=fig_two_c, width=fig_width, height=fig_height, units="cm")
-    ggsave(png_out, plot=fig_two_c, width=fig_width, height=fig_height, units="cm", dpi=326)
-    save(fig_two_c, file=grob_out)
+    ggsave(svg_out, plot=fig_four_c, width=fig_width, height=fig_height, units="cm")
+    ggsave(pdf_out, plot=fig_four_c, width=fig_width, height=fig_height, units="cm")
+    ggsave(png_out, plot=fig_four_c, width=fig_width, height=fig_height, units="cm", dpi=326)
+    save(fig_four_c, file=grob_out)
 }
 
 main(theme_spec = snakemake@input[["theme"]],

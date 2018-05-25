@@ -29,7 +29,7 @@ main = function(theme_spec,
     df = import(mnase_data, sample_list=sample_list) %>%
         mutate_at(vars(-c(group, annotation, position)), funs(.*10))
 
-    fig_two_b = ggplot(data = df,
+    fig_four_a = ggplot(data = df,
                        aes(x=position, color=group, fill=group)) +
         geom_vline(xintercept = 0, size=0.4, color="grey65") +
         geom_ribbon(aes(ymin=low, ymax=high), size=0, alpha=0.2) +
@@ -48,12 +48,12 @@ main = function(theme_spec,
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         theme_default
 
-    fig_two_b %<>% add_label("b")
+    fig_four_a %<>% add_label("A")
 
-    ggsave(svg_out, plot=fig_two_b, width=fig_width, height=fig_height, units="cm")
-    ggsave(pdf_out, plot=fig_two_b, width=fig_width, height=fig_height, units="cm")
-    ggsave(png_out, plot=fig_two_b, width=fig_width, height=fig_height, units="cm", dpi=326)
-    save(fig_two_b, file=grob_out)
+    ggsave(svg_out, plot=fig_four_a, width=fig_width, height=fig_height, units="cm")
+    ggsave(pdf_out, plot=fig_four_a, width=fig_width, height=fig_height, units="cm")
+    ggsave(png_out, plot=fig_four_a, width=fig_width, height=fig_height, units="cm", dpi=326)
+    save(fig_four_a, file=grob_out)
 }
 
 main(theme_spec = snakemake@input[["theme"]],

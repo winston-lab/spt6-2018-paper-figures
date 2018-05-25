@@ -33,7 +33,7 @@ main = function(theme_spec, in_genic, in_intra, in_anti, in_inter, alpha,
                ymin=ymax-group_total,
                y=(ymax+ymin)/2)
 
-    fig_one_e = ggplot(data = summary_df) +
+    fig_one_c = ggplot(data = summary_df) +
         geom_segment(aes(x=if_else(category=="genic", upregulated, -downregulated),
                          xend=if_else(category=="genic", 2500, -3800),
                          y=y+800, yend=y+800),
@@ -62,12 +62,12 @@ main = function(theme_spec, in_genic, in_intra, in_anti, in_inter, alpha,
                         expand = c(0,0))+
         theme_void()
 
-    fig_one_e %<>% add_label("E")
+    fig_one_c %<>% add_label("C")
 
-    ggsave(svg_out, plot=fig_one_e, width=fig_width, height=fig_height, units="cm")
-    ggsave(pdf_out, plot=fig_one_e, width=fig_width, height=fig_height, units="cm")
-    ggsave(png_out, plot=fig_one_e, width=fig_width, height=fig_height, units="cm", dpi=326)
-    save(fig_one_e, file=grob_out)
+    ggsave(svg_out, plot=fig_one_c, width=fig_width, height=fig_height, units="cm")
+    ggsave(pdf_out, plot=fig_one_c, width=fig_width, height=fig_height, units="cm")
+    ggsave(png_out, plot=fig_one_c, width=fig_width, height=fig_height, units="cm", dpi=326)
+    save(fig_one_c, file=grob_out)
 }
 
 main(theme_spec = snakemake@input[["theme"]],

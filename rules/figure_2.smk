@@ -8,10 +8,10 @@ rule figure_two_a:
         heatmap_scripts = "scripts/plot_heatmap.R",
         theme = config["theme_spec"]
     output:
-        svg = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps-nonoverlapping.svg",
-        pdf = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps-nonoverlapping.pdf",
-        png = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps-nonoverlapping.png",
-        grob = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps-nonoverlapping.Rdata",
+        svg = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps.svg",
+        pdf = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps.pdf",
+        png = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps.png",
+        grob = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps.Rdata",
     params:
         height = eval(str(config["figure_two"]["two_a"]["height"])),
         width = eval(str(config["figure_two"]["two_a"]["width"])),
@@ -53,4 +53,26 @@ rule figure_two_d:
         width = eval(str(config["figure_two"]["two_d"]["width"])),
     script:
         "../scripts/spt6_2018_figure2D.R"
+
+#violin plots of expression level and TFIIB signal
+rule figure_two_e:
+    input:
+        tss_genic = config["figure_two"]["two_e"]["tss_genic"],
+        tss_intragenic = config["figure_two"]["two_e"]["tss_intragenic"],
+        tss_antisense = config["figure_two"]["two_e"]["tss_antisense"],
+        tss_intergenic = config["figure_two"]["two_e"]["tss_intergenic"],
+        tfiib_genic = config["figure_two"]["two_e"]["tfiib_genic"],
+        tfiib_intragenic = config["figure_two"]["two_e"]["tfiib_intragenic"],
+        tfiib_intergenic = config["figure_two"]["two_e"]["tfiib_intergenic"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure2/figure2E/spt6_2018_figure2E-TSS-seq-and-TFIIB-levels.svg",
+        pdf = "figure2/figure2E/spt6_2018_figure2E-TSS-seq-and-TFIIB-levels.pdf",
+        png = "figure2/figure2E/spt6_2018_figure2E-TSS-seq-and-TFIIB-levels.png",
+        grob = "figure2/figure2E/spt6_2018_figure2E-TSS-seq-and-TFIIB-levels.Rdata",
+    params:
+        height = eval(str(config["figure_two"]["two_e"]["height"])),
+        width = eval(str(config["figure_two"]["two_e"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure2E.R"
 

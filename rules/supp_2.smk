@@ -33,6 +33,23 @@ rule supp_two_b:
     script:
         "../scripts/spt6_2018_supp2B.R"
 
+#TFIIB ChIPnexus scatterplots
+rule supp_two_c:
+    input:
+        sense_tfiib_data = config["figure_two"]["supp_c"]["sense_tfiib_data"],
+        antisense_tfiib_data = config["figure_two"]["supp_c"]["antisense_tfiib_data"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure2/supp2C/spt6_2018_supp2C-TFIIB-ChIPnexus-average-signal-TATAs.svg",
+        pdf = "figure2/supp2C/spt6_2018_supp2C-TFIIB-ChIPnexus-average-signal-TATAs.pdf",
+        png = "figure2/supp2C/spt6_2018_supp2C-TFIIB-ChIPnexus-average-signal-TATAs.png",
+        grob = "figure2/supp2C/spt6_2018_supp2C-TFIIB-ChIPnexus-average-signal-TATAs.Rdata",
+    params:
+        height = eval(str(config["figure_two"]["supp_c"]["height"])),
+        width = eval(str(config["figure_two"]["supp_c"]["width"])),
+    script:
+        "../scripts/spt6_2018_supp2C.R"
+
 #TFIIB Western
 rule supp_two_d:
     input:

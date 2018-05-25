@@ -22,13 +22,13 @@ main = function(theme_spec, heatmap_scripts,
                                  y_label="coding genes", colorbar_title="sense TSS-seq signal")
     anti_heatmap = plot_heatmap(df=anti_df, max_length=3, add_ylabel=FALSE, cutoff_pct=0.95,
                                  colorbar_title="antisense TSS-seq signal")
-    fig_one_c = arrangeGrob(sense_heatmap, anti_heatmap, nrow=1) %>%
-        add_label("c")
+    fig_one_a = arrangeGrob(sense_heatmap, anti_heatmap, nrow=1) %>%
+        add_label("A")
 
-    ggsave(svg_out, plot=fig_one_c, width=fig_width, height=fig_height, units="cm")
-    ggsave(pdf_out, plot=fig_one_c, width=fig_width, height=fig_height, units="cm")
-    ggsave(png_out, plot=fig_one_c, width=fig_width, height=fig_height, units="cm", dpi=326)
-    save(fig_one_c, file=grob_out)
+    ggsave(svg_out, plot=fig_one_a, width=fig_width, height=fig_height, units="cm")
+    ggsave(pdf_out, plot=fig_one_a, width=fig_width, height=fig_height, units="cm")
+    ggsave(png_out, plot=fig_one_a, width=fig_width, height=fig_height, units="cm", dpi=326)
+    save(fig_one_a, file=grob_out)
 }
 
 main(theme_spec = snakemake@input[["theme"]],
