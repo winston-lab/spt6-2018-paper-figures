@@ -19,7 +19,7 @@ main = function(theme_spec, heatmap_scripts,
     anti_df = import(antisense_tss_data, sample_list=sample_list) %>% left_join(anno, by="index")
 
     sense_heatmap = plot_heatmap(df=sense_df, max_length=3, add_ylabel=TRUE, cutoff_pct=0.95,
-                                 y_label="coding genes", colorbar_title="sense TSS-seq signal")
+                                 y_label="nonoverlapping coding genes", colorbar_title="sense TSS-seq signal")
     anti_heatmap = plot_heatmap(df=anti_df, max_length=3, add_ylabel=FALSE, cutoff_pct=0.95,
                                  colorbar_title="antisense TSS-seq signal")
     fig_one_a = arrangeGrob(sense_heatmap, anti_heatmap, nrow=1) %>%

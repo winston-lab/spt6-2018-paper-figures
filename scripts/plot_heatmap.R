@@ -21,7 +21,7 @@ plot_heatmap = function(df, max_length, add_ylabel, y_label="", cutoff_pct, colo
         geom_raster(data=df, aes(x=position, y=sorted_index, fill=signal),
                     interpolate=FALSE) +
         geom_text(data=label_df, aes(x=1, y=sorted_index, label=group),
-                  hjust=0, nudge_y=-500, size=9/72*25.4, parse=TRUE) +
+                  hjust=0, nudge_y=-250, size=9/72*25.4, parse=TRUE) +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
                            expand = c(0, 0.05),
                            labels = function(x){case_when(x==0 ~ "TSS",

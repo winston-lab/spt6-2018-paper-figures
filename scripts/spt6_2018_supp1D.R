@@ -13,11 +13,26 @@ main = function(theme_spec, intra_diffexp_data, orf_anno,
 
     supp_one_d = ggplot(data = df, aes(x=n)) +
         geom_histogram(binwidth=1, center=0, fill="#114477", color="white", size=0.1) +
+        stat_bin(geom="text",
+                 aes(y=..count..+20, label=..count..),
+                 binwidth=1, center=0, size=5/72*25.4, hjust=0) +
         scale_x_continuous(limits = c(NA, max(df[["n"]])),
-                           name = "# intragenic TSSs per ORF") +
+                           expand = c(0,0.3),
+                           breaks = scales::pretty_breaks(n=3),
+                           name = "# TSSs") +
+        scale_y_continuous(limits = c(0, 3620),
+                           breaks = scales::pretty_breaks(n=2),
+                           expand=c(0,0)) +
+        coord_flip() +
+        ggtitle("# intragenic TSSs per ORF") +
         theme_default +
-        theme(axis.title.y = element_blank(),
-              axis.title.x = element_text(margin = margin(t=2, unit="pt")))
+        theme(axis.title.x = element_blank(),
+              plot.title = element_text(size=7, margin=margin(0,0,0,0)),
+              axis.title.y = element_text(margin = margin(r=2, unit="pt")),
+              panel.border = element_blank(),
+              panel.grid.major.y = element_blank(),
+              panel.grid.minor.y = element_blank(),
+              axis.line.y = element_line(color="grey65", size=0.1))
 
     supp_one_d %<>% add_label("D")
 
