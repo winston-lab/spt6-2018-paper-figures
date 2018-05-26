@@ -35,7 +35,7 @@ rule figure_four_b:
     script:
         "../scripts/spt6_2018_figure4B.R"
 
-
+#global quantification of nucleosome occupancy and fuzziness
 rule figure_four_c:
     input:
         wt_mnase_quant = config["figure_four"]["four_c"]["wt_mnase_quant"],
@@ -52,4 +52,23 @@ rule figure_four_c:
     script:
         "../scripts/spt6_2018_figure4C.R"
 
+# nucleosome dyad signal, occupancy, and fuzziness aligned to TSS/plusone nuc dyad,
+# sorted by NETseq signal
+rule figure_four_d:
+    input:
+        netseq_data = config["figure_four"]["four_d"]["netseq_data"],
+        mnase_data = config["figure_four"]["four_d"]["mnase_data"],
+        quant_data = config["figure_four"]["four_d"]["quant_data"],
+        annotation = config["figure_four"]["four_d"]["annotation"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure4/figure4D/spt6_2018_figure4D-MNase-dyad-signal-occupancy-fuzziness-NETseq-sorted.svg",
+        pdf = "figure4/figure4D/spt6_2018_figure4D-MNase-dyad-signal-occupancy-fuzziness-NETseq-sorted.pdf",
+        png = "figure4/figure4D/spt6_2018_figure4D-MNase-dyad-signal-occupancy-fuzziness-NETseq-sorted.png",
+        grob = "figure4/figure4D/spt6_2018_figure4D-MNase-dyad-signal-occupancy-fuzziness-NETseq-sorted.Rdata",
+    params:
+        height = eval(str(config["figure_four"]["four_d"]["height"])),
+        width = eval(str(config["figure_four"]["four_d"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure4D.R"
 
