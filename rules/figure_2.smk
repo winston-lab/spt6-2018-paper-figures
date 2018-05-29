@@ -76,3 +76,19 @@ rule figure_two_e:
     script:
         "../scripts/spt6_2018_figure2E.R"
 
+rule assemble_figure_two:
+    input:
+        two_a = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps.Rdata",
+        two_b = "figure2/figure2B/spt6_2018_figure2B-VAM6-ChIPnexus-and-qPCR.Rdata",
+        two_d = "figure2/figure2D/spt6_2018_figure2D-TSS-seq-v-TFIIB-ChIPnexus-foldchange.Rdata",
+        two_e = "figure2/figure2E/spt6_2018_figure2E-TSS-seq-and-TFIIB-levels.Rdata",
+    output:
+        svg = "figure2/spt6_2018_figure2-TFIIB-ChIP-nexus.svg",
+        pdf = "figure2/spt6_2018_figure2-TFIIB-ChIP-nexus.pdf",
+        png = "figure2/spt6_2018_figure2-TFIIB-ChIP-nexus.png",
+        grob = "figure2/spt6_2018_figure2-TFIIB-ChIP-nexus.Rdata",
+    params:
+        height = eval(str(config["figure_two"]["height"])),
+        width = eval(str(config["figure_two"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure2.R"

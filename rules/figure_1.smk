@@ -38,3 +38,17 @@ rule figure_one_c:
     script:
         "../scripts/spt6_2018_figure1C.R"
 
+rule assemble_figure_one:
+    input:
+        one_a = "figure1/figure1A/spt6_2018_figure1A-TSS-seq-heatmaps.Rdata",
+        one_c = "figure1/figure1C/spt6_2018_figure1C-TSS-seq-diffexp-summary.Rdata",
+    output:
+        svg = "figure1/spt6_2018_figure1-TSS-seq.svg",
+        pdf = "figure1/spt6_2018_figure1-TSS-seq.pdf",
+        png = "figure1/spt6_2018_figure1-TSS-seq.png",
+        grob = "figure1/spt6_2018_figure1-TSS-seq.Rdata",
+    params:
+        height = eval(str(config["figure_one"]["height"])),
+        width = eval(str(config["figure_one"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure1.R"
