@@ -17,3 +17,38 @@ rule supp_three_a:
     script:
         "../scripts/spt6_2018_supp3A.R"
 
+#NETseq scatterplots
+rule supp_three_b:
+    input:
+        sense_netseq_data = config["figure_three"]["supp_b"]["sense_netseq_data"],
+        antisense_netseq_data = config["figure_three"]["supp_b"]["antisense_netseq_data"],
+        annotation = config["figure_three"]["supp_b"]["annotation"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure3/supp3B/spt6_2018_supp3B-NETseq-foldchange-heatmaps.svg",
+        pdf = "figure3/supp3B/spt6_2018_supp3B-NETseq-foldchange-heatmaps.pdf",
+        png = "figure3/supp3B/spt6_2018_supp3B-NETseq-foldchange-heatmaps.png",
+        grob = "figure3/supp3B/spt6_2018_supp3B-NETseq-foldchange-heatmaps.Rdata",
+    params:
+        height = eval(str(config["figure_three"]["supp_b"]["height"])),
+        width = eval(str(config["figure_three"]["supp_b"]["width"])),
+    script:
+        "../scripts/spt6_2018_supp3B.R"
+
+# RNAPII and Spt6 ChIP-nexus scatterplots
+rule supp_three_c:
+    input:
+        data_path = config["figure_three"]["supp_c"]["data_path"],
+        scatterplot_script = "scripts/plot_scatter_plots.R",
+        theme = config["theme_spec"]
+    output:
+        svg = "figure3/supp3C/spt6_2018_supp3C-RNAPII-and-Spt6-ChIP-nexus-scatterplots.svg",
+        pdf = "figure3/supp3C/spt6_2018_supp3C-RNAPII-and-Spt6-ChIP-nexus-scatterplots.pdf",
+        png = "figure3/supp3C/spt6_2018_supp3C-RNAPII-and-Spt6-ChIP-nexus-scatterplots.png",
+        grob = "figure3/supp3C/spt6_2018_supp3C-RNAPII-and-Spt6-ChIP-nexus-scatterplots.Rdata",
+    params:
+        height = eval(str(config["figure_three"]["supp_c"]["height"])),
+        width = eval(str(config["figure_three"]["supp_c"]["width"])),
+    script:
+        "../scripts/spt6_2018_supp3C.R"
+
