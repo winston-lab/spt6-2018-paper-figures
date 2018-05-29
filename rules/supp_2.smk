@@ -65,3 +65,20 @@ rule supp_two_d:
         width = eval(str(config["figure_two"]["supp_d"]["width"])),
     script:
         "../scripts/spt6_2018_supp2D.R"
+
+rule assemble_supp_two:
+    input:
+        supp_two_a = "figure2/supp2A/spt6_2018_supp2A-TFIIB-ChIPnexus-scatterplots.Rdata",
+        supp_two_b = "figure2/supp2B/spt6_2018_supp2B-TFIIB-ChIPnexus-v-ChIPexo-scatterplots.Rdata",
+        supp_two_c = "figure2/supp2C/spt6_2018_supp2C-TFIIB-ChIPnexus-average-signal-TATAs.Rdata",
+        supp_two_d = "figure2/supp2D/spt6_2018_supp2D-TFIIB-western.Rdata",
+    output:
+        svg = "figure2/spt6_2018_supp2-TFIIB-ChIP-nexus.svg",
+        pdf = "figure2/spt6_2018_supp2-TFIIB-ChIP-nexus.pdf",
+        png = "figure2/spt6_2018_supp2-TFIIB-ChIP-nexus.png",
+        grob = "figure2/spt6_2018_supp2-TFIIB-ChIP-nexus.Rdata",
+    params:
+        height = eval(str(config["figure_two"]["supp_height"])),
+        width = eval(str(config["figure_two"]["supp_width"])),
+    script:
+        "../scripts/spt6_2018_supp2.R"

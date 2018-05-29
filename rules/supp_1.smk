@@ -85,3 +85,20 @@ rule supp_one_e:
     script:
         "../scripts/spt6_2018_supp1E.R"
 
+rule assemble_supp_one:
+    input:
+        supp_one_a = "figure1/supp1A/spt6_2018_supp1A-TSS-seq-scatterplots.Rdata",
+        supp_one_b  = "figure1/supp1B/spt6_2018_supp1B-TSS-seq-vs-malabat15.Rdata",
+        supp_one_c = "figure1/supp1C/spt6_2018_supp1C-TSS-seq-vs-uwimana17-RNA-seq.Rdata",
+        supp_one_d = "figure1/supp1D/spt6_2018_supp1D-intra-TSS-per-ORF-histogram.Rdata",
+        supp_one_e = "figure1/supp1E/spt6_2018_supp1E-genes-with-intragenic-TSS-vs-cheung08-uwimana17.Rdata",
+    output:
+        svg = "figure1/spt6_2018_supp1-TSS-seq.svg",
+        pdf = "figure1/spt6_2018_supp1-TSS-seq.pdf",
+        png = "figure1/spt6_2018_supp1-TSS-seq.png",
+        grob = "figure1/spt6_2018_supp1-TSS-seq.Rdata",
+    params:
+        height = eval(str(config["figure_one"]["supp_height"])),
+        width = eval(str(config["figure_one"]["supp_width"])),
+    script:
+        "../scripts/spt6_2018_supp1.R"
