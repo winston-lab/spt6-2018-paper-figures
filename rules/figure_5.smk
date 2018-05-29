@@ -55,3 +55,19 @@ rule figure_five_c:
     script:
         "../scripts/spt6_2018_figure5C.R"
 
+rule assemble_figure_five:
+    input:
+        fig_five_a = "figure5/figure5A/spt6_2018_figure5A-intragenic-TSS-MNase-clusters.Rdata",
+        fig_five_b = "figure5/figure5B/spt6_2018_figure5B-intragenic-TSS-MNase-clusters-expression.Rdata",
+        fig_five_c = "figure5/figure5C/spt6_2018_figure5C-intragenic-TSS-sequence-information.Rdata",
+    output:
+        svg = "figure5/spt6_2018_figure5-intragenic-promoters.svg",
+        pdf = "figure5/spt6_2018_figure5-intragenic-promoters.pdf",
+        png = "figure5/spt6_2018_figure5-intragenic-promoters.png",
+        grob = "figure5/spt6_2018_figure5-intragenic-promoters.Rdata",
+    params:
+        height = eval(str(config["figure_five"]["height"])),
+        width = eval(str(config["figure_five"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure5.R"
+
