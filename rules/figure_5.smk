@@ -39,3 +39,19 @@ rule figure_five_b:
     script:
         "../scripts/spt6_2018_figure5B.R"
 
+# intragenic TSSs sequence logos
+rule figure_five_c:
+    input:
+        data_paths = config["figure_five"]["five_c"]["data_paths"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure5/figure5C/spt6_2018_figure5C-intragenic-TSS-sequence-information.svg",
+        pdf = "figure5/figure5C/spt6_2018_figure5C-intragenic-TSS-sequence-information.pdf",
+        png = "figure5/figure5C/spt6_2018_figure5C-intragenic-TSS-sequence-information.png",
+        grob = "figure5/figure5C/spt6_2018_figure5C-intragenic-TSS-sequence-information.Rdata",
+    params:
+        height = eval(str(config["figure_five"]["five_c"]["height"])),
+        width = eval(str(config["figure_five"]["five_c"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure5C.R"
+
