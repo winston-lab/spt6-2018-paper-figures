@@ -28,6 +28,7 @@ rule all:
         "figure4/figure4D/spt6_2018_figure4D-MNase-dyad-signal-occupancy-fuzziness-NETseq-sorted.png",
         "figure4/supp4A/spt6_2018_supp4A-MNase-seq-scatterplots.png",
         "figure5/figure5A/spt6_2018_figure5A-intragenic-TSS-MNase-clusters.png",
+        "figure5/figure5B/spt6_2018_figure5B-intragenic-TSS-MNase-clusters-expression.png",
         "figure6/figure6A/spt6_2018_figure6A-MNase-at-genic-TSSs.png",
 
 include: "rules/figure_1.smk"

@@ -20,3 +20,22 @@ rule figure_five_a:
     script:
         "../scripts/spt6_2018_figure5A.R"
 
+# intragenic MNase clusters expression level
+rule figure_five_b:
+    input:
+        cluster_one = config["figure_five"]["five_b"]["cluster_one"],
+        cluster_two = config["figure_five"]["five_b"]["cluster_two"],
+        tss_diffexp = config["figure_five"]["five_b"]["tss_diffexp"],
+        tfiib_diffbind = config["figure_five"]["five_b"]["tfiib_diffbind"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure5/figure5B/spt6_2018_figure5B-intragenic-TSS-MNase-clusters-expression.svg",
+        pdf = "figure5/figure5B/spt6_2018_figure5B-intragenic-TSS-MNase-clusters-expression.pdf",
+        png = "figure5/figure5B/spt6_2018_figure5B-intragenic-TSS-MNase-clusters-expression.png",
+        grob = "figure5/figure5B/spt6_2018_figure5B-intragenic-TSS-MNase-clusters-expression.Rdata",
+    params:
+        height = eval(str(config["figure_five"]["five_b"]["height"])),
+        width = eval(str(config["figure_five"]["five_b"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure5B.R"
+
