@@ -36,7 +36,8 @@ rule all:
         "figure5/figure5B/spt6_2018_figure5B-intragenic-TSS-MNase-clusters-expression.png",
         "figure5/figure5C/spt6_2018_figure5C-intragenic-TSS-sequence-information.png",
         "figure5/spt6_2018_figure5-intragenic-promoters.png",
-        "figure6/figure6A/spt6_2018_figure6A-MNase-at-genic-TSSs.png",
+        "figure6/figure6B/spt6_2018_figure6B-MNase-at-genic-TSSs.png",
+        "figure6/figure6C/spt6_2018_figure6C-spt6-upregulated-genic-TSSs-gene-ontology.png",
 
 include: "rules/figure_1.smk"
 include: "rules/supp_1.smk"
