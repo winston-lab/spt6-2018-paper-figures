@@ -38,6 +38,7 @@ rule all:
         "figure5/spt6_2018_figure5-intragenic-promoters.png",
         "figure6/figure6B/spt6_2018_figure6B-MNase-at-genic-TSSs.png",
         "figure6/figure6C/spt6_2018_figure6C-spt6-upregulated-genic-TSSs-gene-ontology.png",
+        "figure6/figure6D/spt6_2018_figure6D-spt6-depletion-SSA4-RTqPCR.png",
 
 include: "rules/figure_1.smk"
 include: "rules/supp_1.smk"

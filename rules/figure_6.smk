@@ -15,7 +15,6 @@ rule figure_six_b:
     script:
         "../scripts/spt6_2018_figure6B.R"
 
-
 rule figure_six_c:
     input:
         go_results = config["figure_six"]["six_c"]["go_results"],
@@ -30,5 +29,20 @@ rule figure_six_c:
         width = eval(str(config["figure_six"]["six_c"]["width"])),
     script:
         "../scripts/spt6_2018_figure6C.R"
+
+rule figure_six_d:
+    input:
+        data_path = config["figure_six"]["six_d"]["data_path"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure6/figure6D/spt6_2018_figure6D-spt6-depletion-SSA4-RTqPCR.svg",
+        pdf = "figure6/figure6D/spt6_2018_figure6D-spt6-depletion-SSA4-RTqPCR.pdf",
+        png = "figure6/figure6D/spt6_2018_figure6D-spt6-depletion-SSA4-RTqPCR.png",
+        grob = "figure6/figure6D/spt6_2018_figure6D-spt6-depletion-SSA4-RTqPCR.Rdata",
+    params:
+        height = eval(str(config["figure_six"]["six_d"]["height"])),
+        width = eval(str(config["figure_six"]["six_d"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure6D.R"
 
 
