@@ -19,6 +19,22 @@ rule figure_one_a:
     script:
         "../scripts/spt6_2018_figure1A.R"
 
+# Spt6 western blot
+rule figure_one_b:
+    input:
+        data_path = config["figure_one"]["one_b"]["data_path"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure1/figure1B/spt6_2018_figure1B-SPT6-western-blot.svg",
+        pdf = "figure1/figure1B/spt6_2018_figure1B-SPT6-western-blot.pdf",
+        png = "figure1/figure1B/spt6_2018_figure1B-SPT6-western-blot.png",
+        grob = "figure1/figure1B/spt6_2018_figure1B-SPT6-western-blot.Rdata",
+    params:
+        height = eval(str(config["figure_one"]["one_b"]["height"])),
+        width = eval(str(config["figure_one"]["one_b"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure1B.R"
+
 # mosaic plot of TSS-seq differential expression
 rule figure_one_c:
     input:

@@ -5,6 +5,7 @@ configfile: "config.yaml"
 rule all:
     input:
         "figure1/figure1A/spt6_2018_figure1A-TSS-seq-heatmaps.png",
+        "figure1/figure1B/spt6_2018_figure1B-SPT6-western-blot.png",
         "figure1/figure1C/spt6_2018_figure1C-TSS-seq-diffexp-summary.png",
         "figure1/spt6_2018_figure1-TSS-seq.png",
         "figure1/supp1A/spt6_2018_supp1A-TSS-seq-scatterplots.png",
