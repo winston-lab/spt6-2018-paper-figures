@@ -32,7 +32,7 @@ main = function(theme_spec, tfiib_data,
         facet_zoom(x=position > -0.3 & position < 2.111+0.3,
                    horizontal=FALSE, zoom.size=1) +
         annotate(geom="segment", x=0, xend=2.111, y=0.7, yend=0.7) +
-        annotate(geom="rect", xmin=0.054, xmax=1.983, ymin=0.65, ymax=0.75,
+        annotate(geom="rect", xmin=0.054, xmax=1.983, ymin=0.60, ymax=0.80,
                  fill="grey75") +
         annotate(geom="text", x=2.111/2, y=0.7, label="italic(\"SSA4\")", size=7/72*25.4,
                  parse=TRUE) +
@@ -40,14 +40,14 @@ main = function(theme_spec, tfiib_data,
         ggtitle("TFIIB ChIP-nexus protection") +
         theme_default +
         theme(strip.background = element_rect(fill="grey80", size=0, color=NA),
-              axis.text.y = element_text(size=5),
-              axis.title.y = element_text(margin=margin(r=4, unit="pt")),
+              axis.title.y = element_text(margin=margin(r=6, unit="pt")),
               axis.title.x = element_blank(),
               panel.border = element_blank(),
               panel.grid.major.x = element_blank(),
               panel.grid.minor.x = element_blank(),
               panel.grid.minor.y = element_blank(),
-              panel.spacing.y = unit(3, "pt"))
+              panel.spacing.y = unit(1, "pt"),
+              plot.margin = margin(0, 0, 0, 11/2 ))
 
     fig_two_c %<>% add_label("C")
 

@@ -18,7 +18,7 @@ main = function(theme_spec, heatmap_scripts,
     df = import(tfiib_data, sample_list=sample_list) %>% left_join(anno, by="index")
 
     fig_two_a = plot_heatmap(df=df, max_length=3, add_ylabel=TRUE, cutoff_pct=0.90,
-                             y_label = "coding genes", colorbar_title="TFIIB ChIP-nexus protection") %>%
+                             y_label = "nonoverlapping coding genes", colorbar_title="TFIIB ChIP-nexus protection") %>%
         add_label("A")
 
     ggsave(svg_out, plot=fig_two_a, width=fig_width, height=fig_height, units="cm")

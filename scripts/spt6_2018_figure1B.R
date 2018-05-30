@@ -21,7 +21,7 @@ main = function(theme_spec, data_path,
         filter(group=="WT") %>%
         distinct(group_mean) %>%
         pull(group_mean)
-    
+
     df %<>% mutate(spikenorm_scaled = scales::rescale(spikenorm, from=c(0, wt_og_mean)))
 
     summary_df = df %>%
@@ -49,15 +49,17 @@ main = function(theme_spec, data_path,
         scale_fill_ptol(guide=FALSE) +
         scale_x_discrete(labels = c("WT", bquote(italic("spt6-1004")))) +
         scale_y_continuous(limits = c(0, max_y),
-                           breaks = scales::pretty_breaks(n=2),
+                           breaks = c(0, 1),
                            expand=c(0,0),
                            name="relative signal (a.u.)") +
-        ggtitle("SPT6 levels by Western blot") +
+        # ggtitle("SPT6 levels by Western blot") +
         theme_default +
         theme(axis.text.x = element_text(margin=margin(t=3, unit="pt")),
-              axis.title.x = element_blank())
+              axis.title.x = element_blank(),
+              panel.border = element_blank(),
+              panel.grid.major.x = element_blank())
 
-    fig_one_b = arrangeGrob(textGrob(label="Western blot goes here."),
+    fig_one_b = arrangeGrob(textGrob(label="BLOT GOES HERE"),
                  barplot, ncol=1) %>%
         add_label("B")
 

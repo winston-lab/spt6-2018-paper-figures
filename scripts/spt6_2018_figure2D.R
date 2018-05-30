@@ -24,20 +24,24 @@ main = function(theme_spec, genic, intragenic, antisense,
         geom_abline(intercept = 0, slope=1, color="grey65") +
         stat_bin_hex(geom="point",
                      aes(x=tss_lfc, y=tfiib_lfc, color=(..count..)),
-                     binwidth=c(0.12, 0.12), alpha=0.5, size=0.5, shape=16) +
-        geom_text(data = count_df,
+                     binwidth=c(0.17, 0.17), alpha=0.5, size=0.1, fill=NA) +
+        geom_label(data = count_df,
                   aes(label=paste0("n=",n)),
-                  x=-4.9, y=4.2, hjust=0, size=7/72*25.4) +
+                  x=-6, y=5, hjust=0, size=7/72*25.4,
+                  label.padding = unit(0, "pt"),
+                  label.r = unit(0, "pt"),
+                  label.size = 0) +
         facet_grid(.~category) +
         scale_color_viridis(guide=FALSE) +
-        scale_fill_viridis(guide=FALSE) +
         scale_y_continuous(limits = c(-4.5, 6),
                            name = expression(atop("TFIIB ChIP-nexus", log[2] ~ textstyle(frac(italic("spt6-1004"), "WT"))))) +
         scale_x_continuous(limits = c(-6, 9),
                            name = expression("TSS-seq" ~ log[2] ~ textstyle(frac(italic("spt6-1004"), "WT")))) +
         theme_default +
         theme(strip.text = element_text(size=9, color="black"),
-              axis.title.y = element_text(angle=0, hjust=1, vjust=0.5))
+              axis.title.y = element_text(angle=0, hjust=1, vjust=0.5),
+              panel.spacing.x = unit(3, "pt"),
+              plot.margin = margin(0, 11, 0, 0, "pt"))
 
     fig_two_d %<>% add_label("D")
 

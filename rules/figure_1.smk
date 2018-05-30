@@ -54,10 +54,35 @@ rule figure_one_c:
     script:
         "../scripts/spt6_2018_figure1C.R"
 
+#violin plots of expression level
+rule figure_one_e:
+    input:
+        tss_genic = config["figure_one"]["one_e"]["tss_genic"],
+        tss_intragenic = config["figure_one"]["one_e"]["tss_intragenic"],
+        tss_antisense = config["figure_one"]["one_e"]["tss_antisense"],
+        tss_intergenic = config["figure_one"]["one_e"]["tss_intergenic"],
+        # tfiib_genic = config["figure_one"]["one_e"]["tfiib_genic"],
+        # tfiib_intragenic = config["figure_one"]["one_e"]["tfiib_intragenic"],
+        # tfiib_intergenic = config["figure_one"]["one_e"]["tfiib_intergenic"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure1/figure1E/spt6_2018_figure1E-TSS-seq-expression-levels.svg",
+        pdf = "figure1/figure1E/spt6_2018_figure1E-TSS-seq-expression-levels.pdf",
+        png = "figure1/figure1E/spt6_2018_figure1E-TSS-seq-expression-levels.png",
+        grob = "figure1/figure1E/spt6_2018_figure1E-TSS-seq-expression-levels.Rdata",
+    params:
+        height = eval(str(config["figure_one"]["one_e"]["height"])),
+        width = eval(str(config["figure_one"]["one_e"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure1E.R"
+
+
 rule assemble_figure_one:
     input:
         one_a = "figure1/figure1A/spt6_2018_figure1A-TSS-seq-heatmaps.Rdata",
+        one_b = "figure1/figure1B/spt6_2018_figure1B-SPT6-western-blot.Rdata",
         one_c = "figure1/figure1C/spt6_2018_figure1C-TSS-seq-diffexp-summary.Rdata",
+        one_e = "figure1/figure1E/spt6_2018_figure1E-TSS-seq-expression-levels.Rdata",
     output:
         svg = "figure1/spt6_2018_figure1-TSS-seq.svg",
         pdf = "figure1/spt6_2018_figure1-TSS-seq.pdf",

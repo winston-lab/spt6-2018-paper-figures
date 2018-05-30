@@ -70,34 +70,13 @@ rule figure_two_d:
     script:
         "../scripts/spt6_2018_figure2D.R"
 
-#violin plots of expression level and TFIIB signal
-rule figure_two_e:
-    input:
-        tss_genic = config["figure_two"]["two_e"]["tss_genic"],
-        tss_intragenic = config["figure_two"]["two_e"]["tss_intragenic"],
-        tss_antisense = config["figure_two"]["two_e"]["tss_antisense"],
-        tss_intergenic = config["figure_two"]["two_e"]["tss_intergenic"],
-        tfiib_genic = config["figure_two"]["two_e"]["tfiib_genic"],
-        tfiib_intragenic = config["figure_two"]["two_e"]["tfiib_intragenic"],
-        tfiib_intergenic = config["figure_two"]["two_e"]["tfiib_intergenic"],
-        theme = config["theme_spec"]
-    output:
-        svg = "figure2/figure2E/spt6_2018_figure2E-TSS-seq-and-TFIIB-levels.svg",
-        pdf = "figure2/figure2E/spt6_2018_figure2E-TSS-seq-and-TFIIB-levels.pdf",
-        png = "figure2/figure2E/spt6_2018_figure2E-TSS-seq-and-TFIIB-levels.png",
-        grob = "figure2/figure2E/spt6_2018_figure2E-TSS-seq-and-TFIIB-levels.Rdata",
-    params:
-        height = eval(str(config["figure_two"]["two_e"]["height"])),
-        width = eval(str(config["figure_two"]["two_e"]["width"])),
-    script:
-        "../scripts/spt6_2018_figure2E.R"
-
 rule assemble_figure_two:
     input:
         two_a = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps.Rdata",
         two_b = "figure2/figure2B/spt6_2018_figure2B-VAM6-TFIIB-ChIPnexus-and-qPCR.Rdata",
+        two_c = "figure2/figure2C/spt6_2018_figure2C-SSA4-TFIIB-ChIP-nexus.Rdata",
         two_d = "figure2/figure2D/spt6_2018_figure2D-TSS-seq-v-TFIIB-ChIPnexus-foldchange.Rdata",
-        two_e = "figure2/figure2E/spt6_2018_figure2E-TSS-seq-and-TFIIB-levels.Rdata",
+        # two_e = "figure2/figure2E/spt6_2018_figure2E-TSS-seq-and-TFIIB-levels.Rdata",
     output:
         svg = "figure2/spt6_2018_figure2-TFIIB-ChIP-nexus.svg",
         pdf = "figure2/spt6_2018_figure2-TFIIB-ChIP-nexus.pdf",
@@ -108,3 +87,4 @@ rule assemble_figure_two:
         width = eval(str(config["figure_two"]["width"])),
     script:
         "../scripts/spt6_2018_figure2.R"
+
