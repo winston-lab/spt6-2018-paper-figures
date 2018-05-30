@@ -40,7 +40,7 @@ main = function(theme_spec,
                                                           TRUE ~ as.character(x))},
                            expand = c(0.025, 0)) +
         scale_y_reverse(breaks = function(x){seq(min(x)+500, max(x)-500, 500)},
-                        name = paste(n_distinct(netseq_df[["index"]]), "coding genes"),
+                        name = paste(n_distinct(netseq_df[["index"]]), "nonoverlapping coding genes"),
                         expand = c(0, 50)) +
         scale_fill_viridis(option="inferno",
                            limits = c(NA, quantile(netseq_df[["signal"]], probs=netseq_cutoff)),

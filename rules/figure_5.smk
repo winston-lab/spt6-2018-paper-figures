@@ -57,9 +57,9 @@ rule figure_five_c:
 
 rule assemble_figure_five:
     input:
-        fig_five_a = "figure5/figure5A/spt6_2018_figure5A-intragenic-TSS-MNase-clusters.Rdata",
-        fig_five_b = "figure5/figure5B/spt6_2018_figure5B-intragenic-TSS-MNase-clusters-expression.Rdata",
-        fig_five_c = "figure5/figure5C/spt6_2018_figure5C-intragenic-TSS-sequence-information.Rdata",
+        five_a = "figure5/figure5A/spt6_2018_figure5A-intragenic-TSS-MNase-clusters.Rdata",
+        five_b = "figure5/figure5B/spt6_2018_figure5B-intragenic-TSS-MNase-clusters-expression.Rdata",
+        five_c = "figure5/figure5C/spt6_2018_figure5C-intragenic-TSS-sequence-information.Rdata",
     output:
         svg = "figure5/spt6_2018_figure5-intragenic-promoters.svg",
         pdf = "figure5/spt6_2018_figure5-intragenic-promoters.pdf",

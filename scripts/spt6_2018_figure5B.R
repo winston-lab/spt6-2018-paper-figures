@@ -41,10 +41,10 @@ main = function(theme_spec,
 
     tss_plot = ggplot(data = tss_levels_df, aes(x=cluster, y=tss_levels+1)) +
         geom_violin(aes(fill=group),
-                    position=position_dodge(width=0.5),
+                    position=position_dodge(width=0.6),
                     size=0.2) +
         geom_boxplot(aes(group = interaction(cluster, group)),
-                     position=position_dodge(width=0.5),
+                     position=position_dodge(width=0.6),
                      width=0.1, size=0.2,
                      outlier.size=0, outlier.stroke=0, notch=TRUE) +
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
@@ -57,21 +57,16 @@ main = function(theme_spec,
         theme_default +
         theme(axis.title.x = element_blank(),
               axis.text.x = element_blank(),
-              legend.position = c(0.55, 1),
-              legend.justification = c(0.5, 0.9),
-              legend.key.size = unit(5, "pt"),
-              legend.text = element_text(size=5),
-              plot.margin = margin(0,0,0,8,"pt"),
-              plot.title = element_text(size=5, margin = margin(0,0,0,0)),
-              axis.text.y = element_text(size=5),
-              axis.title.y = element_text(size=5))
+              legend.position = c(0.55, 0.98),
+              legend.justification = c(0.5, 1),
+              legend.key.width = unit(8, "pt"))
 
     tfiib_plot = ggplot(data = tfiib_levels_df, aes(x=cluster, y=tfiib_levels+1)) +
         geom_violin(aes(fill=group),
-                    position=position_dodge(width=0.5),
+                    position=position_dodge(width=0.6),
                     size=0.2) +
         geom_boxplot(aes(group = interaction(cluster, group)),
-                     position=position_dodge(width=0.5),
+                     position=position_dodge(width=0.6),
                      width=0.1, size=0.2,
                      outlier.size=0, outlier.stroke=0, notch=TRUE) +
         scale_fill_ptol() +
@@ -83,11 +78,7 @@ main = function(theme_spec,
         ggtitle("TFIIB ChIP-nexus signal") +
         theme_default +
         theme(axis.title.x = element_blank(),
-              legend.position = "none",
-              plot.margin = margin(0,0,0,8,"pt"),
-              plot.title = element_text(size=5, margin = margin(0,0,0,0)),
-              axis.text.y = element_text(size=5),
-              axis.title.y = element_text(size=5))
+              legend.position = "none")
 
     fig_five_b = plot_grid(tss_plot, tfiib_plot, ncol=1, align="vh", axis="trbl") %>%
         add_label("B")

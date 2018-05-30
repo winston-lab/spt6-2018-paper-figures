@@ -84,7 +84,8 @@ main = function(theme_spec,
         theme_default +
         theme(legend.position = "none",
               axis.title.y = element_text(angle=0, hjust=1, vjust=0.5),
-              axis.title.x = element_blank())
+              axis.title.x = element_blank(),
+              panel.border = element_blank())
 
     fig_five_c %<>% add_label("C")
 

@@ -31,9 +31,9 @@ metagene = function(df, assay, ylabel="", top=FALSE, bottom=FALSE){
         geom_line(data = df,
                   aes(x=position, y=mid, color=group),
                   alpha=0.7) +
-        geom_label(data = tibble(label=assay, x=-0.48, y=max(df[["high"]]), anno_labeled="cluster 1 (1891 iTSSs)"),
+        geom_label(data = tibble(label=assay, x=-0.495, y=max(df[["high"]])*1.15, anno_labeled="cluster 1 (1891 iTSSs)"),
                   aes(x=x, y=y, label=label),
-                  hjust=0, size=7/72*25.4,
+                  hjust=0, vjust=1, size=7/72*25.4,
                   label.size=0, label.padding = unit(1, "pt"), label.r=unit(0,"pt")) +
         facet_grid(.~anno_labeled) +
         scale_x_continuous(expand = c(0,0),
@@ -42,27 +42,22 @@ metagene = function(df, assay, ylabel="", top=FALSE, bottom=FALSE){
                                                          x==0.4 ~ paste0(x, "kb"),
                                                          TRUE ~ as.character(x))) +
         scale_y_continuous(breaks = scales::pretty_breaks(n=3),
-                           expand = c(0.15, 0),
+                           expand = c(0.05, 0),
                            name = ylabel) +
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         theme_default +
         theme(axis.title.x = element_blank(),
-              axis.text.y = element_text(size=5),
               panel.spacing.x = unit(10, "pt"),
-              plot.margin = margin(1,1,1,1,"pt"),
-              legend.text = element_text(size=7),
-              legend.key.size = unit(10, "pt"),
-              legend.position = c(0.99, 0.99),
-              legend.justification = c(1,1),
-              legend.background = element_rect(fill="white", color=NA, size=0))
+              plot.margin = margin(1,1,1,1,"pt"))
     if (! bottom){
         plot = plot +
-            theme(axis.text.x = element_blank())
+            theme(axis.text.x = element_blank(),
+                  axis.ticks.x = element_blank())
     }
     if (top){
         plot = plot +
-            theme(strip.text = element_text(size=7, color="black",
+            theme(strip.text = element_text(size=9, color="black",
                                             margin = margin(0,0,0,0)))
     } else {
         plot = plot +
