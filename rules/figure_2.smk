@@ -26,15 +26,31 @@ rule figure_two_b:
         annotation = config["figure_two"]["two_b"]["annotation"],
         theme = config["theme_spec"]
     output:
-        svg = "figure2/figure2B/spt6_2018_figure2B--VAM6-ChIPnexus-and-qPCR.svg",
-        pdf = "figure2/figure2B/spt6_2018_figure2B-VAM6-ChIPnexus-and-qPCR.pdf",
-        png = "figure2/figure2B/spt6_2018_figure2B-VAM6-ChIPnexus-and-qPCR.png",
-        grob = "figure2/figure2B/spt6_2018_figure2B-VAM6-ChIPnexus-and-qPCR.Rdata",
+        svg = "figure2/figure2B/spt6_2018_figure2B-VAM6-TFIIB-ChIPnexus-and-qPCR.svg",
+        pdf = "figure2/figure2B/spt6_2018_figure2B-VAM6-TFIIB-ChIPnexus-and-qPCR.pdf",
+        png = "figure2/figure2B/spt6_2018_figure2B-VAM6-TFIIB-ChIPnexus-and-qPCR.png",
+        grob = "figure2/figure2B/spt6_2018_figure2B-VAM6-TFIIB-ChIPnexus-and-qPCR.Rdata",
     params:
         height = eval(str(config["figure_two"]["two_b"]["height"])),
         width = eval(str(config["figure_two"]["two_b"]["width"])),
     script:
         "../scripts/spt6_2018_figure2B.R"
+
+# view of TFIIB ChIPnexus region surrounding SSA4
+rule figure_two_c:
+    input:
+        tfiib_data = config["figure_two"]["two_c"]["tfiib_data"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure2/figure2C/spt6_2018_figure2C-SSA4-TFIIB-ChIP-nexus.svg",
+        pdf = "figure2/figure2C/spt6_2018_figure2C-SSA4-TFIIB-ChIP-nexus.pdf",
+        png = "figure2/figure2C/spt6_2018_figure2C-SSA4-TFIIB-ChIP-nexus.png",
+        grob = "figure2/figure2C/spt6_2018_figure2C-SSA4-TFIIB-ChIP-nexus.Rdata",
+    params:
+        height = eval(str(config["figure_two"]["two_c"]["height"])),
+        width = eval(str(config["figure_two"]["two_c"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure2C.R"
 
 # TSS-seq vs TFIIB fold-change
 rule figure_two_d:
@@ -79,7 +95,7 @@ rule figure_two_e:
 rule assemble_figure_two:
     input:
         two_a = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps.Rdata",
-        two_b = "figure2/figure2B/spt6_2018_figure2B-VAM6-ChIPnexus-and-qPCR.Rdata",
+        two_b = "figure2/figure2B/spt6_2018_figure2B-VAM6-TFIIB-ChIPnexus-and-qPCR.Rdata",
         two_d = "figure2/figure2D/spt6_2018_figure2D-TSS-seq-v-TFIIB-ChIPnexus-foldchange.Rdata",
         two_e = "figure2/figure2E/spt6_2018_figure2E-TSS-seq-and-TFIIB-levels.Rdata",
     output:
