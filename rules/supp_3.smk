@@ -52,3 +52,18 @@ rule supp_three_c:
     script:
         "../scripts/spt6_2018_supp3C.R"
 
+rule assemble_supp_three:
+    input:
+        three_a = "figure3/supp3A/spt6_2018_supp3A-NETseq-scatterplots.Rdata",
+        three_b = "figure3/supp3B/spt6_2018_supp3B-NETseq-foldchange-heatmaps.Rdata",
+        three_c = "figure3/supp3C/spt6_2018_supp3C-RNAPII-and-Spt6-ChIP-nexus-scatterplots.Rdata",
+    output:
+        svg = "figure3/spt6_2018_supp3-NET-seq.svg",
+        pdf = "figure3/spt6_2018_supp3-NET-seq.pdf",
+        png = "figure3/spt6_2018_supp3-NET-seq.png",
+        grob = "figure3/spt6_2018_supp3-NET-seq.Rdata",
+    params:
+        height = eval(str(config["figure_three"]["supp_height"])),
+        width = eval(str(config["figure_three"]["supp_width"])),
+    script:
+        "../scripts/spt6_2018_supp3.R"

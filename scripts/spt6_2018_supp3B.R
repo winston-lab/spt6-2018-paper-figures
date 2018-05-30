@@ -33,9 +33,10 @@ main = function(theme_spec, sense_netseq_data, antisense_netseq_data,
 
     supp_three_b = ggplot() +
         geom_raster(data = df, aes(x=position, y=sorted_index, fill=ratio)) +
-        geom_text(data = tibble(strand = c("sense", "antisense")),
+        geom_text(data = tibble(strand = ordered(c("sense", "antisense"),
+                                                 levels=c("sense", "antisense"))),
                   aes(x=1, y=max(df[["sorted_index"]]), label=strand),
-                  nudge_y=-250, size=9/72*25.4) +
+                  nudge_y=-250, size=9/72*25.4, hjust=0) +
         facet_grid(.~strand) +
         scale_fill_gradientn(colors=coolwarm(100),
                              limits = c(-2, 2),

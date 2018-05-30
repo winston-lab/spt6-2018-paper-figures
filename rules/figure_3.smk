@@ -67,3 +67,18 @@ rule figure_three_c_alt:
     script:
         "../scripts/spt6_2018_figure3C-alternate.R"
 
+rule assemble_figure_three:
+    input:
+        three_a = "figure3/figure3A/spt6_2018_figure3A-NET-seq-average-signal.Rdata",
+        three_b = "figure3/figure3B/spt6_2018_figure3B-NET-seq-foldchange-vs-Spt6-ChIP-nexus-levels.Rdata",
+        three_c = "figure3/figure3C/spt6_2018_figure3C-spt6-v-set2-antisense-NET-seq-metagenes.Rdata",
+    output:
+        svg = "figure3/spt6_2018_figure3-NET-seq.svg",
+        pdf = "figure3/spt6_2018_figure3-NET-seq.pdf",
+        png = "figure3/spt6_2018_figure3-NET-seq.png",
+        grob = "figure3/spt6_2018_figure3-NET-seq.Rdata",
+    params:
+        height = eval(str(config["figure_three"]["height"])),
+        width = eval(str(config["figure_three"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure3.R"

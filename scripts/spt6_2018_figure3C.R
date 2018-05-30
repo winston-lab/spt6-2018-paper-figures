@@ -74,7 +74,7 @@ main = function(theme_spec,
         }
     }
 
-    fig_three_b = ggmatrix(plots, nrow=ncol(df), ncol=ncol(df),
+    fig_three_c = ggmatrix(plots, nrow=ncol(df), ncol=ncol(df),
                    title = "antisense NET-seq signal, 100nt bins",
                    xAxisLabels = names(df), yAxisLabels = names(df), switch="both",
                    labeller=label_parsed) +
@@ -93,12 +93,12 @@ main = function(theme_spec,
               panel.border = element_rect(size=0.5),
               panel.grid.minor = element_blank())
 
-    fig_three_b %<>% ggmatrix_gtable() %>% add_label("B")
+    fig_three_c %<>% ggmatrix_gtable() %>% add_label("C")
 
-    ggsave(svg_out, plot=fig_three_b, width=fig_width, height=fig_height, units="cm")
-    ggsave(pdf_out, plot=fig_three_b, width=fig_width, height=fig_height, units="cm")
-    ggsave(png_out, plot=fig_three_b, width=fig_width, height=fig_height, units="cm", dpi=326)
-    save(fig_three_b, file=grob_out)
+    ggsave(svg_out, plot=fig_three_c, width=fig_width, height=fig_height, units="cm")
+    ggsave(pdf_out, plot=fig_three_c, width=fig_width, height=fig_height, units="cm")
+    ggsave(png_out, plot=fig_three_c, width=fig_width, height=fig_height, units="cm", dpi=326)
+    save(fig_three_c, file=grob_out)
 }
 
 main(theme_spec = snakemake@input[["theme"]],

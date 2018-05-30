@@ -10,7 +10,7 @@ main = function(theme_spec, netseq_results, annotation,
                   by = c('chrom', 'start', 'end', 'transcript_id' = 'name')) %>%
         drop_na()
 
-    fig_three_c = ggplot(data = df, aes(x=score+0.01, y=log2FoldChange)) +
+    fig_three_b = ggplot(data = df, aes(x=score+0.01, y=log2FoldChange)) +
         geom_hline(yintercept = 0, size=0.4, color="grey65") +
         stat_bin_hex(geom="point", aes(color=(..count..)),
                      binwidth = c(0.04, 0.04), size=0.1, alpha=0.8, fill=NA) +
@@ -21,12 +21,12 @@ main = function(theme_spec, netseq_results, annotation,
         theme(axis.title.y = element_text(angle=0, hjust=1, vjust=0.5),
               axis.title.x = element_text(margin = margin(t=3, unit="pt")))
 
-    fig_three_c %<>% add_label("C")
+    fig_three_b %<>% add_label("B")
 
-    ggsave(svg_out, plot=fig_three_c, width=fig_width, height=fig_height, units="cm")
-    ggsave(pdf_out, plot=fig_three_c, width=fig_width, height=fig_height, units="cm")
-    ggsave(png_out, plot=fig_three_c, width=fig_width, height=fig_height, units="cm", dpi=326)
-    save(fig_three_c, file=grob_out)
+    ggsave(svg_out, plot=fig_three_b, width=fig_width, height=fig_height, units="cm")
+    ggsave(pdf_out, plot=fig_three_b, width=fig_width, height=fig_height, units="cm")
+    ggsave(png_out, plot=fig_three_b, width=fig_width, height=fig_height, units="cm", dpi=326)
+    save(fig_three_b, file=grob_out)
 }
 
 main(theme_spec = snakemake@input[["theme"]],
