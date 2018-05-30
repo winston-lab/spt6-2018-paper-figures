@@ -1,5 +1,22 @@
 #!/usr/bin/env python
 
+rule figure_six_a:
+    input:
+        pma_seq_data = config["figure_six"]["six_a"]["pma_seq_data"],
+        hsp_seq_data = config["figure_six"]["six_a"]["hsp_seq_data"],
+        qpcr_data = config["figure_six"]["six_a"]["qpcr_data_path"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure6/figure6A/spt6_2018_figure6A-TFIIB-at-PMA1-and-HSP82.svg",
+        pdf = "figure6/figure6A/spt6_2018_figure6A-TFIIB-at-PMA1-and-HSP82.pdf",
+        png = "figure6/figure6A/spt6_2018_figure6A-TFIIB-at-PMA1-and-HSP82.png",
+        grob = "figure6/figure6A/spt6_2018_figure6A-TFIIB-at-PMA1-and-HSP82.Rdata",
+    params:
+        height = eval(str(config["figure_six"]["six_a"]["height"])),
+        width = eval(str(config["figure_six"]["six_a"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure6A.R"
+
 rule figure_six_b:
     input:
         mnase_data = config["figure_six"]["six_b"]["mnase_data"],
