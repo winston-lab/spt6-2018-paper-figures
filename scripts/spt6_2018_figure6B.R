@@ -20,7 +20,7 @@ import = function(path, sample_list){
                                                "spt6-1004 downregulated genic TSSs"),
                                     labels = c("\"312 TSSs upregulated in\" ~ italic(\"spt6-1004\")",
                                                "\"1284 TSSs not significantly changed\"",
-                                               "\"4206 TSSs downregulated in\" ~ italic(\"spt6-1004\")"))) %>%
+                                               "\"4206 TSSs downregulated\""))) %>%
         return()
 }
 
