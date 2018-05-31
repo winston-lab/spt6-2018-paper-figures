@@ -9,21 +9,33 @@ main = function(theme_spec, data_path,
         mutate(strain = ordered(strain,
                                 levels = c("spt6-AID2 DMSO", "spt6-AID2 IAA", "spt6-1004")))
     
-    fig_six_d = ggplot(data = df, aes(x=strain,
-                          group=interaction(strain,temperature),
-                          color=temperature, y=value)) +
+    summary_df = df %>% 
+        group_by(strain, temperature) %>% 
+        summarise(mean = mean(value),
+                  sd = sd(value))
+    
+    fig_six_d = ggplot() +
         annotate(geom="rect", xmin=0.5, xmax=2.5, ymin=-40, ymax=max(df[["value"]]*1.05),
                  fill="grey65", alpha=0.5) +
         annotate(geom="text", x=1.5, y=-20, label="italic(\"Spt6-AID2\")", parse=TRUE,
                  size=7/72*25.4) +
         annotate(geom="text", x=3, y=-20, label="italic(\"spt6-1004\")", parse=TRUE,
                  size=7/72*25.4) +
-        geom_boxplot(width=0.5,
-                     position = position_dodge(width=0.5),
-                     color="black",
-                     size=0.4) +
-        geom_point(position=position_jitterdodge(dodge.width=0.6,
-                                                 jitter.width=0.3),
+        geom_col(data = summary_df,
+                 aes(x=strain, group=interaction(strain, temperature), y = mean),
+                 position = position_dodge(width=0.6), width=0.5, alpha=0.9, fill="white", color="black", size=0.2) +
+        geom_errorbar(data = summary_df,
+                      aes(x=strain, group=interaction(strain, temperature), ymax=mean+sd, ymin=pmax(0, mean-sd)),
+                      position=position_dodge(width=0.6), width=0.2, alpha=0.9) +
+        # geom_boxplot(width=0.5,
+        #              position = position_dodge(width=0.5),
+        #              color="black",
+        #              size=0.4) +
+        geom_point(data = df,
+                   aes(x=strain, group=interaction(strain, temperature),
+                       y = value, color=temperature),
+                   position=position_jitterdodge(dodge.width=0.6,
+                                                 jitter.width=0.2),
                    size=1, alpha=0.8) +
         scale_x_discrete(labels = c("DMSO", "IAA", ""),
                          expand=c(0,0.3)) +
@@ -43,8 +55,8 @@ main = function(theme_spec, data_path,
         theme(axis.title.x = element_blank(),
               legend.position = c(0.03, 0.99),
               legend.justification = c(0,1),
-              legend.key = element_blank(),
-              legend.key.height = unit(10, "pt"))
+              legend.background = element_blank(),
+              legend.key = element_blank())
        
     fig_six_d %<>% add_label("D")
     

@@ -1,4 +1,3 @@
-library(psych)
 
 import = function(path, sample_list){
     read_tsv(path, col_names = c("group", "sample", "annotation", "assay", "index", "position", "signal")) %>%
@@ -8,8 +7,7 @@ import = function(path, sample_list){
         #           low = quantile(signal, 0.25),
         #           high = quantile(signal, 0.75)) %>%
         summarise(mid = winsor.mean(signal, trim=0.01),
-                  sd = winsor.sd(signal, trim=0.01),
-                  n = n_distinct(index)) %>%
+                  sd = winsor.sd(signal, trim=0.01)) %>%
         mutate(high = mid+sd,
                low = pmax(mid-sd, 0)) %>%
         ungroup() %>%
@@ -20,9 +18,9 @@ import = function(path, sample_list){
                                     levels = c("spt6-1004 upregulated genic TSSs",
                                                "unchanged genic TSSs",
                                                "spt6-1004 downregulated genic TSSs"),
-                                    labels = c("\"TSS upregulated in\" ~ italic(\"spt6-1004\")",
-                                               "\"TSS not significantly changed\"",
-                                               "\"TSS downregulated in\" ~ italic(\"spt6-1004\")"))) %>%
+                                    labels = c("\"312 TSSs upregulated in\" ~ italic(\"spt6-1004\")",
+                                               "\"1284 TSSs not significantly changed\"",
+                                               "\"4206 TSSs downregulated in\" ~ italic(\"spt6-1004\")"))) %>%
         return()
 }
 
@@ -32,6 +30,7 @@ main = function(theme_spec,
                 fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
     source(theme_spec)
+    library(psych)
     sample_list = c("WT-37C-1", "spt6-1004-37C-1", "spt6-1004-37C-2")
 
     # anno = read_tsv(annotation,
@@ -43,7 +42,7 @@ main = function(theme_spec,
     df = import(mnase_data, sample_list=sample_list) %>%
         mutate_at(vars(-c(group, annotation, position)), funs(.*10))
 
-    fig_six_a = ggplot() +
+    fig_six_b = ggplot() +
         geom_vline(xintercept = 0, size=0.4, color="grey65") +
         geom_ribbon(data = df,
                     aes(x=position, ymin=low, ymax=high, fill=group),
@@ -71,12 +70,12 @@ main = function(theme_spec,
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         theme_default
 
-    fig_six_a %<>% add_label("A")
+    fig_six_b %<>% add_label("B")
 
-    ggsave(svg_out, plot=fig_six_a, width=fig_width, height=fig_height, units="cm")
-    ggsave(pdf_out, plot=fig_six_a, width=fig_width, height=fig_height, units="cm")
-    ggsave(png_out, plot=fig_six_a, width=fig_width, height=fig_height, units="cm", dpi=326)
-    save(fig_six_a, file=grob_out)
+    ggsave(svg_out, plot=fig_six_b, width=fig_width, height=fig_height, units="cm")
+    ggsave(pdf_out, plot=fig_six_b, width=fig_width, height=fig_height, units="cm")
+    ggsave(png_out, plot=fig_six_b, width=fig_width, height=fig_height, units="cm", dpi=326)
+    save(fig_six_b, file=grob_out)
 }
 
 main(theme_spec = snakemake@input[["theme"]],
