@@ -46,7 +46,7 @@ main = function(theme_spec,
         geom_vline(xintercept = 0, size=0.4, color="grey65") +
         geom_ribbon(data = df,
                     aes(x=position, ymin=low, ymax=high, fill=group),
-                    size=NA, alpha=0.2) +
+                    alpha=0.2, linetype="blank") +
         geom_line(data = df,
                   aes(x=position, y=mid, color=group),
                   alpha=0.7) +

@@ -32,7 +32,7 @@ main = function(theme_spec,
     fig_four_a = ggplot(data = df,
                        aes(x=position, color=group, fill=group)) +
         geom_vline(xintercept = 0, size=0.4, color="grey65") +
-        geom_ribbon(aes(ymin=low, ymax=high), size=NA, alpha=0.2) +
+        geom_ribbon(aes(ymin=low, ymax=high), alpha=0.2, linetype='blank') +
         geom_line(aes(y=mid), alpha=0.7) +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
                            labels = function(x){case_when(x==0 ~ "+1 dyad",
