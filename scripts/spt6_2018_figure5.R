@@ -2,15 +2,15 @@ library(ggplot2)
 library(grid)
 library(gridExtra)
 
-main = function(five_a, five_b, five_c,
+main = function(five_a, five_b, five_c, five_d,
                 fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
     layout = rbind(c(1,1,1,1,1,1,3,3,3,3,3,3),
                    c(1,1,1,1,1,1,3,3,3,3,3,3),
                    c(1,1,1,1,1,1,3,3,3,3,3,3),
                    c(1,1,1,1,1,1,3,3,3,3,3,3),
-                   c(1,1,1,1,1,1,NA,NA,NA,NA,NA,NA),
-                   c(1,1,1,1,1,1,NA,NA,NA,NA,NA,NA),
+                   c(1,1,1,1,1,1,4,4,4,4,4,4),
+                   c(1,1,1,1,1,1,4,4,4,4,4,4),
                    c(1,1,1,1,1,1,4,4,4,4,4,4),
                    c(2,2,2,2,2,NA,4,4,4,4,4,4),
                    c(2,2,2,2,2,NA,4,4,4,4,4,4),
@@ -21,7 +21,7 @@ main = function(five_a, five_b, five_c,
     load(five_a)
     load(five_b)
     load(five_c)
-    fig_five_d = textGrob(label="5D: motif enrichment")
+    load(five_d)
 
     fig_five = arrangeGrob(fig_five_a, fig_five_b, fig_five_c, fig_five_d,
                           layout_matrix=layout)
@@ -35,6 +35,7 @@ main = function(five_a, five_b, five_c,
 main(five_a = snakemake@input[["five_a"]],
      five_b = snakemake@input[["five_b"]],
      five_c = snakemake@input[["five_c"]],
+     five_d = snakemake@input[["five_d"]],
      fig_width = snakemake@params[["width"]],
      fig_height = snakemake@params[["height"]],
      svg_out = snakemake@output[["svg"]],

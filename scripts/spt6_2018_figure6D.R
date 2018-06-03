@@ -3,17 +3,17 @@ main = function(theme_spec, data_path,
                 fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
     source(theme_spec)
-    
+
     df = read_tsv(data_path,
-                  col_types = 'ccd') %>% 
+                  col_types = 'ccd') %>%
         mutate(strain = ordered(strain,
                                 levels = c("spt6-AID2 DMSO", "spt6-AID2 IAA", "spt6-1004")))
-    
-    summary_df = df %>% 
-        group_by(strain, temperature) %>% 
+
+    summary_df = df %>%
+        group_by(strain, temperature) %>%
         summarise(mean = mean(value),
                   sd = sd(value))
-    
+
     fig_six_d = ggplot() +
         annotate(geom="rect", xmin=0.5, xmax=2.5, ymin=-40, ymax=max(df[["value"]]*1.05),
                  fill="grey65", alpha=0.5) +
@@ -41,7 +41,7 @@ main = function(theme_spec, data_path,
                          expand=c(0,0.3)) +
         scale_y_continuous(limits = c(-40, max(df[["value"]]*1.05)),
                            expand = c(0,0),
-                           name = "????????") +
+                           name = "normalized signal (au)") +
         scale_color_tableau(labels = c(bquote(30*degree*C), bquote(37*degree*C))) +#,
                             # guide=guide_legend(label.position="bottom",
                             #                    label.hjust=0.5,
@@ -57,9 +57,9 @@ main = function(theme_spec, data_path,
               legend.justification = c(0,1),
               legend.background = element_blank(),
               legend.key = element_blank())
-       
+
     fig_six_d %<>% add_label("D")
-    
+
     ggsave(svg_out, plot=fig_six_d, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_six_d, width=fig_width, height=fig_height, units="cm")
     ggsave(png_out, plot=fig_six_d, width=fig_width, height=fig_height, units="cm", dpi=326)
