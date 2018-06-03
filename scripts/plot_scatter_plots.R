@@ -79,7 +79,7 @@ plot_scatter = function(data_path, sample_list, title, pcount, genome_binsize, p
                         scale_x_log10(limit = c(pcount, max_signal)) +
                         annotate("label", x=.90*max_signal, y=0.5, hjust=1,
                                  label=names(df)[i], size=7/72*25.4, fontface="plain",
-                                 label.size = 0, label.r=unit(0,"pt"), label.padding=unit(0.25,"pt"),
+                                 label.size = NA, label.r=unit(0,"pt"), label.padding=unit(0.25,"pt"),
                                  parse=TRUE)
                 plots[[idx]] = plot
             } else {
@@ -92,7 +92,7 @@ plot_scatter = function(data_path, sample_list, title, pcount, genome_binsize, p
                               aes(x=x_values+pcount, y=y_values+pcount)) +
                     geom_abline(intercept = 0, slope=1, color="grey80", size=.5) +
                     stat_bin_hex(geom="point", aes(color=log10(..count..)),
-                                 binwidth=rep(plot_binwidth,2), size=.125, alpha=0.8) +
+                                 binwidth=rep(plot_binwidth,2), size=.1, alpha=0.8) +
                     scale_fill_viridis(option="inferno") +
                     scale_color_viridis(option="inferno") +
                     scale_x_log10(limit = c(pcount, max_signal)) +

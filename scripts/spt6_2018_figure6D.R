@@ -56,7 +56,8 @@ main = function(theme_spec, data_path,
               legend.position = c(0.03, 0.99),
               legend.justification = c(0,1),
               legend.background = element_blank(),
-              legend.key = element_blank())
+              legend.key = element_blank(),
+              plot.margin = margin(t=0, b=0, unit="pt"))
 
     fig_six_d %<>% add_label("D")
 

@@ -36,7 +36,7 @@ main = function(theme_spec,
 
     supp_four_b = ggplot() +
         geom_vline(xintercept = 0, size=0.4, color="grey65") +
-        geom_ribbon(data = df, aes(x=position, ymin=low, ymax=high, fill=group), size=0, alpha=0.2) +
+        geom_ribbon(data = df, aes(x=position, ymin=low, ymax=high, fill=group), size=NA, alpha=0.2) +
         geom_line(data = df, aes(x=position, y=mid, color=group), alpha=0.7) +
         geom_text(data = tibble(annotation = ordered(c("quintile 1", "quintiles 2-4", "quintile 5")),
                                 label = c("top 20% sense NET-seq",

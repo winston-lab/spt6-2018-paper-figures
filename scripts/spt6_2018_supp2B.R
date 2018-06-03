@@ -48,7 +48,7 @@ main = function(theme_spec, data_path,
                         scale_x_log10(limit = c(pcount, max_signal)) +
                         annotate("label", x=.90*max_signal, y=0.5, hjust=1,
                                  label=names(df)[i], size=7/72*25.4, fontface="plain",
-                                 label.size = 0, label.r=unit(0,"pt"), label.padding=unit(0.25,"pt"),
+                                 label.size = NA, label.r=unit(0,"pt"), label.padding=unit(0.25,"pt"),
                                  parse=TRUE)
                 plots[[idx]] = plot
             } else {

@@ -32,7 +32,7 @@ main = function(theme_spec, sense_netseq_data, antisense_netseq_data,
 
     fig_three_a = ggplot(data = df, aes(x=position, color=group, fill=group)) +
         geom_vline(xintercept = 0, size=0.4, color="grey65") +
-        geom_ribbon(aes(ymin=low_sense, ymax=high_sense), size=0, alpha=0.2) +
+        geom_ribbon(aes(ymin=low_sense, ymax=high_sense), size=NA, alpha=0.2) +
         geom_line(aes(y=mid_sense), alpha=0.7) +
         geom_ribbon(aes(ymin=-low_anti, ymax=-high_anti),
                     size=0, alpha=0.2, show.legend = FALSE) +

@@ -27,14 +27,14 @@ metagene = function(df, assay, ylabel="", top=FALSE, bottom=FALSE){
         geom_vline(xintercept = 0, size=0.4, color="grey65") +
         geom_ribbon(data = df,
                     aes(x=position, ymin=low, ymax=high, fill=group),
-                    alpha=0.2, size=0) +
+                    alpha=0.2, size=NA) +
         geom_line(data = df,
                   aes(x=position, y=mid, color=group),
                   alpha=0.7) +
         geom_label(data = tibble(label=assay, x=-0.495, y=max(df[["high"]])*1.15, anno_labeled="cluster 1 (1891 iTSSs)"),
                   aes(x=x, y=y, label=label),
                   hjust=0, vjust=1, size=7/72*25.4,
-                  label.size=0, label.padding = unit(1, "pt"), label.r=unit(0,"pt")) +
+                  label.size=NA, label.padding = unit(1, "pt"), label.r=unit(0,"pt")) +
         facet_grid(.~anno_labeled) +
         scale_x_continuous(expand = c(0,0),
                            breaks = c(-0.4, 0, 0.4),

@@ -32,7 +32,8 @@ main = function(theme_spec,
               legend.key.size = unit(8, "pt"),
               legend.text = element_text(size=5),
               panel.border = element_blank(),
-              panel.grid.major.y = element_blank())
+              panel.grid.major.y = element_blank(),
+              plot.margin = margin(t=0, b=0, unit="pt"))
 
     fig_six_c %<>% add_label("C")
 

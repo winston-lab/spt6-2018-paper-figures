@@ -22,10 +22,10 @@ main = function(theme_spec, data_path,
 
     supp_one_c = ggplot(data = df, aes(x=tss+1, y=rna+1)) +
         stat_bin_hex(geom="point", aes(color=..count..),
-                     binwidth=c(.06,.06), alpha=0.8, size=0.1) +
+                     binwidth=c(.05,.05), alpha=0.8, size=0.1) +
         annotate(geom="label", x=1e4, y=1e1, label= paste0("R=", cor),
                  size=7/72*25.4, label.r=unit(0,"pt"), label.padding=unit(2,"pt"),
-                 label.size=0) +
+                 label.size=NA) +
         scale_color_viridis(option="inferno", guide=FALSE) +
         scale_fill_viridis(option="inferno", guide=FALSE) +
         scale_x_log10(name = "TSS-seq (RPM)") +

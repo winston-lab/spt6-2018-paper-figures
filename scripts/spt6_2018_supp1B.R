@@ -29,7 +29,7 @@ main = function(theme_spec,
 
     supp_one_b = ggplot(data = df, aes(x=position, y=mid, ymin=low, ymax=high, color=group, fill=group)) +
         geom_vline(xintercept = c(0,2), size=0.2, color="grey65") +
-        geom_ribbon(alpha=0.3, size=0, position=position_dodge(width=0.07)) +
+        geom_ribbon(alpha=0.3, size=NA, position=position_dodge(width=0.07)) +
         geom_line(position=position_dodge(width=0.07), size=0.3, alpha=0.8) +
         # facet_zoom(xy=position > 0.5 & position < 1.5,
         #            horizontal=FALSE, zoom.size=1) +

@@ -24,7 +24,7 @@ main = function(theme_spec, netseq_data, annotation,
                    size=0.5, color="grey65") +
         geom_ribbon(data = df,
                     aes(x=position, ymin=low, ymax=high),
-                    alpha=0.4, size=0, color=NA, fill="#114477") +
+                    alpha=0.4, size=NA, color=NA, fill="#114477") +
         geom_line(data = df,
                   aes(x=position, y=mid),
                   color="#114477", size=0.5) +
@@ -33,7 +33,7 @@ main = function(theme_spec, netseq_data, annotation,
                                           "italic(\"spt6-1004\")*\",\" ~ 37*degree*C")),
                   aes(label=group),
                   x=0.01, y=0.05, hjust=0, size=7/72*25.4, parse=TRUE,
-                  label.r = unit(0,"pt"), label.padding = unit(1, "pt"), label.size=0) +
+                  label.r = unit(0,"pt"), label.padding = unit(1, "pt"), label.size=NA) +
         scale_x_continuous(expand = c(0,0),
                            breaks = c(0, 1, 2),
                            labels = c("sense TSS", "", "CPS")) +

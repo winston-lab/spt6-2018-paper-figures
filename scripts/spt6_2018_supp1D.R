@@ -27,7 +27,6 @@ main = function(theme_spec, intra_diffexp_data, orf_anno,
         ggtitle("# intragenic TSSs per ORF") +
         theme_default +
         theme(axis.title.x = element_blank(),
-              plot.title = element_text(size=7, margin=margin(0,0,0,0)),
               axis.title.y = element_text(margin = margin(r=2, unit="pt")),
               panel.border = element_blank(),
               panel.grid.major.y = element_blank(),

@@ -65,7 +65,7 @@ main = function(theme_spec,
         geom_polygon(data = df, aes(x=x, y=y, group=interaction(position, base), fill=base)) +
         geom_label(data = tibble(tss_class=c("genic", "intragenic")),
                   aes(label=tss_class), x=-12, y=max(df[["y"]])*0.9,
-                  size=7/72*25.4, label.size=0, label.padding=unit(2, "pt"),
+                  size=7/72*25.4, label.size=NA, label.padding=unit(2, "pt"),
                   label.r = unit(0, "pt"), hjust=0) +
         scale_fill_manual(values = c('#109648', '#255C99', '#F7B32B', '#D62839', '#D62839'),
                           breaks = c('A','C','G','T','U')) +

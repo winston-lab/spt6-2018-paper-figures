@@ -46,13 +46,13 @@ main = function(theme_spec,
         geom_vline(xintercept = 0, size=0.4, color="grey65") +
         geom_ribbon(data = df,
                     aes(x=position, ymin=low, ymax=high, fill=group),
-                    size=0, alpha=0.2) +
+                    size=NA, alpha=0.2) +
         geom_line(data = df,
                   aes(x=position, y=mid, color=group),
                   alpha=0.7) +
         geom_label(data = df %>% distinct(annotation),
                   aes(label = annotation),
-                  fill="white", label.size=0, label.r=unit(0,"pt"), label.padding=unit(0,"pt"),
+                  fill="white", label.size=NA, label.r=unit(0,"pt"), label.padding=unit(0,"pt"),
                   x=-0.29, y=4.5, size=7/72*25.4, parse=TRUE, hjust=0) +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
                            labels = function(x){case_when(x==0 ~ "TSS",

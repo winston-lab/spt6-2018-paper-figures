@@ -30,7 +30,7 @@ main = function(theme_spec, genic, intragenic, antisense,
                   x=-6, y=5, hjust=0, size=7/72*25.4,
                   label.padding = unit(0, "pt"),
                   label.r = unit(0, "pt"),
-                  label.size = 0) +
+                  label.size = NA) +
         facet_grid(.~category) +
         scale_color_viridis(guide=FALSE) +
         scale_y_continuous(limits = c(-4.5, 6),

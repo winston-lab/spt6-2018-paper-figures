@@ -54,7 +54,9 @@ main = function(theme_spec, data_path,
                 subtitle = "normalized to Dst1 spike-in") +
         theme_default +
         theme(axis.text.x = element_text(margin=margin(t=3, unit="pt")),
-              axis.title.x = element_blank())
+              axis.title.x = element_blank(),
+              panel.border = element_blank(),
+              panel.grid.major.x = element_blank())
 
     supp_two_d %<>% add_label("D")
 
