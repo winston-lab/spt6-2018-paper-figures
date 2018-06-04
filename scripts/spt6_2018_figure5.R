@@ -5,6 +5,7 @@ library(gridExtra)
 main = function(five_a, five_b, five_c, five_d,
                 fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
+    library(ggrepel)
     layout = rbind(c(1,1,1,1,1,1,3,3,3,3,3,3),
                    c(1,1,1,1,1,1,3,3,3,3,3,3),
                    c(1,1,1,1,1,1,3,3,3,3,3,3),
@@ -15,8 +16,8 @@ main = function(five_a, five_b, five_c, five_d,
                    c(2,2,2,2,2,NA,4,4,4,4,4,4),
                    c(2,2,2,2,2,NA,4,4,4,4,4,4),
                    c(2,2,2,2,2,NA,4,4,4,4,4,4),
-                   c(2,2,2,2,2,NA,NA,NA,NA,NA,NA,NA),
-                   c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA))
+                   c(2,2,2,2,2,NA,4,4,4,4,4,4),
+                   c(2,2,2,2,2,NA,4,4,4,4,4,4))
 
     load(five_a)
     load(five_b)

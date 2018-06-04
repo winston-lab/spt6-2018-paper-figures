@@ -61,6 +61,7 @@ rule figure_five_d:
         tata_genic_path = config["figure_five"]["five_d"]["tata_genic"],
         tata_intra_path = config["figure_five"]["five_d"]["tata_intragenic"],
         tata_random_path = config["figure_five"]["five_d"]["tata_random"],
+        all_motif_path = config["figure_five"]["five_d"]["all_motif_path"],
         theme = config["theme_spec"]
     output:
         svg = "figure5/figure5D/spt6_2018_figure5D-intragenic-TSS-motifs.svg",
