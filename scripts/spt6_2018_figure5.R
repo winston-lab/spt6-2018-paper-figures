@@ -1,4 +1,5 @@
 library(ggplot2)
+library(magrittr)
 library(grid)
 library(gridExtra)
 
@@ -25,7 +26,8 @@ main = function(five_a, five_b, five_c, five_d,
     load(five_d)
 
     fig_five = arrangeGrob(fig_five_a, fig_five_b, fig_five_c, fig_five_d,
-                          layout_matrix=layout)
+                          layout_matrix=layout) %>%
+        arrangeGrob(top=textGrob(label = "Figure 5: intragenic promoters", gp=gpar(fontsize=12)))
 
     ggsave(svg_out, plot=fig_five, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_five, width=fig_width, height=fig_height, units="cm")

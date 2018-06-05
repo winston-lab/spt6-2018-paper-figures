@@ -1,4 +1,5 @@
 library(ggplot2)
+library(magrittr)
 library(grid)
 library(gridExtra)
 
@@ -24,7 +25,8 @@ main = function(one_a, one_b, one_c, one_e,
     fig_one_d = textGrob(label = "1D: 3' bias of intragenic sense")
     load(one_e)
 
-    fig_one = arrangeGrob(fig_one_a, fig_one_b, fig_one_c, fig_one_d, fig_one_e, layout_matrix=layout)
+    fig_one = arrangeGrob(fig_one_a, fig_one_b, fig_one_c, fig_one_d, fig_one_e, layout_matrix=layout) %>%
+        arrangeGrob(top=textGrob(label = "Figure 1: TSS-seq", gp=gpar(fontsize=12)))
 
     ggsave(svg_out, plot=fig_one, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_one, width=fig_width, height=fig_height, units="cm")

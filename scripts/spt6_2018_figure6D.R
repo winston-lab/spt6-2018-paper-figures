@@ -17,7 +17,7 @@ main = function(theme_spec, data_path,
     fig_six_d = ggplot() +
         annotate(geom="rect", xmin=0.5, xmax=2.5, ymin=-40, ymax=max(df[["value"]]*1.05),
                  fill="grey65", alpha=0.5) +
-        annotate(geom="text", x=1.5, y=-20, label="italic(\"Spt6-AID2\")", parse=TRUE,
+        annotate(geom="text", x=1.5, y=-20, label="italic(\"SPT6-AID2\")", parse=TRUE,
                  size=7/72*25.4) +
         annotate(geom="text", x=3, y=-20, label="italic(\"spt6-1004\")", parse=TRUE,
                  size=7/72*25.4) +
@@ -50,7 +50,7 @@ main = function(theme_spec, data_path,
                             # guide=guide_legend(label.position="bottom",
                             #                    label.hjust=0.5,
                             #                    keywidth=2)) +
-        ggtitle("SSA4 RT-qPCR") +
+        ggtitle(bquote(italic(SSA4) ~ "RT-qPCR")) +
         theme_default +
         theme(axis.title.x = element_blank(),
               legend.position = c(0.03, 0.99),

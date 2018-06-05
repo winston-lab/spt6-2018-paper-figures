@@ -1,28 +1,53 @@
 library(ggplot2)
+library(magrittr)
 library(grid)
 library(gridExtra)
 
 main = function(four_a, four_b,
                 fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
-    layout = rbind(c(1,1,1,1,1,1,1,1,1,1,1,1),
-                   c(1,1,1,1,1,1,1,1,1,1,1,1),
-                   c(1,1,1,1,1,1,1,1,1,1,1,1),
-                   c(1,1,1,1,1,1,1,1,1,1,1,1),
-                   c(2,2,2,2,2,2,2,2,2,2,2,2),
-                   c(2,2,2,2,2,2,2,2,2,2,2,2),
-                   c(2,2,2,2,2,2,2,2,2,2,2,2),
-                   c(2,2,2,2,2,2,2,2,2,2,2,2),
-                   c(2,2,2,2,2,2,2,2,2,2,2,2),
-                   c(2,2,2,2,2,2,2,2,2,2,2,2),
-                   c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA),
-                   c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA))
+    layout = rbind(c(1,1,1,1,1,1,1,1,1,1,NA,NA),
+                   c(1,1,1,1,1,1,1,1,1,1,NA,NA),
+                   c(1,1,1,1,1,1,1,1,1,1,NA,NA),
+                   c(1,1,1,1,1,1,1,1,1,1,NA,NA),
+                   c(1,1,1,1,1,1,1,1,1,1,NA,NA),
+                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
+                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
+                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
+                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
+                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
+                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
+                   c(3,3,3,3,3,3,3,3,3,3,3,3),
+                   c(3,3,3,3,3,3,3,3,3,3,3,3))
 
     load(four_a)
     load(four_b)
+    legends = c("Figure S4. Spt6 mutants have defective chromatin.",
+                "(A)",
+                "Comparison of spike-in normalized MNase-seq dyad signal in",
+                "wild-type and spt6-1004 cells. Panels on the bottom left are",
+                "scatterplots of dyad signal in non-overlapping 25 bp bins",
+                "with signal in at least one sample, panels on the diagonal",
+                "are kernel density estimates of the same signal within each",
+                "sample, and panels on the top right are Pearson correlations",
+                "of log10(signal), comparing pairwise complete observations.",
+                "(B)",
+                "Average Mnase-seq dyad signal for the same 3522",
+                "nonoverlapping coding genes shown in figure 4A, but grouped",
+                "by total sense NET-seq signal in the window extending 500 nt",
+                "downstream from the TSS. The solid line and shading represent",
+                "the median and the interquartile range.") %>%
+        paste(collapse=" ") %>%
+        strwrap(width=132) %>%
+        paste(collapse="\n") %>%
+        textGrob(x=unit(0, "npc"),
+                 just="left",
+                 gp = gpar(fontsize=8,
+                           lineheight=1.05))
 
-    supp_four = arrangeGrob(supp_four_a, supp_four_b,
-                          layout_matrix=layout)
+    supp_four = arrangeGrob(supp_four_a, supp_four_b, legends,
+                          layout_matrix=layout) %>%
+        arrangeGrob(top=textGrob(label = "Supplemental Figure 4: MNase-seq", gp=gpar(fontsize=12)))
 
     ggsave(svg_out, plot=supp_four, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=supp_four, width=fig_width, height=fig_height, units="cm")

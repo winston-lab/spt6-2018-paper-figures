@@ -92,7 +92,7 @@ plot_scatter = function(data_path, sample_list, title, pcount, genome_binsize, p
                               aes(x=x_values+pcount, y=y_values+pcount)) +
                     geom_abline(intercept = 0, slope=1, color="grey80", size=.5) +
                     stat_bin_hex(geom="point", aes(color=log10(..count..)),
-                                 binwidth=rep(plot_binwidth,2), size=.1, alpha=0.8) +
+                                 binwidth=rep(plot_binwidth,2), size=.05, alpha=0.8) +
                     scale_fill_viridis(option="inferno") +
                     scale_color_viridis(option="inferno") +
                     scale_x_log10(limit = c(pcount, max_signal)) +

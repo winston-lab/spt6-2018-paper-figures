@@ -1,4 +1,5 @@
 library(ggplot2)
+library(magrittr)
 library(grid)
 library(gridExtra)
 
@@ -23,7 +24,8 @@ main = function(six_a, six_b, six_c, six_d,
     load(six_c)
     load(six_d)
 
-    fig_six = arrangeGrob(fig_six_a, fig_six_b, fig_six_c, fig_six_d, layout_matrix=layout)
+    fig_six = arrangeGrob(fig_six_a, fig_six_b, fig_six_c, fig_six_d, layout_matrix=layout) %>%
+        arrangeGrob(top=textGrob(label = "Figure 6: genic promoters", gp=gpar(fontsize=12)))
 
     ggsave(svg_out, plot=fig_six, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_six, width=fig_width, height=fig_height, units="cm")

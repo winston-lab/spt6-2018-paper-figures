@@ -1,4 +1,5 @@
 library(ggplot2)
+library(magrittr)
 library(grid)
 library(gridExtra)
 
@@ -24,7 +25,8 @@ main = function(four_a, four_b, four_c, four_d,
     load(four_d)
 
     fig_four = arrangeGrob(fig_four_a, fig_four_b, fig_four_c, fig_four_d,
-                          layout_matrix=layout)
+                          layout_matrix=layout) %>%
+        arrangeGrob(top=textGrob(label = "Figure 4: MNase-seq", gp=gpar(fontsize=12)))
 
     ggsave(svg_out, plot=fig_four, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_four, width=fig_width, height=fig_height, units="cm")
