@@ -39,12 +39,12 @@ theme_heatmap = theme_minimal() +
           axis.text.x = element_text(size=7, color="black", margin=margin(t=1, unit="pt")),
           axis.text.y = element_blank(),
           axis.title.x = element_blank(),
-          axis.title.y = element_text(size=7, margin=margin(r=0)),
+          axis.title.y = element_text(size=9, margin=margin(r=0)),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           axis.ticks.x = element_line(color="black"),
           axis.ticks.length = unit(0.5, "pt"),
-          plot.margin = margin(0,0,0,0,"pt"))
+          plot.margin = margin(0,4,0,0,"pt"))
 
 add_label = function(grob, letter){
     return(arrangeGrob(grob,

@@ -13,6 +13,7 @@ import = function(path){
                   low = quantile(signal, 0.1, na.rm=TRUE),
                   high = quantile(signal, 0.9, na.rm=TRUE)) %>%
         ungroup() %>%
+        mutate(group = ordered(group, levels = c("malabat", "doris"))) %>% 
         return()
 }
 
@@ -29,14 +30,20 @@ main = function(theme_spec,
 
     supp_one_b = ggplot(data = df, aes(x=position, y=mid, ymin=low, ymax=high, color=group, fill=group)) +
         geom_vline(xintercept = c(0,2), size=0.2, color="grey65") +
-        geom_ribbon(alpha=0.3, position=position_dodge(width=0.07), linetype='blank') +
-        geom_line(position=position_dodge(width=0.07), size=0.3, alpha=0.8) +
+        geom_ribbon(alpha=0.3,
+                    # position=position_dodge(width=0.07),
+                    linetype='blank') +
+        geom_line(size=0.3,
+                  # position=position_dodge(width=0.07),
+                  alpha=0.8) +
         # facet_zoom(xy=position > 0.5 & position < 1.5,
         #            horizontal=FALSE, zoom.size=1) +
-        scale_color_tableau(labels = c("this work", bquote(Malabat ~ italic("et al.") ~ 2015)),
+        scale_color_tableau(labels = c(bquote(Malabat ~ italic("et al.") ~ 2015),
+                                       "this work"),
                             guide=guide_legend(keyheight=unit(9, "pt"),
                                                keywidth=unit(9, "pt"))) +
-        scale_fill_tableau(labels = c("this work", bquote(Malabat ~ italic("et al.") ~ 2015)),
+        scale_fill_tableau(labels = c(bquote(Malabat ~ italic("et al.") ~ 2015),
+                                      "this work"),
                            guide=guide_legend(keyheight=unit(9, "pt"),
                                               keywidth=unit(9, "pt"))) +
         scale_x_continuous(breaks = c(0,1,2),
@@ -44,7 +51,7 @@ main = function(theme_spec,
                            expand = c(0,0)) +
         scale_y_continuous(name = "relative signal",
                            breaks = scales::pretty_breaks(n=1)) +
-        ggtitle("relative sense TSS-seq signal") +
+        # ggtitle("relative sense TSS-seq signal") +
         theme_default +
         theme(axis.title.x = element_blank(),
               legend.position = c(0.5, 0.7),

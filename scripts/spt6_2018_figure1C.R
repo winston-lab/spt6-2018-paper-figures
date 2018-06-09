@@ -31,36 +31,63 @@ main = function(theme_spec, in_genic, in_intra, in_anti, in_inter, alpha,
         filter(significance) %>%
         mutate(ymax=cumsum(group_total),
                ymin=ymax-group_total,
-               y=(ymax+ymin)/2)
+               y=(ymax+ymin)/2) %>%
+        rowid_to_column(var = "ymax_unscaled") %>%
+        mutate(ymin_unscaled = lag(ymax_unscaled, default=as.integer(0)),
+               y_unscaled = (ymin_unscaled+ymax_unscaled)/2)
 
     fig_one_c = ggplot(data = summary_df) +
         geom_segment(aes(x=if_else(category=="genic", upregulated, -downregulated),
-                         xend=if_else(category=="genic", 2500, -3800),
-                         y=y+800, yend=y+800),
+                         xend=if_else(category=="genic", 3000, -4100),
+                         # y=y+800, yend=y+800),
+                         y=y_unscaled+0.15, yend=y_unscaled+0.15),
                      alpha=0.2, size=0.2) +
-        geom_rect(aes(xmin=0, xmax=upregulated, ymax=ymax, ymin=ymin),
-                  size=0.5, color="white", fill=ptol_pal()(2)[2], alpha=0.7) +
-        geom_rect(aes(xmin=-downregulated, xmax=0, ymax=ymax, ymin=ymin),
-                  size=0.5, color="white", fill=ptol_pal()(2)[1], alpha=0.7) +
+        geom_rect(aes(xmin=0, xmax=upregulated,
+                      # ymax=ymax, ymin=ymin),
+                      ymax=ymax_unscaled, ymin=ymin_unscaled),
+                  # size=0.5, color="white", fill=ptol_pal()(2)[2], alpha=0.7) +
+                  size=0.5, color="white", fill="#fdcdac", alpha=0.9) +
+        geom_rect(aes(xmin=-downregulated, xmax=0,
+                      # ymax=ymax, ymin=ymin),
+                      ymax=ymax_unscaled, ymin=ymin_unscaled),
+                  size=0.5, color="white", fill="#cbd5e8", alpha=0.9) +
         geom_text(aes(x=if_else(upregulated>1000, upregulated/2, upregulated+30),
                       hjust = if_else(upregulated>1000, 0.5, 0),
-                      y=y, label=upregulated),
-                  size=7/72*25.4) +
+                      # y=y,
+                      y=y_unscaled,
+                      label=upregulated),
+                  size=9/72*25.4) +
         geom_text(aes(x=if_else(downregulated>900, -downregulated/2, -(downregulated+30)),
                       hjust = if_else(downregulated>900, 0.5, 1),
-                      y=y, label=downregulated),
-                  size=7/72*25.4) +
-        geom_text(aes(x=if_else(category=="genic", 2500, -3800),
-                      hjust = if_else(category=="genic", 1, 0),
-                      y=y, label = category),
+                      # y=y,
+                      y=y_unscaled,
+                      label=downregulated),
                   size=9/72*25.4) +
-        annotate(geom="text", x=max(summary_df[["upregulated"]])/2, y=-500,
-                 hjust=0.5, vjust=0, label="upregulated TSSs", size=9/72*25.4) +
-        annotate(geom="text", x=max(summary_df[["downregulated"]])/-2, y=-500,
-                 hjust=0.5, vjust=0, label="downregulated TSSs", size=9/72*25.4) +
-        scale_y_reverse(limits = c(max(summary_df[["ymax"]]), -2500),
+        geom_text(aes(x=if_else(category=="genic", 3000, -4100),
+                      hjust = if_else(category=="genic", 1, 0),
+                      # y=y,
+                      y=y_unscaled,
+                      label = category),
+                  size=9/72*25.4) +
+        annotate(geom="label", x=max(summary_df[["upregulated"]])/2,
+                 fill= "#fdcdac",
+                 label.r = unit(0, "pt"),
+                 label.size = NA,
+                 # y=-500,
+                 y=-0.3,
+                 hjust=0.5, label="upregulated", size=7/72*25.4) +
+        annotate(geom="label", x=max(summary_df[["downregulated"]])/-2,
+                 # y=-500,
+                 fill= "#cbd5e8",
+                 label.r = unit(0, "pt"),
+                 label.size = NA,
+                 y=-0.3,
+                 hjust=0.5, label="downregulated", size=7/72*25.4) +
+        # scale_y_reverse(limits = c(max(summary_df[["ymax"]]), -2500),
+        scale_y_reverse(limits = c(max(summary_df[["ymax_unscaled"]]), -.5),
                         expand = c(0,0))+
-        theme_void()
+        theme_void() +
+        theme(plot.margin = margin(l=2, unit="pt"))
 
     fig_one_c %<>% add_label("C")
 

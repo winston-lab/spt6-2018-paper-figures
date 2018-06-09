@@ -60,7 +60,7 @@ main = function(theme_spec,
                            name = "scaled density") +
         scale_color_tableau() +
         scale_fill_tableau() +
-        ggtitle("TATAWAWR") +
+        ggtitle("TATA consensus") +
         theme_default +
         theme(axis.title.x = element_blank(),
               axis.line.y = element_line(size=0.25, color="grey65"),

@@ -15,16 +15,16 @@ main = function(theme_spec, intra_diffexp_data, orf_anno,
         geom_histogram(binwidth=1, center=0, fill="#114477", color="white", size=0.1) +
         stat_bin(geom="text",
                  aes(y=..count..+20, label=..count..),
-                 binwidth=1, center=0, size=5/72*25.4, hjust=0) +
+                 binwidth=1, center=0, size=7/72*25.4, hjust=0) +
         scale_x_continuous(limits = c(NA, max(df[["n"]])),
                            expand = c(0,0.3),
                            breaks = scales::pretty_breaks(n=3),
-                           name = "# TSSs") +
+                           name = "number of TSSs") +
         scale_y_continuous(limits = c(0, 3620),
                            breaks = scales::pretty_breaks(n=2),
                            expand=c(0,0)) +
         coord_flip() +
-        ggtitle("# intragenic TSSs per ORF") +
+        ggtitle("number of intragenic TSSs per ORF") +
         theme_default +
         theme(axis.title.x = element_blank(),
               axis.title.y = element_text(margin = margin(r=2, unit="pt")),

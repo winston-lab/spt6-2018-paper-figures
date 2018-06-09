@@ -46,23 +46,27 @@ main = function(theme_spec,
         geom_boxplot(position=position_dodge(width=0.6),
                      width=0.1, notch=TRUE, outlier.size=0, outlier.stroke=0,
                      size=0.2) +
-        scale_x_discrete(expand = c(0,0),
-                         limits = c("genic", "intragenic", "antisense", "intergenic", "")) +
+        scale_x_discrete(expand = c(0,0)) +
+                         # limits = c("genic", "intragenic", "antisense", "intergenic", "")) +
         scale_y_log10(name = "normalized counts",
                       breaks = c(10, 1000), labels = c(bquote(10^1), bquote(10^3))) +
-        scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
-                        # guide=guide_legend(label.position="top",
-                        #                    label.hjust=0.5,
-                        #                    keywidth=unit(30, "pt"),
-                        #                    keyheight=unit(10, "pt"))) +
+        scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004"))),
+                        guide=guide_legend(label.position="top",
+                                           label.hjust=0.5,
+                                           keywidth=unit(30, "pt"),
+                                           keyheight=unit(6, "pt"))) +
         ggtitle("expression level of TSS-seq peaks") +
         theme_default +
         theme(axis.title.x = element_blank(),
-              panel.border = element_blank(),
+              # panel.border = element_blank(),
               panel.grid.major.x = element_blank(),
-              legend.position = c(1, 1),
+              legend.position = "top",
+              legend.text = element_text(margin = margin(0,0,0,0,"pt")),
+              legend.justification = c(0.5, 0.5),
+              legend.box.margin = margin(3, 0, -10, 0, "pt"))
+              # legend.position = c(0.99, 0.99),
               # legend.justification = c(0.5, 0.5),
-              legend.key.width = unit(8, "pt"))
+              # legend.key.width = unit(8, "pt"))
 
     # tfiib_plot = ggplot(data = tfiib_df,
     #                     aes(x=category, y=expression+1,
@@ -92,13 +96,13 @@ main = function(theme_spec,
 
 
     # fig_one_e = arrangeGrob(tss_plot, tfiib_plot, ncol=1, heights = c(1, 1)) %>%
-    fig_one_e = tss_plot %>%
-        add_label("E")
+    fig_one_d = tss_plot %>%
+        add_label("D")
 
-    ggsave(svg_out, plot=fig_one_e, width=fig_width, height=fig_height, units="cm")
-    ggsave(pdf_out, plot=fig_one_e, width=fig_width, height=fig_height, units="cm")
-    ggsave(png_out, plot=fig_one_e, width=fig_width, height=fig_height, units="cm", dpi=326)
-    save(fig_one_e, file=grob_out)
+    ggsave(svg_out, plot=fig_one_d, width=fig_width, height=fig_height, units="cm")
+    ggsave(pdf_out, plot=fig_one_d, width=fig_width, height=fig_height, units="cm")
+    ggsave(png_out, plot=fig_one_d, width=fig_width, height=fig_height, units="cm", dpi=326)
+    save(fig_one_d, file=grob_out)
 }
 
 main(theme_spec = snakemake@input[["theme"]],

@@ -30,7 +30,7 @@ main = function(theme_spec, data_path,
                   group_sd = sd(spikenorm_scaled))
 
     max_y = summary_df %>%
-        mutate(max_y = (group_mean_scaled+group_sd)*1.05) %>%
+        mutate(max_y = (group_mean_scaled+group_sd+0.05)*1.05) %>%
         pull(max_y) %>% max()
 
     supp_two_d = ggplot() +
@@ -41,17 +41,17 @@ main = function(theme_spec, data_path,
         geom_jitter(data = df, aes(x=group, y=spikenorm_scaled),
                     width=0.2, size=1, alpha=0.9) +
         geom_text(data = summary_df, parse=TRUE,
-                  aes(x=group, y=(group_mean_scaled-group_sd)-0.1,
+                  aes(x=group, y=(group_mean_scaled+group_sd)+0.05,
                       label = paste(round(group_mean_scaled,2), "%+-%", round(group_sd, 2))),
                   size=7/72*25.4) +
         scale_fill_ptol(guide=FALSE) +
         scale_x_discrete(labels = c("WT", bquote(italic("spt6-1004")))) +
         scale_y_continuous(limits = c(0, max_y),
-                           breaks = scales::pretty_breaks(n=2),
+                           breaks = c(0,1),
                            expand=c(0,0),
-                           name="relative signal (a.u.)") +
-        ggtitle("TFIIB levels by Western blot",
-                subtitle = "normalized to Dst1 spike-in") +
+                           name="relative signal") +
+        # ggtitle("TFIIB levels by Western blot",
+        #         subtitle = "normalized to Dst1 spike-in") +
         theme_default +
         theme(axis.text.x = element_text(margin=margin(t=3, unit="pt")),
               axis.title.x = element_blank(),

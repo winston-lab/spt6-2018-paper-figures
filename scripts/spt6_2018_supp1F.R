@@ -46,7 +46,9 @@ bvenn = function(lists, scale=1, title){
         geom_text(data = data %>% filter(numbers > 0),
                   aes(x=x,y=y,label=numbers),
                   size=7/72*25.4, fontface="plain") +
-        geom_text(data = labels, aes(x=x,y=y, label=name),
+        geom_text(data = labels,
+                  aes(x=x,y=y, label=name, vjust=0.8),
+                      # vjust=if_else(point=="point2", 1, 0)),
                   size=9/72*25.4, fontface="plain", parse=TRUE) +
         expand_limits(x = c(0, 1)) +
         coord_fixed() +

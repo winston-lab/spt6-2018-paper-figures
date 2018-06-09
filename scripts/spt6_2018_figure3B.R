@@ -18,8 +18,8 @@ main = function(theme_spec, netseq_results, annotation,
         scale_x_log10("wild-type Spt6 levels (ChIP-nexus RPKM)") +
         ylab(expression(atop("sense NET-seq", log[2] ~ frac(italic("spt6-1004"), "WT")))) +
         theme_default +
-        theme(axis.title.y = element_text(angle=0, hjust=1, vjust=0.5),
-              axis.title.x = element_text(margin = margin(t=3, unit="pt")))
+        theme(axis.title.y = element_text(angle=0, hjust=1, vjust=0.5, size=9),
+              axis.title.x = element_text(margin = margin(t=3, unit="pt"), size=9))
 
     fig_three_b %<>% add_label("B")
 

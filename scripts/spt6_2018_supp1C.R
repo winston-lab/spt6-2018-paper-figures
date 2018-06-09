@@ -30,7 +30,7 @@ main = function(theme_spec, data_path,
         scale_fill_viridis(option="inferno", guide=FALSE) +
         scale_x_log10(name = "TSS-seq (RPM)") +
         scale_y_log10(name = "RNA-seq\n(RPKM)") +
-        ggtitle(expression(WT*"," ~ 37*degree*C)) +
+        # ggtitle(expression(WT*"," ~ 37*degree*C)) +
         theme_default +
         theme(axis.title.x = element_text(margin = margin(t=3, unit="pt")),
               axis.title.y = element_text(angle=0, hjust=1, vjust=0.5),

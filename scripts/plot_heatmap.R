@@ -11,7 +11,21 @@ import = function(path, sample_list){
         return()
 }
 
-plot_heatmap = function(df, max_length, add_ylabel, y_label="", cutoff_pct, colorbar_title){
+plot_heatmap = function(data_path, sample_list, anno_path, cps_dist,
+                        max_length, add_ylabel, y_label="",
+                        cutoff_pct, colorbar_title){
+
+    anno_df = read_tsv(anno_path,
+                       col_names = c('chrom', 'start', 'end',
+                                     'name', 'score', 'strand')) %>%
+        rowid_to_column(var="index") %>%
+        arrange(desc(end-start)) %>%
+        rowid_to_column(var="sorted_index") %>%
+        mutate(cps_position = (end-start)/1000-cps_dist)
+
+    df = import(data_path, sample_list=sample_list) %>%
+        left_join(anno_df %>% select(index, sorted_index), by="index")
+
     label_df = df %>%
         group_by(group) %>%
         summarise(sorted_index = max(sorted_index),
@@ -20,6 +34,9 @@ plot_heatmap = function(df, max_length, add_ylabel, y_label="", cutoff_pct, colo
     heatmap = ggplot() +
         geom_raster(data=df, aes(x=position, y=sorted_index, fill=signal),
                     interpolate=FALSE) +
+        geom_path(data = anno_df %>% filter(cps_position <= max_length),
+                     aes(x=cps_position, y=sorted_index),
+                  size=0.3, linetype="dotted", alpha=0.9) +
         geom_text(data=label_df, aes(x=1, y=sorted_index, label=group),
                   hjust=0, nudge_y=-250, size=9/72*25.4, parse=TRUE) +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
@@ -32,7 +49,7 @@ plot_heatmap = function(df, max_length, add_ylabel, y_label="", cutoff_pct, colo
                            expand = c(0, 0)) +
         scale_fill_distiller(palette = "PuBu", direction=1,
                              limits = c(NA, quantile(df[["signal"]], cutoff_pct)),
-                             breaks = scales::pretty_breaks(n=3),
+                             breaks = scales::pretty_breaks(n=2),
                              oob = scales::squish,
                              name = colorbar_title,
                              guide = guide_colorbar(title.position="top",

@@ -7,21 +7,29 @@ main = function(theme_spec, heatmap_scripts,
     source(heatmap_scripts)
 
     sample_list = c("WT-37C-1", "WT-37C-2", "spt6-1004-37C-1", "spt6-1004-37C-2")
+    cps_dist = 0.3
+    max_length = 3
+    add_ylabel = TRUE
+    cutoff_pct = 0.95
 
-    anno = read_tsv(annotation,
-                    col_names = c('chrom', 'start', 'end', 'name', 'score', 'strand')) %>%
-        rowid_to_column(var="index") %>%
-        arrange(desc(end-start)) %>%
-        rowid_to_column(var="sorted_index") %>%
-        select(index, sorted_index)
+    sense_heatmap = plot_heatmap(data_path = sense_tss_data,
+                                 sample_list = sample_list,
+                                 anno_path = annotation,
+                                 cps_dist = cps_dist,
+                                 max_length= max_length,
+                                 cutoff_pct= cutoff_pct,
+                                 add_ylabel= TRUE,
+                                 y_label="nonoverlapping coding genes",
+                                 colorbar_title="sense TSS-seq signal")
 
-    sense_df = import(sense_tss_data, sample_list=sample_list) %>% left_join(anno, by="index")
-    anti_df = import(antisense_tss_data, sample_list=sample_list) %>% left_join(anno, by="index")
-
-    sense_heatmap = plot_heatmap(df=sense_df, max_length=3, add_ylabel=TRUE, cutoff_pct=0.95,
-                                 y_label="nonoverlapping coding genes", colorbar_title="sense TSS-seq signal")
-    anti_heatmap = plot_heatmap(df=anti_df, max_length=3, add_ylabel=FALSE, cutoff_pct=0.95,
-                                 colorbar_title="antisense TSS-seq signal")
+    anti_heatmap = plot_heatmap(data_path = antisense_tss_data,
+                                sample_list = sample_list,
+                                anno_path = annotation,
+                                cps_dist = cps_dist,
+                                max_length= max_length,
+                                cutoff_pct= cutoff_pct,
+                                add_ylabel=FALSE,
+                                colorbar_title="antisense TSS-seq signal")
     fig_one_a = arrangeGrob(sense_heatmap, anti_heatmap, nrow=1) %>%
         add_label("A")
 

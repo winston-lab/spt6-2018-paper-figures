@@ -50,7 +50,7 @@ main = function(theme_spec, data_path,
                             # guide=guide_legend(label.position="bottom",
                             #                    label.hjust=0.5,
                             #                    keywidth=2)) +
-        ggtitle(bquote(italic(SSA4) ~ "RT-qPCR")) +
+        ggtitle(bquote(italic("SSA4") ~ "RT-qPCR")) +
         theme_default +
         theme(axis.title.x = element_blank(),
               legend.position = c(0.03, 0.99),
