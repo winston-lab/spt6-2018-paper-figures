@@ -5,10 +5,10 @@ library(gridExtra)
 
 main = function(three_a, three_b, three_c, fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
-    layout = rbind(c(1,1,1,1,1,1,1,1,1,1,NA,NA),
-                   c(1,1,1,1,1,1,1,1,1,1,NA,NA),
-                   c(1,1,1,1,1,1,1,1,1,1,NA,NA),
-                   c(1,1,1,1,1,1,1,1,1,1,NA,NA),
+    layout = rbind(c(1,1,1,1,1,1,1,1,1,1,1,NA),
+                   c(1,1,1,1,1,1,1,1,1,1,1,NA),
+                   c(1,1,1,1,1,1,1,1,1,1,1,NA),
+                   c(1,1,1,1,1,1,1,1,1,1,1,NA),
                    c(2,2,2,2,2,2,2,2,2,2,2,2),
                    c(2,2,2,2,2,2,2,2,2,2,2,2),
                    c(2,2,2,2,2,2,2,2,2,2,2,2),
@@ -24,7 +24,7 @@ main = function(three_a, three_b, three_c, fig_width, fig_height,
     load(three_c)
 
     fig_three = arrangeGrob(fig_three_a, fig_three_b, fig_three_c, layout_matrix=layout) %>%
-        arrangeGrob(top=textGrob(label = "Figure 3: NET-seq", gp=gpar(fontsize=12)))
+        arrangeGrob(top=textGrob(label = "Figure 3", gp=gpar(fontsize=12)))
 
     ggsave(svg_out, plot=fig_three, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_three, width=fig_width, height=fig_height, units="cm")

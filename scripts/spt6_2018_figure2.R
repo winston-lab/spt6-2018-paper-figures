@@ -7,18 +7,18 @@ main = function(two_a, two_b, two_c, two_d,
                 # two_e,
                 fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
-    layout = rbind(c(1,1,1,1,1,1,4,4,4,4,4,4),
-                   c(1,1,1,1,1,1,4,4,4,4,4,4),
-                   c(1,1,1,1,1,1,4,4,4,4,4,4),
-                   c(1,1,1,1,1,1,4,4,4,4,4,4),
-                   c(1,1,1,1,1,1,4,4,4,4,4,4),
-                   c(1,1,1,1,1,1,4,4,4,4,4,4),
-                   c(2,2,2,2,2,2,2,2,2,NA,NA,NA),
-                   c(2,2,2,2,2,2,2,2,2,NA,NA,NA),
-                   c(2,2,2,2,2,2,2,2,2,NA,NA,NA),
-                   c(3,3,3,3,3,3,3,3,3,NA,NA,NA),
-                   c(3,3,3,3,3,3,3,3,3,NA,NA,NA),
-                   c(3,3,3,3,3,3,3,3,3,NA,NA,NA))
+    layout = rbind(c(1,1,1,1,1,1,2,2,2,2,2,2),
+                   c(1,1,1,1,1,1,2,2,2,2,2,2),
+                   c(1,1,1,1,1,1,2,2,2,2,2,2),
+                   c(1,1,1,1,1,1,2,2,2,2,2,2),
+                   c(1,1,1,1,1,1,2,2,2,2,2,2),
+                   c(1,1,1,1,1,1,NA,NA,4,4,4,4),
+                   c(3,3,3,3,3,3,3,3,4,4,4,4),
+                   c(3,3,3,3,3,3,3,3,4,4,4,4),
+                   c(3,3,3,3,3,3,3,3,4,4,4,4),
+                   c(3,3,3,3,3,3,3,3,4,4,4,4),
+                   c(3,3,3,3,3,3,3,3,4,4,4,4),
+                   c(3,3,3,3,3,3,3,3,4,4,4,4))
 
     load(two_a)
     load(two_b)
@@ -29,7 +29,7 @@ main = function(two_a, two_b, two_c, two_d,
     fig_two = arrangeGrob(fig_two_a, fig_two_b, fig_two_c, fig_two_d,
                           # fig_two_e,
                           layout_matrix=layout) %>%
-        arrangeGrob(top=textGrob(label = "Figure 2: TFIIB ChIP-nexus", gp=gpar(fontsize=12)))
+        arrangeGrob(top=textGrob(label = "Figure 2", gp=gpar(fontsize=12)))
 
     ggsave(svg_out, plot=fig_two, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_two, width=fig_width, height=fig_height, units="cm")

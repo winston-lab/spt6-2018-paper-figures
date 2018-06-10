@@ -19,7 +19,8 @@ main = function(theme_spec, netseq_results, annotation,
         ylab(expression(atop("sense NET-seq", log[2] ~ frac(italic("spt6-1004"), "WT")))) +
         theme_default +
         theme(axis.title.y = element_text(angle=0, hjust=1, vjust=0.5, size=9),
-              axis.title.x = element_text(margin = margin(t=3, unit="pt"), size=9))
+              axis.title.x = element_text(margin = margin(t=3, unit="pt"), size=9),
+              plot.margin = margin(0, 11, -10, 11/2, "pt"))
 
     fig_three_b %<>% add_label("B")
 

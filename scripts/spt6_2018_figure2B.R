@@ -18,7 +18,7 @@ main = function(theme_spec, tfiib_data,
                                labels = c("WT", "spt6-1004")))
 
     fig_two_b = ggplot(data = df, aes(x=position, y=signal, fill=group)) +
-        geom_area(alpha=0.5, position=position_identity()) +
+        geom_area(alpha=0.75, position=position_identity()) +
         scale_x_continuous(expand = c(0,0),
                            breaks = scales::pretty_breaks(3),
                            labels = function(x) case_when(x %>% near(10) ~ "+10kb",
@@ -32,8 +32,12 @@ main = function(theme_spec, tfiib_data,
         facet_zoom(x=position > -0.3 & position < 2.111+0.3,
                    horizontal=FALSE, zoom.size=1) +
         annotate(geom="segment", x=0, xend=2.111, y=0.7, yend=0.7) +
-        annotate(geom="rect", xmin=0.054, xmax=1.983, ymin=0.60, ymax=0.80,
-                 fill="grey75") +
+        annotate(geom="polygon",
+                 x=c(0.054, 1.983*.95, 1.983, 1.983*.95, 0.053),
+                 y=c(0.75, 0.75, 0.7, 0.65, 0.65),
+                 fill="grey80") +
+        # annotate(geom="rect", xmin=0.054, xmax=1.983, ymin=0.60, ymax=0.80,
+        #          fill="grey80") +
         annotate(geom="text", x=2.111/2, y=0.7, label="italic(\"SSA4\")", size=7/72*25.4,
                  parse=TRUE) +
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
@@ -43,11 +47,12 @@ main = function(theme_spec, tfiib_data,
               axis.title.y = element_text(margin=margin(r=6, unit="pt")),
               axis.title.x = element_blank(),
               panel.border = element_blank(),
+              axis.line.y = element_line(size=0.25, color="grey65"),
               panel.grid.major.x = element_blank(),
               panel.grid.minor.x = element_blank(),
               panel.grid.minor.y = element_blank(),
               panel.spacing.y = unit(1, "pt"),
-              plot.margin = margin(0, 0, -11, 11/2 ))
+              plot.margin = margin(0, 6, -11, 11/2 ))
 
     fig_two_b %<>% add_label("B")
 

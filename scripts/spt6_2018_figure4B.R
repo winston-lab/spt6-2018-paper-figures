@@ -1,149 +1,166 @@
 
-import = function(path, sample_list){
-    read_tsv(path, col_names = c("group", "sample", "annotation", "assay", "index", "position", "signal")) %>%
-        filter((sample %in% sample_list) & ! is.na(signal)) %>%
-        select(-c(annotation, assay, index)) %>%
-        mutate(group = ordered(group,
-                               levels = c("spt6+", "spt6-1004-37C"),
-                               labels = c("WT", "spt6-1004"))) %>%
-        return()
-}
-
-build_qpcr_df = function(path, gene_id, norm="input"){
-    df = read_tsv(path) %>%
-        mutate(condition=fct_inorder(condition))
-    subdf = df %>%
-        filter(gene==gene_id)
-    if (norm != "input"){
-        subdf = df %>% filter(gene==norm) %>%
-            select(condition, replicate, spikein=value) %>%
-            left_join(subdf, ., by=c("condition", "replicate")) %>%
-            mutate(value=value/spikein)
-    }
-
-    strand = subdf %>% distinct(strand) %>% pull(strand)
-    if (strand=="+"){
-        subdf %<>%
-            mutate_at(vars(amplicon_start, amplicon_end, transcript_end, orf_start, orf_end, transcript_start),
-                      funs((.-transcript_start))/1e3)
-    } else if (strand=="-"){
-        subdf %<>%
-            mutate_at(vars(amplicon_start, amplicon_end, transcript_start, orf_start, orf_end, transcript_end),
-                      funs((transcript_end-.)/1e3))
-    }
-    return(subdf)
-}
-
-main = function(theme_spec, seq_data_path, qpcr_data_path,
-                annotation,
+main = function(theme_spec,
+                netseq_data, mnase_data, quant_data, annotation_path,
                 fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
     source(theme_spec)
     library(cowplot)
-    sample_list = c("WT-37C-1", "spt6-1004-37C-1", "spt6-1004-37C-2")
-    gene_id = "VAM6"
+    library(pals)
 
-    df = import(seq_data_path, sample_list=sample_list) %>%
-        group_by(group, position) %>% 
-        summarise(signal=mean(signal))
+    sample_ids = c("WT-37C-1", "spt6-1004-37C-1", "spt6-1004-37C-2")
+    max_length = 1
+    mnase_cutoff = 0.95
+    netseq_cutoff = 0.93
 
-    qpcr_df = build_qpcr_df(qpcr_data_path, gene_id=gene_id, norm="pma1+")
+    netseq_df = read_tsv(netseq_data,
+                         col_names=c('group', 'sample', 'annotation', 'index', 'position', 'signal')) %>%
+        filter(group=="WT-37C" & between(position, -0.1, 0.5)) %>%
+        group_by(group, index, position) %>%
+        summarise(signal = mean(signal)) %>%
+        ungroup() %>%
+        mutate(group = "\"WT\"")
 
-    txn_end = max(c(qpcr_df[["transcript_start"]], qpcr_df[["transcript_end"]]))
-    orf_start = min(c(qpcr_df[["orf_start"]], qpcr_df[["orf_end"]]))
-    orf_end = max(c(qpcr_df[["orf_start"]], qpcr_df[["orf_end"]]))
-    
-    seq_plot = ggplot() +
-        geom_vline(data = qpcr_df %>%
-                       distinct(amplicon_start, amplicon_end) %>%
-                       gather(key, coord),
-                   aes(xintercept = coord), linetype="dashed",
-                   alpha=0.3, size=0.3) +
-        geom_area(data = df,
-                  aes(x=position, y=signal, fill=group),
-                  position=position_identity(),
-                  alpha=0.75) +
-        scale_x_continuous(expand=c(0,0),
-                           labels = function(x)case_when(x==0 ~ "TSS",
-                                                         x==3 ~ paste0(x, "kb"),
-                                                         TRUE ~ as.character(x))) +
-        # scale_y_continuous(limits = c(-1, NA),
-        scale_y_continuous(limits = c(NA, NA),
-                           labels = function(x){abs(x)},
-                           name = "normalized counts",
-                           breaks = scales::pretty_breaks(n=2)) +
-        scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
-        ggtitle("smoothed MNase-seq dyad signal") +
-        theme_default +
-        theme(legend.position = c(0.8, 0.75),
-              legend.justification = c(0.5, 0.5),
-              axis.title.x = element_blank(),
-              panel.border = element_blank())
+    mnase_df = read_tsv(mnase_data,
+                        col_names=c('group', 'sample', 'annotation', 'index', 'position', 'signal')) %>%
+        filter(position <= max_length & sample %in% sample_ids) %>%
+        group_by(group, index, position) %>%
+        summarise(signal = mean(signal)) %>%
+        ungroup() %>%
+        mutate(group = ordered(group,
+                               levels = c("WT-37C", "spt6-1004-37C"),
+                               labels = c("\"WT\"", "italic(\"spt6-1004\")")))
 
-    diagram = ggplot() +
-        geom_vline(data = qpcr_df %>%
-                       distinct(amplicon_start, amplicon_end) %>%
-                       gather(key, coord),
-                   aes(xintercept = coord), linetype="dashed", alpha=0.3, size=0.3) +
-        annotate(geom="segment", color="black",
-                 x=0, xend=txn_end, y=0, yend=0) +
-        annotate(geom="rect", fill="grey80",
-                 xmin=orf_start, xmax=orf_end, ymin=-1, ymax=1) +
-        annotate(geom="text", label="italic(\"VAM6\")", x=(orf_start+orf_end)/2,
-                 y=0, size=7/72*25.4, parse=TRUE) +
-        scale_x_continuous(limits = c(min(df[["position"]]), max(df[["position"]])),
-                           expand=c(0,0)) +
-        scale_y_continuous(limits = c(-1.5, 1.5), expand=c(0,0)) +
-        theme_void() +
-        theme(plot.margin = margin(0,0,0,0,"pt"))
-
-    qpcr_summary = qpcr_df %>%
-        group_by(amplicon_start, amplicon_end, condition) %>%
-        summarise(mean = mean(value),
-                  sd = sd(value))
-
-    qpcr_plot = ggplot() +
-        geom_vline(data = qpcr_summary,
-                   aes(xintercept = amplicon_start), linetype="dashed", alpha=0.3, size=0.3) +
-        geom_vline(data = qpcr_summary,
-                   aes(xintercept = amplicon_end), linetype="dashed", alpha=0.3, size=0.3) +
-        geom_col(data = qpcr_summary,
-                 aes(x=(amplicon_start+amplicon_end)/2, y=mean, group=condition),
-                 position=position_dodge(0.45), width=0.4, alpha=0.9, size=0.2, fill="white", color="black") +
-        geom_errorbar(data = qpcr_summary,
-                      aes(x=(amplicon_start+amplicon_end)/2, ymin=mean-sd, ymax=mean+sd,
-                          group = interaction(amplicon_start, condition)),
-                      position = position_dodge(width=0.45),
-                      width=0.2, alpha=0.9) +
-        # geom_boxplot(position=position_dodge(.45), width=.4, size=0.3) +
-        geom_point(data = qpcr_df,
-                   aes(x=(amplicon_start+amplicon_end)/2, y=value, color=condition),
-                   position=position_jitterdodge(jitter.width=.4, dodge.width = .45),
-                   # position = position_dodge(width=0.45),
-                   size=1.3, alpha=0.9) +
-        # scale_fill_ptol(labels=c("WT", bquote(italic("spt6-1004"))), guide=guide_legend(reverse = TRUE)) +
-        scale_color_ptol(labels=c("WT", bquote(italic("spt6-1004")))) +
-        scale_x_continuous(limits = c(min(df[["position"]]), max(df[["position"]])),
-                           expand = c(0,0),
-                           labels = function(x)case_when(x==0 ~ "TSS",
-                                                         x==3 ~ paste0(x, "kb"),
-                                                         TRUE ~ as.character(x))) +
-        scale_y_continuous(limits = c(0, NA),
+    netseq_plot = ggplot(data = netseq_df %>%
+                             complete(group, index, position, fill=list(signal=0)),
+                         aes(x=position, y=index, fill=signal)) +
+        geom_raster() +
+        scale_x_continuous(breaks = c(0, 0.4),
+                           labels = function(x){case_when(x==0 ~ "TSS",
+                                                          x==0.4 ~ paste0(x, "kb"),
+                                                          TRUE ~ as.character(x))},
+                           expand = c(0.025, 0)) +
+        scale_y_reverse(breaks = function(x){seq(min(x)+500, max(x)-500, 500)},
+                        name = paste(n_distinct(netseq_df[["index"]]), "nonoverlapping coding genes"),
+                        expand = c(0, 50)) +
+        scale_fill_viridis(option="inferno",
+                           limits = c(NA, quantile(netseq_df[["signal"]], probs=netseq_cutoff)),
+                           oob=scales::squish,
                            breaks = scales::pretty_breaks(n=2),
-                           name = "enrichment (AU)") +
-        ggtitle("histone H3 ChIP-qPCR") +
-        theme_default +
-        theme(legend.position = c(0.8, 0.75),
-              legend.justification = c(0.5, 0.5),
-              axis.title.x = element_blank(),
-              panel.border = element_blank())
+                           name = "NET-seq",
+                           guide=guide_colorbar(title.position="top",
+                                                barwidth=unit(1.3, "cm"),
+                                                barheight=0.3)) +
+        facet_grid(.~group, labeller=label_parsed) +
+        theme_heatmap +
+        theme(strip.text = element_text(size=9, color="black", face="plain", margin=margin(0, 0, -4, 0, "pt")),
+              panel.grid.major.x = element_line(color="black"),
+              panel.grid.major.y = element_line(color="black"),
+              legend.box.margin = margin(0, 0, -3, 0, "pt"),
+              plot.margin = margin(2,4,-10,3,"pt" ))
 
-    fig_four_b = plot_grid(seq_plot, diagram, qpcr_plot, ncol=1, align="v", axis="lr", rel_heights = c(1,0.15,1)) %>%
+    mnase_plot = ggplot(data = mnase_df %>%
+                            complete(group, index, position, fill=list(signal=0)),
+                        aes(x=position, y=index, fill=signal)) +
+        geom_raster() +
+        scale_x_continuous(breaks = scales::pretty_breaks(n=3),
+                           labels = function(x){case_when(x==0 ~ "+1 dyad",
+                                                          x==max_length ~ paste0(x, "kb"),
+                                                          TRUE ~ as.character(x))},
+                           expand = c(0, 0.025)) +
+        scale_y_reverse(breaks = function(x){seq(min(x)+500, max(x)-500, 500)},
+                        expand = c(0, 50), name=NULL) +
+        scale_fill_viridis(option="inferno",
+                           limits = c(NA, quantile(mnase_df[["signal"]], probs=mnase_cutoff)),
+                           oob=scales::squish,
+                           breaks = scales::pretty_breaks(n=3),
+                           name = "MNase-seq dyad signal",
+                           guide=guide_colorbar(title.position="top",
+                                                barwidth=8, barheight=0.3, title.hjust=0.5)) +
+        facet_grid(.~group, labeller=label_parsed) +
+        theme_heatmap +
+        theme(strip.text = element_text(size=9, color="black", face="plain", margin=margin(0, 0, -4, 0, "pt")),
+              panel.grid.major.x = element_line(color="black"),
+              panel.grid.minor.x = element_line(color="black"),
+              panel.grid.major.y = element_line(color="black"),
+              legend.box.margin = margin(0, 0, -3, 0, "pt"),
+              plot.margin = margin(2,4,-10,0,"pt" ))
+
+    quant_df = read_tsv(quant_data,
+                        col_types = "ciicdcciiiiiiidddddddddddddddic") %>%
+            left_join(read_tsv(annotation_path,
+                               col_names = c('chrom', 'start', 'end', 'feat_name', 'score', 'feat_strand')) %>%
+                                   select(-score) %>%
+                                   mutate(annotation="nonoverlapping coding genes"),
+                      by=c("feat_chrom"="chrom", "feat_name", "feat_strand", "annotation")) %>%
+            mutate(feat_start=start, feat_end=end) %>%
+            select(-c(start, end, nuc_chrom, overlap)) %>%
+            mutate_at(vars(nuc_start, nuc_end, nuc_center, ctrl_summit_loc, cond_summit_loc, diff_summit_loc),
+                      funs(if_else(feat_strand=="+", .-feat_start, feat_end-.))) %>%
+            group_by(annotation) %>%
+            mutate(anno_labeled = paste(n_distinct(feat_name), annotation)) %>%
+            ungroup() %>% mutate(annotation=anno_labeled) %>% select(-anno_labeled) %>%
+            mutate(cond_ctrl_dist = cond_summit_loc-ctrl_summit_loc,
+                   annotation = fct_inorder(annotation, ordered=TRUE),
+                   index = as.integer(fct_inorder(feat_name, ordered=TRUE))) %>%
+            mutate(direction=factor(as.integer(sign(cond_ctrl_dist)),
+                                    levels=c(-1, 0, 1),
+                                    labels=c("-", "no change", "+")))
+
+    fuzz_plot = ggplot(data = quant_df %>%
+                           filter(nuc_center-50>=-400 &
+                                      nuc_center+50<=1000 &
+                                      nuc_center <= feat_end-feat_start) %>%
+                          mutate(label = "log[2](italic(\"spt6-1004\")/WT)"),
+                       aes(x=nuc_center, y=index, width=100, fill=fuzziness_lfc)) +
+        geom_tile(linetype="blank") +
+        scale_x_continuous(breaks = scales::pretty_breaks(n=3),
+                           labels = function(x){case_when(x==0 ~ "+1 dyad",
+                                                          x==max_length*1e3 ~ paste0(x/1e3, "kb"),
+                                                          TRUE ~ as.character(x/1000))},
+                           expand = c(0, 25)) +
+        scale_y_reverse(breaks = function(x){seq(min(x)+500, max(x)-500, 500)},
+                        expand = c(0, 50), name=NULL) +
+        scale_fill_gradientn(colors = coolwarm(100), limits = c(-0.7, 0.7),
+                             oob=scales::squish,
+                             breaks = scales::pretty_breaks(n=2),
+                             name = "fuzziness",
+                             guide=guide_colorbar(title.position="top",
+                                                  barwidth=5, barheight=0.3, title.hjust=0.5)) +
+        facet_grid(.~label, labeller = label_parsed) +
+        theme_heatmap +
+        theme(strip.text = element_text(size=7, color="black", face="plain", margin=margin(0,0,-4,0,"pt")),
+              legend.box.margin = margin(0, 0, -3, 0, "pt"),
+              plot.margin = margin(2,4,-10,0,"pt" ))
+
+    occ_plot = ggplot(data = quant_df %>%
+                          filter(nuc_center-50>=-400 &
+                                     nuc_center+50<=1000 &
+                                     nuc_center <= feat_end-feat_start) %>%
+                          mutate(label = "log[2](italic(\"spt6-1004\")/WT)"),
+                      aes(x=nuc_center, y=index, width=100, fill=summit_lfc)) +
+        geom_tile(linetype="blank") +
+        scale_x_continuous(breaks = scales::pretty_breaks(n=3),
+                           labels = function(x){case_when(x==0 ~ "+1 dyad",
+                                                          x==max_length*1e3 ~ paste0(x/1e3, "kb"),
+                                                          TRUE ~ as.character(x/1000))},
+                           expand = c(0, 25)) +
+        scale_y_reverse(breaks = function(x){seq(min(x)+500, max(x)-500, 500)},
+                        expand = c(0, 50), name=NULL) +
+        scale_fill_gradientn(colors = coolwarm(100), limits = c(-2, 2),
+                             oob=scales::squish,
+                             breaks = scales::pretty_breaks(n=3),
+                             name = "occupancy",
+                             guide=guide_colorbar(title.position="top",
+                                                  barwidth=5, barheight=0.3, title.hjust=0.5)) +
+        facet_grid(.~label, labeller = label_parsed) +
+        theme_heatmap +
+        theme(strip.text = element_text(size=7, color="black", face="plain", margin=margin(0,0,-4,0,"pt")),
+              legend.box.margin = margin(0, 0, -3, 0, "pt"),
+              plot.margin = margin(2,4,-10,0,"pt" ))
+
+    fig_four_b = plot_grid(netseq_plot, mnase_plot, occ_plot, fuzz_plot, align="h", axis="tb", nrow=1,
+                     rel_widths = c(0.2, 1, 0.5, 0.5)) %>%
         add_label("B")
-
-    # anno = read_tsv(annotation,
-    #                 col_names = c('chrom', 'start', 'end', 'name', 'score', 'strand')) %>%
-    #     rowid_to_column(var="index")
 
     ggplot2::ggsave(svg_out, plot=fig_four_b, width=fig_width, height=fig_height, units="cm")
     ggplot2::ggsave(pdf_out, plot=fig_four_b, width=fig_width, height=fig_height, units="cm")
@@ -152,9 +169,10 @@ main = function(theme_spec, seq_data_path, qpcr_data_path,
 }
 
 main(theme_spec = snakemake@input[["theme"]],
-     seq_data_path = snakemake@input[["seq_data"]],
-     qpcr_data_path = snakemake@input[["qpcr_data"]],
-     annotation = snakemake@input[["annotation"]],
+     netseq_data = snakemake@input[["netseq_data"]],
+     mnase_data = snakemake@input[["mnase_data"]],
+     quant_data = snakemake@input[["quant_data"]],
+     annotation_path = snakemake@input[["annotation"]],
      fig_width = snakemake@params[["width"]],
      fig_height = snakemake@params[["height"]],
      svg_out = snakemake@output[["svg"]],

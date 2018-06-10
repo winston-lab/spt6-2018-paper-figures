@@ -31,7 +31,7 @@ main = function(theme_spec,
 
     fig_four_a = ggplot(data = df,
                        aes(x=position, color=group, fill=group)) +
-        geom_vline(xintercept = 0, size=0.4, color="grey65") +
+        # geom_vline(xintercept = 0, size=0.4, color="grey65") +
         geom_ribbon(aes(ymin=low, ymax=high), alpha=0.2, linetype='blank') +
         geom_line(aes(y=mid), alpha=0.7) +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
@@ -40,13 +40,18 @@ main = function(theme_spec,
                                                           TRUE ~ as.character(x))},
                            name = NULL,
                            expand = c(0,0)) +
-        scale_y_continuous(breaks = scales::pretty_breaks(n=3),
+        scale_y_continuous(breaks = scales::pretty_breaks(n=2),
+                           limits = c(0, max(df[["high"]]*1.05)),
+                           expand = c(0,0),
                            labels = function(x){if_else(x<0, abs(x), x)},
                            name = "normalized counts") +
         ggtitle("MNase-seq dyad signal") +
         scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
-        theme_default
+        theme_default +
+        theme(panel.grid.major.y = element_blank(),
+              panel.grid.minor.y = element_blank(),
+              plot.margin = margin(2, 11, -10, 11/2, "pt"))
 
     fig_four_a %<>% add_label("A")
 

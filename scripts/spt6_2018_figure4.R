@@ -6,15 +6,15 @@ library(gridExtra)
 main = function(four_a, four_b, four_c, four_d,
                 fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
-    layout = rbind(c(1,1,1,1,NA,2,2,2,2,2,NA,NA),
-                   c(1,1,1,1,NA,2,2,2,2,2,NA,NA),
-                   c(1,1,1,1,NA,2,2,2,2,2,NA,NA),
-                   c(3,3,3,3,NA,2,2,2,2,2,NA,NA),
-                   c(3,3,3,3,NA,2,2,2,2,2,NA,NA),
-                   c(3,3,3,3,NA,2,2,2,2,2,NA,NA),
-                   c(4,4,4,4,4,4,4,4,4,4,4,4),
-                   c(4,4,4,4,4,4,4,4,4,4,4,4),
-                   c(4,4,4,4,4,4,4,4,4,4,4,4),
+    layout = rbind(c(1,1,1,1,1,1,3,3,3,3,3,3),
+                   c(1,1,1,1,1,1,3,3,3,3,3,3),
+                   c(1,1,1,1,1,1,3,3,3,3,3,3),
+                   c(2,2,2,2,2,2,2,2,2,2,2,2),
+                   c(2,2,2,2,2,2,2,2,2,2,2,2),
+                   c(2,2,2,2,2,2,2,2,2,2,2,2),
+                   c(2,2,2,2,2,2,2,2,2,2,2,2),
+                   c(2,2,2,2,2,2,2,2,2,2,2,2),
+                   c(2,2,2,2,2,2,2,2,2,2,2,2),
                    c(4,4,4,4,4,4,4,4,4,4,4,4),
                    c(4,4,4,4,4,4,4,4,4,4,4,4),
                    c(4,4,4,4,4,4,4,4,4,4,4,4))
@@ -26,7 +26,7 @@ main = function(four_a, four_b, four_c, four_d,
 
     fig_four = arrangeGrob(fig_four_a, fig_four_b, fig_four_c, fig_four_d,
                           layout_matrix=layout) %>%
-        arrangeGrob(top=textGrob(label = "Figure 4: MNase-seq", gp=gpar(fontsize=12)))
+        arrangeGrob(top=textGrob(label = "Figure 4", gp=gpar(fontsize=12)))
 
     ggsave(svg_out, plot=fig_four, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_four, width=fig_width, height=fig_height, units="cm")
