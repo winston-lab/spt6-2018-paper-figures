@@ -52,7 +52,7 @@ main = function(theme_spec, tfiib_data,
               panel.grid.minor.x = element_blank(),
               panel.grid.minor.y = element_blank(),
               panel.spacing.y = unit(1, "pt"),
-              plot.margin = margin(0, 6, -11, 11/2 ))
+              plot.margin = margin(0, 11, -11, 11/2 ))
 
     fig_two_b %<>% add_label("B")
 

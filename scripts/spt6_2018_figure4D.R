@@ -22,8 +22,7 @@ main = function(theme_spec, plot_functions,
                                      seqdata_df = pma1_mnase_df,
                                      gene_id = "PMA1")
     fig_four_d = plot_grid(pma1_diagram, pma1_diagram, pma1_mnase_plot, pma1_qpcr_plot,
-                           ncol=2, align="vh", axis="trbl", rel_heights = c(0.37,1),
-                           rel_widths =c(1,1)) %>%
+                           ncol=2, align="vh", axis="trbl", rel_heights = c(0.37,1)) %>%
         add_label("D")
 
     # anno = read_tsv(annotation,

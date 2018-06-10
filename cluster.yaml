@@ -1,6 +1,6 @@
 __default__:
     queue : short
-    time : 60
+    time : 10
     n : 1
     mem : 12000
     name : "{rule}"

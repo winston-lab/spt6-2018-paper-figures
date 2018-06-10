@@ -45,7 +45,7 @@ main = function(theme_spec,
                     size=0.2) +
         geom_boxplot(aes(group = interaction(cluster, group)),
                      position=position_dodge(width=0.6),
-                     width=0.1, size=0.2,
+                     width=0.15, size=0.2,
                      outlier.size=0, outlier.stroke=0, notch=TRUE) +
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
@@ -57,9 +57,11 @@ main = function(theme_spec,
         theme_default +
         theme(axis.title.x = element_blank(),
               axis.text.x = element_blank(),
-              legend.position = c(0.55, 0.98),
+              legend.position = c(0.53, 0.96),
               legend.justification = c(0.5, 1),
-              legend.key.width = unit(8, "pt"))
+              legend.key.width = unit(8, "pt"),
+              panel.grid.major.x = element_blank(),
+              plot.margin = margin(0,11,-8,11/2,"pt"))
 
     tfiib_plot = ggplot(data = tfiib_levels_df, aes(x=cluster, y=tfiib_levels+1)) +
         geom_violin(aes(fill=group),
@@ -67,7 +69,7 @@ main = function(theme_spec,
                     size=0.2) +
         geom_boxplot(aes(group = interaction(cluster, group)),
                      position=position_dodge(width=0.6),
-                     width=0.1, size=0.2,
+                     width=0.15, size=0.2,
                      outlier.size=0, outlier.stroke=0, notch=TRUE) +
         scale_fill_ptol() +
         scale_color_ptol() +
@@ -78,7 +80,9 @@ main = function(theme_spec,
         ggtitle("TFIIB ChIP-nexus signal") +
         theme_default +
         theme(axis.title.x = element_blank(),
-              legend.position = "none")
+              legend.position = "none",
+              panel.grid.major.x = element_blank(),
+              plot.margin = margin(0,11,2,11/2,"pt"))
 
     fig_five_b = plot_grid(tss_plot, tfiib_plot, ncol=1, align="vh", axis="trbl") %>%
         add_label("B")

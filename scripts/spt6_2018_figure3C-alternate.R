@@ -24,10 +24,10 @@ main = function(theme_spec, netseq_data, annotation,
                    size=0.5, color="grey65") +
         geom_ribbon(data = df,
                     aes(x=position, ymin=low, ymax=high),
-                    alpha=0.4, size=NA, color=NA, fill="#114477") +
+                    alpha=0.2, size=NA, color=NA, fill="#114477") +
         geom_line(data = df,
                   aes(x=position, y=mid),
-                  color="#114477", size=0.5) +
+                  color="#114477", size=0.4) +
         geom_label(data = tibble(group=c("italic(\"set2\"*Delta)",
                                           "italic(\"spt6-1004\")*\",\" ~ 30*degree*C",
                                           "italic(\"spt6-1004\")*\",\" ~ 37*degree*C")),
@@ -38,7 +38,8 @@ main = function(theme_spec, netseq_data, annotation,
                            breaks = c(0, 1, 2),
                            labels = c("sense TSS", "", "CPS")) +
         scale_y_continuous(breaks = scales::pretty_breaks(n=1),
-                           limits = c(NA, max(df[["high"]])*1.15),
+                           limits = c(0, max(df[["high"]])*1.15),
+                           expand = c(0,0.001),
                            name = "normalized counts") +
         facet_grid(group~.) +
         ggtitle("antisense NET-seq signal") +

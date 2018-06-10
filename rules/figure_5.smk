@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+localrules: assemble_figure_five
+
 # intragenic MNase clusters
 rule figure_five_a:
     input:
@@ -55,31 +57,47 @@ rule figure_five_c:
     script:
         "../scripts/spt6_2018_figure5C.R"
 
-# intragenic motifs
+# intragenic TATA boxes
 rule figure_five_d:
     input:
         tata_genic_path = config["figure_five"]["five_d"]["tata_genic"],
         tata_intra_path = config["figure_five"]["five_d"]["tata_intragenic"],
         tata_random_path = config["figure_five"]["five_d"]["tata_random"],
-        all_motif_path = config["figure_five"]["five_d"]["all_motif_path"],
         theme = config["theme_spec"]
     output:
-        svg = "figure5/figure5D/spt6_2018_figure5D-intragenic-TSS-motifs.svg",
-        pdf = "figure5/figure5D/spt6_2018_figure5D-intragenic-TSS-motifs.pdf",
-        png = "figure5/figure5D/spt6_2018_figure5D-intragenic-TSS-motifs.png",
-        grob = "figure5/figure5D/spt6_2018_figure5D-intragenic-TSS-motifs.Rdata",
+        svg = "figure5/figure5D/spt6_2018_figure5D-intragenic-TSS-TATA-boxes.svg",
+        pdf = "figure5/figure5D/spt6_2018_figure5D-intragenic-TSS-TATA-boxes.pdf",
+        png = "figure5/figure5D/spt6_2018_figure5D-intragenic-TSS-TATA-boxes.png",
+        grob = "figure5/figure5D/spt6_2018_figure5D-intragenic-TSS-TATA-boxes.Rdata",
     params:
         height = eval(str(config["figure_five"]["five_d"]["height"])),
         width = eval(str(config["figure_five"]["five_d"]["width"])),
     script:
         "../scripts/spt6_2018_figure5D.R"
 
+# intragenic motif enrichment
+rule figure_five_e:
+    input:
+        all_motif_path = config["figure_five"]["five_e"]["all_motif_path"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure5/figure5E/spt6_2018_figure5E-intragenic-TSS-motif-enrichment.svg",
+        pdf = "figure5/figure5E/spt6_2018_figure5E-intragenic-TSS-motif-enrichment.pdf",
+        png = "figure5/figure5E/spt6_2018_figure5E-intragenic-TSS-motif-enrichment.png",
+        grob = "figure5/figure5E/spt6_2018_figure5E-intragenic-TSS-motif-enrichment.Rdata",
+    params:
+        height = eval(str(config["figure_five"]["five_e"]["height"])),
+        width = eval(str(config["figure_five"]["five_e"]["width"])),
+    script:
+        "../scripts/spt6_2018_figure5E.R"
+
 rule assemble_figure_five:
     input:
         five_a = "figure5/figure5A/spt6_2018_figure5A-intragenic-TSS-MNase-clusters.Rdata",
         five_b = "figure5/figure5B/spt6_2018_figure5B-intragenic-TSS-MNase-clusters-expression.Rdata",
         five_c = "figure5/figure5C/spt6_2018_figure5C-intragenic-TSS-sequence-information.Rdata",
-        five_d = "figure5/figure5D/spt6_2018_figure5D-intragenic-TSS-motifs.Rdata",
+        five_d = "figure5/figure5D/spt6_2018_figure5D-intragenic-TSS-TATA-boxes.Rdata",
+        five_e = "figure5/figure5E/spt6_2018_figure5E-intragenic-TSS-motif-enrichment.Rdata",
     output:
         svg = "figure5/spt6_2018_figure5-intragenic-promoters.svg",
         pdf = "figure5/spt6_2018_figure5-intragenic-promoters.pdf",

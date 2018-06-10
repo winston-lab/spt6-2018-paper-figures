@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+localrules: assemble_figure_three
+
 #metagene of NET-seq
 rule figure_three_a:
     input:

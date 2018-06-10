@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+localrules: assemble_figure_one
+
 # heatmaps of TSS-seq signal
 rule figure_one_a:
     input:

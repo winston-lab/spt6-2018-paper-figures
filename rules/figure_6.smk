@@ -1,16 +1,23 @@
 #!/usr/bin/env python
 
+localrules: assemble_figure_six
+
 rule figure_six_a:
     input:
-        pma_seq_data = config["figure_six"]["six_a"]["pma_seq_data"],
-        hsp_seq_data = config["figure_six"]["six_a"]["hsp_seq_data"],
+        theme = config["theme_spec"],
+        plot_functions = "scripts/coverage_and_qpcr_plotting_functions.R",
+        pma1_tfiib_nexus = config["figure_six"]["six_a"]["pma1_tfiib_nexus"],
+        # pma1_tss_sense = config["figure_six"]["six_a"]["pma1_tss_sense"],
+        pma1_mnase = config["figure_six"]["six_a"]["pma1_mnase"],
+        hsp82_tfiib_nexus = config["figure_six"]["six_a"]["hsp82_tfiib_nexus"],
+        # hsp82_tss_sense = config["figure_six"]["six_a"]["hsp82_tss_sense"],
+        hsp82_mnase = config["figure_six"]["six_a"]["hsp82_mnase"],
         qpcr_data = config["figure_six"]["six_a"]["qpcr_data_path"],
-        theme = config["theme_spec"]
     output:
-        svg = "figure6/figure6A/spt6_2018_figure6A-TFIIB-at-PMA1-and-HSP82.svg",
-        pdf = "figure6/figure6A/spt6_2018_figure6A-TFIIB-at-PMA1-and-HSP82.pdf",
-        png = "figure6/figure6A/spt6_2018_figure6A-TFIIB-at-PMA1-and-HSP82.png",
-        grob = "figure6/figure6A/spt6_2018_figure6A-TFIIB-at-PMA1-and-HSP82.Rdata",
+        svg = "figure6/figure6A/spt6_2018_figure6A-genic-promoters-PMA1-and-HSP82.svg",
+        pdf = "figure6/figure6A/spt6_2018_figure6A-genic-promoters-PMA1-and-HSP82.pdf",
+        png = "figure6/figure6A/spt6_2018_figure6A-genic-promoters-PMA1-and-HSP82.png",
+        grob = "figure6/figure6A/spt6_2018_figure6A-genic-promoters-PMA1-and-HSP82.Rdata",
     params:
         height = eval(str(config["figure_six"]["six_a"]["height"])),
         width = eval(str(config["figure_six"]["six_a"]["width"])),
@@ -32,42 +39,41 @@ rule figure_six_b:
     script:
         "../scripts/spt6_2018_figure6B.R"
 
+# rule figure_six_c:
+#     input:
+#         go_results = config["figure_six"]["six_c"]["go_results"],
+#         theme = config["theme_spec"]
+#     output:
+#         svg = "figure6/figure6C/spt6_2018_figure6C-spt6-upregulated-genic-TSSs-gene-ontology.svg",
+#         pdf = "figure6/figure6C/spt6_2018_figure6C-spt6-upregulated-genic-TSSs-gene-ontology.pdf",
+#         png = "figure6/figure6C/spt6_2018_figure6C-spt6-upregulated-genic-TSSs-gene-ontology.png",
+#         grob = "figure6/figure6C/spt6_2018_figure6C-spt6-upregulated-genic-TSSs-gene-ontology.Rdata",
+#     params:
+#         height = eval(str(config["figure_six"]["six_c"]["height"])),
+#         width = eval(str(config["figure_six"]["six_c"]["width"])),
+#     script:
+#         "../scripts/spt6_2018_figure6C.R"
+
 rule figure_six_c:
     input:
-        go_results = config["figure_six"]["six_c"]["go_results"],
+        data_path = config["figure_six"]["six_c"]["data_path"],
         theme = config["theme_spec"]
     output:
-        svg = "figure6/figure6C/spt6_2018_figure6C-spt6-upregulated-genic-TSSs-gene-ontology.svg",
-        pdf = "figure6/figure6C/spt6_2018_figure6C-spt6-upregulated-genic-TSSs-gene-ontology.pdf",
-        png = "figure6/figure6C/spt6_2018_figure6C-spt6-upregulated-genic-TSSs-gene-ontology.png",
-        grob = "figure6/figure6C/spt6_2018_figure6C-spt6-upregulated-genic-TSSs-gene-ontology.Rdata",
+        svg = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-SSA4-RTqPCR.svg",
+        pdf = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-SSA4-RTqPCR.pdf",
+        png = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-SSA4-RTqPCR.png",
+        grob = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-SSA4-RTqPCR.Rdata",
     params:
         height = eval(str(config["figure_six"]["six_c"]["height"])),
         width = eval(str(config["figure_six"]["six_c"]["width"])),
     script:
         "../scripts/spt6_2018_figure6C.R"
 
-rule figure_six_d:
-    input:
-        data_path = config["figure_six"]["six_d"]["data_path"],
-        theme = config["theme_spec"]
-    output:
-        svg = "figure6/figure6D/spt6_2018_figure6D-spt6-depletion-SSA4-RTqPCR.svg",
-        pdf = "figure6/figure6D/spt6_2018_figure6D-spt6-depletion-SSA4-RTqPCR.pdf",
-        png = "figure6/figure6D/spt6_2018_figure6D-spt6-depletion-SSA4-RTqPCR.png",
-        grob = "figure6/figure6D/spt6_2018_figure6D-spt6-depletion-SSA4-RTqPCR.Rdata",
-    params:
-        height = eval(str(config["figure_six"]["six_d"]["height"])),
-        width = eval(str(config["figure_six"]["six_d"]["width"])),
-    script:
-        "../scripts/spt6_2018_figure6D.R"
-
 rule assemble_figure_six:
     input:
-        six_a = "figure6/figure6A/spt6_2018_figure6A-TFIIB-at-PMA1-and-HSP82.Rdata",
+        six_a = "figure6/figure6A/spt6_2018_figure6A-genic-promoters-PMA1-and-HSP82.Rdata",
         six_b = "figure6/figure6B/spt6_2018_figure6B-MNase-at-genic-TSSs.Rdata",
-        six_c = "figure6/figure6C/spt6_2018_figure6C-spt6-upregulated-genic-TSSs-gene-ontology.Rdata",
-        six_d = "figure6/figure6D/spt6_2018_figure6D-spt6-depletion-SSA4-RTqPCR.Rdata",
+        six_c = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-SSA4-RTqPCR.Rdata",
     output:
         svg = "figure6/spt6_2018_figure6-genic-promoters.svg",
         pdf = "figure6/spt6_2018_figure6-genic-promoters.pdf",

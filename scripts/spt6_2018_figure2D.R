@@ -42,6 +42,8 @@ main = function(theme_spec, genic, intragenic, antisense,
                                         hjust=0, vjust=1),
               axis.title = element_text(size=9),
               axis.title.y = element_text(margin = margin(r=-6, unit="pt")),
+              panel.grid.minor.x = element_blank(),
+              panel.grid.minor.y = element_blank(),
               panel.spacing.y = unit(0, "pt"),
               plot.margin=margin(-5,0,-4,6,"pt"))
 

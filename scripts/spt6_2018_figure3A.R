@@ -32,10 +32,10 @@ main = function(theme_spec, sense_netseq_data, antisense_netseq_data,
 
     fig_three_a = ggplot(data = df, aes(x=position, color=group, fill=group)) +
         geom_vline(xintercept = 0, size=0.4, color="grey65") +
-        geom_ribbon(aes(ymin=low_sense, ymax=high_sense), alpha=0.2, linetype='blank') +
-        geom_line(aes(y=mid_sense), alpha=0.8) +
+        geom_ribbon(aes(ymin=low_sense, ymax=high_sense), alpha=0.15, linetype='blank') +
+        geom_line(aes(y=mid_sense), alpha=0.7) +
         geom_ribbon(aes(ymin=-low_anti, ymax=-high_anti),
-                    alpha=0.2, show.legend = FALSE, linetype='blank') +
+                    alpha=0.15, show.legend = FALSE, linetype='blank') +
         geom_line(aes(y=-mid_anti), alpha=0.7, show.legend = FALSE) +
         geom_hline(yintercept = 0, size=0.5, color="black") +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
@@ -52,8 +52,7 @@ main = function(theme_spec, sense_netseq_data, antisense_netseq_data,
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         theme_default +
         theme(legend.key.height = unit(10, "pt"),
-              panel.grid.minor.y = element_blank(),
-              panel.grid.major.y = element_blank(),
+              panel.grid = element_blank(),
               legend.background = element_rect(color=NA, fill="white", size=0),
               plot.margin = margin(11/2, 11, -10, 11/2, unit="pt"))
 

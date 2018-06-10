@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+localrules: assemble_figure_two
+
 # heatmaps of TFIIB ChIP-nexus signal
 rule figure_two_a:
     input:

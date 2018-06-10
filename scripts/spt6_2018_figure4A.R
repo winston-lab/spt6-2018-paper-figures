@@ -49,8 +49,7 @@ main = function(theme_spec,
         scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         theme_default +
-        theme(panel.grid.major.y = element_blank(),
-              panel.grid.minor.y = element_blank(),
+        theme(panel.grid = element_blank(),
               plot.margin = margin(2, 11, -10, 11/2, "pt"))
 
     fig_four_a %<>% add_label("A")

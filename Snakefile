@@ -46,12 +46,12 @@ rule all:
         "figure5/figure5A/spt6_2018_figure5A-intragenic-TSS-MNase-clusters.png",
         "figure5/figure5B/spt6_2018_figure5B-intragenic-TSS-MNase-clusters-expression.png",
         "figure5/figure5C/spt6_2018_figure5C-intragenic-TSS-sequence-information.png",
-        "figure5/figure5D/spt6_2018_figure5D-intragenic-TSS-motifs.png",
+        "figure5/figure5D/spt6_2018_figure5D-intragenic-TSS-TATA-boxes.png",
+        "figure5/figure5E/spt6_2018_figure5E-intragenic-TSS-motif-enrichment.png",
         "figure5/spt6_2018_figure5-intragenic-promoters.png",
-        "figure6/figure6A/spt6_2018_figure6A-TFIIB-at-PMA1-and-HSP82.png",
+        "figure6/figure6A/spt6_2018_figure6A-genic-promoters-PMA1-and-HSP82.png",
         "figure6/figure6B/spt6_2018_figure6B-MNase-at-genic-TSSs.png",
-        "figure6/figure6C/spt6_2018_figure6C-spt6-upregulated-genic-TSSs-gene-ontology.png",
-        "figure6/figure6D/spt6_2018_figure6D-spt6-depletion-SSA4-RTqPCR.png",
+        "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-SSA4-RTqPCR.png",
         "figure6/spt6_2018_figure6-genic-promoters.png",
 
 include: "rules/figure_1.smk"

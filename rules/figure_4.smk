@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+localrules: assemble_figure_four
+
 #metagene of MNase-seq
 rule figure_four_a:
     input:
@@ -73,7 +75,6 @@ rule figure_four_d:
         width = eval(str(config["figure_four"]["four_d"]["width"])),
     script:
         "../scripts/spt6_2018_figure4D.R"
-
 
 rule assemble_figure_four:
     input:

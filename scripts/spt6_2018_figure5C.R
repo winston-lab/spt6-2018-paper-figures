@@ -64,8 +64,8 @@ main = function(theme_spec,
     fig_five_c = ggplot() +
         geom_polygon(data = df, aes(x=x, y=y, group=interaction(position, base), fill=base)) +
         geom_label(data = tibble(tss_class=c("genic", "intragenic")),
-                  aes(label=tss_class), x=-12, y=max(df[["y"]])*0.9,
-                  size=7/72*25.4, label.size=NA, label.padding=unit(2, "pt"),
+                  aes(label=tss_class), x=-12, y=max(df[["y"]])*0.8,
+                  size=9/72*25.4, label.size=NA, label.padding=unit(2, "pt"),
                   label.r = unit(0, "pt"), hjust=0) +
         scale_fill_manual(values = c('#109648', '#255C99', '#F7B32B', '#D62839', '#D62839'),
                           breaks = c('A','C','G','T','U')) +
@@ -85,6 +85,8 @@ main = function(theme_spec,
         theme(legend.position = "none",
               axis.title.y = element_text(angle=0, hjust=1, vjust=0.5),
               axis.title.x = element_blank(),
+              axis.line = element_line(size=0.25, color="grey65"),
+              panel.grid = element_blank(),
               panel.border = element_blank())
 
     fig_five_c %<>% add_label("C")

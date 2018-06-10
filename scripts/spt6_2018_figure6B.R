@@ -60,7 +60,9 @@ main = function(theme_spec,
                                                           TRUE ~ as.character(x))},
                            name = NULL,
                            expand = c(0,0)) +
-        scale_y_continuous(breaks = scales::pretty_breaks(n=3),
+        scale_y_continuous(limits = c(0, max(df[["high"]])*1.05),
+                           expand = c(0,0),
+                           breaks = scales::pretty_breaks(n=3),
                            labels = function(x){if_else(x<0, abs(x), x)},
                            name = "normalized counts") +
         facet_grid(annotation~., labeller=label_parsed) +
@@ -68,7 +70,9 @@ main = function(theme_spec,
         scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004"))),
                          guide=guide_legend(keyheight=unit(10, "pt"))) +
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
-        theme_default
+        theme_default +
+        theme(panel.grid = element_blank(),
+              panel.spacing.y = unit(3, "pt"))
 
     fig_six_b %<>% add_label("B")
 
