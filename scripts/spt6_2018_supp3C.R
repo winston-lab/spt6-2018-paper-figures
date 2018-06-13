@@ -9,7 +9,7 @@ main = function(theme_spec, scatterplot_script, data_path,
                               title = "ChIP-nexus signal",
                               sample_list = c("rnapii_YPD-1", "rnapii_YPD-2", "spt6_YPD-1", "spt6_YPD-2"),
                               pcount = 0.1,
-                              genome_binsize = "100nt bins",
+                              genome_binsize = "200 nt bins",
                               plot_binwidth = 0.07,
                               chipnexus= TRUE) %>%
         add_label("C")

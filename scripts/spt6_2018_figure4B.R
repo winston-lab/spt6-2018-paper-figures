@@ -48,6 +48,7 @@ main = function(theme_spec,
                            breaks = scales::pretty_breaks(n=2),
                            name = "NET-seq",
                            guide=guide_colorbar(title.position="top",
+                                                title.hjust=1,
                                                 barwidth=unit(1.3, "cm"),
                                                 barheight=0.3)) +
         facet_grid(.~group, labeller=label_parsed) +
@@ -56,7 +57,8 @@ main = function(theme_spec,
               panel.grid.major.x = element_line(color="black"),
               panel.grid.major.y = element_line(color="black"),
               legend.box.margin = margin(0, 0, -3, 0, "pt"),
-              plot.margin = margin(2,4,-10,3,"pt" ))
+              legend.justification = c(0, 0.5),
+              plot.margin = margin(4,4,-10,4,"pt" ))
 
     mnase_plot = ggplot(data = mnase_df %>%
                             complete(group, index, position, fill=list(signal=0)),
@@ -83,7 +85,7 @@ main = function(theme_spec,
               panel.grid.minor.x = element_line(color="black"),
               panel.grid.major.y = element_line(color="black"),
               legend.box.margin = margin(0, 0, -3, 0, "pt"),
-              plot.margin = margin(2,4,-10,0,"pt" ))
+              plot.margin = margin(4,4,-10,0,"pt" ))
 
     quant_df = read_tsv(quant_data,
                         col_types = "ciicdcciiiiiiidddddddddddddddic") %>%
@@ -130,7 +132,7 @@ main = function(theme_spec,
         theme_heatmap +
         theme(strip.text = element_text(size=7, color="black", face="plain", margin=margin(0,0,-4,0,"pt")),
               legend.box.margin = margin(0, 0, -3, 0, "pt"),
-              plot.margin = margin(2,4,-10,0,"pt" ))
+              plot.margin = margin(4,4,-10,0,"pt" ))
 
     occ_plot = ggplot(data = quant_df %>%
                           filter(nuc_center-50>=-400 &
@@ -156,7 +158,7 @@ main = function(theme_spec,
         theme_heatmap +
         theme(strip.text = element_text(size=7, color="black", face="plain", margin=margin(0,0,-4,0,"pt")),
               legend.box.margin = margin(0, 0, -3, 0, "pt"),
-              plot.margin = margin(2,4,-10,0,"pt" ))
+              plot.margin = margin(4,4,-10,0,"pt" ))
 
     fig_four_b = plot_grid(netseq_plot, mnase_plot, occ_plot, fuzz_plot, align="h", axis="tb", nrow=1,
                      rel_widths = c(0.2, 1, 0.5, 0.5)) %>%

@@ -91,7 +91,7 @@ rule assemble_supp_one:
         supp_one_b  = "figure1/supp1B/spt6_2018_supp1B-TSS-seq-vs-malabat15.Rdata",
         supp_one_c = "figure1/supp1C/spt6_2018_supp1C-TSS-seq-vs-uwimana17-RNA-seq.Rdata",
         supp_one_d = "figure1/supp1D/spt6_2018_supp1D-intra-TSS-per-ORF-histogram.Rdata",
-        supp_one_e = "figure1/supp1E/spt6_2018_supp1E-genes-with-intragenic-TSS-vs-cheung08-uwimana17.Rdata",
+        supp_one_f = "figure1/supp1F/spt6_2018_supp1F-genes-with-intragenic-TSS-vs-cheung08-uwimana17.Rdata",
     output:
         svg = "figure1/spt6_2018_supp1-TSS-seq.svg",
         pdf = "figure1/spt6_2018_supp1-TSS-seq.pdf",

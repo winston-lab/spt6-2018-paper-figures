@@ -75,8 +75,12 @@ plot_scatter = function(data_path, sample_list, title, pcount, genome_binsize, p
                 sub_df = df %>% select(value=i)
                 plot = ggplot(data = sub_df, aes(x=(value+pcount))) +
                         geom_density(aes(y=..scaled..), fill="#114477", color="#114477", size=0.1) +
-                        scale_y_continuous(breaks=c(0,1)) +
-                        scale_x_log10(limit = c(pcount, max_signal)) +
+                        scale_y_continuous(breaks=c(0,1),
+                                           limits = c(0, 1.05),
+                                           expand = c(0,0)) +
+                        scale_x_log10(limits = c(pcount, max_signal*2),
+                                      expand = c(0,0.1),
+                                      labels = scales::comma) +
                         annotate("label", x=.90*max_signal, y=0.5, hjust=1,
                                  label=names(df)[i], size=7/72*25.4, fontface="plain",
                                  label.size = NA, label.r=unit(0,"pt"), label.padding=unit(0.25,"pt"),
@@ -95,8 +99,12 @@ plot_scatter = function(data_path, sample_list, title, pcount, genome_binsize, p
                                  binwidth=rep(plot_binwidth,2), size=.05, alpha=0.8) +
                     scale_fill_viridis(option="inferno") +
                     scale_color_viridis(option="inferno") +
-                    scale_x_log10(limit = c(pcount, max_signal)) +
-                    scale_y_log10(limit = c(pcount, max_signal))
+                    scale_x_log10(limits = c(pcount, max_signal*2),
+                                  expand = c(0,0.1),
+                                  labels = scales::comma) +
+                    scale_y_log10(limits = c(pcount, max_signal*2),
+                                  expand = c(0,0.1),
+                                  labels = scales::comma)
                 plots[[idx]] = plot
             }
         }
@@ -108,17 +116,18 @@ plot_scatter = function(data_path, sample_list, title, pcount, genome_binsize, p
                    labeller=label_parsed) +
         theme_light() +
         theme(plot.title = element_text(size=9, color="black", face="plain", margin = margin(0,0,0,0, "pt")),
-              axis.text = element_text(size=5, margin=margin(0,0,0,0,"pt")),
+              axis.text = element_text(size=5, margin = margin(0,0,0,0,"pt")),
               axis.title = element_blank(),
               strip.background = element_blank(),
-              strip.text = element_text(size=7, color="black", margin=margin(0,0,0,0,"pt")),
-              strip.text.y = element_text(angle=180, hjust=1),
+              strip.text = element_text(size=7, color="black"),
+              strip.text.x = element_text(margin = margin(0, 6, 0, 0, "pt")),
+              strip.text.y = element_text(angle=180, hjust=1, margin = margin(0, 2, 0, 0, "pt")),
               strip.placement="outside",
               strip.switch.pad.grid = unit(0, "points"),
               strip.switch.pad.wrap = unit(0, "points"),
               plot.margin = margin(0,0,0,0, "pt"),
               panel.spacing = unit(0, "pt"),
-              panel.border = element_rect(size=0.5),
+              panel.border = element_rect(size=0.25),
               panel.grid.minor = element_blank())
 
     return(ggmatrix_gtable(all_plots))

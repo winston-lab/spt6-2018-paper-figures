@@ -27,13 +27,13 @@ metagene = function(df, assay, ylabel="", top=FALSE, bottom=FALSE){
         geom_vline(xintercept = 0, size=0.4, color="grey65") +
         geom_ribbon(data = df,
                     aes(x=position, ymin=low, ymax=high, fill=group),
-                    alpha=0.2, linetype='blank') +
+                    alpha=if(bottom){0.15} else {0.2}, linetype='blank') +
         geom_line(data = df,
                   aes(x=position, y=mid, color=group),
                   alpha=0.7) +
-        geom_label(data = tibble(label=assay, x=-0.495, y=max(df[["high"]])*1.15, anno_labeled="cluster 1 (1891 TSSs)"),
+        geom_label(data = tibble(label=assay, x=-0.495, y=max(df[["high"]])*1.02, anno_labeled="cluster 1 (1891 TSSs)"),
                   aes(x=x, y=y, label=label),
-                  hjust=0, vjust=1, size=7/72*25.4,
+                  hjust=0, vjust=1, size=9/72*25.4,
                   label.size=NA, label.padding = unit(1, "pt"), label.r=unit(0,"pt")) +
         facet_grid(.~anno_labeled) +
         scale_x_continuous(expand = c(0,0),
@@ -42,7 +42,7 @@ metagene = function(df, assay, ylabel="", top=FALSE, bottom=FALSE){
                                                          x==0.4 ~ paste0(x, "kb"),
                                                          TRUE ~ as.character(x))) +
         scale_y_continuous(breaks = scales::pretty_breaks(n=3),
-                           expand = c(0.05, 0),
+                           # expand = c(0.05, 0),
                            name = ylabel) +
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
@@ -59,8 +59,7 @@ metagene = function(df, assay, ylabel="", top=FALSE, bottom=FALSE){
     if (top){
         plot = plot +
             theme(strip.text = element_text(size=9, color="black",
-                                            margin = margin(0,0,0,0)),
-                  legend.key.width=unit(14, "pt"))
+                                            margin = margin(0,0,0,0)))
     } else {
         plot = plot +
             theme(legend.position = "none")
@@ -70,23 +69,27 @@ metagene = function(df, assay, ylabel="", top=FALSE, bottom=FALSE){
 
 main = function(theme_spec,
                 annotation,
-                mnase_data, rnapii_data, spt6_data, gc_data,
+                mnase_data,
+                gc_data,
+                # rnapii_data, spt6_data,
                 fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
     source(theme_spec)
     library(cowplot)
 
     mnase_df = import(mnase_data)
-    rnapii_df = import(rnapii_data, normalize=TRUE)
-    spt6_df = import(spt6_data, normalize=TRUE)
+    # rnapii_df = import(rnapii_data, normalize=TRUE)
+    # spt6_df = import(spt6_data, normalize=TRUE)
     gc_df = import(gc_data)
 
     mnase_plot = metagene(mnase_df, assay="MNase-seq", ylabel="normalized dyad counts", top=TRUE)
-    gc_plot = metagene(gc_df, ylabel="%", assay="GC%")
-    spt6_plot = metagene(spt6_df, ylabel="relative levels", assay="Spt6 ChIP-nexus")
-    rnapii_plot = metagene(rnapii_df, ylabel="relative levels", assay="RNAPII ChIP-nexus", bottom=TRUE)
+    gc_plot = metagene(gc_df, ylabel="%", assay="GC%", bottom=TRUE)
+    # spt6_plot = metagene(spt6_df, ylabel="relative levels", assay="Spt6 ChIP-nexus")
+    # rnapii_plot = metagene(rnapii_df, ylabel="relative levels", assay="RNAPII ChIP-nexus", bottom=TRUE)
 
-    fig_five_a = plot_grid(mnase_plot, gc_plot, spt6_plot, rnapii_plot, ncol=1,
+    fig_five_a = plot_grid(mnase_plot, gc_plot,
+                           # spt6_plot, rnapii_plot,
+                           ncol=1,
                      align="v", axis="lr", rel_heights = c(1, 0.55, 0.55, 0.65)) %>%
         add_label("A")
 
@@ -103,8 +106,8 @@ main = function(theme_spec,
 main(theme_spec = snakemake@input[["theme"]],
      annotation = snakemake@input[["annotation"]],
      mnase_data = snakemake@input[["mnase_data"]],
-     rnapii_data = snakemake@input[["rnapii_data"]],
-     spt6_data = snakemake@input[["spt6_data"]],
+     # rnapii_data = snakemake@input[["rnapii_data"]],
+     # spt6_data = snakemake@input[["spt6_data"]],
      gc_data = snakemake@input[["gc_data"]],
      fig_width = snakemake@params[["width"]],
      fig_height = snakemake@params[["height"]],

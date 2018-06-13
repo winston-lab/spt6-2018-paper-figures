@@ -35,7 +35,7 @@ main = function(theme_spec,
                                                "quintile 5")))
 
     supp_four_b = ggplot() +
-        geom_vline(xintercept = 0, size=0.4, color="grey65") +
+        # geom_vline(xintercept = 0, size=0.4, color="grey65") +
         geom_ribbon(data = df, aes(x=position, ymin=low, ymax=high, fill=group), alpha=0.2, linetype='blank') +
         geom_line(data = df, aes(x=position, y=mid, color=group), alpha=0.7) +
         geom_text(data = tibble(annotation = ordered(c("quintile 1", "quintiles 2-4", "quintile 5")),
@@ -49,7 +49,7 @@ main = function(theme_spec,
                                                           TRUE ~ as.character(x))},
                            name = NULL,
                            expand = c(0,0)) +
-        scale_y_continuous(breaks = scales::pretty_breaks(n=3),
+        scale_y_continuous(breaks = scales::pretty_breaks(n=2),
                            labels = function(x){if_else(x<0, abs(x), x)},
                            name = "normalized counts") +
         ggtitle("MNase-seq dyad signal") +

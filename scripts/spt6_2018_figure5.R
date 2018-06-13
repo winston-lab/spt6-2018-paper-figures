@@ -7,18 +7,18 @@ main = function(five_a, five_b, five_c, five_d, five_e,
                 fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
     library(ggrepel)
-    layout = rbind(c(1,1,1,1,1,1,3,3,3,3,3,3),
-                   c(1,1,1,1,1,1,3,3,3,3,3,3),
-                   c(1,1,1,1,1,1,3,3,3,3,3,3),
-                   c(1,1,1,1,1,1,3,3,3,3,3,3),
-                   c(1,1,1,1,1,1,4,4,4,4,4,4),
-                   c(1,1,1,1,1,1,4,4,4,4,4,4),
-                   c(1,1,1,1,1,1,4,4,4,4,4,4),
-                   c(2,2,2,2,2,5,5,5,5,5,5,5),
-                   c(2,2,2,2,2,5,5,5,5,5,5,5),
-                   c(2,2,2,2,2,5,5,5,5,5,5,5),
-                   c(2,2,2,2,2,5,5,5,5,5,5,5),
-                   c(2,2,2,2,2,5,5,5,5,5,5,5))
+    layout = rbind(c(1,1,1,1,1,1,1,1,2,2,2,2),
+                   c(1,1,1,1,1,1,1,1,2,2,2,2),
+                   c(1,1,1,1,1,1,1,1,2,2,2,2),
+                   c(1,1,1,1,1,1,1,1,2,2,2,2),
+                   c(1,1,1,1,1,1,1,1,2,2,2,2),
+                   c(1,1,1,1,1,1,1,1,2,2,2,2),
+                   c(3,3,3,3,3,3,5,5,5,5,5,5),
+                   c(3,3,3,3,3,3,5,5,5,5,5,5),
+                   c(3,3,3,3,3,3,5,5,5,5,5,5),
+                   c(4,4,4,4,4,4,5,5,5,5,5,5),
+                   c(4,4,4,4,4,4,5,5,5,5,5,5),
+                   c(4,4,4,4,4,4,5,5,5,5,5,5))
 
     load(five_a)
     load(five_b)
@@ -28,7 +28,7 @@ main = function(five_a, five_b, five_c, five_d, five_e,
 
     fig_five = arrangeGrob(fig_five_a, fig_five_b, fig_five_c, fig_five_d, fig_five_e,
                           layout_matrix=layout) %>%
-        arrangeGrob(top=textGrob(label = "Figure 5: intragenic promoters", gp=gpar(fontsize=12)))
+        arrangeGrob(top=textGrob(label = "Figure 5", gp=gpar(fontsize=12)))
 
     ggsave(svg_out, plot=fig_five, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_five, width=fig_width, height=fig_height, units="cm")

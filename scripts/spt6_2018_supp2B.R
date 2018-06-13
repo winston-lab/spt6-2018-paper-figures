@@ -44,8 +44,12 @@ main = function(theme_spec, data_path,
                 sub_df = df %>% select(value=i)
                 plot = ggplot(data = sub_df, aes(x=(value+pcount))) +
                         geom_density(aes(y=..scaled..), fill="#114477", color="#114477", size=0.1) +
-                        scale_y_continuous(breaks=c(0,1)) +
-                        scale_x_log10(limit = c(pcount, max_signal)) +
+                        scale_y_continuous(breaks=c(0,1),
+                                           limits = c(0, 1.05),
+                                           expand = c(0,0)) +
+                        scale_x_log10(limits = c(pcount, max_signal*2),
+                                      expand = c(0,0.1),
+                                      labels = scales::comma) +
                         annotate("label", x=.90*max_signal, y=0.5, hjust=1,
                                  label=names(df)[i], size=7/72*25.4, fontface="plain",
                                  label.size = NA, label.r=unit(0,"pt"), label.padding=unit(0.25,"pt"),
@@ -64,15 +68,20 @@ main = function(theme_spec, data_path,
                                  binwidth=rep(0.05,2), size=.25, shape=16, alpha=0.8) +
                     scale_fill_viridis(option="inferno") +
                     scale_color_viridis(option="inferno") +
-                    scale_x_log10(limit = c(pcount, max_signal)) +
-                    scale_y_log10(limit = c(pcount, max_signal))
+                    scale_x_log10(limit = c(pcount, max_signal*2),
+                                  expand = c(0,0.1),
+                                  labels = scales::comma) +
+                    scale_y_log10(limit = c(pcount, max_signal*2),
+                                  expand = c(0,0.1),
+                                  labels = scales::comma)
                 plots[[idx]] = plot
             }
         }
     }
 
     supp_two_b = ggmatrix(plots, nrow=ncol(df), ncol=ncol(df),
-                   title = expression(WT~ 30*degree*C ~ TFIIB ~ signal*"," ~ "50nt bins"),
+                   # title = expression(WT~ 30*degree*C ~ TFIIB ~ signal*"," ~ "50nt bins"),
+                   title = "TFIIB signal, 200 nt bins",
                    xAxisLabels = names(df), yAxisLabels = names(df), switch="both",
                    labeller=label_parsed) +
         theme_light() +

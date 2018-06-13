@@ -3,13 +3,13 @@ import = function(path, sample_list){
     read_tsv(path, col_names = c("group", "sample", "annotation", "assay", "index", "position", "signal")) %>%
         filter((sample %in% sample_list) & ! is.na(signal)) %>%
         group_by(group, annotation, position) %>%
-        # summarise(mid = median(signal),
-        #           low = quantile(signal, 0.25),
-        #           high = quantile(signal, 0.75)) %>%
-        summarise(mid = winsor.mean(signal, trim=0.01),
-                  sd = winsor.sd(signal, trim=0.01)) %>%
-        mutate(high = mid+sd,
-               low = pmax(mid-sd, 0)) %>%
+        summarise(mid = median(signal),
+                  low = quantile(signal, 0.25),
+                  high = quantile(signal, 0.75)) %>%
+        # summarise(mid = winsor.mean(signal, trim=0.01),
+        #           sd = winsor.sd(signal, trim=0.01)) %>%
+        # mutate(high = mid+sd,
+        #        low = pmax(mid-sd, 0)) %>%
         ungroup() %>%
         mutate(group = ordered(group,
                                levels = c("spt6+", "spt6-1004-37C"),
@@ -39,8 +39,7 @@ main = function(theme_spec,
 
     max_length=0.2
 
-    df = import(mnase_data, sample_list=sample_list) %>%
-        mutate_at(vars(-c(group, annotation, position)), funs(.*10))
+    df = import(mnase_data, sample_list=sample_list)
 
     fig_six_b = ggplot() +
         geom_vline(xintercept = 0, size=0.4, color="grey65") +
@@ -52,17 +51,15 @@ main = function(theme_spec,
                   alpha=0.7) +
         geom_label(data = df %>% distinct(annotation),
                   aes(label = annotation),
-                  fill="white", label.size=NA, label.r=unit(0,"pt"), label.padding=unit(0,"pt"),
-                  x=-0.29, y=4.5, size=7/72*25.4, parse=TRUE, hjust=0) +
-        scale_x_continuous(breaks = scales::pretty_breaks(n=3),
-                           labels = function(x){case_when(x==0 ~ "TSS",
-                                                          near(x,max_length) ~ paste0(x, "kb"),
-                                                          TRUE ~ as.character(x))},
+                  fill="white", label.size=NA, label.r=unit(0,"pt"), label.padding=unit(2,"pt"),
+                  x=-0.5, y=max(df[["high"]]), size=7/72*25.4, parse=TRUE, hjust=0, vjust=1) +
+        scale_x_continuous(breaks = c(-0.4, 0, 0.4),
+                           labels = function(x){if_else(x==0, "TSS", as.character(x))},
                            name = NULL,
                            expand = c(0,0)) +
         scale_y_continuous(limits = c(0, max(df[["high"]])*1.05),
                            expand = c(0,0),
-                           breaks = scales::pretty_breaks(n=3),
+                           breaks = scales::pretty_breaks(n=2),
                            labels = function(x){if_else(x<0, abs(x), x)},
                            name = "normalized counts") +
         facet_grid(annotation~., labeller=label_parsed) +
@@ -72,7 +69,10 @@ main = function(theme_spec,
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         theme_default +
         theme(panel.grid = element_blank(),
-              panel.spacing.y = unit(3, "pt"))
+              panel.spacing.y = unit(3, "pt"),
+              legend.position = c(0.99, 0.99),
+              legend.justification = c(1,1),
+              plot.margin = margin(0, 11/2, 2, 0, "pt"))
 
     fig_six_b %<>% add_label("B")
 

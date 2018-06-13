@@ -3,25 +3,26 @@ library(magrittr)
 library(grid)
 library(gridExtra)
 
-main = function(four_a, four_b,
+main = function(four_a, four_b, four_c,
                 fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
-    layout = rbind(c(1,1,1,1,1,1,1,1,1,1,NA,NA),
-                   c(1,1,1,1,1,1,1,1,1,1,NA,NA),
-                   c(1,1,1,1,1,1,1,1,1,1,NA,NA),
-                   c(1,1,1,1,1,1,1,1,1,1,NA,NA),
-                   c(1,1,1,1,1,1,1,1,1,1,NA,NA),
-                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
-                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
-                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
-                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
-                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
-                   c(2,2,2,2,2,2,2,2,NA,NA,NA,NA),
+    layout = rbind(c(1,1,1,1,1,1,1,2,2,2,2,2),
+                   c(1,1,1,1,1,1,1,2,2,2,2,2),
+                   c(1,1,1,1,1,1,1,2,2,2,2,2),
+                   c(1,1,1,1,1,1,1,2,2,2,2,2),
+                   c(1,1,1,1,1,1,1,2,2,2,2,2),
                    c(3,3,3,3,3,3,3,3,3,3,3,3),
-                   c(3,3,3,3,3,3,3,3,3,3,3,3))
+                   c(3,3,3,3,3,3,3,3,3,3,3,3),
+                   c(3,3,3,3,3,3,3,3,3,3,3,3),
+                   c(3,3,3,3,3,3,3,3,3,3,3,3),
+                   c(3,3,3,3,3,3,3,3,3,3,3,3),
+                   c(3,3,3,3,3,3,3,3,3,3,3,3),
+                   c(4,4,4,4,4,4,4,4,4,4,4,4),
+                   c(4,4,4,4,4,4,4,4,4,4,4,4))
 
     load(four_a)
     load(four_b)
+    load(four_c)
     legends = c("Figure S4. Spt6 mutants have defective chromatin.",
                 "(A)",
                 "Comparison of spike-in normalized MNase-seq dyad signal in",
@@ -45,7 +46,7 @@ main = function(four_a, four_b,
                  gp = gpar(fontsize=8,
                            lineheight=1.05))
 
-    supp_four = arrangeGrob(supp_four_a, supp_four_b, legends,
+    supp_four = arrangeGrob(supp_four_a, supp_four_b, supp_four_c, legends,
                           layout_matrix=layout) %>%
         arrangeGrob(top=textGrob(label = "Supplemental Figure 4: MNase-seq", gp=gpar(fontsize=12)))
 
@@ -57,6 +58,7 @@ main = function(four_a, four_b,
 
 main(four_a = snakemake@input[["four_a"]],
      four_b = snakemake@input[["four_b"]],
+     four_c = snakemake@input[["four_c"]],
      fig_width = snakemake@params[["width"]],
      fig_height = snakemake@params[["height"]],
      svg_out = snakemake@output[["svg"]],

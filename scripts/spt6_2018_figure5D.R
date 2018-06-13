@@ -44,7 +44,7 @@ main = function(theme_spec,
     tata = ggplot(data = df,
            aes(x=x, y=y*n_motifs/n_regions, fill=annotation, color=annotation)) +
         geom_area(na.rm=TRUE, alpha=0.9) +
-        geom_vline(xintercept = 0, color="grey65", size=2) +
+        geom_vline(xintercept = 0, color="grey65", size=1.5) +
         scale_x_continuous(limits = c(-200, 0),
                            expand = c(0,0),
                            breaks = scales::pretty_breaks(n=3),
@@ -62,12 +62,13 @@ main = function(theme_spec,
         theme(axis.title.x = element_blank(),
               axis.line.y = element_line(size=0.25, color="grey65"),
               axis.text.y = element_text(size=5),
-              axis.title.y = element_text(margin = margin(r=0, unit="pt")),
+              axis.title.y = element_text(margin = margin(r=-5, unit="pt")),
               panel.border = element_blank(),
               panel.grid = element_blank(),
               legend.justification = c(0.5, 0.5),
               legend.position = c(0.70, 0.7),
-              legend.key.width= unit(8, "pt"))
+              legend.key.width= unit(8, "pt"),
+              plot.margin = margin(2, 8, 1, 6, "pt"))
 
     fig_five_d = tata %>%
         add_label("D")

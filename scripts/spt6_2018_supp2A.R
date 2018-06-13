@@ -9,7 +9,7 @@ main = function(theme_spec, scatterplot_script, tfiib_data,
                               title = "TFIIB ChIP-nexus signal",
                               sample_list = c("WT-37C-1", "WT-37C-2", "spt6-1004-37C-1", "spt6-1004-37C-2"),
                               pcount = 0.1,
-                              genome_binsize = "50nt bins",
+                              genome_binsize = "200 nt bins",
                               plot_binwidth = 0.07) %>%
         add_label("A")
 

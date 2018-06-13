@@ -13,7 +13,7 @@ import = function(path){
                   low = quantile(signal, 0.1, na.rm=TRUE),
                   high = quantile(signal, 0.9, na.rm=TRUE)) %>%
         ungroup() %>%
-        mutate(group = ordered(group, levels = c("malabat", "doris"))) %>% 
+        mutate(group = ordered(group, levels = c("doris", "malabat"))) %>%
         return()
 }
 
@@ -29,7 +29,8 @@ main = function(theme_spec,
     df = import(data_path)
 
     supp_one_b = ggplot(data = df, aes(x=position, y=mid, ymin=low, ymax=high, color=group, fill=group)) +
-        geom_vline(xintercept = c(0,2), size=0.2, color="grey65") +
+        # geom_vline(xintercept = c(0,2), size=0.2, color="grey65") +
+        geom_vline(xintercept = c(2), size=0.2, color="grey65") +
         geom_ribbon(alpha=0.3,
                     # position=position_dodge(width=0.07),
                     linetype='blank') +
@@ -38,12 +39,12 @@ main = function(theme_spec,
                   alpha=0.8) +
         # facet_zoom(xy=position > 0.5 & position < 1.5,
         #            horizontal=FALSE, zoom.size=1) +
-        scale_color_tableau(labels = c(bquote(Malabat ~ italic("et al.") ~ 2015),
-                                       "this work"),
+        scale_color_tableau(labels = c("this work",
+                                       bquote(Malabat ~ italic("et al.") ~ 2015)),
                             guide=guide_legend(keyheight=unit(9, "pt"),
                                                keywidth=unit(9, "pt"))) +
-        scale_fill_tableau(labels = c(bquote(Malabat ~ italic("et al.") ~ 2015),
-                                      "this work"),
+        scale_fill_tableau(labels = c("this work",
+                                      bquote(Malabat ~ italic("et al.") ~ 2015)),
                            guide=guide_legend(keyheight=unit(9, "pt"),
                                               keywidth=unit(9, "pt"))) +
         scale_x_continuous(breaks = c(0,1,2),

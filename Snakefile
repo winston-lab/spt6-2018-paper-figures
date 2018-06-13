@@ -38,10 +38,11 @@ rule all:
         "figure4/figure4A/spt6_2018_figure4A-MNase-seq-average-signal.png",
         "figure4/figure4B/spt6_2018_figure4B-MNase-dyad-signal-occupancy-fuzziness-NETseq-sorted.png",
         "figure4/figure4C/spt6_2018_figure4C-MNase-global-quantification.png",
-        "figure4/figure4D/spt6_2018_figure4D-PMA1-MNase-seq-and-H3-qPCR.Rdata",
+        "figure4/figure4D/spt6_2018_figure4D-VAM6-MNase-seq-and-H3-qPCR.Rdata",
         "figure4/spt6_2018_figure4-MNase-seq.png",
         "figure4/supp4A/spt6_2018_supp4A-MNase-seq-scatterplots.png",
         "figure4/supp4B/spt6_2018_supp4B-MNase-seq-metagene-by-NETseq-levels.png",
+        "figure4/supp4C/spt6_2018_supp4C-PMA1-HSP82-H3-ChIP.png",
         "figure4/spt6_2018_supp4-MNase-seq.png",
         "figure5/figure5A/spt6_2018_figure5A-intragenic-TSS-MNase-clusters.png",
         "figure5/figure5B/spt6_2018_figure5B-intragenic-TSS-MNase-clusters-expression.png",
@@ -51,7 +52,7 @@ rule all:
         "figure5/spt6_2018_figure5-intragenic-promoters.png",
         "figure6/figure6A/spt6_2018_figure6A-genic-promoters-PMA1-and-HSP82.png",
         "figure6/figure6B/spt6_2018_figure6B-MNase-at-genic-TSSs.png",
-        "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-SSA4-RTqPCR.png",
+        "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-RTqPCR.png",
         "figure6/spt6_2018_figure6-genic-promoters.png",
 
 include: "rules/figure_1.smk"

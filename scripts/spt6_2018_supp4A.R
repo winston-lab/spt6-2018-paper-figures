@@ -9,7 +9,7 @@ main = function(theme_spec, scatterplot_script, mnase_data,
                               title = "MNase-seq dyad signal",
                               sample_list = c("WT-37C-1", "spt6-1004-37C-1", "spt6-1004-37C-2"),
                               pcount = 1,
-                              genome_binsize = "25bp bins",
+                              genome_binsize = "75 bp bins",
                               plot_binwidth = 0.03) %>%
         add_label("A")
 

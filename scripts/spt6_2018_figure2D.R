@@ -15,7 +15,8 @@ main = function(theme_spec, genic, intragenic, antisense,
         import(genic, 'genic') %>%
         import(intragenic, 'intragenic') %>%
         import(antisense, 'antisense') %>%
-        mutate(category=fct_inorder(category, ordered=TRUE))
+        mutate(category=fct_inorder(category, ordered=TRUE)) %>%
+        filter(! is.na(tss_lfc) & ! is.na(tfiib_lfc))
     count_df = df %>% count(category)
 
     fig_two_d = ggplot(data = df) +

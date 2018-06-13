@@ -57,7 +57,7 @@ main = function(theme_spec,
                            labels = function(x){x/1e2},
                            expand = c(0,0),
                            name = "occupancy (au)") +
-        ggtitle("nucleosome occupancy + fuzziness") +
+        ggtitle("nucleosome occupancy and fuzziness") +
         theme_default +
         theme(panel.grid = element_blank(),
               panel.border = element_blank(),

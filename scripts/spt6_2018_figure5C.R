@@ -87,7 +87,8 @@ main = function(theme_spec,
               axis.title.x = element_blank(),
               axis.line = element_line(size=0.25, color="grey65"),
               panel.grid = element_blank(),
-              panel.border = element_blank())
+              panel.border = element_blank(),
+              plot.margin = margin(0, 0, -10, 0, "pt"))
 
     fig_five_c %<>% add_label("C")
 

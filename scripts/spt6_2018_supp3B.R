@@ -16,23 +16,30 @@ main = function(theme_spec, sense_netseq_data, antisense_netseq_data,
     source(theme_spec)
     library(pals)
     sample_list = c("WT-37C-1", "WT-37C-2", "spt6-1004-37C-1", "spt6-1004-37C-2")
+    max_length = 3
+    cps_dist = 0.3
 
     bed = read_tsv(annotation,
-                   col_names = c('chrom', 'start', 'end', 'name', 'score', 'strand')) %>%
+                   col_names = c('chrom', 'start', 'end',
+                                 'name', 'score', 'strand')) %>%
         rowid_to_column(var="index") %>%
-        arrange(desc(end-start), desc(score)) %>%
+        arrange(desc(end-start)) %>%
         rowid_to_column(var="sorted_index") %>%
-        select(index, sorted_index)
+        mutate(cps_position = (end-start)/1000-cps_dist)
 
     df = import(sense_netseq_data, sample_list=sample_list, strand="sense") %>%
         bind_rows(import(antisense_netseq_data, sample_list=sample_list, strand="antisense")) %>%
         spread(group, signal) %>%
         mutate(ratio = log2((`spt6-1004-37C`+0.01)/(`WT-37C`+0.01)),
                strand = ordered(strand, levels = c("sense", "antisense"))) %>%
-        left_join(bed, by="index")
+        left_join(bed %>% select(index, sorted_index), by="index")
 
     supp_three_b = ggplot() +
         geom_raster(data = df, aes(x=position, y=sorted_index, fill=ratio)) +
+        geom_path(data = bed %>% filter(cps_position <= max_length) %>%
+                      select(-strand),
+                     aes(x=cps_position, y=sorted_index),
+                  size=0.3, linetype="dotted", alpha=0.9, color="black") +
         geom_text(data = tibble(strand = ordered(c("sense", "antisense"),
                                                  levels=c("sense", "antisense"))),
                   aes(x=1, y=max(df[["sorted_index"]]), label=strand),

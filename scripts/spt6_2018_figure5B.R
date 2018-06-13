@@ -80,6 +80,7 @@ main = function(theme_spec,
         ggtitle("TFIIB ChIP-nexus signal") +
         theme_default +
         theme(axis.title.x = element_blank(),
+              axis.text.x = element_text(size=9),
               legend.position = "none",
               panel.grid.major.x = element_blank(),
               plot.margin = margin(0,11,2,11/2,"pt"))

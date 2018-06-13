@@ -61,15 +61,15 @@ rule figure_four_c:
 rule figure_four_d:
     input:
         plot_functions = "scripts/coverage_and_qpcr_plotting_functions.R",
-        pma1_mnase_path = config["figure_four"]["four_d"]["pma1_mnase_path"],
+        vam6_mnase_path = config["figure_four"]["four_d"]["vam6_mnase_path"],
         qpcr_data = config["figure_four"]["four_d"]["qpcr_data"],
         annotation = config["figure_four"]["four_d"]["annotation"],
         theme = config["theme_spec"]
     output:
-        svg = "figure4/figure4D/spt6_2018_figure4D-PMA1-MNase-seq-and-H3-qPCR.svg",
-        pdf = "figure4/figure4D/spt6_2018_figure4D-PMA1-MNase-seq-and-H3-qPCR.pdf",
-        png = "figure4/figure4D/spt6_2018_figure4D-PMA1-MNase-seq-and-H3-qPCR.png",
-        grob = "figure4/figure4D/spt6_2018_figure4D-PMA1-MNase-seq-and-H3-qPCR.Rdata",
+        svg = "figure4/figure4D/spt6_2018_figure4D-VAM6-MNase-seq-and-H3-qPCR.svg",
+        pdf = "figure4/figure4D/spt6_2018_figure4D-VAM6-MNase-seq-and-H3-qPCR.pdf",
+        png = "figure4/figure4D/spt6_2018_figure4D-VAM6-MNase-seq-and-H3-qPCR.png",
+        grob = "figure4/figure4D/spt6_2018_figure4D-VAM6-MNase-seq-and-H3-qPCR.Rdata",
     params:
         height = eval(str(config["figure_four"]["four_d"]["height"])),
         width = eval(str(config["figure_four"]["four_d"]["width"])),
@@ -81,7 +81,7 @@ rule assemble_figure_four:
         four_a = "figure4/figure4A/spt6_2018_figure4A-MNase-seq-average-signal.Rdata",
         four_b = "figure4/figure4B/spt6_2018_figure4B-MNase-dyad-signal-occupancy-fuzziness-NETseq-sorted.Rdata",
         four_c = "figure4/figure4C/spt6_2018_figure4C-MNase-global-quantification.Rdata",
-        four_d = "figure4/figure4D/spt6_2018_figure4D-PMA1-MNase-seq-and-H3-qPCR.Rdata",
+        four_d = "figure4/figure4D/spt6_2018_figure4D-VAM6-MNase-seq-and-H3-qPCR.Rdata",
     output:
         svg = "figure4/spt6_2018_figure4-MNase-seq.svg",
         pdf = "figure4/spt6_2018_figure4-MNase-seq.pdf",

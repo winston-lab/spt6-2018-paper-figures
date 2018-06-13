@@ -3,7 +3,7 @@ library(magrittr)
 library(grid)
 library(gridExtra)
 
-main = function(supp_one_a, supp_one_b, supp_one_c, supp_one_d, supp_one_e,
+main = function(supp_one_a, supp_one_b, supp_one_c, supp_one_d, supp_one_f,
                 fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
     layout = rbind(c(1,1,1,1,1,1,1,1,1,NA,NA,NA),
@@ -27,7 +27,7 @@ main = function(supp_one_a, supp_one_b, supp_one_c, supp_one_d, supp_one_e,
     load(supp_one_b)
     load(supp_one_c)
     load(supp_one_d)
-    load(supp_one_e)
+    load(supp_one_f)
     legends = c("Figure S1. TSS-seq comparisons.",
                 "(A)",
                 "Comparison of spike-in normalized TSS-seq signal in wild-type",
@@ -71,7 +71,7 @@ main = function(supp_one_a, supp_one_b, supp_one_c, supp_one_d, supp_one_e,
                  gp = gpar(fontsize=8,
                            lineheight=1.05))
 
-    supp_one = arrangeGrob(supp_one_a, supp_one_b, supp_one_c, supp_one_d, supp_one_e, legends,
+    supp_one = arrangeGrob(supp_one_a, supp_one_b, supp_one_c, supp_one_d, supp_one_f, legends,
                           layout_matrix=layout) %>%
         arrangeGrob(top=textGrob(label = "Supplemental Figure 1: TSS-seq", gp=gpar(fontsize=12)))
 
@@ -85,7 +85,7 @@ main(supp_one_a = snakemake@input[["supp_one_a"]],
      supp_one_b = snakemake@input[["supp_one_b"]],
      supp_one_c = snakemake@input[["supp_one_c"]],
      supp_one_d = snakemake@input[["supp_one_d"]],
-     supp_one_e = snakemake@input[["supp_one_e"]],
+     supp_one_f = snakemake@input[["supp_one_f"]],
      fig_width = snakemake@params[["width"]],
      fig_height = snakemake@params[["height"]],
      svg_out = snakemake@output[["svg"]],

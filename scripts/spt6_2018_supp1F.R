@@ -98,16 +98,16 @@ main = function(theme_spec,
                       uwimana_genes$sys_gene_name,
                       doris_genes$sys_name)
 
-    supp_one_e = bvenn(list("\"Cheung\" ~ italic(\"et al.\")*\", 2008\""=cheung_genes$sys_ORF_name,
+    supp_one_f = bvenn(list("\"Cheung\" ~ italic(\"et al.\")*\", 2008\""=cheung_genes$sys_ORF_name,
                            "\"Uwimana\" ~ italic(\"et al.\")*\", 2017\""=uwimana_genes$sys_gene_name,
                            "\"this work\""=doris_genes$sys_name),
                       scale=0.9, title="genes with sense intragenic transcripts")
-    supp_one_e %<>% add_label("E")
+    supp_one_f %<>% add_label("F")
 
-    ggsave(svg_out, plot=supp_one_e, width=fig_width, height=fig_height, units="cm")
-    ggsave(pdf_out, plot=supp_one_e, width=fig_width, height=fig_height, units="cm")
-    ggsave(png_out, plot=supp_one_e, width=fig_width, height=fig_height, units="cm", dpi=326)
-    save(supp_one_e, file=grob_out)
+    ggsave(svg_out, plot=supp_one_f, width=fig_width, height=fig_height, units="cm")
+    ggsave(pdf_out, plot=supp_one_f, width=fig_width, height=fig_height, units="cm")
+    ggsave(png_out, plot=supp_one_f, width=fig_width, height=fig_height, units="cm", dpi=326)
+    save(supp_one_f, file=grob_out)
 }
 
 main(theme_spec = snakemake@input[["theme"]],

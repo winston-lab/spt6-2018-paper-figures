@@ -59,10 +59,10 @@ rule figure_six_c:
         data_path = config["figure_six"]["six_c"]["data_path"],
         theme = config["theme_spec"]
     output:
-        svg = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-SSA4-RTqPCR.svg",
-        pdf = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-SSA4-RTqPCR.pdf",
-        png = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-SSA4-RTqPCR.png",
-        grob = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-SSA4-RTqPCR.Rdata",
+        svg = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-RTqPCR.svg",
+        pdf = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-RTqPCR.pdf",
+        png = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-RTqPCR.png",
+        grob = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-RTqPCR.Rdata",
     params:
         height = eval(str(config["figure_six"]["six_c"]["height"])),
         width = eval(str(config["figure_six"]["six_c"]["width"])),
@@ -73,7 +73,7 @@ rule assemble_figure_six:
     input:
         six_a = "figure6/figure6A/spt6_2018_figure6A-genic-promoters-PMA1-and-HSP82.Rdata",
         six_b = "figure6/figure6B/spt6_2018_figure6B-MNase-at-genic-TSSs.Rdata",
-        six_c = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-SSA4-RTqPCR.Rdata",
+        six_c = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-RTqPCR.Rdata",
     output:
         svg = "figure6/spt6_2018_figure6-genic-promoters.svg",
         pdf = "figure6/spt6_2018_figure6-genic-promoters.pdf",
