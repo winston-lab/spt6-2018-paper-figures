@@ -13,6 +13,7 @@ rule all:
         "figure1/supp1B/spt6_2018_supp1B-TSS-seq-vs-malabat15.png",
         "figure1/supp1C/spt6_2018_supp1C-TSS-seq-vs-uwimana17-RNA-seq.png",
         "figure1/supp1D/spt6_2018_supp1D-intra-TSS-per-ORF-histogram.png",
+        "figure1/supp1E/spt6_2018_supp1E-intra-TSS-position-bias.png",
         "figure1/supp1F/spt6_2018_supp1F-genes-with-intragenic-TSS-vs-cheung08-uwimana17.png",
         "figure1/spt6_2018_supp1-TSS-seq.png",
         "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps.png",

@@ -9,7 +9,7 @@ main = function(theme_spec, scatterplot_script, tss_data,
                               title = "TSS-seq signal",
                               sample_list = c("WT-37C-1", "WT-37C-2", "spt6-1004-37C-1", "spt6-1004-37C-2"),
                               pcount = 0.1,
-                              genome_binsize = "1nt bins",
+                              genome_binsize = "10 nt bins",
                               plot_binwidth = 0.07) %>%
         add_label("A")
 

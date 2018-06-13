@@ -47,11 +47,12 @@ main = function(theme_spec, data_path,
                         scale_y_continuous(breaks=c(0,1),
                                            limits = c(0, 1.05),
                                            expand = c(0,0)) +
-                        scale_x_log10(limits = c(pcount, max_signal*2),
+                        scale_x_log10(limits = c(pcount, max_signal*1.1),
                                       expand = c(0,0.1),
                                       labels = scales::comma) +
-                        annotate("label", x=.90*max_signal, y=0.5, hjust=1,
-                                 label=names(df)[i], size=7/72*25.4, fontface="plain",
+                        annotate("label", x=.99*max_signal, y=0.5, hjust=1,
+                                 label=names(df)[i],
+                                 size=7/72*25.4, fontface="plain",
                                  label.size = NA, label.r=unit(0,"pt"), label.padding=unit(0.25,"pt"),
                                  parse=TRUE)
                 plots[[idx]] = plot
@@ -68,10 +69,10 @@ main = function(theme_spec, data_path,
                                  binwidth=rep(0.05,2), size=.25, shape=16, alpha=0.8) +
                     scale_fill_viridis(option="inferno") +
                     scale_color_viridis(option="inferno") +
-                    scale_x_log10(limit = c(pcount, max_signal*2),
+                    scale_x_log10(limit = c(pcount, max_signal*1.1),
                                   expand = c(0,0.1),
                                   labels = scales::comma) +
-                    scale_y_log10(limit = c(pcount, max_signal*2),
+                    scale_y_log10(limit = c(pcount, max_signal*1.1),
                                   expand = c(0,0.1),
                                   labels = scales::comma)
                 plots[[idx]] = plot
@@ -96,7 +97,7 @@ main = function(theme_spec, data_path,
               strip.switch.pad.wrap = unit(0, "points"),
               plot.margin = margin(0,0,0,0, "pt"),
               panel.spacing = unit(0, "pt"),
-              panel.border = element_rect(size=0.5),
+              panel.border = element_rect(size=0.25),
               panel.grid.minor = element_blank())
 
     supp_two_b %<>%

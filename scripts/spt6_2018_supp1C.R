@@ -22,7 +22,7 @@ main = function(theme_spec, data_path,
 
     supp_one_c = ggplot(data = df, aes(x=tss+1, y=rna+1)) +
         stat_bin_hex(geom="point", aes(color=..count..),
-                     binwidth=c(.05,.05), alpha=0.8, size=0.1) +
+                     binwidth=c(.04,.04), alpha=0.7, size=0.1) +
         annotate(geom="label", x=1e4, y=1e1, label= paste0("R=", cor),
                  size=7/72*25.4, label.r=unit(0,"pt"), label.padding=unit(2,"pt"),
                  label.size=NA) +
@@ -34,7 +34,8 @@ main = function(theme_spec, data_path,
         theme_default +
         theme(axis.title.x = element_text(margin = margin(t=3, unit="pt")),
               axis.title.y = element_text(angle=0, hjust=1, vjust=0.5),
-              axis.text = element_text(size=5))
+              axis.text = element_text(size=5),
+              plot.margin = margin(0, 11/2, 0, 0, "pt"))
 
     supp_one_c %<>% add_label("C")
 

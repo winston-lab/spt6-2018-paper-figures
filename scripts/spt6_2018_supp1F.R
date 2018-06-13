@@ -47,14 +47,15 @@ bvenn = function(lists, scale=1, title){
                   aes(x=x,y=y,label=numbers),
                   size=7/72*25.4, fontface="plain") +
         geom_text(data = labels,
-                  aes(x=x,y=y, label=name, vjust=0.8),
-                      # vjust=if_else(point=="point2", 1, 0)),
-                  size=9/72*25.4, fontface="plain", parse=TRUE) +
+                  aes(x=x,y=y, label=name,
+                      vjust=if_else(point=="point2", 0.8, 0.7)),
+                  size=7/72*25.4, fontface="plain", parse=TRUE) +
         expand_limits(x = c(0, 1)) +
         coord_fixed() +
         ggtitle(title) +
         theme_void() +
-        theme(plot.title=element_text(size=9, face="plain", hjust=0.5))
+        theme(plot.title=element_text(size=9, face="plain", hjust=0.5),
+              plot.margin = margin(4, 0, 0, 4, "pt"))
     return(plot)
 }
 
@@ -121,3 +122,4 @@ main(theme_spec = snakemake@input[["theme"]],
      pdf_out = snakemake@output[["pdf"]],
      png_out = snakemake@output[["png"]],
      grob_out = snakemake@output[["grob"]])
+

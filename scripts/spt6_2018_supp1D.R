@@ -24,14 +24,15 @@ main = function(theme_spec, intra_diffexp_data, orf_anno,
                            breaks = scales::pretty_breaks(n=2),
                            expand=c(0,0)) +
         coord_flip() +
-        ggtitle("number of intragenic TSSs per ORF") +
+        ggtitle("intragenic TSSs per ORF") +
         theme_default +
         theme(axis.title.x = element_blank(),
               axis.title.y = element_text(margin = margin(r=2, unit="pt")),
               panel.border = element_blank(),
               panel.grid.major.y = element_blank(),
               panel.grid.minor.y = element_blank(),
-              axis.line.y = element_line(color="grey65", size=0.1))
+              axis.line.y = element_line(color="grey65", size=0.1),
+              plot.margin = margin(0, 0, 0, 0, "pt"))
 
     supp_one_d %<>% add_label("D")
 

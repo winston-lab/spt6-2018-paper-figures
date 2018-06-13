@@ -34,7 +34,7 @@ main = function(theme_spec,
         geom_ribbon(alpha=0.3,
                     # position=position_dodge(width=0.07),
                     linetype='blank') +
-        geom_line(size=0.3,
+        geom_line(size=0.6,
                   # position=position_dodge(width=0.07),
                   alpha=0.8) +
         # facet_zoom(xy=position > 0.5 & position < 1.5,
@@ -42,11 +42,11 @@ main = function(theme_spec,
         scale_color_tableau(labels = c("this work",
                                        bquote(Malabat ~ italic("et al.") ~ 2015)),
                             guide=guide_legend(keyheight=unit(9, "pt"),
-                                               keywidth=unit(9, "pt"))) +
+                                               keywidth=unit(14, "pt"))) +
         scale_fill_tableau(labels = c("this work",
                                       bquote(Malabat ~ italic("et al.") ~ 2015)),
                            guide=guide_legend(keyheight=unit(9, "pt"),
-                                              keywidth=unit(9, "pt"))) +
+                                              keywidth=unit(14, "pt"))) +
         scale_x_continuous(breaks = c(0,1,2),
                            labels = c("TSS", "", "CPS"),
                            expand = c(0,0)) +

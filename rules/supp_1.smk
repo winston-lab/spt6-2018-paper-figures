@@ -66,6 +66,23 @@ rule supp_one_d:
     script:
         "../scripts/spt6_2018_supp1D.R"
 
+# position bias of intragenic TSSs
+rule supp_one_e:
+    input:
+        diffexp_results = config["figure_one"]["supp_e"]["diffexp_results"],
+        positions = config["figure_one"]["supp_e"]["positions"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure1/supp1E/spt6_2018_supp1E-intra-TSS-position-bias.svg",
+        pdf = "figure1/supp1E/spt6_2018_supp1E-intra-TSS-position-bias.pdf",
+        png = "figure1/supp1E/spt6_2018_supp1E-intra-TSS-position-bias.png",
+        grob = "figure1/supp1E/spt6_2018_supp1E-intra-TSS-position-bias.Rdata",
+    params:
+        height = eval(str(config["figure_one"]["supp_e"]["height"])),
+        width = eval(str(config["figure_one"]["supp_e"]["width"])),
+    script:
+        "../scripts/spt6_2018_supp1E.R"
+
 # bvenn of cheung09, uwimana17, tss-seq genes with intragenic starts
 rule supp_one_f:
     input:
@@ -91,6 +108,7 @@ rule assemble_supp_one:
         supp_one_b  = "figure1/supp1B/spt6_2018_supp1B-TSS-seq-vs-malabat15.Rdata",
         supp_one_c = "figure1/supp1C/spt6_2018_supp1C-TSS-seq-vs-uwimana17-RNA-seq.Rdata",
         supp_one_d = "figure1/supp1D/spt6_2018_supp1D-intra-TSS-per-ORF-histogram.Rdata",
+        supp_one_e = "figure1/supp1E/spt6_2018_supp1E-intra-TSS-position-bias.Rdata",
         supp_one_f = "figure1/supp1F/spt6_2018_supp1F-genes-with-intragenic-TSS-vs-cheung08-uwimana17.Rdata",
     output:
         svg = "figure1/spt6_2018_supp1-TSS-seq.svg",
