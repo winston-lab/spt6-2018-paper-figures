@@ -56,10 +56,12 @@ main = function(theme_spec, data_path,
                            name = "relative abundance",
                            breaks = scales::pretty_breaks(n=2)) +
         theme_default +
-        theme(legend.position = c(0.05, 0.9),
+        theme(legend.position = c(0.02, 0.9),
               legend.direction = "horizontal",
               legend.justification = c(0, 1),
-              panel.grid.major.x = element_blank(),
+              legend.key.height=unit(3, "pt"),
+              legend.key.width=unit(11, "pt"),
+              panel.grid = element_blank(),
               axis.text.x = element_text(),
               axis.title.x = element_blank(),
               strip.text = element_text(size=7, color="black", hjust=0,
@@ -67,7 +69,7 @@ main = function(theme_spec, data_path,
               legend.title = element_text(size=7, color="black"),
               plot.margin = margin(0,0,2,0,"pt"))
 
-    fig_six_c = arrangeGrob(textGrob(label = "diagram"),
+    fig_six_c = arrangeGrob(textGrob(label = "Western"),
                             barplot, ncol=1, heights=c(0.3, 1)) %>%
         add_label("C")
 

@@ -18,9 +18,9 @@ import = function(path, sample_list){
                                     levels = c("spt6-1004 upregulated genic TSSs",
                                                "unchanged genic TSSs",
                                                "spt6-1004 downregulated genic TSSs"),
-                                    labels = c("\"312 TSSs upregulated in\" ~ italic(\"spt6-1004\")",
-                                               "\"1284 TSSs not significantly changed\"",
-                                               "\"4206 TSSs downregulated\""))) %>%
+                                    labels = c("\"312 TSSs\nupregulated in\" ~ italic(\"spt6-1004\")",
+                                               "\"1284 TSSs\nnot significantly changed\"",
+                                               "\"4206 TSSs\ndownregulated\""))) %>%
         return()
 }
 
@@ -52,7 +52,7 @@ main = function(theme_spec,
         geom_label(data = df %>% distinct(annotation),
                   aes(label = annotation),
                   fill="white", label.size=NA, label.r=unit(0,"pt"), label.padding=unit(2,"pt"),
-                  x=-0.5, y=max(df[["high"]]), size=7/72*25.4, parse=TRUE, hjust=0, vjust=1) +
+                  x=-0.5, y=max(df[["high"]]*0.8), size=7/72*25.4, parse=TRUE, hjust=0, vjust=1) +
         scale_x_continuous(breaks = c(-0.4, 0, 0.4),
                            labels = function(x){if_else(x==0, "TSS", as.character(x))},
                            name = NULL,
@@ -70,8 +70,9 @@ main = function(theme_spec,
         theme_default +
         theme(panel.grid = element_blank(),
               panel.spacing.y = unit(3, "pt"),
-              legend.position = c(0.99, 0.99),
-              legend.justification = c(1,1),
+              legend.position = c(0.99, 1),
+              legend.justification = c(1,0.85),
+              legend.background = element_blank(),
               plot.margin = margin(0, 11/2, 2, 0, "pt"))
 
     fig_six_b %<>% add_label("B")

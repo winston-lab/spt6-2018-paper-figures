@@ -31,11 +31,11 @@ main = function(theme_spec, sense_netseq_data, antisense_netseq_data,
 
     fig_three_a = ggplot(data = df, aes(x=position, color=group, fill=group)) +
         geom_vline(xintercept = 0, size=0.4, color="grey65") +
-        geom_ribbon(aes(ymin=low_sense, ymax=high_sense), alpha=0.2, linetype='blank') +
-        geom_line(aes(y=mid_sense), alpha=0.7) +
+        geom_ribbon(aes(ymin=low_sense, ymax=high_sense), alpha=0.17, linetype='blank') +
+        geom_line(aes(y=mid_sense), alpha=0.75) +
         geom_ribbon(aes(ymin=-low_anti, ymax=-high_anti),
-                    alpha=0.2, show.legend = FALSE, linetype='blank') +
-        geom_line(aes(y=-mid_anti), alpha=0.7, show.legend = FALSE) +
+                    alpha=0.17, show.legend = FALSE, linetype='blank') +
+        geom_line(aes(y=-mid_anti), alpha=0.75, show.legend = FALSE) +
         geom_hline(yintercept = 0, size=0.5, color="black") +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
                            labels = function(x){case_when(x==0 ~ "TSS",

@@ -120,7 +120,7 @@ plot_scatter = function(data_path, sample_list, title, pcount, genome_binsize, p
               axis.title = element_blank(),
               strip.background = element_blank(),
               strip.text = element_text(size=7, color="black"),
-              strip.text.x = element_text(margin = margin(4, 0, 0, 0, "pt")),
+              strip.text.x = element_text(margin = margin(3, 0, 0, 0, "pt")),
               strip.text.y = element_text(angle=180, hjust=1, margin = margin(0, 2, 0, 0, "pt")),
               strip.placement="outside",
               strip.switch.pad.grid = unit(0, "points"),

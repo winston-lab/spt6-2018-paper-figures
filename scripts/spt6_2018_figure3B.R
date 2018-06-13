@@ -13,7 +13,7 @@ main = function(theme_spec, netseq_results, annotation,
     fig_three_b = ggplot(data = df, aes(x=score+0.01, y=log2FoldChange)) +
         geom_hline(yintercept = 0, size=0.4, color="grey65") +
         stat_bin_hex(geom="point", aes(color=(..count..)),
-                     binwidth = c(0.04, 0.04), size=0.1, alpha=0.8, fill=NA) +
+                     binwidth = c(0.04, 0.04), size=0.1, alpha=0.7, fill=NA) +
         scale_color_viridis(option="inferno", guide=FALSE) +
         scale_x_log10("wild-type Spt6 levels (ChIP-nexus RPKM)") +
         ylab(expression(atop("sense NET-seq", log[2] ~ frac(italic("spt6-1004"), "WT")))) +
