@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+localrules: assemble_supp_three
+
 #NETseq scatterplots
 rule supp_three_a:
     input:

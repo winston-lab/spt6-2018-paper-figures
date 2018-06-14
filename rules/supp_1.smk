@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+localrules: assemble_supp_one
+
 #TSS-seq scatterplots
 rule supp_one_a:
     input:
@@ -120,3 +122,4 @@ rule assemble_supp_one:
         width = eval(str(config["figure_one"]["supp_width"])),
     script:
         "../scripts/spt6_2018_supp1.R"
+

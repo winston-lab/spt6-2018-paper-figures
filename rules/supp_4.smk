@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+localrules: assemble_supp_four
+
 #MNase-seq scatterplots
 rule supp_four_a:
     input:

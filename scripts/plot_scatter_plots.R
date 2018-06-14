@@ -29,7 +29,7 @@ import = function(path, sample_list, netseq=FALSE, chipnexus=FALSE){
                                       "italic(\"spt6-1004\") ~ 37*degree ~ 2",
                                       "italic(\"set2\"*Delta)")
                                     } else if (chipnexus) {
-                                        c("\"RNAPII 1\"", "\"RNAPII 2\"",
+                                        c("\"Rpb1 1\"", "\"Rpb1 2\"",
                                           "\"Spt6 1\"", "\"Spt6 2\"")
                                 } else {
                                     c("\"WT 1\"", "\"WT 2\"",

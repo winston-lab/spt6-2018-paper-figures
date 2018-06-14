@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+localrules: assemble_supp_two
+
 #TFIIB ChIPnexus scatterplots
 rule supp_two_a:
     input:
