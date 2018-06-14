@@ -54,6 +54,7 @@ rule supp_two_c:
 rule supp_two_d:
     input:
         data_path = config["figure_two"]["supp_d"]["data"],
+        image = config["figure_two"]["supp_d"]["image"],
         theme = config["theme_spec"]
     output:
         svg = "figure2/supp2D/spt6_2018_supp2D-TFIIB-western.svg",
