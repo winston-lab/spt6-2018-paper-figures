@@ -20,6 +20,7 @@ rule all:
         "figure2/figure2B/spt6_2018_figure2B-SSA4-TFIIB-ChIP-nexus.png",
         "figure2/figure2C/spt6_2018_figure2C-VAM6-FLO8-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.png",
         "figure2/figure2D/spt6_2018_figure2D-TSS-seq-v-TFIIB-ChIPnexus-foldchange.png",
+        "figure2/figure2extra/spt6_2018_figure2extra-AVT2-YPT52-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.png",
         # "figure2/figure2E/spt6_2018_figure2E-TSS-seq-and-TFIIB-levels.png",
         "figure2/spt6_2018_figure2-TFIIB-ChIP-nexus.png",
         "figure2/supp2A/spt6_2018_supp2A-TFIIB-ChIPnexus-scatterplots.png",

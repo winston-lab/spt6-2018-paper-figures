@@ -3,6 +3,9 @@ import = function(path, sample_list){
     read_tsv(path, col_names = c("group", "sample", "annotation", "assay", "index", "position", "signal")) %>%
         filter((sample %in% sample_list) & ! is.na(signal)) %>%
         select(-c(annotation, assay, index)) %>%
+        group_by(group, position) %>%
+        summarise(signal = mean(signal)) %>%
+        ungroup() %>%
         mutate(group = ordered(group,
                                levels = c("spt6+", "spt6-1004-37C"),
                                labels = c("WT", "spt6-1004"))) %>%
