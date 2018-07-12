@@ -157,38 +157,117 @@ main = function(theme_spec,
 
     #rt-qpcr
     df = read_tsv(data_path,
-                  col_types = 'ccid') %>%
+                  col_types = 'cciid') %>%
         mutate(strain = ordered(strain,
-                                levels = c("spt6-AID2 DMSO", "spt6-AID2 IAA"),
-                                labels = c("+DMSO", "+IAA")))
+                                levels = c("spt6-AID2 IAA", "spt6-AID2 DMSO"),
+                                labels = c("+IAA", "+DMSO")))
 
     summary_df = df %>%
-        group_by(strain, gene, time) %>%
-        summarise(mean = mean(value),
-                  sd = sd(value)) %>%
+        group_by(strain, gene, temperature, time) %>%
+        summarise(mean = mean(value, na.rm=TRUE),
+                  sd = sd(value, na.rm=TRUE)) %>%
         mutate(high = mean+sd,
                low = mean-sd)
+    
+    # lineplot = ggplot() +
+    #     geom_label(data = df %>%
+    #                    group_by(gene) %>%
+    #                    summarise(y = max(value, na.rm=TRUE)) %>%
+    #                    bind_rows(summary_df %>%
+    #                                  group_by(gene) %>% 
+    #                                  summarise(y = max(high))) %>% 
+    #                    group_by(gene) %>% 
+    #                    summarise(y = max(y)) %>% 
+    #                    mutate(label = if_else(gene=="SSA4",
+    #                                           "italic(\"SSA4\")",
+    #                                           "italic(\"HSP12\")")),
+    #                aes(y=y, label=label),
+    #                parse=TRUE,
+    #                x=-3, size=7/72*25.4,
+    #                label.size = NA, label.r = unit(0, "pt"), vjust=1, hjust=0) +
+    #     geom_line(data = summary_df %>% 
+    #                   bind_rows(summary_df %>%
+    #                                 filter(temperature==30, time==0) %>%
+    #                                 ungroup() %>%
+    #                                 mutate(temperature=as.integer(37))),
+    #              aes(x=time, y=mean, color=factor(temperature), linetype=strain,
+    #                  group = interaction(temperature, strain)),
+    #              position=position_dodge(width=5)) +
+    #     geom_errorbar(data = summary_df %>%
+    #                       bind_rows(summary_df %>%
+    #                                     filter(temperature==30, time==0) %>%
+    #                                     ungroup() %>%
+    #                                     mutate(temperature=as.integer(37))),
+    #                   aes(x=time, ymax=high, ymin=pmax(0,low),
+    #                       color=factor(temperature),
+    #                       group=interaction(temperature, strain)),
+    #                   position = position_dodge(width=5),
+    #                   width=5, alpha=0.9, size=0.5) +
+    #     geom_point(data = df,
+    #                aes(x=time, y=value, color=factor(temperature),
+    #                    shape = interaction(temperature, strain)),
+    #                position = position_jitterdodge(dodge.width=5),
+    #                alpha=0.9, size=0.8) +
+    #     scale_color_tableau(labels = c(bquote(30*degree*C),
+    #                                    bquote(37*degree*C)),
+    #                         guide=guide_legend(reverse=TRUE)) +
+    #     # scale_linetype_discrete(labels = c("+IAA (Spt6 depletion)",
+    #     #                                    "+DMSO (no depletion)")) +
+    #     scale_x_continuous(limits = c(-3, 85),
+    #                        breaks = c(0, 20, 80),
+    #                        expand = c(0,0),
+    #                        name = "minutes at temperature") +
+    #     scale_y_continuous(name = "relative abundance",
+    #                        breaks = scales::pretty_breaks(n=2)) +
+    #     scale_shape_discrete(guide=FALSE) +
+    #     # facet_grid(gene~., scales="free_y") +
+    #     facet_wrap(~gene, nrow=1, scales="free_y") +
+    #     theme_default +
+    #     theme(legend.position = c(0.45, 0.99),
+    #           panel.grid.major = element_blank(),
+    #           panel.grid.minor = element_blank(),
+    #           legend.justification = c(1,1),
+    #           legend.box = "vertical",
+    #           legend.spacing.y = unit(1, "pt"),
+    #           plot.margin = margin(-2,0,0,0,"pt"))
 
     barplot = ggplot() +
         geom_col(data = summary_df,
-                 aes(x=strain, y=mean, group=time),
+                 aes(x=interaction(temperature, strain) %>% 
+                         ordered(levels = c("30.+DMSO", "30.+IAA", "37.+DMSO", "37.+IAA")),
+                     y=mean, group=time),
                  fill = "grey90",
                  position = position_dodge(width=0.5),
                  width=0.4,
                  color="black") +
+        facet_wrap(~gene,
+                   nrow=1,
+                   scales = "free") +
         geom_errorbar(data = summary_df,
                       aes(ymax=high, ymin=pmax(0,low),
-                          x=strain, group=time),
+                          x=interaction(temperature, strain) %>%
+                              ordered(levels = c("30.+DMSO",
+                                                 "30.+IAA",
+                                                 "37.+DMSO",
+                                                 "37.+IAA")),
+                          group=time),
                       position = position_dodge(width=0.5),
                       width = 0.2) +
         geom_point(data = df,
-                   aes(x=strain, y=value, color=factor(time)),
+                   aes(x=interaction(temperature, strain) %>%
+                           ordered(levels = c("30.+DMSO", "30.+IAA", "37.+DMSO", "37.+IAA")),
+                       y=value, color=factor(time)),
                    position = position_jitterdodge(dodge.width=0.5,
                                                    jitter.width= 0.3),
                    size = 0.7) +
         geom_label(data = df %>%
                        group_by(gene) %>%
-                       summarise(y = max(value)) %>%
+                       summarise(y = max(value, na.rm=TRUE)) %>%
+                       bind_rows(summary_df %>%
+                                     group_by(gene) %>% 
+                                     summarise(y = max(high))) %>% 
+                       group_by(gene) %>% 
+                       summarise(y = max(y)) %>% 
                        mutate(label = if_else(gene=="SSA4",
                                               "italic(\"SSA4\")",
                                               "italic(\"HSP12\")")),
@@ -202,14 +281,18 @@ main = function(theme_spec,
                                                label.hjust=0.5,
                                                title.position = "top",
                                                title.hjust=0.5),
-                            name = expression(minutes ~ at ~ 37*degree*C)) +
-        scale_x_discrete(expand = c(0,0.3)) +
+                            name = expression(minutes)) +
+        scale_x_discrete(labels = c(bquote(atop(30*degree*C, +DMSO)),
+                                    bquote(atop(30*degree*C, +IAA)),
+                                    bquote(atop(37*degree*C, +DMSO)),
+                                    bquote(atop(37*degree*C, +IAA))),
+                         expand = c(0,0.3)) +
         scale_y_continuous(limits = c(0, NA),
                            expand = c(0.03,0),
                            name = "relative abundance",
                            breaks = scales::pretty_breaks(n=2)) +
         theme_default +
-        theme(legend.position = c(0.02, 0.88),
+        theme(legend.position = c(0.02, 0.78),
               legend.direction = "horizontal",
               legend.justification = c(0, 1),
               legend.key.height=unit(3, "pt"),
@@ -224,36 +307,10 @@ main = function(theme_spec,
 
     fig_six_c = arrangeGrob(diagram, western,
                             barplot, layout_matrix = rbind(c(1,2),
+                            # lineplot, layout_matrix = rbind(c(1,2),
                                                            c(3,3),
                                                            c(3,3))) %>%
         add_label("C")
-
-# fig_six_c = ggplot() +
-#     # geom_ribbon(data = summary_df, aes(x=time, ymax=high, ymin=pmax(0, low), fill=strain),
-#     #             alpha=0.2) +
-#     geom_line(data = summary_df, aes(x=time, y=mean, color=strain),
-#               position = position_dodge(width=5),
-#               size=1.5, alpha=0.9) +
-#     geom_errorbar(data = summary_df, aes(x=time, ymax=high, ymin=pmax(0,low), color=strain),
-#                   position = position_dodge(width=5), width=5, alpha=0.9, size=0.5) +
-#     geom_label(data = tibble(gene = c("SSA4", "HSP12"),
-#                              y = c(df %>% filter(gene == "SSA4") %>% pull(value) %>% max(),
-#                                    df %>% filter(gene == "HSP12") %>% pull(value) %>% max())),
-#                aes(y=y, label=gene),
-#                x=0, size=9/72*25.4,
-#                label.size = NA, label.r = unit(0, "pt"), vjust=1, hjust=0) +
-#     geom_point(data = df,
-#        aes(x=time, y=value, color=strain),
-#        position = position_jitterdodge(dodge.width=5),
-#        alpha=0.75, size=0.8) +
-#     facet_grid(gene~., scales="free_y") +
-#     scale_x_continuous(limits = c(-3, 85),
-#                        expand = c(0,0),
-#                        name = expression("minutes at" ~ 37*degree*C)) +
-#     scale_y_continuous(name = "relative abundance") +
-#     scale_color_tableau() +
-#     theme_default +
-#     theme(legend.position = c(0.5, 0.90))
 
     ggsave(svg_out, plot=fig_six_c, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_six_c, width=fig_width, height=fig_height, units="cm")
@@ -271,4 +328,3 @@ main(theme_spec = snakemake@input[["theme"]],
      pdf_out = snakemake@output[["pdf"]],
      png_out = snakemake@output[["png"]],
      grob_out = snakemake@output[["grob"]])
-
