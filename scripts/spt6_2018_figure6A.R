@@ -37,7 +37,7 @@ main = function(theme_spec, plot_functions,
                                     title = "smoothed MNase-seq dyad signal",
                                     show_amplicons=FALSE)
     pma1_qpcr_plot = plot_qpcr(qpcr_df = pma1_qpcr_df, seqdata_df = pma1_tfiib_nexus_df,
-                               title = "TFIIB ChIP-qPCR")
+                               title = "TFIIB ChIP-qPCR", xunits_tick=2)
     pma1_diagram = plot_gene_diagram(qpcr_df = pma1_qpcr_df,
                                      seqdata_df = pma1_tfiib_nexus_df,
                                      gene_id = "PMA1")

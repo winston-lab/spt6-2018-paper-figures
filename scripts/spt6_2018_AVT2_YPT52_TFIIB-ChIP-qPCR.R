@@ -26,7 +26,7 @@ main = function(theme_spec, plot_functions, avt2_tfiib_nexus_path, ypt52_tfiib_n
                                   title = "sense TSS-seq signal",
                                   line_type="solid", show_amplicons=FALSE)
     avt2_qpcr_plot = plot_qpcr(qpcr_df = avt2_qpcr_df, seqdata_df = avt2_tfiib_nexus_df,
-                               title = "TFIIB ChIP-qPCR")
+                               title = "TFIIB ChIP-qPCR", xunits_tick=2)
 
     ypt52_tfiib_plot = plot_seq_data(qpcr_df = ypt52_qpcr_df,
                                     seqdata_df = ypt52_tfiib_nexus_df,
@@ -44,7 +44,7 @@ main = function(theme_spec, plot_functions, avt2_tfiib_nexus_path, ypt52_tfiib_n
                                title = "TFIIB ChIP-qPCR",
                                show_y_title = FALSE,
                                show_legend = FALSE,
-                               show_title=FALSE)
+                               show_title=FALSE, xunits_tick=1)
 
     avt2_diagram = plot_gene_diagram(qpcr_df = avt2_qpcr_df,
                                      seqdata_df = avt2_tfiib_nexus_df,

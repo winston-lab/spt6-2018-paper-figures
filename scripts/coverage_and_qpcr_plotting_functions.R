@@ -106,7 +106,7 @@ plot_gene_diagram = function(qpcr_df, seqdata_df, gene_id){
 }
 
 plot_qpcr = function(qpcr_df, seqdata_df, title, show_y_title=TRUE,
-                     show_legend=TRUE, show_title=TRUE){
+                     show_legend=TRUE, show_title=TRUE, xunits_tick=3){
     qpcr_summary = qpcr_df %>%
         group_by(amplicon_start, amplicon_end, condition) %>%
         summarise(mean = mean(value*100),
@@ -136,7 +136,7 @@ plot_qpcr = function(qpcr_df, seqdata_df, title, show_y_title=TRUE,
         scale_x_continuous(limits = c(min(seqdata_df[["position"]]), max(seqdata_df[["position"]])),
                            expand = c(0,0),
                            labels = function(x)case_when(x==0 ~ "TSS",
-                                                         x==3 ~ paste0(x, "kb"),
+                                                         x==xunits_tick ~ paste0(x, "kb"),
                                                          TRUE ~ as.character(x))) +
         scale_y_continuous(limits = c(0, max(c(qpcr_df[["value"]], qpcr_summary[["mean"]] + qpcr_summary[["sd"]])) *1.05),
                            expand = c(0,0),

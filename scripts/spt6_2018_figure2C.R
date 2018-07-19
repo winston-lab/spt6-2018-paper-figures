@@ -44,7 +44,8 @@ main = function(theme_spec, plot_functions, vam6_tfiib_nexus_path, flo8_tfiib_ne
                                title = "TFIIB ChIP-qPCR",
                                show_y_title = FALSE,
                                show_legend = FALSE,
-                               show_title=FALSE)
+                               show_title=FALSE,
+                               xunits_tick=2)
 
     vam6_diagram = plot_gene_diagram(qpcr_df = vam6_qpcr_df,
                                      seqdata_df = vam6_tfiib_nexus_df,
