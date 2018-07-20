@@ -16,6 +16,7 @@ rule figure_four_a:
     params:
         height = eval(str(config["figure_four"]["four_a"]["height"])),
         width = eval(str(config["figure_four"]["four_a"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_figure4A.R"
 
@@ -36,9 +37,32 @@ rule figure_four_b:
     params:
         height = eval(str(config["figure_four"]["four_b"]["height"])),
         width = eval(str(config["figure_four"]["four_b"]["width"])),
+        assay = "NET-seq"
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_figure4B.R"
 
+# nucleosome dyad signal, occupancy, and fuzziness aligned to TSS/plusone nuc dyad,
+# sorted by NETseq signal
+rule figure_four_b_extra:
+    input:
+        netseq_data = config["figure_four"]["four_b_extra"]["netseq_data"],
+        mnase_data = config["figure_four"]["four_b_extra"]["mnase_data"],
+        quant_data = config["figure_four"]["four_b_extra"]["quant_data"],
+        annotation = config["figure_four"]["four_b_extra"]["annotation"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure4/figure4Bextra/spt6_2018_figure4Bextra-MNase-dyad-signal-occupancy-fuzziness-TFIIB-sorted.svg",
+        pdf = "figure4/figure4Bextra/spt6_2018_figure4Bextra-MNase-dyad-signal-occupancy-fuzziness-TFIIB-sorted.pdf",
+        png = "figure4/figure4Bextra/spt6_2018_figure4Bextra-MNase-dyad-signal-occupancy-fuzziness-TFIIB-sorted.png",
+        grob = "figure4/figure4Bextra/spt6_2018_figure4Bextra-MNase-dyad-signal-occupancy-fuzziness-TFIIB-sorted.Rdata",
+    params:
+        height = eval(str(config["figure_four"]["four_b"]["height"])),
+        width = eval(str(config["figure_four"]["four_b"]["width"])),
+        assay = "TFIIB"
+    conda: "../envs/tidyverse.yaml"
+    script:
+        "../scripts/spt6_2018_figure4B.R"
 
 #global quantification of nucleosome occupancy and fuzziness
 rule figure_four_c:
@@ -54,6 +78,7 @@ rule figure_four_c:
     params:
         height = eval(str(config["figure_four"]["four_c"]["height"])),
         width = eval(str(config["figure_four"]["four_c"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_figure4C.R"
 
@@ -73,6 +98,7 @@ rule figure_four_d:
     params:
         height = eval(str(config["figure_four"]["four_d"]["height"])),
         width = eval(str(config["figure_four"]["four_d"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_figure4D.R"
 
@@ -90,5 +116,7 @@ rule assemble_figure_four:
     params:
         height = eval(str(config["figure_four"]["height"])),
         width = eval(str(config["figure_four"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_figure4.R"
+

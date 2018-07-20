@@ -21,6 +21,7 @@ rule figure_six_a:
     params:
         height = eval(str(config["figure_six"]["six_a"]["height"])),
         width = eval(str(config["figure_six"]["six_a"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_figure6A.R"
 
@@ -36,6 +37,7 @@ rule figure_six_b:
     params:
         height = eval(str(config["figure_six"]["six_b"]["height"])),
         width = eval(str(config["figure_six"]["six_b"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_figure6B.R"
 
@@ -68,6 +70,7 @@ rule figure_six_c:
     params:
         height = eval(str(config["figure_six"]["six_c"]["height"])),
         width = eval(str(config["figure_six"]["six_c"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_figure6C.R"
 
@@ -84,6 +87,7 @@ rule assemble_figure_six:
     params:
         height = eval(str(config["figure_six"]["height"])),
         width = eval(str(config["figure_six"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_figure6.R"
 

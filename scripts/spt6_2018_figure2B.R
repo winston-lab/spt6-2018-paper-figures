@@ -21,7 +21,8 @@ main = function(theme_spec, tfiib_data,
         geom_area(alpha=0.75, position=position_identity()) +
         scale_x_continuous(expand = c(0,0),
                            breaks = scales::pretty_breaks(3),
-                           labels = function(x) case_when(x %>% near(10) ~ "+10kb",
+                           labels = function(x) case_when(x == 0 ~ "TSS",
+                                                          x %>% near(10) ~ "+10kb",
                                                           x %>% near(2) ~ "+2kb",
                                                           x > 0 ~ paste0("+", x),
                                                           TRUE ~ as.character(x))) +

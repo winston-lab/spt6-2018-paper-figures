@@ -39,6 +39,7 @@ rule all:
         "figure3/spt6_2018_supp3-NET-seq.png",
         "figure4/figure4A/spt6_2018_figure4A-MNase-seq-average-signal.png",
         "figure4/figure4B/spt6_2018_figure4B-MNase-dyad-signal-occupancy-fuzziness-NETseq-sorted.png",
+        # "figure4/figure4Bextra/spt6_2018_figure4Bextra-MNase-dyad-signal-occupancy-fuzziness-TFIIB-sorted.png",
         "figure4/figure4C/spt6_2018_figure4C-MNase-global-quantification.png",
         "figure4/figure4D/spt6_2018_figure4D-VAM6-MNase-seq-and-H3-qPCR.Rdata",
         "figure4/spt6_2018_figure4-MNase-seq.png",
@@ -67,3 +68,4 @@ include: "rules/figure_4.smk"
 include: "rules/supp_4.smk"
 include: "rules/figure_5.smk"
 include: "rules/figure_6.smk"
+

@@ -150,14 +150,14 @@ figure_three:
     width: 8.5
     ## NET-seq metagene
     three_a:
-        sense_netseq_data: ../other-datasets/murawska-net-seq/datavis/verified-transcripts-nonoverlapping-TSS/libsizenorm/verified-transcripts-nonoverlapping-TSS-allsamples-allannotations-libsizenorm-5end-SENSE.tsv.gz
-        antisense_netseq_data: ../other-datasets/murawska-net-seq/datavis/verified-transcripts-nonoverlapping-TSS/libsizenorm/verified-transcripts-nonoverlapping-TSS-allsamples-allannotations-libsizenorm-5end-ANTISENSE.tsv.gz
+        sense_netseq_data: ../murawska-net-seq/datavis/verified-transcripts-nonoverlapping-TSS/libsizenorm/verified-transcripts-nonoverlapping-TSS-allsamples-allannotations-libsizenorm-5end-SENSE.tsv.gz
+        antisense_netseq_data: ../murawska-net-seq/datavis/verified-transcripts-nonoverlapping-TSS/libsizenorm/verified-transcripts-nonoverlapping-TSS-allsamples-allannotations-libsizenorm-5end-ANTISENSE.tsv.gz
         annotation: ../genome/annotations/Scer_transcripts_w_verifiedORFs-nonoverlapping.bed
         height: 4.25
         width: 6
     # NET-seq fold change versus Spt6 levels
     three_b:
-        netseq_results: ../other-datasets/murawska-net-seq/diff_exp/spt6-1004-37C-v-WT-37C/spt6-1004-37C-v-WT-37C-results-libsizenorm-all.tsv
+        netseq_results: ../murawska-net-seq/diff_exp/spt6-1004-37C-v-WT-37C/spt6-1004-37C-v-WT-37C-results-libsizenorm-all.tsv
         annotation: ../genome/annotations/verified-transcripts-Spt6nexus-quintiles/verified-transcripts-Spt6nexus-levels.bed
         height: 4.5
         width: 8
@@ -168,19 +168,19 @@ figure_three:
         width: 10
     # antisense NET-seq metagenes
     three_c_alt:
-        netseq_data: ../other-datasets/murawska-net-seq/datavis/verified-transcripts-nonoverlapping-scaled/libsizenorm/verified-transcripts-nonoverlapping-scaled-allsamples-allannotations-libsizenorm-5end-ANTISENSE.tsv.gz
+        netseq_data: ../murawska-net-seq/datavis/verified-transcripts-nonoverlapping-scaled/libsizenorm/verified-transcripts-nonoverlapping-scaled-allsamples-allannotations-libsizenorm-5end-ANTISENSE.tsv.gz
         height: 6
         width: 8
     # NETseq scatterplots
     supp_height: 24
     supp_width: 17.4
     supp_a:
-        netseq_data: ../other-datasets/murawska-net-seq/coverage/libsizenorm/union-bedgraph-window-200-libsizenorm.tsv.gz
+        netseq_data: ../murawska-net-seq/coverage/libsizenorm/union-bedgraph-window-200-libsizenorm.tsv.gz
         height: "17/12*8"
         width: 17.4
     supp_b:
-        sense_netseq_data: ../other-datasets/murawska-net-seq/datavis/verified-transcripts-nonoverlapping-slopR300-TSS/libsizenorm/verified-transcripts-nonoverlapping-slopR300-TSS-allsamples-allannotations-libsizenorm-5end-SENSE.tsv.gz
-        antisense_netseq_data: ../other-datasets/murawska-net-seq/datavis/verified-transcripts-nonoverlapping-slopR300-TSS/libsizenorm/verified-transcripts-nonoverlapping-slopR300-TSS-allsamples-allannotations-libsizenorm-5end-ANTISENSE.tsv.gz
+        sense_netseq_data: ../murawska-net-seq/datavis/verified-transcripts-nonoverlapping-slopR300-TSS/libsizenorm/verified-transcripts-nonoverlapping-slopR300-TSS-allsamples-allannotations-libsizenorm-5end-SENSE.tsv.gz
+        antisense_netseq_data: ../murawska-net-seq/datavis/verified-transcripts-nonoverlapping-slopR300-TSS/libsizenorm/verified-transcripts-nonoverlapping-slopR300-TSS-allsamples-allannotations-libsizenorm-5end-ANTISENSE.tsv.gz
         annotation: ../genome/annotations/Scer_transcripts_w_verifiedORFs-nonoverlapping_slopR300.bed
         height: 5/12*17
         width: 6
@@ -194,22 +194,30 @@ figure_four:
     width: 17.4
     # MNase-seq metagene
     four_a:
-        mnase_data: ../other-datasets/viktorovskaya-mnase-seq/datavis/verified-transcripts-plusonenuc/spikenorm/verified-transcripts-plusonenuc-allsamples-allannotations-midpoint-spikenorm.tsv.gz
+        mnase_data: ../viktorovskaya-mnase-seq/datavis/verified-transcripts-plusonenuc/spikenorm/verified-transcripts-plusonenuc-allsamples-allannotations-midpoint-spikenorm.tsv.gz
         annotation: ../genome/annotations/Scer_transcripts_w_verifiedORFs-plus-one-nuc-dyad.bed
         height: 4.25
         width: 6
     # MNase heatmap sorted by NET-seq, and heatmaps of occupancy and fuzziness
     four_b:
-        netseq_data: ../other-datasets/murawska-net-seq/datavis/verified-transcripts-nonoverlapping-TSS-NETseq-sort/libsizenorm/verified-transcripts-nonoverlapping-TSS-NETseq-sort-allsamples-allannotations-libsizenorm-5end-SENSE.tsv.gz
-        mnase_data: ../other-datasets/viktorovskaya-mnase-seq/datavis/verified-transcripts-nonoverlapping-plusonenuc-NETseq-sort/spikenorm/verified-transcripts-nonoverlapping-plusonenuc-NETseq-sort-allsamples-allannotations-midpoint-spikenorm.tsv.gz
-        quant_data: ../other-datasets/viktorovskaya-mnase-seq/nucleosome_calling/regions/verified-transcripts-nonoverlapping-plusonenuc-NETseq-sort/spikenorm/spt6-1004-37C-v-WT-37C/verified-transcripts-nonoverlapping-plusonenuc-NETseq-sort-allannotations-integrated-spikenorm.tsv
+        netseq_data: ../murawska-net-seq/datavis/verified-transcripts-nonoverlapping-TSS-NETseq-sort/libsizenorm/verified-transcripts-nonoverlapping-TSS-NETseq-sort-allsamples-allannotations-libsizenorm-5end-SENSE.tsv.gz
+        mnase_data: ../viktorovskaya-mnase-seq/datavis/verified-transcripts-nonoverlapping-plusonenuc-NETseq-sort/spikenorm/verified-transcripts-nonoverlapping-plusonenuc-NETseq-sort-allsamples-allannotations-midpoint-spikenorm.tsv.gz
+        quant_data: ../viktorovskaya-mnase-seq/nucleosome_calling/regions/verified-transcripts-nonoverlapping-plusonenuc-NETseq-sort/spikenorm/spt6-1004-37C-v-WT-37C/verified-transcripts-nonoverlapping-plusonenuc-NETseq-sort-allannotations-integrated-spikenorm.tsv
         annotation: ../genome/annotations/Scer_transcripts_w_verifiedORFs-nonoverlapping-NETseq-sort-plusone-nucdyad.bed
+        height: 8.5
+        width: 17.4
+          # MNase heatmap sorted by TFIIB ChIP-nexus, and heatmaps of occupancy and fuzziness
+    four_b_extra:
+        netseq_data: ../murawska-net-seq/datavis/verified-transcripts-nonoverlapping-TSS-TFIIB-sort/libsizenorm/verified-transcripts-nonoverlapping-TSS-TFIIB-sort-allsamples-allannotations-libsizenorm-5end-SENSE.tsv.gz
+        mnase_data: ../viktorovskaya-mnase-seq/datavis/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-sort/spikenorm/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-sort-allsamples-allannotations-midpoint-spikenorm.tsv.gz
+        quant_data: ../viktorovskaya-mnase-seq/nucleosome_calling/regions/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-sort/spikenorm/spt6-1004-37C-v-WT-37C/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-sort-allannotations-integrated-spikenorm.tsv
+        annotation: ../genome/annotations/Scer_transcripts_w_verifiedORFs-nonoverlapping-WT-TFIIB-sort.bed
         height: 8.5
         width: 17.4
     # MNase global occupancy and fuzziness quantification
     four_c:
-        wt_mnase_quant: ../other-datasets/viktorovskaya-mnase-seq/nucleosome_calling/spt6-1004-37C-v-WT-37C/spikenorm/pooled/nucleosome_calling_data_WT-37C.Fnor.smooth.positions.xls
-        spt6_mnase_quant: ../other-datasets/viktorovskaya-mnase-seq/nucleosome_calling/spt6-1004-37C-v-WT-37C/spikenorm/pooled/nucleosome_calling_data_spt6-1004-37C.Fnor.smooth.positions.xls
+        wt_mnase_quant: ../viktorovskaya-mnase-seq/nucleosome_calling/spt6-1004-37C-v-WT-37C/spikenorm/pooled/nucleosome_calling_data_WT-37C.Fnor.smooth.positions.xls
+        spt6_mnase_quant: ../viktorovskaya-mnase-seq/nucleosome_calling/spt6-1004-37C-v-WT-37C/spikenorm/pooled/nucleosome_calling_data_spt6-1004-37C.Fnor.smooth.positions.xls
         height: 4.25
         width: 6
     # MNase-seq browser shot and H3 ChIP-qPCR
@@ -223,12 +231,12 @@ figure_four:
     supp_height: 20
     supp_width: 17.4
     supp_a:
-        mnase_data: ../other-datasets/viktorovskaya-mnase-seq/coverage/spikenorm/union-bedgraph-window-75-spikenorm.tsv.gz
+        mnase_data: ../viktorovskaya-mnase-seq/coverage/spikenorm/union-bedgraph-window-75-spikenorm.tsv.gz
         height: 6
         width: 10
     # MNase metagenes by NET-seq levels
     supp_b:
-        mnase_data: ../other-datasets/viktorovskaya-mnase-seq/datavis/verified-transcripts-nonoverlapping-plusonenuc-NETseq-quintiles/spikenorm/verified-transcripts-nonoverlapping-plusonenuc-NETseq-quintiles-allsamples-allannotations-midpoint-spikenorm.tsv.gz
+        mnase_data: ../viktorovskaya-mnase-seq/datavis/verified-transcripts-nonoverlapping-plusonenuc-NETseq-quintiles/spikenorm/verified-transcripts-nonoverlapping-plusonenuc-NETseq-quintiles-allsamples-allannotations-midpoint-spikenorm.tsv.gz
         annotation:
             - ../genome/annotations/verified-transcripts-nonoverlapping-NETseq-quintiles-plusonenucdyad/Scer_transcripts_w_verifiedORFs-nonoverlapping-plusone-nucdyad-NETseq-quintile-1.bed
             - ../genome/annotations/verified-transcripts-nonoverlapping-NETseq-quintiles-plusonenucdyad/Scer_transcripts_w_verifiedORFs-nonoverlapping-plusone-nucdyad-NETseq-quintile-2.bed

@@ -13,7 +13,7 @@ list2table3l = function(l1, l2, l3){
     return(tibble(numbers = numbers, percentage = percentage))
 }
 
-#modified from Raivo Kolde's 'bvenn' R package for ggplot graphics
+#modified for ggplot graphics from Raivo Kolde's 'bvenn' R package
 #https://cran.r-project.org/web/packages/bvenn/index.html
 bvenn = function(lists, scale=1, title){
     x = (c(0.20, 0.50, 0.80, 0.35, 0.50, 0.65, 0.50) - 0.5) * scale + 0.5
@@ -54,7 +54,8 @@ bvenn = function(lists, scale=1, title){
         coord_fixed() +
         ggtitle(title) +
         theme_void() +
-        theme(plot.title=element_text(size=9, face="plain", hjust=0.5),
+        theme(plot.title=element_text(size=9, face="plain", hjust=0.5,
+                                      margin = margin(t=4, b=2, unit="pt")),
               plot.margin = margin(4, 0, 0, 4, "pt"))
     return(plot)
 }

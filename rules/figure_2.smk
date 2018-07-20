@@ -17,6 +17,7 @@ rule figure_two_a:
     params:
         height = eval(str(config["figure_two"]["two_a"]["height"])),
         width = eval(str(config["figure_two"]["two_a"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_figure2A.R"
 
@@ -33,6 +34,7 @@ rule figure_two_b:
     params:
         height = eval(str(config["figure_two"]["two_b"]["height"])),
         width = eval(str(config["figure_two"]["two_b"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_figure2B.R"
 
@@ -55,6 +57,7 @@ rule figure_two_c:
     params:
         height = eval(str(config["figure_two"]["two_c"]["height"])),
         width = eval(str(config["figure_two"]["two_c"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_figure2C.R"
 
@@ -77,6 +80,7 @@ rule figure_two_extra:
     params:
         height = eval(str(config["figure_two"]["two_extra"]["height"])),
         width = eval(str(config["figure_two"]["two_extra"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_AVT2_YPT52_TFIIB-ChIP-qPCR.R"
 
@@ -95,6 +99,7 @@ rule figure_two_d:
     params:
         height = eval(str(config["figure_two"]["two_d"]["height"])),
         width = eval(str(config["figure_two"]["two_d"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_figure2D.R"
 
@@ -113,6 +118,7 @@ rule assemble_figure_two:
     params:
         height = eval(str(config["figure_two"]["height"])),
         width = eval(str(config["figure_two"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_figure2.R"
 

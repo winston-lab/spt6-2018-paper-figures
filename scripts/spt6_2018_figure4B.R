@@ -1,7 +1,7 @@
 
 main = function(theme_spec,
                 netseq_data, mnase_data, quant_data, annotation_path,
-                fig_width, fig_height,
+                fig_width, fig_height, assay,
                 svg_out, pdf_out, png_out, grob_out){
     source(theme_spec)
     library(cowplot)
@@ -46,7 +46,7 @@ main = function(theme_spec,
                            limits = c(NA, quantile(netseq_df[["signal"]], probs=netseq_cutoff)),
                            oob=scales::squish,
                            breaks = scales::pretty_breaks(n=2),
-                           name = "NET-seq",
+                           name = assay,
                            guide=guide_colorbar(title.position="top",
                                                 title.hjust=1,
                                                 barwidth=unit(1.3, "cm"),
@@ -177,7 +177,9 @@ main(theme_spec = snakemake@input[["theme"]],
      annotation_path = snakemake@input[["annotation"]],
      fig_width = snakemake@params[["width"]],
      fig_height = snakemake@params[["height"]],
+     assay = snakemake@params[["assay"]],
      svg_out = snakemake@output[["svg"]],
      pdf_out = snakemake@output[["pdf"]],
      png_out = snakemake@output[["png"]],
      grob_out = snakemake@output[["grob"]])
+

@@ -16,6 +16,7 @@ rule supp_four_a:
     params:
         height = eval(str(config["figure_four"]["supp_a"]["height"])),
         width = eval(str(config["figure_four"]["supp_a"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_supp4A.R"
 
@@ -33,6 +34,7 @@ rule supp_four_b:
     params:
         height = eval(str(config["figure_four"]["supp_b"]["height"])),
         width = eval(str(config["figure_four"]["supp_b"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_supp4B.R"
 
@@ -51,6 +53,7 @@ rule supp_four_c:
     params:
         height = eval(str(config["figure_four"]["supp_c"]["height"])),
         width = eval(str(config["figure_four"]["supp_c"]["width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_supp4C.R"
 
@@ -67,6 +70,7 @@ rule assemble_supp_four:
     params:
         height = eval(str(config["figure_four"]["supp_height"])),
         width = eval(str(config["figure_four"]["supp_width"])),
+    conda: "../envs/tidyverse.yaml"
     script:
         "../scripts/spt6_2018_supp4.R"
 
