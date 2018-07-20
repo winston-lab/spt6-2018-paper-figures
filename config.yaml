@@ -208,7 +208,7 @@ figure_four:
         width: 17.4
           # MNase heatmap sorted by TFIIB ChIP-nexus, and heatmaps of occupancy and fuzziness
     four_b_extra:
-        netseq_data: ../murawska-net-seq/datavis/verified-transcripts-nonoverlapping-TSS-TFIIB-sort/libsizenorm/verified-transcripts-nonoverlapping-TSS-TFIIB-sort-allsamples-allannotations-libsizenorm-5end-SENSE.tsv.gz
+        # netseq_data: ../murawska-net-seq/datavis/verified-transcripts-nonoverlapping-TSS-TFIIB-sort/libsizenorm/verified-transcripts-nonoverlapping-TSS-TFIIB-sort-allsamples-allannotations-libsizenorm-5end-SENSE.tsv.gz
         mnase_data: ../viktorovskaya-mnase-seq/datavis/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-sort/spikenorm/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-sort-allsamples-allannotations-midpoint-spikenorm.tsv.gz
         quant_data: ../viktorovskaya-mnase-seq/nucleosome_calling/regions/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-sort/spikenorm/spt6-1004-37C-v-WT-37C/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-sort-allannotations-integrated-spikenorm.tsv
         annotation: ../genome/annotations/Scer_transcripts_w_verifiedORFs-nonoverlapping-WT-TFIIB-sort.bed

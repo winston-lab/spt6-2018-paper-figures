@@ -45,7 +45,7 @@ main = function(theme_spec, sense_netseq_data, antisense_netseq_data,
                   aes(x=1, y=max(df[["sorted_index"]]), label=strand),
                   nudge_y=-250, size=9/72*25.4, hjust=0) +
         facet_grid(.~strand) +
-        scale_fill_gradientn(colors=coolwarm(100),
+        scale_fill_gradientn(colors=coolwarm,
                              limits = c(-2, 2),
                              oob = scales::squish,
                              breaks = scales::pretty_breaks(n=3),

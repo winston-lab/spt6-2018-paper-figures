@@ -5,7 +5,7 @@ main = function(theme_spec,
                 svg_out, pdf_out, png_out, grob_out){
     source(theme_spec)
     library(cowplot)
-    library(pals)
+    # library(pals)
 
     sample_ids = c("WT-37C-1", "spt6-1004-37C-1", "spt6-1004-37C-2")
     max_length = 1
@@ -122,7 +122,8 @@ main = function(theme_spec,
                            expand = c(0, 25)) +
         scale_y_reverse(breaks = function(x){seq(min(x)+500, max(x)-500, 500)},
                         expand = c(0, 50), name=NULL) +
-        scale_fill_gradientn(colors = coolwarm(100), limits = c(-0.7, 0.7),
+        # scale_fill_gradientn(colors = coolwarm(100), limits = c(-0.7, 0.7),
+        scale_fill_gradientn(colors = coolwarm, limits = c(-0.7, 0.7),
                              oob=scales::squish,
                              breaks = scales::pretty_breaks(n=2),
                              name = "fuzziness",
@@ -148,7 +149,8 @@ main = function(theme_spec,
                            expand = c(0, 25)) +
         scale_y_reverse(breaks = function(x){seq(min(x)+500, max(x)-500, 500)},
                         expand = c(0, 50), name=NULL) +
-        scale_fill_gradientn(colors = coolwarm(100), limits = c(-2, 2),
+        # scale_fill_gradientn(colors = coolwarm(100), limits = c(-2, 2),
+        scale_fill_gradientn(colors = coolwarm, limits = c(-2, 2),
                              oob=scales::squish,
                              breaks = scales::pretty_breaks(n=3),
                              name = "occupancy",
