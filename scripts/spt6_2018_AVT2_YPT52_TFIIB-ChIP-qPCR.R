@@ -6,16 +6,31 @@ main = function(theme_spec, plot_functions, avt2_tfiib_nexus_path, ypt52_tfiib_n
                 svg_out, pdf_out, png_out, grob_out){
     source(theme_spec)
     source(plot_functions)
+    library(broom)
     library(cowplot)
     sample_list = c("WT-37C-1", "WT-37C-2", "spt6-1004-37C-1", "spt6-1004-37C-2")
 
     avt2_tfiib_nexus_df = import(avt2_tfiib_nexus_path, sample_list=sample_list)
     avt2_tss_sense_df = import(avt2_tss_sense_path, sample_list=sample_list)
     avt2_qpcr_df = build_qpcr_df(qpcr_data_path, gene_id="AVT2", norm="pma1+")
+    
+    avt2_qpcr_df %>%
+        do(t.test(value ~ condition,
+                  data = .,
+                  alternative = "less") %>% 
+               tidy()) %>% 
+        print()
 
     ypt52_tfiib_nexus_df = import(ypt52_tfiib_nexus_path, sample_list=sample_list)
     ypt52_tss_sense_df = import(ypt52_tss_sense_path, sample_list=sample_list)
     ypt52_qpcr_df = build_qpcr_df(qpcr_data_path, gene_id="YPT52", norm="pma1+")
+    
+    ypt52_qpcr_df %>%
+        do(t.test(value ~ condition,
+                  data = .,
+                  alternative = "less") %>% 
+               tidy()) %>% 
+        print()
 
     avt2_tfiib_plot = plot_seq_data(qpcr_df = avt2_qpcr_df,
                                     seqdata_df = avt2_tfiib_nexus_df,

@@ -1,0 +1,83 @@
+\documentclass[9pt, letterpaper]{extarticle}
+\setlength\parindent{0pt}
+\linespread{1}
+\pagestyle{empty}
+
+% \usepackage[letterpaper, left=20.95mm, right=20.95mm, top=15.95mm, bottom=15.95mm, showframe]{geometry}
+\usepackage[letterpaper, left=20.95mm, right=20.95mm, top=15.95mm, bottom=15.95mm]{geometry}
+
+\usepackage{fontspec}
+\setmainfont{FreeSans}[
+    Path=fonts/,
+    BoldFont=FreeSansBold,
+    ItalicFont=FreeSansOblique,
+    BoldItalicFont=FreeSansBoldOblique
+]
+
+\usepackage{graphicx}
+
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{enumitem}
+
+\begin{document}
+
+\textbf{\large Figure S1. Related to Figure 1 (TSS-seq)}
+
+{\centering \includegraphics[width=17.4cm]{figure1/spt6_2018_supp1-TSS-seq.pdf}\par}
+
+\textbf{Figure S1. TSS-seq}
+
+\begin{description}[noitemsep, topsep=0pt, align=right, labelwidth=12pt, itemindent=0pt, leftmargin=0pt]
+	\item [\textbf{(A)}] Comparison of spike-in normalized TSS-seq signal in wild-type and \textit{spt6-1004} cells. Panels on the bottom left are scatterplots of the signal in all non-overlapping 10 nucleotide bins across the genome with signal in at least one sample, panels on the diagonal are kernel density estimates of the signal within each sample, and panels on the top right are Pearson correlations of $\log_{10}\left(\text{signal} \right)$, comparing pairwise complete observations.
+	\item [\textbf{(B)}] Relative TSS-seq signal over 5088 coding genes, comparing wild-type samples from this work (grown at 37{\textdegree}C for 80 min.) to previously published wild-type samples (Malabat \textit{et al.}, 2015). For each gene, the signal in the window from TSS-500 nt to CPS+500 nt is scaled from 0 to 1 before averaging. The solid line and shaded area are the median and the interdecile range.
+	\item [\textbf{(C)}] Scatterplot of 5088 coding genes in wild-type, comparing TSS-seq signal in the 60 nt window centered on the annotated TSS to RNA-seq signal over the whole transcript, using published RNA-seq data (Uwimana \textit{et al.}, 2017).
+	\item [\textbf{(D)}] Histogram of the number of sense intragenic TSSs upregulated in \textit{spt6-1004} per open reading frame.
+	\item [\textbf{(E)}] The observed distribution of the positions of \textit{spt6-1004} upregulated sense intragenic TSSs (orange) compared to the distribution expected if the same number of intragenic TSSs were randomly distributed along the length of ORFs (blue). The random distribution is not uniform because we require that intragenic TSSs do not overlap genic regions. Lines are TSS positions loess smoothed with span 0.1, and the p-value indicates the probability of the observed distribution under the random null model, using a permutation test on the $\chi^2$ test statistic (see Methods).
+	\item [\textbf{(F)}] Set diagram showing the overlap of genes reported to have intragenic TSS in \textit{spt6-1004} using tiled arrays (Cheung \textit{et al.}, 2008), RNA-seq (Uwimana \textit{et al.}, 2017), and TSS-seq (this work). Universal overlap is represented by the center circle and pairwise overlaps are represented by the circles between datasets. The radius of a circle is proportional to the number of genes in the set.
+\end{description}
+
+\newpage
+
+\textbf{\large Figure S2. Related to Figure 2 (TFIIB ChIP-nexus)}
+
+{\centering \includegraphics[width=17.4cm]{figure2/spt6_2018_supp2-TFIIB-ChIP-nexus.pdf}\par}
+
+\textbf{Figure S2. ChIP-nexus analysis of TFIIB}
+
+\begin{description}[noitemsep, topsep=0pt, align=right, labelwidth=12pt, itemindent=0pt, leftmargin=0pt]
+	\item [\textbf{(A)}] Comparison of library-size normalized TFIIB footprints in wild-type and \textit{spt6-1004} cells. Panels on the bottom left are scatterplots of the signal in all non-overlapping 200 nucleotide bins across the genome with signal in at least one sample, panels on the diagonal are kernel density estimates of the signal within each sample, and panels on the top right are Pearson correlations of $\log_{10}\left(\text{signal} \right)$, comparing pairwise complete observations.
+	\item [\textbf{(B)}] Plots as in (A), but comparing TFIIB ChIP-nexus to ChIP-exo (Rhee and Pugh, 2012).
+	\item [\textbf{(C)}] Average TFIIB ChIP-nexus signal in wild-type cells (grown at 37{\textdegree}C for 80 min.), aligned to 572 TATA boxes with no mismatches to the sequence TATAWAWR as previously defined (Rhee and Pugh, 2012). The signal around each TATA box is scaled from 0 to 1 before averaging to normalize differences in levels of TFIIB binding. Values shown are the mean over TATA boxes. Crosslinking signal on the plus and minus strand are plotted above and below the x-axis, respectively.
+	\item [\textbf{(D)}] (left panel) Western analysis of TFIIB protein levels in wild-type and \textit{spt6-1004} cells. Protein levels were quantified using $\alpha$-SPA antibody to detect the TAP tag on TFIIB and $\alpha$-Myc to detect Dst1 from a spike-in strain (see Methods). (right panel) Quantification of TFIIB protein levels for three Westerns. Each bar shows the mean and standard deviation of three replicates.
+\end{description}
+
+\newpage
+
+\textbf{\large Figure S3. Related to Figure 3 (NET-seq, ChIP-nexus of RNAPII and Spt6)}
+
+{\centering \includegraphics[width=17.4cm]{figure3/spt6_2018_supp3-NET-seq.pdf}\par}
+
+\textbf{Figure S3. Spt6 alters the location and levels of active RNAPII.}
+
+\begin{description}[noitemsep, topsep=0pt, align=right, labelwidth=12pt, itemindent=0pt, leftmargin=0pt]
+	\item [\textbf{(A)}] Comparison of library-size normalized NET-seq signal in wild-type and \textit{spt6-1004} cells cultured at 30{\textdegree}C and 37{\textdegree}C. Panels on the bottom left are scatterplots of the signal in all non-overlapping 200 nucleotide bins across the genome with signal in at least one sample, panels on the diagonal are kernel density estimates of the signal within each sample, and panels on the top right are Pearson correlations of $\log_{10}\left(\text{signal} \right)$, comparing pairwise complete observations.
+	\item [\textbf{(B)}] Heatmaps of fold-change in sense and antisense NET-seq signal between \textit{spt6-1004} and wild-type cells, over the same regions shown in Figure 1A. Fold-changes are calculated from the mean of library-size normalized coverage in non-overlapping 20 nt windows, averaged over two replicates. Fold-changes with an absolute value greater than 4 are set to -4 or 4 for visualization.
+	\item [\textbf{(C)}] Plots as in (A), but for library-size normalized RNAPII (Rpb1) and Spt6 ChIP-nexus signal.
+\end{description}
+
+\newpage
+
+\textbf{\large Figure S4. Related to Figure 4 (MNase-seq)}
+
+{\centering \includegraphics[width=17.4cm]{figure4/spt6_2018_supp4-MNase-seq.pdf}\par}
+
+\textbf{Figure S4. The \textit{spt6-1004} mutant has defective chromatin.}
+
+\begin{description}[noitemsep, topsep=0pt, align=right, labelwidth=12pt, itemindent=0pt, leftmargin=0pt]
+	\item [\textbf{(A)}] Comparison of spike-in normalized MNase-seq dyad signal in wild-type and \textit{spt6-1004} cells. Panels on the bottom left are scatterplots of the signal in all non-overlapping 75 bp bins across the genome with signal in at least one sample, panels on the diagonal are kernel density estimates of the signal within each sample, and panels on the top right are Pearson correlations of $\log_{10}\left(\text{signal} \right)$, comparing pairwise complete observations.
+	\item [\textbf{(B)}] Average MNase-seq dyad signal for the same 3522 non-overlapping coding genes shown in Figure 4A, but grouped by total sense NET-seq signal in the window extending 500 nucleotides downstream from the TSS. The solid line and shading represent the median and interquartile range.
+	\item [\textbf{(C)}] Histone H3 ChIP-qPCR measurements and MNase-seq signal at the \textit{PMA1} and \textit{HSP82} loci in wild-type and \textit{spt6-1004} strains. MNase-seq coverage is spike-in normalized dyad signal, smoothed using a Gaussian kernel with 20 bp standard deviation, and averaged by taking the mean of two replicates (\textit{spt6-1004}) or one experiment (wild-type). Histone H3 ChIP-qPCR enrichment is normalized to amplification at the \textit{S. pombe} \textit{pma1+} gene as a spike-in control. Vertical dashed lines represent the coordinates of qPCR amplicon boundaries.
+\end{description}
+
+\end{document}

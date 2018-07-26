@@ -24,4 +24,8 @@ dependencies:
     - r-gdtools=0.1.6
     - r-stringi=1.1.7
     - r-hexbin=1.27.2
+    - r-cowplot=0.9.3
+    - r-ggforce=0.1.1
+    - r-ggseqlogo=0.1
+    - r-png=0.1_7
 

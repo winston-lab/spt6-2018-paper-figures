@@ -20,7 +20,6 @@ rule supp_four_a:
     script:
         "../scripts/spt6_2018_supp4A.R"
 
-#MNase-seq scatterplots
 rule supp_four_b:
     input:
         mnase_data = config["figure_four"]["supp_b"]["mnase_data"],
@@ -32,6 +31,25 @@ rule supp_four_b:
         png = "figure4/supp4B/spt6_2018_supp4B-MNase-seq-metagene-by-NETseq-levels.png",
         grob = "figure4/supp4B/spt6_2018_supp4B-MNase-seq-metagene-by-NETseq-levels.Rdata",
     params:
+        assay = "sense NET-seq",
+        height = eval(str(config["figure_four"]["supp_b"]["height"])),
+        width = eval(str(config["figure_four"]["supp_b"]["width"])),
+    conda: "../envs/tidyverse.yaml"
+    script:
+        "../scripts/spt6_2018_supp4B.R"
+
+rule supp_four_b_extra:
+    input:
+        mnase_data = config["figure_four"]["supp_b_extra"]["mnase_data"],
+        annotation = config["figure_four"]["supp_b_extra"]["annotation"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure4/supp4Bextra/spt6_2018_supp4Bextra-MNase-seq-metagene-by-TFIIB-levels.svg",
+        pdf = "figure4/supp4Bextra/spt6_2018_supp4Bextra-MNase-seq-metagene-by-TFIIB-levels.pdf",
+        png = "figure4/supp4Bextra/spt6_2018_supp4Bextra-MNase-seq-metagene-by-TFIIB-levels.png",
+        grob = "figure4/supp4Bextra/spt6_2018_supp4Bextra-MNase-seq-metagene-by-TFIIB-levels.Rdata",
+    params:
+        assay = "genic TFIIB",
         height = eval(str(config["figure_four"]["supp_b"]["height"])),
         width = eval(str(config["figure_four"]["supp_b"]["width"])),
     conda: "../envs/tidyverse.yaml"

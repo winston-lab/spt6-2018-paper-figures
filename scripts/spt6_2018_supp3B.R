@@ -14,7 +14,8 @@ main = function(theme_spec, sense_netseq_data, antisense_netseq_data,
                 fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
     source(theme_spec)
-    library(pals)
+    # library(pals)
+
     sample_list = c("WT-37C-1", "WT-37C-2", "spt6-1004-37C-1", "spt6-1004-37C-2")
     max_length = 3
     cps_dist = 0.3

@@ -14,7 +14,9 @@ main = function(theme_spec,
 
     netseq_df = read_tsv(netseq_data,
                          col_names=c('group', 'sample', 'annotation', 'index', 'position', 'signal')) %>%
-        filter(group=="WT-37C" & between(position, -0.1, 0.5)) %>%
+        filter(group=="WT-37C" & between(position,
+                                         ifelse(assay=="NET-seq", -0.1, -0.3),
+                                         ifelse(assay=="NET-seq", 0.5, 0.1))) %>%
         group_by(group, index, position) %>%
         summarise(signal = mean(signal)) %>%
         ungroup() %>%

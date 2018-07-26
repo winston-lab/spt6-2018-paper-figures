@@ -16,39 +16,14 @@ main = function(four_a, four_b, four_c,
                    c(3,3,3,3,3,3,3,3,3,3,3,3),
                    c(3,3,3,3,3,3,3,3,3,3,3,3),
                    c(3,3,3,3,3,3,3,3,3,3,3,3),
-                   c(3,3,3,3,3,3,3,3,3,3,3,3),
-                   c(4,4,4,4,4,4,4,4,4,4,4,4),
-                   c(4,4,4,4,4,4,4,4,4,4,4,4))
+                   c(3,3,3,3,3,3,3,3,3,3,3,3))
 
     load(four_a)
     load(four_b)
     load(four_c)
-    legends = c("Figure S4. Spt6 mutants have defective chromatin.",
-                "(A)",
-                "Comparison of spike-in normalized MNase-seq dyad signal in",
-                "wild-type and spt6-1004 cells. Panels on the bottom left are",
-                "scatterplots of dyad signal in non-overlapping 25 bp bins",
-                "with signal in at least one sample, panels on the diagonal",
-                "are kernel density estimates of the same signal within each",
-                "sample, and panels on the top right are Pearson correlations",
-                "of log10(signal), comparing pairwise complete observations.",
-                "(B)",
-                "Average Mnase-seq dyad signal for the same 3522",
-                "nonoverlapping coding genes shown in figure 4A, but grouped",
-                "by total sense NET-seq signal in the window extending 500 nt",
-                "downstream from the TSS. The solid line and shading represent",
-                "the median and the interquartile range.") %>%
-        paste(collapse=" ") %>%
-        strwrap(width=132) %>%
-        paste(collapse="\n") %>%
-        textGrob(x=unit(0, "npc"),
-                 just="left",
-                 gp = gpar(fontsize=8,
-                           lineheight=1.05))
 
-    supp_four = arrangeGrob(supp_four_a, supp_four_b, supp_four_c, legends,
-                          layout_matrix=layout) %>%
-        arrangeGrob(top=textGrob(label = "Supplemental Figure 4: MNase-seq", gp=gpar(fontsize=12)))
+    supp_four = arrangeGrob(supp_four_a, supp_four_b, supp_four_c,
+                          layout_matrix=layout)
 
     ggsave(svg_out, plot=supp_four, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=supp_four, width=fig_width, height=fig_height, units="cm")

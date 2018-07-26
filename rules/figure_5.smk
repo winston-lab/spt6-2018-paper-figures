@@ -77,7 +77,24 @@ rule figure_five_d:
         width = eval(str(config["figure_five"]["five_d"]["width"])),
     conda: "../envs/tidyverse.yaml"
     script:
-        "../scripts/spt6_2018_figure5D.R"
+        "../scripts/spt6_2018_figure5Dextra.R"
+
+rule figure_five_d_extra:
+    input:
+        fimo_results = config["figure_five"]["five_d_extra"]["fimo_results"],
+        tss_results = config["figure_five"]["five_d_extra"]["tss_results"],
+        theme = config["theme_spec"]
+    output:
+        svg = "figure5/figure5Dextra/spt6_2018_figure5Dextra-intragenic-TSS-TATA-box-expression.svg",
+        pdf = "figure5/figure5Dextra/spt6_2018_figure5Dextra-intragenic-TSS-TATA-box-expression.pdf",
+        png = "figure5/figure5Dextra/spt6_2018_figure5Dextra-intragenic-TSS-TATA-box-expression.png",
+        grob = "figure5/figure5Dextra/spt6_2018_figure5Dextra-intragenic-TSS-TATA-box-expression.Rdata",
+    params:
+        height = eval(str(config["figure_five"]["five_d_extra"]["height"])),
+        width = eval(str(config["figure_five"]["five_d_extra"]["width"])),
+    conda: "../envs/tidyverse.yaml"
+    script:
+        "../scripts/spt6_2018_figure5Dextra.R"
 
 # intragenic motif enrichment
 rule figure_five_e:

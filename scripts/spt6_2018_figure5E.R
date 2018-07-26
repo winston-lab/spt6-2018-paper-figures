@@ -33,9 +33,9 @@ main = function(theme_spec,
                   label.size=NA, label.padding = unit(0.8, "pt"),
                   ylim = c(-log10(0.015), NA), force=0.5,
                   segment.size = 0.2, segment.alpha=0.5) +
-        annotate(geom="label", x=1, y=9.7, label="enriched", size=7/72*25.4,
+        annotate(geom="label", x=1, y=9.7, label="enriched", size=9/72*25.4,
                  fill="#fbb4ae", label.size=NA) +
-        annotate(geom="label", x=-1, y=9.7, label="depleted", size=7/72*25.4,
+        annotate(geom="label", x=-1, y=9.7, label="depleted", size=9/72*25.4,
                  fill="#b3cde3", label.size=NA) +
         scale_y_continuous(expand = c(0,0),
                            breaks = scales::pretty_breaks(n=3),

@@ -17,6 +17,7 @@ import = function(path, sample_list){
 main = function(theme_spec,
                 mnase_data,
                 annotation,
+                assay,
                 fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
     source(theme_spec)
@@ -39,10 +40,10 @@ main = function(theme_spec,
         geom_ribbon(data = df, aes(x=position, ymin=low, ymax=high, fill=group), alpha=0.2, linetype='blank') +
         geom_line(data = df, aes(x=position, y=mid, color=group), alpha=0.7) +
         geom_text(data = tibble(annotation = ordered(c("quintile 1", "quintiles 2-4", "quintile 5")),
-                                label = c("top 20% sense NET-seq",
-                                          "middle 60% sense NET-seq",
-                                          "bottom 20% sense NET-seq")),
-                  aes(label=label), x=0.02, y=3.3, size=7/72*25.4, hjust=0) +
+                                label = c(paste("top 20%",  assay),
+                                          paste("middle 60%", assay),
+                                          paste("bottom 20%", assay))),
+                  aes(label=label), x=0.02, y=3.2/2, size=7/72*25.4, hjust=0) +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
                            labels = function(x){case_when(x==0 ~ "+1 dyad",
                                                           x==max_length ~ paste0(x, "kb"),
@@ -69,9 +70,11 @@ main = function(theme_spec,
 main(theme_spec = snakemake@input[["theme"]],
      mnase_data = snakemake@input[["mnase_data"]],
      annotation = snakemake@input[["annotation"]],
+     assay = snakemake@params[["assay"]],
      fig_width = snakemake@params[["width"]],
      fig_height = snakemake@params[["height"]],
      svg_out = snakemake@output[["svg"]],
      pdf_out = snakemake@output[["pdf"]],
      png_out = snakemake@output[["png"]],
      grob_out = snakemake@output[["grob"]])
+

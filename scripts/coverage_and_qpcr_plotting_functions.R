@@ -65,10 +65,10 @@ plot_seq_data = function(qpcr_df, seqdata_df, title, show_y_title=TRUE, line_typ
         scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         ggtitle(if(show_title){title} else {""}) +
         theme_default +
-        theme(legend.position = if(show_legend){c(0.8, 0.75)} else{"none"},
-              legend.justification = c(0.5, 0.5),
+        theme(legend.position = if(show_legend){c(0.97, 0.75)} else{"none"},
+              legend.justification = c(1, 0.5),
               axis.title.x = element_blank(),
-              axis.title.y = element_text(vjust=0, margin=margin(0,0,0,0,"pt")),
+              axis.title.y = element_text(vjust=0.5, margin=margin(0,0,0,0,"pt")),
               axis.text.x = element_blank(),
               panel.grid = element_blank(),
               panel.border = element_blank(),
@@ -138,16 +138,17 @@ plot_qpcr = function(qpcr_df, seqdata_df, title, show_y_title=TRUE,
                            labels = function(x)case_when(x==0 ~ "TSS",
                                                          x==xunits_tick ~ paste0(x, "kb"),
                                                          TRUE ~ as.character(x))) +
-        scale_y_continuous(limits = c(0, max(c(qpcr_df[["value"]], qpcr_summary[["mean"]] + qpcr_summary[["sd"]])) *1.05),
+        scale_y_continuous(limits = c(0, max(c(qpcr_df[["value"]], qpcr_summary[["mean"]] + qpcr_summary[["sd"]])) *1.15),
                            expand = c(0,0),
                            breaks = scales::pretty_breaks(n=2),
                            name = if(show_y_title){"enrichment (AU)"} else {NULL}) +
         ggtitle(if(show_title){title} else {""}) +
         theme_default +
-        theme(legend.position = if(show_legend){c(0.8, 0.75)} else{"none"},
-              legend.justification = c(0.5, 0.5),
+        theme(legend.position = if(show_legend){c(0.97, 0.75)} else{"none"},
+              legend.key.width = unit(3, "pt"),
+              legend.justification = c(1, 0.5),
               axis.title.x = element_blank(),
-              axis.title.y = element_text(vjust=1, margin=margin(0,0,0,0,"pt")),
+              axis.title.y = element_text(vjust=0.5, margin=margin(0,0,0,0,"pt")),
               panel.grid = element_blank(),
               plot.margin = margin(-5,5,0,0,"pt"))
     return(qpcr_plot)

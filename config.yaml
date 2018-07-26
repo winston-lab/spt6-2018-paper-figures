@@ -37,9 +37,9 @@ figure_one:
         # tfiib_intergenic: ../chipnexus-tfiib/diff_binding/spt6-1004-37C-v-WT-37C/libsizenorm/intergenic/spt6-1004-37C-v-WT-37C_tfiib-chipnexus-libsizenorm-diffbind-results-intergenic-all.tsv
         width: 7
         height: 6
-    # TSS-seq scatterplots
-    supp_height: 22
+    supp_height: 16.9
     supp_width: 17.4
+    # TSS-seq scatterplots
     supp_a:
         tss_data: ../tss-seq/qual_ctrl/scatter_plots/tss-seq_union-bedgraph-spikenorm-window-10-allsamples.tsv.gz
         height: "17/12*4"
@@ -119,9 +119,9 @@ figure_two:
         antisense: ../tss-v-tfiib-nexus/diff_binding/spt6-1004-37C-v-WT-37C-tfiib-window-results-antisense.tsv
         width: 14
         height: 6
-    # TFIIB scatterplots
-    supp_height: 24
+    supp_height: 19.2
     supp_width: 17.4
+    # TFIIB scatterplots
     supp_a:
         tfiib_data: ../chipnexus-tfiib/qual_ctrl/scatter_plots/tfiib-chipnexus_union-bedgraph-libsizenorm-window-200-allsamples.tsv.gz
         height: "17/12*4"
@@ -157,7 +157,7 @@ figure_three:
         width: 6
     # NET-seq fold change versus Spt6 levels
     three_b:
-        netseq_results: ../murawska-net-seq/diff_exp/spt6-1004-37C-v-WT-37C/spt6-1004-37C-v-WT-37C-results-libsizenorm-all.tsv
+        netseq_results: ../murawska-net-seq/diff_exp/spt6-1004-37C-v-WT-37C/spt6-1004-37C-v-WT-37C-netseq-results-libsizenorm-all.tsv
         annotation: ../genome/annotations/verified-transcripts-Spt6nexus-quintiles/verified-transcripts-Spt6nexus-levels.bed
         height: 4.5
         width: 8
@@ -171,9 +171,9 @@ figure_three:
         netseq_data: ../murawska-net-seq/datavis/verified-transcripts-nonoverlapping-scaled/libsizenorm/verified-transcripts-nonoverlapping-scaled-allsamples-allannotations-libsizenorm-5end-ANTISENSE.tsv.gz
         height: 6
         width: 8
-    # NETseq scatterplots
-    supp_height: 24
+    supp_height: 20.7
     supp_width: 17.4
+    # NETseq scatterplots
     supp_a:
         netseq_data: ../murawska-net-seq/coverage/libsizenorm/union-bedgraph-window-200-libsizenorm.tsv.gz
         height: "17/12*8"
@@ -202,22 +202,22 @@ figure_four:
     four_b:
         netseq_data: ../murawska-net-seq/datavis/verified-transcripts-nonoverlapping-TSS-NETseq-sort/libsizenorm/verified-transcripts-nonoverlapping-TSS-NETseq-sort-allsamples-allannotations-libsizenorm-5end-SENSE.tsv.gz
         mnase_data: ../viktorovskaya-mnase-seq/datavis/verified-transcripts-nonoverlapping-plusonenuc-NETseq-sort/spikenorm/verified-transcripts-nonoverlapping-plusonenuc-NETseq-sort-allsamples-allannotations-midpoint-spikenorm.tsv.gz
-        quant_data: ../viktorovskaya-mnase-seq/nucleosome_calling/regions/verified-transcripts-nonoverlapping-plusonenuc-NETseq-sort/spikenorm/spt6-1004-37C-v-WT-37C/verified-transcripts-nonoverlapping-plusonenuc-NETseq-sort-allannotations-integrated-spikenorm.tsv
+        quant_data: ../viktorovskaya-mnase-seq/nucleosome_quantification/regions/verified-transcripts-nonoverlapping-plusonenuc-NETseq-sort/spikenorm/spt6-1004-37C-v-WT-37C/verified-transcripts-nonoverlapping-plusonenuc-NETseq-sort-allannotations-integrated-spikenorm.tsv
         annotation: ../genome/annotations/Scer_transcripts_w_verifiedORFs-nonoverlapping-NETseq-sort-plusone-nucdyad.bed
         height: 8.5
         width: 17.4
           # MNase heatmap sorted by TFIIB ChIP-nexus, and heatmaps of occupancy and fuzziness
     four_b_extra:
-        # netseq_data: ../murawska-net-seq/datavis/verified-transcripts-nonoverlapping-TSS-TFIIB-sort/libsizenorm/verified-transcripts-nonoverlapping-TSS-TFIIB-sort-allsamples-allannotations-libsizenorm-5end-SENSE.tsv.gz
+        netseq_data: ../chipnexus-tfiib/datavis/verified-transcripts-nonoverlapping-TSS-TFIIB-sort/libsizenorm/verified-transcripts-nonoverlapping-TSS-TFIIB-sort-allsamples-allannotations-tfiib-chipnexus-libsizenorm-protection.tsv.gz
         mnase_data: ../viktorovskaya-mnase-seq/datavis/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-sort/spikenorm/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-sort-allsamples-allannotations-midpoint-spikenorm.tsv.gz
-        quant_data: ../viktorovskaya-mnase-seq/nucleosome_calling/regions/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-sort/spikenorm/spt6-1004-37C-v-WT-37C/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-sort-allannotations-integrated-spikenorm.tsv
+        quant_data: ../viktorovskaya-mnase-seq/nucleosome_quantification/regions/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-sort/spikenorm/spt6-1004-37C-v-WT-37C/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-sort-allannotations-integrated-spikenorm.tsv
         annotation: ../genome/annotations/Scer_transcripts_w_verifiedORFs-nonoverlapping-WT-TFIIB-sort.bed
         height: 8.5
         width: 17.4
     # MNase global occupancy and fuzziness quantification
     four_c:
-        wt_mnase_quant: ../viktorovskaya-mnase-seq/nucleosome_calling/spt6-1004-37C-v-WT-37C/spikenorm/pooled/nucleosome_calling_data_WT-37C.Fnor.smooth.positions.xls
-        spt6_mnase_quant: ../viktorovskaya-mnase-seq/nucleosome_calling/spt6-1004-37C-v-WT-37C/spikenorm/pooled/nucleosome_calling_data_spt6-1004-37C.Fnor.smooth.positions.xls
+        wt_mnase_quant: ../viktorovskaya-mnase-seq/nucleosome_quantification/spt6-1004-37C-v-WT-37C/spikenorm/pooled/nucleosome_quantification_data_WT-37C.Fnor.smooth.positions.xls
+        spt6_mnase_quant: ../viktorovskaya-mnase-seq/nucleosome_quantification/spt6-1004-37C-v-WT-37C/spikenorm/pooled/nucleosome_quantification_data_spt6-1004-37C.Fnor.smooth.positions.xls
         height: 4.25
         width: 6
     # MNase-seq browser shot and H3 ChIP-qPCR
@@ -227,9 +227,9 @@ figure_four:
         annotation: ../spt6-data-integration/browser-shots/VAM6/VAM6.bed
         height: 10
         width: 8
-    # MNase-seq scatterplots
-    supp_height: 20
+    supp_height: 19.2
     supp_width: 17.4
+    # MNase-seq scatterplots
     supp_a:
         mnase_data: ../viktorovskaya-mnase-seq/coverage/spikenorm/union-bedgraph-window-75-spikenorm.tsv.gz
         height: 6
@@ -243,6 +243,17 @@ figure_four:
             - ../genome/annotations/verified-transcripts-nonoverlapping-NETseq-quintiles-plusonenucdyad/Scer_transcripts_w_verifiedORFs-nonoverlapping-plusone-nucdyad-NETseq-quintile-3.bed
             - ../genome/annotations/verified-transcripts-nonoverlapping-NETseq-quintiles-plusonenucdyad/Scer_transcripts_w_verifiedORFs-nonoverlapping-plusone-nucdyad-NETseq-quintile-4.bed
             - ../genome/annotations/verified-transcripts-nonoverlapping-NETseq-quintiles-plusonenucdyad/Scer_transcripts_w_verifiedORFs-nonoverlapping-plusone-nucdyad-NETseq-quintile-5.bed
+        height: 8
+        width: 8
+    # MNase metagenes by TFIIB levels
+    supp_b_extra:
+        mnase_data: ../viktorovskaya-mnase-seq/datavis/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-quintiles/spikenorm/verified-transcripts-nonoverlapping-plusonenuc-TFIIB-quintiles-allsamples-allannotations-midpoint-spikenorm.tsv.gz
+        annotation:
+            - ../genome/annotations/verified-transcripts-nonoverlapping-TFIIB-quintiles-plusonenucdyad/Scer_transcripts_w_verifiedORFs-nonoverlapping-TFIIB-sort-plusone-nucdyad-quintile-1.bed
+            - ../genome/annotations/verified-transcripts-nonoverlapping-TFIIB-quintiles-plusonenucdyad/Scer_transcripts_w_verifiedORFs-nonoverlapping-TFIIB-sort-plusone-nucdyad-quintile-2.bed
+            - ../genome/annotations/verified-transcripts-nonoverlapping-TFIIB-quintiles-plusonenucdyad/Scer_transcripts_w_verifiedORFs-nonoverlapping-TFIIB-sort-plusone-nucdyad-quintile-3.bed
+            - ../genome/annotations/verified-transcripts-nonoverlapping-TFIIB-quintiles-plusonenucdyad/Scer_transcripts_w_verifiedORFs-nonoverlapping-TFIIB-sort-plusone-nucdyad-quintile-4.bed
+            - ../genome/annotations/verified-transcripts-nonoverlapping-TFIIB-quintiles-plusonenucdyad/Scer_transcripts_w_verifiedORFs-nonoverlapping-TFIIB-sort-plusone-nucdyad-quintile-5.bed
         height: 8
         width: 8
     supp_c:
@@ -285,6 +296,11 @@ figure_five:
         tata_intragenic: ../motif_analysis_tata/comparisons/all-intragenic-v-random/all-intragenic-v-random_condition_allFIMOresults.tsv.gz
         tata_random: ../motif_analysis_tata/comparisons/all-intragenic-v-random/all-intragenic-v-random_control_allFIMOresults.tsv.gz
         height: 4.5
+        width: 8
+    five_d_extra:
+        fimo_results: ../motif_analysis_tata/comparisons/all-intragenic-v-random/all-intragenic-v-random_condition_allFIMOresults.tsv.gz
+        tss_results: ../tss-seq/diff_exp/spt6-1004-37C-v-WT-37C/spikenorm/intragenic/spt6-1004-37C-v-WT-37C_tss-seq-spikenorm-diffexp-results-intragenic-up.tsv
+        height: 8
         width: 8
     five_e:
         all_motif_path: ../motif_analysis_allmotifs/comparisons/all-intragenic-v-random/all-intragenic-v-random_motif-enrichment.tsv
