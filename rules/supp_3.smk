@@ -16,7 +16,7 @@ rule supp_three_a:
     params:
         height = eval(str(config["figure_three"]["supp_a"]["height"])),
         width = eval(str(config["figure_three"]["supp_a"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_supp3A.R"
 
@@ -35,7 +35,7 @@ rule supp_three_b:
     params:
         height = eval(str(config["figure_three"]["supp_b"]["height"])),
         width = eval(str(config["figure_three"]["supp_b"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_supp3B.R"
 
@@ -53,7 +53,7 @@ rule supp_three_c:
     params:
         height = eval(str(config["figure_three"]["supp_c"]["height"])),
         width = eval(str(config["figure_three"]["supp_c"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_supp3C.R"
 
@@ -70,7 +70,7 @@ rule assemble_supp_three:
     params:
         height = eval(str(config["figure_three"]["supp_height"])),
         width = eval(str(config["figure_three"]["supp_width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_supp3.R"
 

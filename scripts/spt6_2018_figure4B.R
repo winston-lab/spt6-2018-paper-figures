@@ -116,6 +116,8 @@ main = function(theme_spec,
                                       nuc_center <= feat_end-feat_start) %>%
                           mutate(label = "log[2](italic(\"spt6-1004\")/WT)"),
                        aes(x=nuc_center, y=index, width=100, fill=fuzziness_lfc)) +
+        annotate(geom="rect", xmin=-400, xmax=1007, ymin=0, ymax=max(quant_df[["index"]]),
+                 fill="white", size=0) +
         geom_tile(linetype="blank") +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
                            labels = function(x){case_when(x==0 ~ "+1 dyad",
@@ -135,6 +137,9 @@ main = function(theme_spec,
         theme_heatmap +
         theme(strip.text = element_text(size=7, color="black", face="plain", margin=margin(0,0,-4,0,"pt")),
               legend.box.margin = margin(0, 0, -3, 0, "pt"),
+              panel.grid.major.x = element_line(color="grey50"),
+              panel.grid.minor.x = element_line(color="grey50"),
+              panel.grid.major.y = element_line(color="grey80"),
               plot.margin = margin(4,4,-10,0,"pt" ))
 
     occ_plot = ggplot(data = quant_df %>%
@@ -143,6 +148,8 @@ main = function(theme_spec,
                                      nuc_center <= feat_end-feat_start) %>%
                           mutate(label = "log[2](italic(\"spt6-1004\")/WT)"),
                       aes(x=nuc_center, y=index, width=100, fill=summit_lfc)) +
+        annotate(geom="rect", xmin=-400, xmax=1007, ymin=0, ymax=max(quant_df[["index"]]),
+                 fill="white", size=0) +
         geom_tile(linetype="blank") +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
                            labels = function(x){case_when(x==0 ~ "+1 dyad",
@@ -162,6 +169,9 @@ main = function(theme_spec,
         theme_heatmap +
         theme(strip.text = element_text(size=7, color="black", face="plain", margin=margin(0,0,-4,0,"pt")),
               legend.box.margin = margin(0, 0, -3, 0, "pt"),
+              panel.grid.major.x = element_line(color="grey50"),
+              panel.grid.minor.x = element_line(color="grey50"),
+              panel.grid.major.y = element_line(color="grey80"),
               plot.margin = margin(4,4,-10,0,"pt" ))
 
     fig_four_b = plot_grid(netseq_plot, mnase_plot, occ_plot, fuzz_plot, align="h", axis="tb", nrow=1,

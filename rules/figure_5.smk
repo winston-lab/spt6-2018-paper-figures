@@ -19,7 +19,7 @@ rule figure_five_a:
     params:
         height = eval(str(config["figure_five"]["five_a"]["height"])),
         width = eval(str(config["figure_five"]["five_a"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure5A.R"
 
@@ -39,7 +39,7 @@ rule figure_five_b:
     params:
         height = eval(str(config["figure_five"]["five_b"]["height"])),
         width = eval(str(config["figure_five"]["five_b"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure5B.R"
 
@@ -56,7 +56,7 @@ rule figure_five_c:
     params:
         height = eval(str(config["figure_five"]["five_c"]["height"])),
         width = eval(str(config["figure_five"]["five_c"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure5C.R"
 
@@ -75,9 +75,9 @@ rule figure_five_d:
     params:
         height = eval(str(config["figure_five"]["five_d"]["height"])),
         width = eval(str(config["figure_five"]["five_d"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
-        "../scripts/spt6_2018_figure5Dextra.R"
+        "../scripts/spt6_2018_figure5D.R"
 
 rule figure_five_d_extra:
     input:
@@ -92,7 +92,7 @@ rule figure_five_d_extra:
     params:
         height = eval(str(config["figure_five"]["five_d_extra"]["height"])),
         width = eval(str(config["figure_five"]["five_d_extra"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure5Dextra.R"
 
@@ -109,7 +109,7 @@ rule figure_five_e:
     params:
         height = eval(str(config["figure_five"]["five_e"]["height"])),
         width = eval(str(config["figure_five"]["five_e"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure5E.R"
 
@@ -128,7 +128,7 @@ rule assemble_figure_five:
     params:
         height = eval(str(config["figure_five"]["height"])),
         width = eval(str(config["figure_five"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure5.R"
 

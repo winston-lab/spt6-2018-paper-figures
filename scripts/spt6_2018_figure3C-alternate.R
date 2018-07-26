@@ -32,7 +32,7 @@ main = function(theme_spec, netseq_data, annotation,
                                           "italic(\"spt6-1004\")*\",\" ~ 30*degree*C",
                                           "italic(\"spt6-1004\")*\",\" ~ 37*degree*C")),
                   aes(label=group),
-                  x=0.01, y=0.05, hjust=0, size=7/72*25.4, parse=TRUE,
+                  x=0.01, y=0.05, hjust=0, vjust=1, size=7/72*25.4, parse=TRUE,
                   label.r = unit(0,"pt"), label.padding = unit(2, "pt"), label.size=NA) +
         scale_x_continuous(expand = c(0,0),
                            breaks = c(0, 1, 2),

@@ -18,7 +18,7 @@ rule figure_one_a:
     params:
         height = eval(str(config["figure_one"]["one_a"]["height"])),
         width = eval(str(config["figure_one"]["one_a"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure1A.R"
 
@@ -36,7 +36,7 @@ rule figure_one_b:
     params:
         height = eval(str(config["figure_one"]["one_b"]["height"])),
         width = eval(str(config["figure_one"]["one_b"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure1B.R"
 
@@ -56,7 +56,7 @@ rule figure_one_c:
     params:
         height = eval(str(config["figure_one"]["one_c"]["height"])),
         width = eval(str(config["figure_one"]["one_c"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure1C.R"
 
@@ -79,7 +79,7 @@ rule figure_one_d:
     params:
         height = eval(str(config["figure_one"]["one_d"]["height"])),
         width = eval(str(config["figure_one"]["one_d"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure1D.R"
 
@@ -97,7 +97,7 @@ rule assemble_figure_one:
     params:
         height = eval(str(config["figure_one"]["height"])),
         width = eval(str(config["figure_one"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure1.R"
 

@@ -16,7 +16,7 @@ rule figure_four_a:
     params:
         height = eval(str(config["figure_four"]["four_a"]["height"])),
         width = eval(str(config["figure_four"]["four_a"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure4A.R"
 
@@ -38,7 +38,7 @@ rule figure_four_b:
         height = eval(str(config["figure_four"]["four_b"]["height"])),
         width = eval(str(config["figure_four"]["four_b"]["width"])),
         assay = "NET-seq"
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure4B.R"
 
@@ -60,7 +60,7 @@ rule figure_four_b_extra:
         height = eval(str(config["figure_four"]["four_b"]["height"])),
         width = eval(str(config["figure_four"]["four_b"]["width"])),
         assay = "TFIIB"
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure4B.R"
 
@@ -78,7 +78,7 @@ rule figure_four_c:
     params:
         height = eval(str(config["figure_four"]["four_c"]["height"])),
         width = eval(str(config["figure_four"]["four_c"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure4C.R"
 
@@ -98,7 +98,7 @@ rule figure_four_d:
     params:
         height = eval(str(config["figure_four"]["four_d"]["height"])),
         width = eval(str(config["figure_four"]["four_d"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure4D.R"
 
@@ -116,7 +116,7 @@ rule assemble_figure_four:
     params:
         height = eval(str(config["figure_four"]["height"])),
         width = eval(str(config["figure_four"]["width"])),
-    conda: "../envs/tidyverse.yaml"
+    conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure4.R"
 

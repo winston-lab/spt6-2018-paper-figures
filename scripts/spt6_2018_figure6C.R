@@ -242,7 +242,8 @@ main = function(theme_spec,
                  aes(x=interaction(temperature, strain) %>%
                          ordered(levels = c("30.+DMSO", "30.+IAA", "37.+DMSO", "37.+IAA")),
                      y=mean, group=time),
-                 fill = "grey90",
+                 # fill = "grey90",
+                 fill = NA,
                  position = position_dodge(width=0.5),
                  width=0.4, size=0.2,
                  color="black") +
@@ -265,7 +266,7 @@ main = function(theme_spec,
                        y=value, color=factor(time)),
                    position = position_jitterdodge(dodge.width=0.5,
                                                    jitter.width= 0.3),
-                   size = 0.7) +
+                   size = 0.7, alpha=0.9) +
         geom_point(data = placeholder,
                    aes(x=interaction(temperature, strain) %>%
                            ordered(levels = c("30.+DMSO", "30.+IAA", "37.+DMSO", "37.+IAA")),
