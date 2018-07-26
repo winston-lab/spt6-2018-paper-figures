@@ -24,8 +24,7 @@ main = function(one_a, one_b, one_c, one_d,
     load(one_c)
     load(one_d)
 
-    fig_one = arrangeGrob(fig_one_a, fig_one_b, fig_one_c, fig_one_d, layout_matrix=layout) %>%
-        arrangeGrob(top=textGrob(label = "Figure 1", gp=gpar(fontsize=12)))
+    fig_one = arrangeGrob(fig_one_a, fig_one_b, fig_one_c, fig_one_d, layout_matrix=layout)
 
     ggsave(svg_out, plot=fig_one, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_one, width=fig_width, height=fig_height, units="cm")

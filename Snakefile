@@ -70,7 +70,24 @@ rule all:
         "figure6/figure6B/spt6_2018_figure6B-MNase-at-genic-TSSs.png",
         "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-RTqPCR.png",
         "figure6/spt6_2018_figure6-genic-promoters.png",
+        "spt6_2018_main_figures.pdf",
         "spt6_2018_supp_figures.pdf"
+
+rule compile_main_figures:
+    input:
+        "figure1/spt6_2018_figure1-TSS-seq.pdf",
+        "figure2/spt6_2018_figure2-TFIIB-ChIP-nexus.pdf",
+        "figure3/spt6_2018_figure3-NET-seq.pdf",
+        "figure4/spt6_2018_figure4-MNase-seq.pdf",
+        "figure5/spt6_2018_figure5-intragenic-promoters.pdf",
+        "figure6/spt6_2018_figure6-genic-promoters.pdf",
+        tex = "spt6_2018_main_figures.tex"
+    output:
+        "spt6_2018_main_figures.pdf"
+    conda: "envs/latex.yaml"
+    shell: """
+        tectonic {input.tex}
+        """
 
 rule render_supplemental_legends:
     input:
