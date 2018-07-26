@@ -62,7 +62,8 @@ main = function(theme_spec, sense_netseq_data, antisense_netseq_data,
                            name = paste(n_distinct(df[["sorted_index"]]), "nonoverlapping coding genes"),
                            expand = c(0,0)) +
         theme_heatmap +
-        theme(plot.margin = margin(0, -20, 0, 0, "pt"))
+        theme(axis.ticks.x = element_line(color="black"),
+              plot.margin = margin(0, -22, 0, 0, "pt"))
 
     supp_three_b %<>% add_label("B")
 
