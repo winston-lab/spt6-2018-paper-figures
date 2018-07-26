@@ -2,6 +2,17 @@
 
 configfile: "config.yaml"
 
+include: "rules/figure_1.smk"
+include: "rules/supp_1.smk"
+include: "rules/figure_2.smk"
+include: "rules/supp_2.smk"
+include: "rules/figure_3.smk"
+include: "rules/supp_3.smk"
+include: "rules/figure_4.smk"
+include: "rules/supp_4.smk"
+include: "rules/figure_5.smk"
+include: "rules/figure_6.smk"
+
 rule all:
     input:
         "figure1/figure1A/spt6_2018_figure1A-TSS-seq-heatmaps.png",
@@ -59,15 +70,20 @@ rule all:
         "figure6/figure6B/spt6_2018_figure6B-MNase-at-genic-TSSs.png",
         "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-RTqPCR.png",
         "figure6/spt6_2018_figure6-genic-promoters.png",
+        "spt6_2018_supp_figures.pdf"
 
-include: "rules/figure_1.smk"
-include: "rules/supp_1.smk"
-include: "rules/figure_2.smk"
-include: "rules/supp_2.smk"
-include: "rules/figure_3.smk"
-include: "rules/supp_3.smk"
-include: "rules/figure_4.smk"
-include: "rules/supp_4.smk"
-include: "rules/figure_5.smk"
-include: "rules/figure_6.smk"
+rule render_supplemental_legends:
+    input:
+        "figure1/spt6_2018_supp1-TSS-seq.pdf",
+        "figure2/spt6_2018_supp2-TFIIB-ChIP-nexus.pdf",
+        "figure3/spt6_2018_supp3-NET-seq.pdf",
+        "figure4/spt6_2018_supp4-MNase-seq.pdf",
+        tex = "spt6_2018_supp_figures.tex"
+    output:
+        "spt6_2018_supp_figures.pdf"
+    conda: "envs/latex.yaml"
+    shell: """
+        tectonic {input.tex}
+        """
+
 
