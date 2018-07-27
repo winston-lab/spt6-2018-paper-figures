@@ -88,28 +88,16 @@ figure_two:
         width: 8
     # TFIIB browser view and ChIP-qPCR
     two_c:
-        vam6_tfiib_nexus_path: ../spt6-data-integration/browser-shots/VAM6/VAM6_TFIIB-ChIP-nexus-protection.tsv.gz
-        # vam6_tfiib_plus: ../spt6-data-integration/browser-shots/VAM6/VAM6_TFIIB-ChIP-nexus-sense.tsv.gz
-        # vam6_tfiib_minus: ../spt6-data-integration/browser-shots/VAM6/VAM6_TFIIB-ChIP-nexus-antisense.tsv.gz
+        avt2_tfiib_nexus_path: ../spt6-data-integration/browser-shots/AVT2/AVT2_TFIIB-ChIP-nexus-protection.tsv.gz
+        # vam6_tfiib_plus: ../spt6-data-integration/browser-shots/AVT2/AVT2_TFIIB-ChIP-nexus-sense.tsv.gz
+        # vam6_tfiib_minus: ../spt6-data-integration/browser-shots/AVT2/AVT2_TFIIB-ChIP-nexus-antisense.tsv.gz
         flo8_tfiib_nexus_path: ../spt6-data-integration/browser-shots/FLO8/FLO8_TFIIB-ChIP-nexus-protection.tsv.gz
-        vam6_tss_sense_path: ../spt6-data-integration/browser-shots/VAM6/VAM6_TSS-seq-sense.tsv.gz
+        avt2_tss_sense_path: ../spt6-data-integration/browser-shots/AVT2/AVT2_TSS-seq-sense.tsv.gz
         flo8_tss_sense_path: ../spt6-data-integration/browser-shots/FLO8/FLO8_TSS-seq-sense.tsv.gz
         qpcr_data: ../small-data/tfiib-chip-qpcr/tfiib-qpcr.tsv
         annotation:
-            - ../spt6-data-integration/browser-shots/VAM6/VAM6.bed
-            - ../spt6-data-integration/browser-shots/FLO8/FLO8.bed
-        height: 17/2
-        width: 17.4*(2/3)
-    # TFIIB browser view and ChIP-qPCR
-    two_extra:
-        avt2_tfiib_nexus_path: ../spt6-data-integration/browser-shots/AVT2/AVT2_TFIIB-ChIP-nexus-protection.tsv.gz
-        ypt52_tfiib_nexus_path: ../spt6-data-integration/browser-shots/YPT52/YPT52_TFIIB-ChIP-nexus-protection.tsv.gz
-        avt2_tss_sense_path: ../spt6-data-integration/browser-shots/AVT2/AVT2_TSS-seq-sense.tsv.gz
-        ypt52_tss_sense_path: ../spt6-data-integration/browser-shots/YPT52/YPT52_TSS-seq-sense.tsv.gz
-        qpcr_data: ../small-data/tfiib-chip-qpcr/tfiib-qpcr.tsv
-        annotation:
             - ../spt6-data-integration/browser-shots/AVT2/AVT2.bed
-            - ../spt6-data-integration/browser-shots/YPT52/YPT52.bed
+            - ../spt6-data-integration/browser-shots/FLO8/FLO8.bed
         height: 17/2
         width: 17.4*(2/3)
     # TSS-seq vs TFIIB fold-change
@@ -119,7 +107,7 @@ figure_two:
         antisense: ../tss-v-tfiib-nexus/diff_binding/spt6-1004-37C-v-WT-37C-tfiib-window-results-antisense.tsv
         width: 14
         height: 6
-    supp_height: 19.2
+    supp_height: 18.9
     supp_width: 17.4
     # TFIIB scatterplots
     supp_a:
@@ -144,6 +132,18 @@ figure_two:
         image: ../small-data/tfiib-western/tfiib_western_image.png
         height: 7
         width: 5
+    # TFIIB browser view and ChIP-qPCR
+    supp_e:
+        vam6_tfiib_nexus_path: ../spt6-data-integration/browser-shots/VAM6/VAM6_TFIIB-ChIP-nexus-protection.tsv.gz
+        ypt52_tfiib_nexus_path: ../spt6-data-integration/browser-shots/YPT52/YPT52_TFIIB-ChIP-nexus-protection.tsv.gz
+        vam6_tss_sense_path: ../spt6-data-integration/browser-shots/VAM6/VAM6_TSS-seq-sense.tsv.gz
+        ypt52_tss_sense_path: ../spt6-data-integration/browser-shots/YPT52/YPT52_TSS-seq-sense.tsv.gz
+        qpcr_data: ../small-data/tfiib-chip-qpcr/tfiib-qpcr.tsv
+        annotation:
+            - ../spt6-data-integration/browser-shots/VAM6/VAM6.bed
+            - ../spt6-data-integration/browser-shots/YPT52/YPT52.bed
+        height: 17/2
+        width: 17.4*(2/3)
 
 figure_three:
     height: 15

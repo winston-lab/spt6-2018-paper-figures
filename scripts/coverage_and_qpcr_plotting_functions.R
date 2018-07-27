@@ -66,6 +66,7 @@ plot_seq_data = function(qpcr_df, seqdata_df, title, show_y_title=TRUE, line_typ
         ggtitle(if(show_title){title} else {""}) +
         theme_default +
         theme(legend.position = if(show_legend){c(0.97, 0.75)} else{"none"},
+              legend.key.width = unit(14, "pt"),
               legend.justification = c(1, 0.5),
               axis.title.x = element_blank(),
               axis.title.y = element_text(vjust=0.5, margin=margin(0,0,0,0,"pt")),
@@ -135,6 +136,7 @@ plot_qpcr = function(qpcr_df, seqdata_df, title, show_y_title=TRUE,
         scale_color_ptol(labels=c("WT", bquote(italic("spt6-1004")))) +
         scale_x_continuous(limits = c(min(seqdata_df[["position"]]), max(seqdata_df[["position"]])),
                            expand = c(0,0),
+                           breaks = scales::pretty_breaks(n=3),
                            labels = function(x)case_when(x==0 ~ "TSS",
                                                          x==xunits_tick ~ paste0(x, "kb"),
                                                          TRUE ~ as.character(x))) +

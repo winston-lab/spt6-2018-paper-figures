@@ -42,47 +42,24 @@ rule figure_two_b:
 rule figure_two_c:
     input:
         plot_functions = "scripts/coverage_and_qpcr_plotting_functions.R",
-        vam6_tfiib_nexus_path = config["figure_two"]["two_c"]["vam6_tfiib_nexus_path"],
+        avt2_tfiib_nexus_path = config["figure_two"]["two_c"]["avt2_tfiib_nexus_path"],
         flo8_tfiib_nexus_path = config["figure_two"]["two_c"]["flo8_tfiib_nexus_path"],
-        vam6_tss_sense_path = config["figure_two"]["two_c"]["vam6_tss_sense_path"],
+        avt2_tss_sense_path = config["figure_two"]["two_c"]["avt2_tss_sense_path"],
         flo8_tss_sense_path = config["figure_two"]["two_c"]["flo8_tss_sense_path"],
         qpcr_data = config["figure_two"]["two_c"]["qpcr_data"],
         annotation = config["figure_two"]["two_c"]["annotation"],
         theme = config["theme_spec"]
     output:
-        svg = "figure2/figure2C/spt6_2018_figure2C-VAM6-FLO8-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.svg",
-        pdf = "figure2/figure2C/spt6_2018_figure2C-VAM6-FLO8-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.pdf",
-        png = "figure2/figure2C/spt6_2018_figure2C-VAM6-FLO8-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.png",
-        grob = "figure2/figure2C/spt6_2018_figure2C-VAM6-FLO8-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.Rdata",
+        svg = "figure2/figure2C/spt6_2018_figure2C-FLO8-AVT2-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.svg",
+        pdf = "figure2/figure2C/spt6_2018_figure2C-FLO8-AVT2-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.pdf",
+        png = "figure2/figure2C/spt6_2018_figure2C-FLO8-AVT2-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.png",
+        grob = "figure2/figure2C/spt6_2018_figure2C-FLO8-AVT2-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.Rdata",
     params:
         height = eval(str(config["figure_two"]["two_c"]["height"])),
         width = eval(str(config["figure_two"]["two_c"]["width"])),
     conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure2C.R"
-
-#TFIIB browser view and ChIP-qPCR
-rule figure_two_extra:
-    input:
-        plot_functions = "scripts/coverage_and_qpcr_plotting_functions.R",
-        avt2_tfiib_nexus_path = config["figure_two"]["two_extra"]["avt2_tfiib_nexus_path"],
-        ypt52_tfiib_nexus_path = config["figure_two"]["two_extra"]["ypt52_tfiib_nexus_path"],
-        avt2_tss_sense_path = config["figure_two"]["two_extra"]["avt2_tss_sense_path"],
-        ypt52_tss_sense_path = config["figure_two"]["two_extra"]["ypt52_tss_sense_path"],
-        qpcr_data = config["figure_two"]["two_extra"]["qpcr_data"],
-        annotation = config["figure_two"]["two_extra"]["annotation"],
-        theme = config["theme_spec"]
-    output:
-        svg = "figure2/figure2extra/spt6_2018_figure2extra-AVT2-YPT52-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.svg",
-        pdf = "figure2/figure2extra/spt6_2018_figure2extra-AVT2-YPT52-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.pdf",
-        png = "figure2/figure2extra/spt6_2018_figure2extra-AVT2-YPT52-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.png",
-        grob = "figure2/figure2extra/spt6_2018_figure2extra-AVT2-YPT52-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.Rdata",
-    params:
-        height = eval(str(config["figure_two"]["two_extra"]["height"])),
-        width = eval(str(config["figure_two"]["two_extra"]["width"])),
-    conda: "../envs/plot.yaml"
-    script:
-        "../scripts/spt6_2018_AVT2_YPT52_TFIIB-ChIP-qPCR.R"
 
 # TSS-seq vs TFIIB fold-change
 rule figure_two_d:
@@ -107,7 +84,7 @@ rule assemble_figure_two:
     input:
         two_a = "figure2/figure2A/spt6_2018_figure2A-TFIIB-ChIPnexus-heatmaps.Rdata",
         two_b = "figure2/figure2B/spt6_2018_figure2B-SSA4-TFIIB-ChIP-nexus.Rdata",
-        two_c = "figure2/figure2C/spt6_2018_figure2C-VAM6-FLO8-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.Rdata",
+        two_c = "figure2/figure2C/spt6_2018_figure2C-FLO8-AVT2-sense-TSS-seq-TFIIB-ChIPnexus-and-qPCR.Rdata",
         two_d = "figure2/figure2D/spt6_2018_figure2D-TSS-seq-v-TFIIB-ChIPnexus-foldchange.Rdata",
         # two_e = "figure2/figure2E/spt6_2018_figure2E-TSS-seq-and-TFIIB-levels.Rdata",
     output:

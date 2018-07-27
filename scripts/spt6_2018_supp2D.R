@@ -40,11 +40,11 @@ main = function(theme_spec, data_path, blot_image,
                       aes(x=group, ymin=group_mean_scaled-group_sd,
                           ymax=group_mean_scaled+group_sd), alpha=0.9) +
         geom_jitter(data = df, aes(x=group, y=spikenorm_scaled),
-                    width=0.2, size=1, alpha=0.9) +
+                    width=0.2, size=1, alpha=0.8) +
         geom_text(data = summary_df, parse=TRUE,
                   aes(x=group, y=(group_mean_scaled+group_sd)+0.05,
                       label = paste(round(group_mean_scaled,2), "%+-%", round(group_sd, 2))),
-                  size=7/72*25.4) +
+                  size=6/72*25.4) +
         scale_fill_ptol(guide=FALSE) +
         scale_x_discrete(labels = c("WT", bquote(italic("spt6-1004")))) +
         scale_y_continuous(limits = c(0, max_y),
@@ -54,33 +54,37 @@ main = function(theme_spec, data_path, blot_image,
         # ggtitle("TFIIB levels by Western blot",
         #         subtitle = "normalized to Dst1 spike-in") +
         theme_default +
-        theme(axis.text.x = element_text(margin=margin(t=3, unit="pt")),
+        theme(axis.text.x = element_text(margin=margin(t=0, unit="pt")),
+              axis.text.y = element_text(margin=margin(r=-2, unit="pt")),
               axis.title.x = element_blank(),
+              axis.title.y = element_text(vjust=0, margin=margin(r=0, unit="pt")),
+              axis.ticks = element_blank(),
               panel.border = element_blank(),
-              panel.grid.major.x = element_blank())
+              panel.grid.major.x = element_blank(),
+              plot.margin = margin(0,2,0,-16,"pt"))
 
     blot = rasterGrob(readPNG(blot_image),
                       width=0.5, height=0.7,
-                      x = 0.34, y = 0.5,
+                      x = 0.34, y = 0.45,
                       hjust=0)
     outline = rectGrob(width=0.5, height=0.7,
-                       x=0.34, y=0.5, hjust=0,
+                       x=0.34, y=0.45, hjust=0,
                        gp = gpar(lwd=1, fill=NA))
     tfiib_label = textGrob(label = "TFIIB-TAP",
-                           x=0.32, y=0.535, hjust=1,
+                           x=0.32, y=0.485, hjust=1,
                            gp = gpar(fontsize=7))
     dst1_label = textGrob(label = "Dst1-Myc",
-                           x=0.32, y=0.465, hjust=1,
+                           x=0.32, y=0.415, hjust=1,
                            gp = gpar(fontsize=7))
     wt_lane_label = textGrob(label = "WT",
-                             x = 0.47, y=0.87, vjust=0,
+                             x = 0.47, y=0.82, vjust=0,
                              gp =gpar(fontsize=7))
     spt6_lane_label = textGrob(label = expression(italic("spt6-1004")),
-                             x = 0.70, y=0.862, vjust=0,
+                             x = 0.70, y=0.812, vjust=0,
                              gp =gpar(fontsize=7))
-    temp_line = linesGrob(x=c(0.35, 0.82), y=c(0.92, 0.92))
+    temp_line = linesGrob(x=c(0.35, 0.82), y=c(0.89, 0.89))
     temp_label = textGrob(label = expression(37*degree*C),
-                          x=0.59, y=0.95,
+                          x=0.59, y=0.93,
                           gp = gpar(fontsize=7))
 
     western = gTree(children = gList(blot, outline,
@@ -88,7 +92,7 @@ main = function(theme_spec, data_path, blot_image,
                                      wt_lane_label, spt6_lane_label,
                                      temp_line, temp_label))
 
-    supp_two_d = arrangeGrob(western, barplot, nrow=1, widths=c(1,1)) %>%
+    supp_two_d = arrangeGrob(western, barplot, nrow=1, widths=c(2,1)) %>%
         add_label("D")
 
     ggsave(svg_out, plot=supp_two_d, width=fig_width, height=fig_height, units="cm")
