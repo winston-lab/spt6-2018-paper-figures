@@ -54,7 +54,9 @@ main = function(theme_spec,
                   fill="white", label.size=NA, label.r=unit(0,"pt"), label.padding=unit(2,"pt"),
                   x=-0.5, y=max(df[["high"]]*0.8), size=7/72*25.4, parse=TRUE, hjust=0, vjust=1) +
         scale_x_continuous(breaks = c(-0.4, 0, 0.4),
-                           labels = function(x){if_else(x==0, "TSS", as.character(x))},
+                           labels = function(x){case_when(x==0 ~ "TSS",
+                                                          x==0.4 ~ "0.4kb",
+                                                          TRUE ~ as.character(x))},
                            name = NULL,
                            expand = c(0,0)) +
         scale_y_continuous(limits = c(0, max(df[["high"]])*1.05),

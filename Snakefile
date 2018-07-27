@@ -13,6 +13,8 @@ include: "rules/supp_4.smk"
 include: "rules/figure_5.smk"
 include: "rules/figure_6.smk"
 
+localrules: all
+
 rule all:
     input:
         "figure1/figure1A/spt6_2018_figure1A-TSS-seq-heatmaps.png",
@@ -102,5 +104,4 @@ rule render_supplemental_legends:
     shell: """
         tectonic {input.tex}
         """
-
 

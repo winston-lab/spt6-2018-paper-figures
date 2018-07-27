@@ -10,7 +10,7 @@ main = function(theme_spec, scatterplot_script, tss_data,
                               sample_list = c("WT-37C-1", "WT-37C-2", "spt6-1004-37C-1", "spt6-1004-37C-2"),
                               pcount = 0.1,
                               genome_binsize = "10 nt bins",
-                              plot_binwidth = 0.07) %>%
+                              plot_binwidth = 0.055) %>%
         add_label("A")
 
     ggsave(svg_out, plot=supp_one_a, width=fig_width, height=fig_height, units="cm")

@@ -23,7 +23,7 @@ main = function(theme_spec, data_path,
     supp_one_c = ggplot(data = df, aes(x=tss+1, y=rna+1)) +
         stat_bin_hex(geom="point", aes(color=..count..),
                      binwidth=c(.04,.04), alpha=0.7, size=0.1) +
-        annotate(geom="label", x=1e4, y=1e1, label= paste("rho ==", cor),
+        annotate(geom="label", x=5e3, y=1e1, label= paste("rho ==", cor),
                  size=7/72*25.4, label.r=unit(0,"pt"), label.padding=unit(2,"pt"),
                  label.size=NA, parse=TRUE) +
         scale_color_viridis(option="inferno", guide=FALSE) +

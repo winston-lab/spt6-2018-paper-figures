@@ -10,12 +10,13 @@ main = function(theme_spec, plot_functions,
     sample_list = c("WT-37C-1", "spt6-1004-37C-1", "spt6-1004-37C-2")
 
     vam6_mnase_df = import(vam6_mnase_path, sample_list=sample_list)
-    vam6_qpcr_df = build_qpcr_df(qpcr_data_path, gene_id="VAM6", norm="pma1+") %>%
-        mutate(value = value/100)
+    vam6_qpcr_df = build_qpcr_df(qpcr_data_path, gene_id="VAM6", norm="pma1+")
     vam6_mnase_plot = plot_seq_data(qpcr_df = vam6_qpcr_df,
                                     seqdata_df = vam6_mnase_df,
                                     title = "smoothed MNase-seq dyad signal") +
-        theme(axis.text.x = element_text(size=7, color="black"))
+        theme(axis.text.x = element_text(size=7,
+                                         color="black",
+                                         margin=margin(1,0,0,0,"pt")))
     vam6_qpcr_plot = plot_qpcr(qpcr_df = vam6_qpcr_df, seqdata_df = vam6_mnase_df,
                                title = "histone H3 ChIP-qPCR")
     vam6_diagram = plot_gene_diagram(qpcr_df = vam6_qpcr_df,

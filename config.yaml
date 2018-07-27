@@ -59,12 +59,12 @@ figure_one:
         orf_anno: ../genome/annotations/Scer_nondubious_ORFs.bed
         height: 4
         width: 4
-    # bvenn of genes with intragenic: us, cheung08, uwimana17
     supp_e:
         diffexp_results: ../tss-seq/diff_exp/spt6-1004-37C-v-WT-37C/spikenorm/intragenic/spt6-1004-37C-v-WT-37C_tss-seq-spikenorm-diffexp-results-intragenic-up.tsv
         positions: ../tss-seq/diff_exp/spt6-1004-37C-v-WT-37C/spikenorm/intragenic/position_bias/spt6-1004-37C-v-WT-37C_tss-seq-spikenorm-intragenic-up-RELATIVE.tsv
         height: 6
         width: 7
+    # bvenn of genes with intragenic: us, cheung08, uwimana17
     supp_f:
         common_names: ../other-datasets/spt6-intragenic-genes-comparison/Scer-sys-to-common-name.tsv
         cheung_data: ../other-datasets/cheung08/cheung08-S3.tsv
