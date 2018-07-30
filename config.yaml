@@ -270,10 +270,11 @@ figure_five:
         annotation:
             - ../cluster_intragenic_mnase/spt6-1004-37C-induced-intragenic-MNase-cluster-1.bed
             - ../cluster_intragenic_mnase/spt6-1004-37C-induced-intragenic-MNase-cluster-2.bed
-        mnase_data: ../spt6-data-integration/datavis/mnase-clustering/mnase-clustering_MNase-seq.tsv.gz
+            - ../spt6-data-integration/datavis/spt6-induced-intragenic-TSSs-MNase-clusters-v-genic/wt-genic_cluster-1.bed
+        mnase_data: ../spt6-data-integration/datavis/spt6-induced-intragenic-TSSs-MNase-clusters-v-genic/spt6-induced-intragenic-TSSs-MNase-clusters-v-genic_MNase-seq.tsv.gz
         # rnapii_data: ../spt6-data-integration/datavis/mnase-clustering/mnase-clustering_RNAPII-ChIP-nexus.tsv.gz
         # spt6_data: ../spt6-data-integration/datavis/mnase-clustering/mnase-clustering_Spt6-ChIP-nexus.tsv.gz
-        gc_data: ../spt6-data-integration/datavis/mnase-clustering/mnase-clustering_GC-pct.tsv.gz
+        gc_data: ../spt6-data-integration/datavis/spt6-induced-intragenic-TSSs-MNase-clusters-v-genic/spt6-induced-intragenic-TSSs-MNase-clusters-v-genic_GC-pct.tsv.gz
         height: 10
         width: 8
     five_b:

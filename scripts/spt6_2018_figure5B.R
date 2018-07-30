@@ -47,8 +47,12 @@ main = function(theme_spec,
                      position=position_dodge(width=0.6),
                      width=0.15, size=0.2,
                      outlier.size=0, outlier.stroke=0, notch=TRUE) +
-        scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
-        scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
+        scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004"))),
+                        guide=guide_legend(label.position="top",
+                                           label.hjust=0.5,
+                                           keywidth=unit(30, "pt"),
+                                           keyheight=unit(6, "pt"))) +
+        # scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         scale_x_discrete(expand=c(0,0)) +
         scale_y_log10(name = "normalized counts",
                       breaks = c(10, 1000),
@@ -57,11 +61,15 @@ main = function(theme_spec,
         theme_default +
         theme(axis.title.x = element_blank(),
               axis.text.x = element_blank(),
-              legend.position = c(0.53, 0.96),
-              legend.justification = c(0.5, 1),
+              # legend.position = c(0.53, 0.96),
+              legend.position = "top",
+              legend.justification = c(0.5, 0.5),
+              legend.box.margin = margin(0, 0, -10, 0, "pt"),
+              legend.text = element_text(margin = margin(b=0, unit="pt")),
               legend.key.width = unit(8, "pt"),
               panel.grid.major.x = element_blank(),
-              plot.margin = margin(0,11,-8,11/2,"pt"))
+              plot.title = element_text(size=7),
+              plot.margin = margin(0,11,4,11/2,"pt"))
 
     tfiib_plot = ggplot(data = tfiib_levels_df, aes(x=cluster, y=tfiib_levels+1)) +
         geom_violin(aes(fill=group),
@@ -80,12 +88,13 @@ main = function(theme_spec,
         ggtitle("TFIIB ChIP-nexus signal") +
         theme_default +
         theme(axis.title.x = element_blank(),
-              axis.text.x = element_text(size=9),
+              axis.text.x = element_text(size=7),
               legend.position = "none",
               panel.grid.major.x = element_blank(),
-              plot.margin = margin(0,11,2,11/2,"pt"))
+              plot.title = element_text(size=7),
+              plot.margin = margin(4,11,0,11/2,"pt"))
 
-    fig_five_b = plot_grid(tss_plot, tfiib_plot, ncol=1, align="vh", axis="trbl") %>%
+    fig_five_b = plot_grid(tss_plot, tfiib_plot, ncol=1, align="h", axis="rl", rel_heights = c(1.1,1)) %>%
         add_label("B")
 
     ggplot2::ggsave(svg_out, plot=fig_five_b, width=fig_width, height=fig_height, units="cm")

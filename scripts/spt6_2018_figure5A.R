@@ -30,8 +30,8 @@ metagene = function(df, assay, ylabel="", top=FALSE, bottom=FALSE){
                     alpha=if(bottom){0.15} else {0.2}, linetype='blank') +
         geom_line(data = df,
                   aes(x=position, y=mid, color=group),
-                  alpha=0.7) +
-        geom_label(data = tibble(label=assay, x=-0.495, y=max(df[["high"]])*1.02, anno_labeled="cluster 1 (1891 TSSs)"),
+                  alpha=0.8) +
+        geom_label(data = tibble(label=assay, x=-0.495, y=max(df[["high"]])*1.02, anno_labeled="intragenic cluster 1 (1891 TSSs)"),
                   aes(x=x, y=y, label=label),
                   hjust=0, vjust=1, size=9/72*25.4,
                   label.size=NA, label.padding = unit(1, "pt"), label.r=unit(0,"pt")) +
@@ -44,13 +44,26 @@ metagene = function(df, assay, ylabel="", top=FALSE, bottom=FALSE){
         scale_y_continuous(breaks = scales::pretty_breaks(n=3),
                            # expand = c(0.05, 0),
                            name = ylabel) +
-        scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
-        scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         theme_default +
-        theme(axis.title.x = element_blank(),
+        theme(legend.justification = c(0, 1),
+              legend.background = element_blank(),
+              legend.position = c(0.005, 0.90),
+              legend.key.width= unit(14, "pt"),
+              legend.key.height = unit(9, "pt"),
+              axis.title.x = element_blank(),
+              axis.title.y = element_text(hjust=0.5),
               panel.spacing.x = unit(10, "pt"),
               panel.grid = element_blank(),
-              plot.margin = margin(1,1,1,1,"pt"))
+              plot.margin = margin(0,1,0,1,"pt"))
+    if (assay != "GC%"){
+        plot = plot +
+            scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
+            scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004"))))
+    } else {
+        plot = plot +
+            scale_fill_manual(values="grey30") +
+            scale_color_manual(values="grey30")
+    }
     if (! bottom){
         plot = plot +
             theme(axis.text.x = element_blank(),
@@ -58,7 +71,7 @@ metagene = function(df, assay, ylabel="", top=FALSE, bottom=FALSE){
     }
     if (top){
         plot = plot +
-            theme(strip.text = element_text(size=9, color="black",
+            theme(strip.text = element_text(size=7, color="black",
                                             margin = margin(0,0,0,0)))
     } else {
         plot = plot +
@@ -80,10 +93,11 @@ main = function(theme_spec,
     mnase_df = import(mnase_data)
     # rnapii_df = import(rnapii_data, normalize=TRUE)
     # spt6_df = import(spt6_data, normalize=TRUE)
-    gc_df = import(gc_data)
+    gc_df = import(gc_data) %>%
+        filter(group=="WT")
 
     mnase_plot = metagene(mnase_df, assay="MNase-seq", ylabel="normalized dyad counts", top=TRUE)
-    gc_plot = metagene(gc_df, ylabel="%", assay="GC%", bottom=TRUE)
+    gc_plot = metagene(gc_df, ylabel="% (21bp)", assay="GC%", bottom=TRUE)
     # spt6_plot = metagene(spt6_df, ylabel="relative levels", assay="Spt6 ChIP-nexus")
     # rnapii_plot = metagene(rnapii_df, ylabel="relative levels", assay="RNAPII ChIP-nexus", bottom=TRUE)
 
