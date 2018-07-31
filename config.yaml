@@ -161,13 +161,13 @@ figure_three:
         annotation: ../genome/annotations/verified-transcripts-Spt6nexus-quintiles/verified-transcripts-Spt6nexus-levels.bed
         height: 4.5
         width: 8
-    # antisense scatterplots vs set2
-    three_c:
-        data_path: ../other-datasets/set2_spt6_netseq_antisense/antisense_window_signals/antisense-windows-allsamples.tsv.gz
-        height: 6
-        width: 10
+    # # antisense scatterplots vs set2
+    # three_c:
+    #     data_path: ../other-datasets/set2_spt6_netseq_antisense/antisense_window_signals/antisense-windows-allsamples.tsv.gz
+    #     height: 6
+    #     width: 10
     # antisense NET-seq metagenes
-    three_c_alt:
+    three_c:
         netseq_data: ../murawska-net-seq/datavis/verified-transcripts-nonoverlapping-scaled/libsizenorm/verified-transcripts-nonoverlapping-scaled-allsamples-allannotations-libsizenorm-5end-ANTISENSE.tsv.gz
         height: 6
         width: 8
@@ -185,7 +185,7 @@ figure_three:
         height: 5/12*17
         width: 6
     supp_c:
-        data_path: ../spt6-rnapii-norm-chipnexus/coverage/window-200-libsizenorm.tsv.gz
+        data_path: ../chipnexus-spt6-v-rnapii/qual_ctrl/scatter_plots/factor-chipnexus_union-bedgraph-libsizenorm-window-200-allsamples.tsv.gz
         height: "17/12*4"
         width: 12
 

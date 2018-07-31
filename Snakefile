@@ -43,7 +43,7 @@ rule all:
         "figure2/spt6_2018_supp2-TFIIB-ChIP-nexus.png",
         "figure3/figure3A/spt6_2018_figure3A-NET-seq-average-signal.png",
         "figure3/figure3B/spt6_2018_figure3B-NET-seq-foldchange-vs-Spt6-ChIP-nexus-levels.png",
-        "figure3/figure3C/spt6_2018_figure3C-spt6-v-set2-antisense-NET-seq.png",
+        # "figure3/figure3C/spt6_2018_figure3C-spt6-v-set2-antisense-NET-seq.png",
         "figure3/figure3C/spt6_2018_figure3C-spt6-v-set2-antisense-NET-seq-metagenes.png",
         "figure3/spt6_2018_figure3-NET-seq.png",
         "figure3/supp3A/spt6_2018_supp3A-NETseq-scatterplots.png",

@@ -39,27 +39,27 @@ rule figure_three_b:
     script:
         "../scripts/spt6_2018_figure3B.R"
 
-# antisense scatterplots vs set2
-rule figure_three_c:
-    input:
-        data_path = config["figure_three"]["three_c"]["data_path"],
-        theme = config["theme_spec"]
-    output:
-        svg = "figure3/figure3C/spt6_2018_figure3C-spt6-v-set2-antisense-NET-seq.svg",
-        pdf = "figure3/figure3C/spt6_2018_figure3C-spt6-v-set2-antisense-NET-seq.pdf",
-        png = "figure3/figure3C/spt6_2018_figure3C-spt6-v-set2-antisense-NET-seq.png",
-        grob = "figure3/figure3C/spt6_2018_figure3C-spt6-v-set2-antisense-NET-seq.Rdata",
-    params:
-        height = eval(str(config["figure_three"]["three_c"]["height"])),
-        width = eval(str(config["figure_three"]["three_c"]["width"])),
-    conda: "../envs/plot.yaml"
-    script:
-        "../scripts/spt6_2018_figure3C.R"
+# # antisense scatterplots vs set2
+# rule figure_three_c:
+#     input:
+#         data_path = config["figure_three"]["three_c"]["data_path"],
+#         theme = config["theme_spec"]
+#     output:
+#         svg = "figure3/figure3C/spt6_2018_figure3C-spt6-v-set2-antisense-NET-seq.svg",
+#         pdf = "figure3/figure3C/spt6_2018_figure3C-spt6-v-set2-antisense-NET-seq.pdf",
+#         png = "figure3/figure3C/spt6_2018_figure3C-spt6-v-set2-antisense-NET-seq.png",
+#         grob = "figure3/figure3C/spt6_2018_figure3C-spt6-v-set2-antisense-NET-seq.Rdata",
+#     params:
+#         height = eval(str(config["figure_three"]["three_c"]["height"])),
+#         width = eval(str(config["figure_three"]["three_c"]["width"])),
+#     conda: "../envs/plot.yaml"
+#     script:
+#         "../scripts/spt6_2018_figure3C.R"
 
 # antisense metagenes with set2D
-rule figure_three_c_alt:
+rule figure_three_c:
     input:
-        netseq_data = config["figure_three"]["three_c_alt"]["netseq_data"],
+        netseq_data = config["figure_three"]["three_c"]["netseq_data"],
         theme = config["theme_spec"]
     output:
         svg = "figure3/figure3C/spt6_2018_figure3C-spt6-v-set2-antisense-NET-seq-metagenes.svg",
@@ -67,8 +67,8 @@ rule figure_three_c_alt:
         png = "figure3/figure3C/spt6_2018_figure3C-spt6-v-set2-antisense-NET-seq-metagenes.png",
         grob = "figure3/figure3C/spt6_2018_figure3C-spt6-v-set2-antisense-NET-seq-metagenes.Rdata",
     params:
-        height = eval(str(config["figure_three"]["three_c_alt"]["height"])),
-        width = eval(str(config["figure_three"]["three_c_alt"]["width"])),
+        height = eval(str(config["figure_three"]["three_c"]["height"])),
+        width = eval(str(config["figure_three"]["three_c"]["width"])),
     conda: "../envs/plot.yaml"
     script:
         "../scripts/spt6_2018_figure3C-alternate.R"

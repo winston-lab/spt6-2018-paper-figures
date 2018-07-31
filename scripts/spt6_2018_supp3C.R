@@ -7,7 +7,7 @@ main = function(theme_spec, scatterplot_script, data_path,
 
     supp_three_c = plot_scatter(data_path = data_path,
                               title = "ChIP-nexus signal",
-                              sample_list = c("rnapii_YPD-1", "rnapii_YPD-2", "spt6_YPD-1", "spt6_YPD-2"),
+                              sample_list = c("YPD-RNAPII-1", "YPD-RNAPII-2", "YPD-Spt6-1", "YPD-Spt6-2"),
                               pcount = 0.1,
                               genome_binsize = "200 nt bins",
                               plot_binwidth = 0.07,

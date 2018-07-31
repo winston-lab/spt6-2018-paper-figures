@@ -14,8 +14,8 @@ import = function(path, sample_list, netseq=FALSE, chipnexus=FALSE){
                                       "spt6-1004-37C-1", "spt6-1004-37C-2",
                                       "set2D")
                                 } else if (chipnexus){
-                                    c("rnapii_YPD-1", "rnapii_YPD-2",
-                                      "spt6_YPD-1", "spt6_YPD-2")
+                                    c("YPD-RNAPII-1", "YPD-RNAPII-2",
+                                      "YPD-Spt6-1", "YPD-Spt6-2")
                                 } else {
                                     c("WT-37C-1", "WT-37C-2",
                                       "spt6-1004-37C-1", "spt6-1004-37C-2")

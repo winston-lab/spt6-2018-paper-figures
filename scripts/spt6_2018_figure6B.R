@@ -72,7 +72,7 @@ main = function(theme_spec,
         theme_default +
         theme(panel.grid = element_blank(),
               panel.spacing.y = unit(3, "pt"),
-              legend.position = c(0.99, 1),
+              legend.position = c(0.99, 0.98),
               legend.justification = c(1,0.85),
               legend.background = element_blank(),
               plot.margin = margin(0, 11/2, 2, 0, "pt"))
