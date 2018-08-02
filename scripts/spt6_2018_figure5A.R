@@ -31,7 +31,7 @@ metagene = function(df, assay, ylabel="", top=FALSE, bottom=FALSE){
         geom_line(data = df,
                   aes(x=position, y=mid, color=group),
                   alpha=0.8) +
-        geom_label(data = tibble(label=assay, x=-0.495, y=max(df[["high"]])*1.02, anno_labeled="intragenic cluster 1 (1891 TSSs)"),
+        geom_label(data = tibble(label=assay, x=-0.495, y=max(df[["high"]])*1.02, anno_labeled="intragenic cluster 1 (2147 TSSs)"),
                   aes(x=x, y=y, label=label),
                   hjust=0, vjust=1, size=9/72*25.4,
                   label.size=NA, label.padding = unit(1, "pt"), label.r=unit(0,"pt")) +

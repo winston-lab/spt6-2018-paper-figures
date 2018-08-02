@@ -43,7 +43,7 @@ main = function(theme_spec,
 
     tata = ggplot(data = df,
            aes(x=x, y=y*n_motifs/n_regions, fill=annotation, color=annotation)) +
-        geom_area(na.rm=TRUE, alpha=0.9) +
+        geom_area(na.rm=TRUE, alpha=0.8, size=0) +
         geom_vline(xintercept = 0, color="grey65", size=1.5) +
         scale_x_continuous(limits = c(-200, 0),
                            expand = c(0,0),

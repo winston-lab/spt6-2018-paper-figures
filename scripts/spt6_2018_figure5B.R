@@ -41,10 +41,10 @@ main = function(theme_spec,
 
     tss_plot = ggplot(data = tss_levels_df, aes(x=cluster, y=tss_levels+1)) +
         geom_violin(aes(fill=group),
-                    position=position_dodge(width=0.6),
+                    position=position_dodge(width=0.5),
                     size=0.2) +
         geom_boxplot(aes(group = interaction(cluster, group)),
-                     position=position_dodge(width=0.6),
+                     position=position_dodge(width=0.5),
                      width=0.15, size=0.2,
                      outlier.size=0, outlier.stroke=0, notch=TRUE) +
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004"))),
@@ -53,7 +53,7 @@ main = function(theme_spec,
                                            keywidth=unit(30, "pt"),
                                            keyheight=unit(6, "pt"))) +
         # scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
-        scale_x_discrete(expand=c(0,0)) +
+        scale_x_discrete(expand=c(0.01,0)) +
         scale_y_log10(name = "normalized counts",
                       breaks = c(10, 1000),
                       labels = c(bquote(10^1), bquote(10^3))) +
@@ -73,15 +73,15 @@ main = function(theme_spec,
 
     tfiib_plot = ggplot(data = tfiib_levels_df, aes(x=cluster, y=tfiib_levels+1)) +
         geom_violin(aes(fill=group),
-                    position=position_dodge(width=0.6),
+                    position=position_dodge(width=0.5),
                     size=0.2) +
         geom_boxplot(aes(group = interaction(cluster, group)),
-                     position=position_dodge(width=0.6),
+                     position=position_dodge(width=0.5),
                      width=0.15, size=0.2,
                      outlier.size=0, outlier.stroke=0, notch=TRUE) +
         scale_fill_ptol() +
         scale_color_ptol() +
-        scale_x_discrete(expand=c(0,0)) +
+        scale_x_discrete(expand=c(0.01,0)) +
         scale_y_log10(name = "normalized counts",
                       breaks = c(10, 1000),
                       labels = c(bquote(10^1), bquote(10^3))) +

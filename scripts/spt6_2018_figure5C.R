@@ -62,7 +62,8 @@ main = function(theme_spec,
     df = df %>% mutate(tss_class = fct_inorder(tss_class, ordered=TRUE))
 
     fig_five_c = ggplot() +
-        geom_polygon(data = df, aes(x=x, y=y, group=interaction(position, base), fill=base)) +
+        geom_polygon(data = df, aes(x=x, y=y, group=interaction(position, base), fill=base),
+                     alpha=0.95) +
         geom_label(data = tibble(tss_class=c("genic", "intragenic")),
                   aes(label=tss_class), x=-12, y=max(df[["y"]])*0.8,
                   size=9/72*25.4, label.size=NA, label.padding=unit(2, "pt"),
@@ -85,7 +86,7 @@ main = function(theme_spec,
         theme(legend.position = "none",
               axis.title.y = element_text(angle=0, hjust=1, vjust=0.5),
               axis.title.x = element_blank(),
-              axis.text.x = element_text(size=12, color="black", face="plain",
+              axis.text.x = element_text(size=7, color="black", face="plain",
                                          margin=margin(1,0,0,0,"pt")),
               axis.line = element_line(size=0.25, color="grey65"),
               panel.grid = element_blank(),

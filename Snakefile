@@ -13,7 +13,7 @@ include: "rules/supp_4.smk"
 include: "rules/figure_5.smk"
 include: "rules/figure_6.smk"
 
-localrules: all
+localrules: all, compile_main_figures, render_supplemental_legends
 
 rule all:
     input:
