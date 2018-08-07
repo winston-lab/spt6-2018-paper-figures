@@ -124,7 +124,7 @@ main = function(theme_spec, in_genic, in_intra, in_anti, in_inter, alpha,
                                  orf_box, orf_label, inter, intra, anti, genic))
 
     fig_one_c = arrangeGrob(diagram, diffexp_summary, ncol=1, heights=c(0.4, 1)) %>%
-        add_label("C")
+        add_label("C", x_pos=0.06)
 
     ggsave(svg_out, plot=fig_one_c, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_one_c, width=fig_width, height=fig_height, units="cm")

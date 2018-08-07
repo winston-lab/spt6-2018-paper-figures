@@ -20,7 +20,7 @@ main = function(theme_spec,
         group_by(group, index, position) %>%
         summarise(signal = mean(signal)) %>%
         ungroup() %>%
-        mutate(group = "\"WT\"")
+        mutate(group = "phantom(log[2](p/T)) ~ WT ~ phantom(log[2](p/T))")
 
     mnase_df = read_tsv(mnase_data,
                         col_names=c('group', 'sample', 'annotation', 'index', 'position', 'signal')) %>%
@@ -30,7 +30,9 @@ main = function(theme_spec,
         ungroup() %>%
         mutate(group = ordered(group,
                                levels = c("WT-37C", "spt6-1004-37C"),
-                               labels = c("\"WT\"", "italic(\"spt6-1004\")")))
+                               # labels = c("\"WT\"", "italic(\"spt6-1004\")")))
+                               labels = c("phantom(g[2](p/T)) ~ WT ~ phantom(g[2](p/T))",
+                                          "phantom(g[2](p/T)) ~ italic(\"spt6-1004\") ~ phantom(g[2](p/T))")))
 
     netseq_plot = ggplot(data = netseq_df %>%
                              complete(group, index, position, fill=list(signal=0)),
@@ -38,7 +40,7 @@ main = function(theme_spec,
         geom_raster() +
         scale_x_continuous(breaks = c(0, 0.4),
                            labels = function(x){case_when(x==0 ~ "TSS",
-                                                          x==0.4 ~ paste0(x, "kb"),
+                                                          x==0.4 ~ paste(x, "kb"),
                                                           TRUE ~ as.character(x))},
                            expand = c(0.025, 0)) +
         scale_y_reverse(breaks = function(x){seq(min(x)+500, max(x)-500, 500)},
@@ -55,10 +57,11 @@ main = function(theme_spec,
                                                 barheight=0.3)) +
         facet_grid(.~group, labeller=label_parsed) +
         theme_heatmap +
-        theme(strip.text = element_text(size=9, color="black", face="plain", margin=margin(0, 0, -4, 0, "pt")),
+        theme(strip.text = element_text(size=9, color="black", face="plain", margin=margin(0, 0, -6, 0, "pt"),
+                                        vjust=0.5),
               panel.grid.major.x = element_line(color="black"),
               panel.grid.major.y = element_line(color="black"),
-              legend.box.margin = margin(0, 0, -3, 0, "pt"),
+              legend.box.margin = margin(0, -12, -5, 0, "pt"),
               legend.justification = c(0, 0.5),
               plot.margin = margin(4,4,-10,4,"pt" ))
 
@@ -68,7 +71,7 @@ main = function(theme_spec,
         geom_raster() +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
                            labels = function(x){case_when(x==0 ~ "+1 dyad",
-                                                          x==max_length ~ paste0(x, "kb"),
+                                                          x==max_length ~ paste(x, "kb"),
                                                           TRUE ~ as.character(x))},
                            expand = c(0, 0.025)) +
         scale_y_reverse(breaks = function(x){seq(min(x)+500, max(x)-500, 500)},
@@ -82,11 +85,12 @@ main = function(theme_spec,
                                                 barwidth=8, barheight=0.3, title.hjust=0.5)) +
         facet_grid(.~group, labeller=label_parsed) +
         theme_heatmap +
-        theme(strip.text = element_text(size=9, color="black", face="plain", margin=margin(0, 0, -4, 0, "pt")),
+        theme(strip.text = element_text(size=9, color="black", face="plain", margin=margin(0, 0, -6, 0, "pt"),
+                                        vjust=0.5),
               panel.grid.major.x = element_line(color="black"),
               panel.grid.minor.x = element_line(color="black"),
               panel.grid.major.y = element_line(color="black"),
-              legend.box.margin = margin(0, 0, -3, 0, "pt"),
+              legend.box.margin = margin(0, 0, -5, 0, "pt"),
               plot.margin = margin(4,4,-10,0,"pt" ))
 
     quant_df = read_tsv(quant_data,
@@ -121,7 +125,7 @@ main = function(theme_spec,
         geom_tile(linetype="blank") +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
                            labels = function(x){case_when(x==0 ~ "+1 dyad",
-                                                          x==max_length*1e3 ~ paste0(x/1e3, "kb"),
+                                                          x==max_length*1e3 ~ paste(x/1e3, "kb"),
                                                           TRUE ~ as.character(x/1000))},
                            expand = c(0, 25)) +
         scale_y_reverse(breaks = function(x){seq(min(x)+500, max(x)-500, 500)},
@@ -135,8 +139,9 @@ main = function(theme_spec,
                                                   barwidth=5, barheight=0.3, title.hjust=0.5)) +
         facet_grid(.~label, labeller = label_parsed) +
         theme_heatmap +
-        theme(strip.text = element_text(size=7, color="black", face="plain", margin=margin(0,0,-4,0,"pt")),
-              legend.box.margin = margin(0, 0, -3, 0, "pt"),
+        theme(strip.text = element_text(size=9, color="black", face="plain", margin=margin(0,0,-6,0,"pt"),
+                                        vjust=0.5),
+              legend.box.margin = margin(0, 0, -5, 0, "pt"),
               panel.grid.major.x = element_line(color="grey50"),
               panel.grid.minor.x = element_line(color="grey50"),
               panel.grid.major.y = element_line(color="grey80"),
@@ -153,7 +158,7 @@ main = function(theme_spec,
         geom_tile(linetype="blank") +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
                            labels = function(x){case_when(x==0 ~ "+1 dyad",
-                                                          x==max_length*1e3 ~ paste0(x/1e3, "kb"),
+                                                          x==max_length*1e3 ~ paste(x/1e3, "kb"),
                                                           TRUE ~ as.character(x/1000))},
                            expand = c(0, 25)) +
         scale_y_reverse(breaks = function(x){seq(min(x)+500, max(x)-500, 500)},
@@ -167,8 +172,9 @@ main = function(theme_spec,
                                                   barwidth=5, barheight=0.3, title.hjust=0.5)) +
         facet_grid(.~label, labeller = label_parsed) +
         theme_heatmap +
-        theme(strip.text = element_text(size=7, color="black", face="plain", margin=margin(0,0,-4,0,"pt")),
-              legend.box.margin = margin(0, 0, -3, 0, "pt"),
+        theme(strip.text = element_text(size=9, color="black", face="plain", margin=margin(0,0,-6,0,"pt"),
+                                        vjust=0.5),
+              legend.box.margin = margin(0, 0, -5, 0, "pt"),
               panel.grid.major.x = element_line(color="grey50"),
               panel.grid.minor.x = element_line(color="grey50"),
               panel.grid.major.y = element_line(color="grey80"),

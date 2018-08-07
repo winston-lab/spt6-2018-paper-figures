@@ -48,7 +48,7 @@ main = function(theme_spec,
         scale_x_continuous(limits = c(-200, 0),
                            expand = c(0,0),
                            breaks = scales::pretty_breaks(n=3),
-                           labels = function(x) case_when(x==-200 ~ "-200nt",
+                           labels = function(x) case_when(x==-200 ~ "-200 nt",
                                                           x==0 ~ "TSS",
                                                           TRUE ~ as.character(x))) +
         scale_y_continuous(limits = c(0, 0.01),
@@ -68,7 +68,7 @@ main = function(theme_spec,
               legend.justification = c(0.5, 0.5),
               legend.position = c(0.70, 0.7),
               legend.key.width= unit(8, "pt"),
-              plot.margin = margin(2, 8, 1, 6, "pt"))
+              plot.margin = margin(2, 11, 1, 6, "pt"))
 
     fig_five_d = tata %>%
         add_label("D")

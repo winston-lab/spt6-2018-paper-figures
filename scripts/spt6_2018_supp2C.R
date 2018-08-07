@@ -35,7 +35,7 @@ main = function(theme_spec, sense_tfiib_path, antisense_tfiib_path,
         geom_col(aes(y=-mid_anti), fill="#4477AA", color="#4477AA", size=0.1) +
         scale_x_continuous(expand = c(0,0),
                            labels = function(x) case_when(x==0 ~ "TATA",
-                                                         x==.120 ~ "120nt",
+                                                         x==.120 ~ "120 nt",
                                                          TRUE ~ as.character(x*1e3)),
                            name = NULL) +
         scale_y_continuous(expand = c(0,0),

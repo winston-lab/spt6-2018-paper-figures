@@ -55,7 +55,7 @@ main = function(theme_spec, sense_netseq_data, antisense_netseq_data,
                                                   barwidth=8, barheight=0.3, title.hjust=0.5)) +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
                            labels = function(x){case_when(x==0 ~ "TSS",
-                                                          x==3 ~ "3kb",
+                                                          x==3 ~ "3 kb",
                                                           TRUE ~ as.character(x))},
                            expand = c(0, 0.05)) +
         scale_y_continuous(breaks = function(x){seq(min(x)+500, max(x)-500, 500)},

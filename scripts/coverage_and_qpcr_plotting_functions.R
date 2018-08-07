@@ -53,7 +53,7 @@ plot_seq_data = function(qpcr_df, seqdata_df, title, show_y_title=TRUE, line_typ
                   alpha=0.75) +
         scale_x_continuous(expand=c(0,0),
                            labels = function(x)case_when(x==0 ~ "TSS",
-                                                         x==3 ~ paste0(x, "kb"),
+                                                         x==3 ~ paste(x, "kb"),
                                                          TRUE ~ as.character(x))) +
         # scale_y_continuous(limits = c(-1, NA),
         scale_y_continuous(limits = c(NA, max(seqdata_df[["signal"]]) *1.05),
@@ -138,12 +138,12 @@ plot_qpcr = function(qpcr_df, seqdata_df, title, show_y_title=TRUE,
                            expand = c(0,0),
                            breaks = scales::pretty_breaks(n=3),
                            labels = function(x)case_when(x==0 ~ "TSS",
-                                                         x==xunits_tick ~ paste0(x, "kb"),
+                                                         x==xunits_tick ~ paste(x, "kb"),
                                                          TRUE ~ as.character(x))) +
         scale_y_continuous(limits = c(0, max(c(qpcr_df[["value"]], qpcr_summary[["mean"]] + qpcr_summary[["sd"]])) *1.15),
                            expand = c(0,0),
                            breaks = scales::pretty_breaks(n=2),
-                           name = if(show_y_title){"enrichment (AU)"} else {NULL}) +
+                           name = if(show_y_title){expression(enrichment ~ (AU))} else {NULL}) +
         ggtitle(if(show_title){title} else {""}) +
         theme_default +
         theme(legend.position = if(show_legend){c(0.97, 0.75)} else{"none"},
@@ -177,11 +177,11 @@ plot_nexus_stranded = function(qpcr_df, plus_df, minus_df, title, show_y_title=T
                   alpha=0.75) +
         scale_x_continuous(expand=c(0,0),
                            labels = function(x)case_when(x==0 ~ "TSS",
-                                                         x==3 ~ paste0(x, "kb"),
+                                                         x==3 ~ paste(x, "kb"),
                                                          TRUE ~ as.character(x))) +
         # scale_y_continuous(limits = c(-1, NA),
         scale_y_continuous(labels = function(x){abs(x)},
-                           name = if(show_y_title){"normalized counts"} else {NULL},
+                           name = if(show_y_title){expression(phantom((AU)) ~ normalized ~ counts ~ phantom((AU)))} else {NULL},
                            breaks = scales::pretty_breaks(n=3)) +
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +

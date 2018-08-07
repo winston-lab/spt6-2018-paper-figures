@@ -36,7 +36,7 @@ main = function(theme_spec,
         geom_line(aes(y=mid), alpha=0.7) +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
                            labels = function(x){case_when(x==0 ~ "+1 dyad",
-                                                          x==max_length ~ paste0(x, "kb"),
+                                                          x==max_length ~ paste(x, "kb"),
                                                           TRUE ~ as.character(x))},
                            name = NULL,
                            expand = c(0,0)) +
@@ -49,8 +49,9 @@ main = function(theme_spec,
         scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         theme_default +
-        theme(panel.grid = element_blank(),
-              plot.margin = margin(2, 11, -10, 11/2, "pt"))
+        theme(legend.position = c(0.7, 0.95),
+              panel.grid = element_blank(),
+              plot.margin = margin(2, 11, -10, 0, "pt"))
 
     fig_four_a %<>% add_label("A")
 

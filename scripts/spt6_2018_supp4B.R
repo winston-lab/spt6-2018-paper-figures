@@ -46,7 +46,7 @@ main = function(theme_spec,
                   aes(label=label), x=0.02, y=3.2/2, size=7/72*25.4, hjust=0) +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
                            labels = function(x){case_when(x==0 ~ "+1 dyad",
-                                                          x==max_length ~ paste0(x, "kb"),
+                                                          x==max_length ~ paste(x, "kb"),
                                                           TRUE ~ as.character(x))},
                            name = NULL,
                            expand = c(0,0)) +

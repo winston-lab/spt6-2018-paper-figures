@@ -17,8 +17,12 @@ main = function(theme_spec, plot_functions,
         theme(axis.text.x = element_text(size=7,
                                          color="black",
                                          margin=margin(1,0,0,0,"pt")))
+    vam6_mnase_plot = vam6_mnase_plot +
+        theme(legend.position = c(0.75, 0.75))
     vam6_qpcr_plot = plot_qpcr(qpcr_df = vam6_qpcr_df, seqdata_df = vam6_mnase_df,
                                title = "histone H3 ChIP-qPCR")
+    vam6_qpcr_plot = vam6_qpcr_plot +
+        theme(legend.position = c(0.75, 0.75))
     vam6_diagram = plot_gene_diagram(qpcr_df = vam6_qpcr_df,
                                      seqdata_df = vam6_mnase_df,
                                      gene_id = "VAM6")

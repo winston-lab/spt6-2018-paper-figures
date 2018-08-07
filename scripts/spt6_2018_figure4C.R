@@ -63,7 +63,8 @@ main = function(theme_spec,
               panel.border = element_blank(),
               axis.line = element_line(size=0.25, color="grey65"),
               axis.title.x = element_text(size=7),
-              plot.margin = margin(2, 11, -12, 11/2, "pt"))
+              legend.position = c(0.8, 0.99),
+              plot.margin = margin(2, 11, -12, 0, "pt"))
 
     fig_four_c %<>% add_label("C")
 

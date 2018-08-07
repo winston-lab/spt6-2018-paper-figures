@@ -52,8 +52,9 @@ main = function(theme_spec, sense_netseq_data, antisense_netseq_data,
         theme_default +
         theme(legend.key.height = unit(10, "pt"),
               panel.grid = element_blank(),
+              legend.position = c(0.8, 0.99),
               legend.background = element_rect(color=NA, fill="white", size=0),
-              plot.margin = margin(11/2, 11, -10, 11/2, unit="pt"))
+              plot.margin = margin(11/2, 0, -10, 0, unit="pt"))
 
     fig_three_a %<>% add_label("A")
 

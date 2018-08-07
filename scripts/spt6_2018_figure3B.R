@@ -24,7 +24,7 @@ main = function(theme_spec, netseq_results, annotation,
                      binwidth = c(0.04, 0.04), size=0.1, alpha=0.7, fill=NA) +
         scale_color_viridis(option="inferno", guide=FALSE) +
         scale_x_log10("wild-type Spt6 levels (ChIP-nexus RPKM)") +
-        ylab(expression(atop("sense NET-seq", log[2] ~ frac(italic("spt6-1004"), "WT")))) +
+        ylab(expression(atop("sense NET-seq", log[2] ~ displaystyle(frac(italic("spt6-1004"), "WT"))))) +
         annotate(geom="label",
                  x=max(df[["score"]]+0.01),
                  y=0.95*max(df[["log2FoldChange"]]),
@@ -39,7 +39,7 @@ main = function(theme_spec, netseq_results, annotation,
         theme_default +
         theme(axis.title.y = element_text(angle=0, hjust=1, vjust=0.5, size=9),
               axis.title.x = element_text(margin = margin(t=3, unit="pt"), size=9, hjust=1),
-              plot.margin = margin(0, 11, -10, 11/2, "pt"))
+              plot.margin = margin(0, 2, -10, 0, "pt"))
 
     fig_three_b %<>% add_label("B")
 

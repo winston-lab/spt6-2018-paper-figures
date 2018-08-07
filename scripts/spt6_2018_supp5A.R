@@ -29,13 +29,15 @@ main = function(theme_spec,
                   aes(x=log2_odds_ratio, y=-log10(fdr), label=label,
                       fill=if_else(log2_odds_ratio<0, "depleted", "enriched")),
                   size=6/72*25.4,
+                  min.segment.length = unit(2, "cm"),
                   box.padding = unit(0, "pt"), label.r = unit(0.5, "pt"),
-                  label.size=NA, label.padding = unit(0.8, "pt"),
-                  ylim = c(-log10(0.015), NA), force=0.5,
-                  segment.size = 0.2, segment.alpha=0.5) +
-        annotate(geom="label", x=1, y=9.7, label="enriched", size=9/72*25.4,
+                  label.size=NA, label.padding = unit(0.4, "pt"),
+                  ylim = c(-log10(0.05), NA),
+                  force=0.8,
+                  segment.size = 0.2, segment.alpha=0.2) +
+        annotate(geom="label", x=1, y=110, label="enriched", size=9/72*25.4,
                  fill="#FFCEC8", label.size=NA) +
-        annotate(geom="label", x=-1, y=9.7, label="depleted", size=9/72*25.4,
+        annotate(geom="label", x=-1, y=110, label="depleted", size=9/72*25.4,
                  fill="#CDE7FD", label.size=NA) +
         scale_y_continuous(expand = c(0,0),
                            breaks = scales::pretty_breaks(n=3),
@@ -44,21 +46,21 @@ main = function(theme_spec,
                            name = expression(log[2]("odds ratio vs. random"))) +
         # scale_fill_brewer(palette = "Pastel1", direction=-1, guide=FALSE) +
         scale_fill_manual(values = c("#CDE7FD","#FFCEC8"), guide=FALSE) +
-        ggtitle(bquote("motifs at" ~ italic("spt6-1004") ~ "intragenic TSSs")) +
+        ggtitle("motifs at genic TSSs") +
         theme_default +
         theme(panel.grid = element_blank(),
               panel.border = element_blank(),
               axis.line = element_line(color="grey65", size=0.2),
               axis.title.y = element_text(margin=margin(r=0, unit="pt")),
-              plot.margin = margin(0, 0, -2, 0, "pt"))
+              plot.margin = margin(0, 0, 0, 0, "pt"))
 
-    fig_five_e = volcano_plot %>%
-        add_label("E")
+    supp_five_a = volcano_plot %>%
+        add_label("A")
 
-    ggsave(svg_out, plot=fig_five_e, width=fig_width, height=fig_height, units="cm")
-    ggsave(pdf_out, plot=fig_five_e, width=fig_width, height=fig_height, units="cm")
-    ggsave(png_out, plot=fig_five_e, width=fig_width, height=fig_height, units="cm", dpi=326)
-    save(fig_five_e, file=grob_out)
+    ggsave(svg_out, plot=supp_five_a, width=fig_width, height=fig_height, units="cm")
+    ggsave(pdf_out, plot=supp_five_a, width=fig_width, height=fig_height, units="cm")
+    ggsave(png_out, plot=supp_five_a, width=fig_width, height=fig_height, units="cm", dpi=326)
+    save(supp_five_a, file=grob_out)
 }
 
 main(theme_spec = snakemake@input[["theme"]],

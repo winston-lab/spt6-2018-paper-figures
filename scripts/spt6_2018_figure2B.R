@@ -22,8 +22,8 @@ main = function(theme_spec, tfiib_data,
         scale_x_continuous(expand = c(0,0),
                            breaks = scales::pretty_breaks(3),
                            labels = function(x) case_when(x == 0 ~ "TSS",
-                                                          x %>% near(10) ~ "+10kb",
-                                                          x %>% near(2) ~ "+2kb",
+                                                          x %>% near(10) ~ "+10 kb",
+                                                          x %>% near(2) ~ "+2 kb",
                                                           x > 0 ~ paste0("+", x),
                                                           TRUE ~ as.character(x))) +
         scale_y_continuous(limits = c(NA, 1), oob=scales::squish,
@@ -53,7 +53,7 @@ main = function(theme_spec, tfiib_data,
               panel.grid.minor.x = element_blank(),
               panel.grid.minor.y = element_blank(),
               panel.spacing.y = unit(1, "pt"),
-              plot.margin = margin(0, 11, -11, 11/2 ))
+              plot.margin = margin(0, 11, -11, 0))
 
     fig_two_b %<>% add_label("B")
 

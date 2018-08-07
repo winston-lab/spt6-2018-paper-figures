@@ -69,7 +69,7 @@ main = function(theme_spec,
               legend.key.width = unit(8, "pt"),
               panel.grid.major.x = element_blank(),
               plot.title = element_text(size=7),
-              plot.margin = margin(0,11,4,11/2,"pt"))
+              plot.margin = margin(0,11,4,0,"pt"))
 
     tfiib_plot = ggplot(data = tfiib_levels_df, aes(x=cluster, y=tfiib_levels+1)) +
         geom_violin(aes(fill=group),
@@ -92,7 +92,7 @@ main = function(theme_spec,
               legend.position = "none",
               panel.grid.major.x = element_blank(),
               plot.title = element_text(size=7),
-              plot.margin = margin(4,11,0,11/2,"pt"))
+              plot.margin = margin(4,11,0,0,"pt"))
 
     fig_five_b = plot_grid(tss_plot, tfiib_plot, ncol=1, align="h", axis="rl", rel_heights = c(1.1,1)) %>%
         add_label("B")

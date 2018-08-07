@@ -42,7 +42,7 @@ plot_heatmap = function(data_path, sample_list, anno_path, cps_dist,
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
                            expand = c(0, 0.05),
                            labels = function(x){case_when(x==0 ~ "TSS",
-                                                          x==max_length ~ paste0(x, "kb"),
+                                                          x==max_length ~ paste(x, "kb"),
                                                           TRUE ~ as.character(x))}) +
         scale_y_continuous(breaks = function(x){seq(min(x)+500, max(x)-500, 500)},
                            name = if(add_ylabel){paste(n_distinct(df[["sorted_index"]]), y_label)} else {""},

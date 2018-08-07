@@ -39,7 +39,7 @@ metagene = function(df, assay, ylabel="", top=FALSE, bottom=FALSE){
         scale_x_continuous(expand = c(0,0),
                            breaks = c(-0.4, 0, 0.4),
                            labels = function(x)case_when(x==0 ~ "TSS",
-                                                         x==0.4 ~ paste0(x, "kb"),
+                                                         x==0.4 ~ paste(x, "kb"),
                                                          TRUE ~ as.character(x))) +
         scale_y_continuous(breaks = scales::pretty_breaks(n=3),
                            # expand = c(0.05, 0),
@@ -54,7 +54,7 @@ metagene = function(df, assay, ylabel="", top=FALSE, bottom=FALSE){
               axis.title.y = element_text(hjust=0.5),
               panel.spacing.x = unit(10, "pt"),
               panel.grid = element_blank(),
-              plot.margin = margin(0,1,0,1,"pt"))
+              plot.margin = margin(0,11/2,0,0,"pt"))
     if (assay != "GC%"){
         plot = plot +
             scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +

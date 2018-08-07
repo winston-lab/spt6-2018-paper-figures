@@ -77,7 +77,7 @@ main = function(theme_spec,
         scale_x_continuous(limits = c(-12.5, 12.5),
                            expand = c(0,0),
                            labels = function(x)case_when(x==0 ~ "TSS",
-                                                         x==10 ~ "+10nt",
+                                                         x==10 ~ "+10 nt",
                                                          x>0 ~ paste0("+", x),
                                                          TRUE ~ as.character(x))) +
         facet_grid(tss_class~., switch="y") +
@@ -91,7 +91,7 @@ main = function(theme_spec,
               axis.line = element_line(size=0.25, color="grey65"),
               panel.grid = element_blank(),
               panel.border = element_blank(),
-              plot.margin = margin(0, 0, -10, 0, "pt"))
+              plot.margin = margin(0, 11/2, -10, 0, "pt"))
 
     fig_five_c %<>% add_label("C")
 

@@ -125,7 +125,7 @@ plot_scatter = function(data_path, sample_list, title, pcount, genome_binsize, p
               strip.placement="outside",
               strip.switch.pad.grid = unit(0, "points"),
               strip.switch.pad.wrap = unit(0, "points"),
-              plot.margin = margin(0,0,0,0, "pt"),
+              plot.margin = margin(0,0.5,0,0, "pt"),
               panel.spacing = unit(0, "pt"),
               panel.border = element_rect(size=0.25),
               panel.grid.minor = element_blank())

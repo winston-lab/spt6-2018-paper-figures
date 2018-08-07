@@ -11,7 +11,9 @@ include: "rules/supp_3.smk"
 include: "rules/figure_4.smk"
 include: "rules/supp_4.smk"
 include: "rules/figure_5.smk"
+include: "rules/supp_5.smk"
 include: "rules/figure_6.smk"
+include: "rules/supp_tables.smk"
 
 localrules: all, compile_main_figures, render_supplemental_legends
 
@@ -68,6 +70,7 @@ rule all:
         "figure5/figure5Dextra/spt6_2018_figure5Dextra-intragenic-TSS-TATA-box-expression.png",
         "figure5/figure5E/spt6_2018_figure5E-intragenic-TSS-motif-enrichment.png",
         "figure5/spt6_2018_figure5-intragenic-promoters.png",
+        "figure5/spt6_2018_supp5-intragenic-promoters.png",
         "figure6/figure6A/spt6_2018_figure6A-genic-promoters-PMA1-and-HSP82.png",
         "figure6/figure6B/spt6_2018_figure6B-MNase-at-genic-TSSs.png",
         "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-RTqPCR.png",
@@ -97,6 +100,7 @@ rule render_supplemental_legends:
         "figure2/spt6_2018_supp2-TFIIB-ChIP-nexus.pdf",
         "figure3/spt6_2018_supp3-NET-seq.pdf",
         "figure4/spt6_2018_supp4-MNase-seq.pdf",
+        "figure5/spt6_2018_supp5-intragenic-promoters.pdf",
         tex = "spt6_2018_supp_figures.tex"
     output:
         "spt6_2018_supp_figures.pdf"

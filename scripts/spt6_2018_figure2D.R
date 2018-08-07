@@ -36,8 +36,10 @@ main = function(theme_spec, genic, intragenic, antisense,
         scale_color_viridis(guide=FALSE, option="inferno") +
         scale_y_continuous(limits = c(-4.5, 6),
                            name = expression("TFIIB ChIP-nexus" ~ log[2] ~ textstyle(frac(italic("spt6-1004"), "WT")))) +
+                           # name = expression("TFIIB ChIP-nexus" ~ log[2] ~ displaystyle(frac(italic("spt6-1004"), "WT")))) +
         scale_x_continuous(limits = c(-6, 8),
                            name = expression("TSS-seq" ~ log[2] ~ textstyle(frac(italic("spt6-1004"), "WT")))) +
+                           # name = expression("TSS-seq" ~ log[2] ~ displaystyle(frac(italic("spt6-1004"), "WT")))) +
         theme_default +
         theme(strip.text = element_text(size=9, color="black", margin=margin(0,0,-10,0,"pt"),
                                         hjust=0, vjust=1),
@@ -46,7 +48,7 @@ main = function(theme_spec, genic, intragenic, antisense,
               panel.grid.minor.x = element_blank(),
               panel.grid.minor.y = element_blank(),
               panel.spacing.y = unit(0, "pt"),
-              plot.margin=margin(-5,0,-4,6,"pt"))
+              plot.margin=margin(0,0,-10,0,"pt"))
 
     fig_two_d %<>% add_label("D")
 
