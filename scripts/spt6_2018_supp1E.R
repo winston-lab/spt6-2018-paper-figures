@@ -47,6 +47,7 @@ main = function(theme_spec,
         scale_color_tableau(guide=guide_legend(reverse=TRUE)) +
         theme_default +
         theme(legend.position = c(0.05, 0.90),
+              legend.key.height = unit(8, "pt"),
               legend.justification = c(0, 0.5),
               axis.title.x = element_blank())
 

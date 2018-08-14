@@ -21,12 +21,12 @@ import = function(path, sample_list, netseq=FALSE, chipnexus=FALSE){
                                       "spt6-1004-37C-1", "spt6-1004-37C-2")
                                     },
                                 labels = if(netseq){
-                                    c("\"WT\" ~ 37*degree ~ 1",
-                                      "\"WT\" ~ 37*degree ~ 2",
-                                      "italic(\"spt6-1004\") ~ 30*degree ~ 1",
-                                      "italic(\"spt6-1004\") ~ 30*degree ~ 2",
-                                      "italic(\"spt6-1004\") ~ 37*degree ~ 1",
-                                      "italic(\"spt6-1004\") ~ 37*degree ~ 2",
+                                    c("\"WT\" ~ 37*degree*C ~ 1",
+                                      "\"WT\" ~ 37*degree*C ~ 2",
+                                      "italic(\"spt6-1004\") ~ 30*degree*C ~ 1",
+                                      "italic(\"spt6-1004\") ~ 30*degree*C ~ 2",
+                                      "italic(\"spt6-1004\") ~ 37*degree*C ~ 1",
+                                      "italic(\"spt6-1004\") ~ 37*degree*C ~ 2",
                                       "italic(\"set2\"*Delta)")
                                     } else if (chipnexus) {
                                         c("\"Rpb1 1\"", "\"Rpb1 2\"",

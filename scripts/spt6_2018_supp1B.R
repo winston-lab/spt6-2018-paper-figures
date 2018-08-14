@@ -6,7 +6,7 @@ import = function(path){
     read_tsv(path,
              col_names = c("group", "sample", "index", "position", "signal")) %>%
         filter((group %in% c("doris", "malabat")) & ! is.na(signal)) %>%
-        group_by(group, index) %>%
+        group_by(group, sample, index) %>%
         mutate(signal = scales::rescale(signal, to=c(0,1))) %>%
         group_by(group, position) %>%
         summarise(mid = median(signal, na.rm=TRUE),

@@ -6,6 +6,7 @@ rulegraph.svg
 dag.svg
 Rplots.pdf
 logs/*
+localrun.sh
 
 figure1/
 figure2/
@@ -13,6 +14,7 @@ figure3/
 figure4/
 figure5/
 figure6/
+supp_tables/
 
 spt6_2018_main_figures.*
 !spt6_2018_main_figures.tex

@@ -18,7 +18,7 @@ main = function(theme_spec,
                                str_to_upper(label),
                                label))
 
-    volcano_plot = ggplot() +
+    supp_five_a = ggplot() +
         geom_vline(xintercept = 0, color="grey65", size=0.5) +
         geom_point(data = all_df %>% filter(fdr>=0.01),
                    aes(x=log2_odds_ratio, y=-log10(fdr)),
@@ -52,10 +52,10 @@ main = function(theme_spec,
               panel.border = element_blank(),
               axis.line = element_line(color="grey65", size=0.2),
               axis.title.y = element_text(margin=margin(r=0, unit="pt")),
-              plot.margin = margin(0, 0, 0, 0, "pt"))
+              plot.margin = margin(4, 0, 0, 0, "pt"))
 
-    supp_five_a = volcano_plot %>%
-        add_label("A")
+    # supp_five_a = volcano_plot %>%
+    #     add_label("A")
 
     ggsave(svg_out, plot=supp_five_a, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=supp_five_a, width=fig_width, height=fig_height, units="cm")

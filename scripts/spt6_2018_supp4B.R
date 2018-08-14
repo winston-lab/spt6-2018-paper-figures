@@ -57,9 +57,10 @@ main = function(theme_spec,
         scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         facet_grid(annotation~.) +
-        theme_default
+        theme_default +
+        theme(plot.margin = margin(0, 0, 0, 11/2, "pt"))
 
-    supp_four_b %<>% add_label("B")
+    supp_four_b %<>% add_label("B", x_pos=0.02)
 
     ggsave(svg_out, plot=supp_four_b, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=supp_four_b, width=fig_width, height=fig_height, units="cm")

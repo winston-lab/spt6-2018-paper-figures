@@ -49,7 +49,7 @@ metagene = function(df, assay, ylabel="", top=FALSE, bottom=FALSE){
               legend.background = element_blank(),
               legend.position = c(0.005, 0.90),
               legend.key.width= unit(14, "pt"),
-              legend.key.height = unit(9, "pt"),
+              legend.key.height = unit(10, "pt"),
               axis.title.x = element_blank(),
               axis.title.y = element_text(hjust=0.5),
               panel.spacing.x = unit(10, "pt"),

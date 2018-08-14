@@ -39,7 +39,7 @@ main = function(theme_spec, sense_netseq_data, antisense_netseq_data,
         geom_hline(yintercept = 0, size=0.5, color="black") +
         scale_x_continuous(breaks = scales::pretty_breaks(n=3),
                            labels = function(x){case_when(x==0 ~ "TSS",
-                                                          x==max_length ~ paste0(x, "kb"),
+                                                          x==max_length ~ paste(x, "kb"),
                                                           TRUE ~ as.character(x))},
                            name = NULL,
                            expand = c(0,0)) +

@@ -65,7 +65,7 @@ plot_seq_data = function(qpcr_df, seqdata_df, title, show_y_title=TRUE, line_typ
         scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         ggtitle(if(show_title){title} else {""}) +
         theme_default +
-        theme(legend.position = if(show_legend){c(0.97, 0.75)} else{"none"},
+        theme(legend.position = if(show_legend){c(0.97, 0.73)} else{"none"},
               legend.key.width = unit(14, "pt"),
               legend.justification = c(1, 0.5),
               axis.title.x = element_blank(),
@@ -146,7 +146,7 @@ plot_qpcr = function(qpcr_df, seqdata_df, title, show_y_title=TRUE,
                            name = if(show_y_title){expression(enrichment ~ (AU))} else {NULL}) +
         ggtitle(if(show_title){title} else {""}) +
         theme_default +
-        theme(legend.position = if(show_legend){c(0.97, 0.75)} else{"none"},
+        theme(legend.position = if(show_legend){c(0.97, 0.73)} else{"none"},
               legend.key.width = unit(3, "pt"),
               legend.justification = c(1, 0.5),
               axis.title.x = element_blank(),

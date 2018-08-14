@@ -19,6 +19,8 @@ localrules: all, compile_main_figures, render_supplemental_legends
 
 rule all:
     input:
+        "supp_tables/spt6_2018_supplemental_table_1_TSS-seq_peaks.csv",
+        "supp_tables/spt6_2018_supplemental_table_2_TFIIB-ChIP-nexus_peaks.csv",
         "figure1/figure1A/spt6_2018_figure1A-TSS-seq-heatmaps.png",
         "figure1/figure1B/spt6_2018_figure1B-SPT6-western-blot.png",
         "figure1/figure1C/spt6_2018_figure1C-TSS-seq-diffexp-summary.png",

@@ -44,7 +44,8 @@ main = function(theme_spec, tfiib_data,
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         ggtitle("TFIIB ChIP-nexus protection") +
         theme_default +
-        theme(strip.background = element_rect(fill="grey80", size=0, color=NA),
+        theme(legend.key.height = unit(10, "pt"),
+              strip.background = element_rect(fill="grey80", size=0, color=NA),
               axis.title.y = element_text(margin=margin(r=6, unit="pt")),
               axis.title.x = element_blank(),
               panel.border = element_blank(),

@@ -43,12 +43,12 @@ main = function(theme_spec, genic, intragenic, antisense,
         theme_default +
         theme(strip.text = element_text(size=9, color="black", margin=margin(0,0,-10,0,"pt"),
                                         hjust=0, vjust=1),
-              axis.title = element_text(size=9),
-              axis.title.y = element_text(margin = margin(r=-6, unit="pt")),
+              axis.title.x = element_text(size=8),
+              axis.title.y = element_text(size=8, margin = margin(r=-5, unit="pt")),
               panel.grid.minor.x = element_blank(),
               panel.grid.minor.y = element_blank(),
               panel.spacing.y = unit(0, "pt"),
-              plot.margin=margin(0,0,-10,0,"pt"))
+              plot.margin=margin(0,0,-5,0,"pt"))
 
     fig_two_d %<>% add_label("D")
 

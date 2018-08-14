@@ -49,7 +49,8 @@ main = function(theme_spec,
         scale_color_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         scale_fill_ptol(labels = c("WT", bquote(italic("spt6-1004")))) +
         theme_default +
-        theme(legend.position = c(0.7, 0.95),
+        theme(legend.key.height = unit(10, "pt"),
+              legend.position = c(0.7, 0.95),
               panel.grid = element_blank(),
               plot.margin = margin(2, 11, -10, 0, "pt"))
 

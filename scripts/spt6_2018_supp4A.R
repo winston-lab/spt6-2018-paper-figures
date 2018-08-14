@@ -12,8 +12,6 @@ main = function(theme_spec, scatterplot_script, mnase_data,
                               genome_binsize = "75 bp bins",
                               plot_binwidth = 0.03) %>%
         add_label("A")
-    supp_four_a = supp_four_a +
-        theme(plot.margin = margin(r=11/2, unit="pt"))
 
     ggsave(svg_out, plot=supp_four_a, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=supp_four_a, width=fig_width, height=fig_height, units="cm")
