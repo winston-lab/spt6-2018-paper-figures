@@ -344,12 +344,14 @@ figure_six:
 supp_tables:
     tss:
         all: ../tss-seq-publication/diff_exp/spt6-1004-37C-v-WT-37C/spikenorm/spt6-1004-37C-v-WT-37C_tss-seq-spikenorm-diffexp-results-all.tsv
+        all_narrowpeak: ../tss-seq-publication/diff_exp/spt6-1004-37C-v-WT-37C/spikenorm/spt6-1004-37C-v-WT-37C_tss-seq-spikenorm-diffexp-results-all.narrowpeak
         genic: ../tss-seq-publication/diff_exp/spt6-1004-37C-v-WT-37C/spikenorm/genic/spt6-1004-37C-v-WT-37C_tss-seq-spikenorm-diffexp-results-genic-all.tsv
         intragenic: ../tss-seq-publication/diff_exp/spt6-1004-37C-v-WT-37C/spikenorm/intragenic/spt6-1004-37C-v-WT-37C_tss-seq-spikenorm-diffexp-results-intragenic-all.tsv
         antisense: ../tss-seq-publication/diff_exp/spt6-1004-37C-v-WT-37C/spikenorm/antisense/spt6-1004-37C-v-WT-37C_tss-seq-spikenorm-diffexp-results-antisense-all.tsv
         intergenic: ../tss-seq-publication/diff_exp/spt6-1004-37C-v-WT-37C/spikenorm/intergenic/spt6-1004-37C-v-WT-37C_tss-seq-spikenorm-diffexp-results-intergenic-all.tsv
     tfiib:
         all: ../chipnexus-tfiib-publication/diff_binding/spt6-1004-37C-v-WT-37C/libsizenorm/spt6-1004-37C-v-WT-37C_tfiib-chipnexus-libsizenorm-diffbind-results-all.tsv
+        all_narrowpeak: ../chipnexus-tfiib-publication/diff_binding/spt6-1004-37C-v-WT-37C/libsizenorm/spt6-1004-37C-v-WT-37C_tfiib-chipnexus-libsizenorm-diffbind-results-all.narrowpeak
         genic: ../chipnexus-tfiib-publication/diff_binding/spt6-1004-37C-v-WT-37C/libsizenorm/genic/spt6-1004-37C-v-WT-37C_tfiib-chipnexus-libsizenorm-diffbind-results-genic-all.tsv
         intragenic: ../chipnexus-tfiib-publication/diff_binding/spt6-1004-37C-v-WT-37C/libsizenorm/intragenic/spt6-1004-37C-v-WT-37C_tfiib-chipnexus-libsizenorm-diffbind-results-intragenic-all.tsv
         intergenic: ../chipnexus-tfiib-publication/diff_binding/spt6-1004-37C-v-WT-37C/libsizenorm/intergenic/spt6-1004-37C-v-WT-37C_tfiib-chipnexus-libsizenorm-diffbind-results-intergenic-all.tsv
