@@ -87,7 +87,7 @@ main = function(theme_spec, in_genic, in_intra, in_anti, in_inter, alpha,
         scale_y_reverse(limits = c(max(summary_df[["ymax_unscaled"]]), -.5),
                         expand = c(0,0))+
         theme_void() +
-        theme(plot.margin = margin(l=2, unit="pt"))
+        theme(plot.margin = margin(l=0, t=11/2, unit="pt"))
 
     orf_label = textGrob(label="ORF",
                          x=0.55, y=0.5, gp=gpar(fontsize=7))
@@ -97,7 +97,7 @@ main = function(theme_spec, in_genic, in_intra, in_anti, in_inter, alpha,
     inter = textGrob(label = "intergenic",
                      x=0.07, y=0.35, hjust=0, vjust=0.5, gp=gpar(fontsize=7))
     inter_dash = linesGrob(x=c(0.31, 0.31), y=c(0.5, 0.35), gp=gpar(lty="twodash"))
-    inter_arrow = linesGrob(x=c(0.31, 0.23), y=c(0.35, 0.35),
+    inter_arrow = linesGrob(x=c(0.31, 0.245), y=c(0.35, 0.35),
                             arrow = arrow(length=unit(0.15, "cm")))
     intra = textGrob(label = "intragenic",
                      x=0.78, y=0.93, hjust=0, vjust=0.5, gp=gpar(fontsize=7))
@@ -112,7 +112,7 @@ main = function(theme_spec, in_genic, in_intra, in_anti, in_inter, alpha,
     anti = textGrob(label = "antisense",
                      x=0.2, y=0.2, hjust=0, vjust=0.5, gp=gpar(fontsize=7))
     anti_dash = linesGrob(x=c(0.5, 0.5), y=c(0.5, 0.2), gp=gpar(lty="twodash"))
-    anti_arrow = linesGrob(x=c(0.5, 0.355), y=c(0.2, 0.2),
+    anti_arrow = linesGrob(x=c(0.5, 0.37), y=c(0.2, 0.2),
                             arrow = arrow(length=unit(0.15, "cm")))
     genome_line = linesGrob(x=c(0.09,0.93), y=c(0.5, 0.5))
 
@@ -124,7 +124,8 @@ main = function(theme_spec, in_genic, in_intra, in_anti, in_inter, alpha,
                                  orf_box, orf_label, inter, intra, anti, genic))
 
     fig_one_c = arrangeGrob(diagram, diffexp_summary, ncol=1, heights=c(0.4, 1)) %>%
-        add_label("C", x_pos=0.06)
+        add_label("C", x_pos=0.055)
+
 
     ggsave(svg_out, plot=fig_one_c, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_one_c, width=fig_width, height=fig_height, units="cm")

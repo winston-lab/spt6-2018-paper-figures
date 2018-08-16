@@ -13,18 +13,20 @@ main = function(one_a, one_b, one_c, one_d,
                    c(1,1,1,1,1,1,1,1,1,1,1,1),
                    c(1,1,1,1,1,1,1,1,1,1,1,1),
                    c(1,1,1,1,1,1,1,1,1,1,1,1),
-                   c(2,2,3,3,3,3,3,4,4,4,4,4),
-                   c(2,2,3,3,3,3,3,4,4,4,4,4),
-                   c(2,2,3,3,3,3,3,4,4,4,4,4),
-                   c(2,2,3,3,3,3,3,4,4,4,4,4),
-                   c(2,2,3,3,3,3,3,4,4,4,4,4))
+                   c(2,2,2,3,3,3,3,3,3,3,3,3),
+                   c(2,2,2,3,3,3,3,3,3,3,3,3),
+                   c(2,2,2,3,3,3,3,3,3,3,3,3),
+                   c(2,2,2,3,3,3,3,3,3,3,3,3),
+                   c(2,2,2,3,3,3,3,3,3,3,3,3))
 
     load(one_a)
     load(one_b)
     load(one_c)
     load(one_d)
 
-    fig_one = arrangeGrob(fig_one_a, fig_one_b, fig_one_c, fig_one_d, layout_matrix=layout)
+    fig_one = arrangeGrob(fig_one_a, fig_one_b,
+                          arrangeGrob(fig_one_c, fig_one_d, nrow=1),
+                          layout_matrix=layout)
 
     ggsave(svg_out, plot=fig_one, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_one, width=fig_width, height=fig_height, units="cm")

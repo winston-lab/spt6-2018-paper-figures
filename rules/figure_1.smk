@@ -26,7 +26,8 @@ rule figure_one_a:
 rule figure_one_b:
     input:
         data_path = config["figure_one"]["one_b"]["data_path"],
-        blot_path = config["figure_one"]["one_b"]["blot_path"],
+        spt6_blot_path = config["figure_one"]["one_b"]["spt6_blot_path"],
+        dst1_blot_path = config["figure_one"]["one_b"]["dst1_blot_path"],
         theme = config["theme_spec"]
     output:
         svg = "figure1/figure1B/spt6_2018_figure1B-SPT6-western-blot.svg",
