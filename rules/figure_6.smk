@@ -61,7 +61,8 @@ rule figure_six_c:
         theme = config["theme_spec"],
         spt6_blot_path = config["figure_six"]["six_c"]["spt6_blot_path"],
         pgk1_blot_path = config["figure_six"]["six_c"]["pgk1_blot_path"],
-        data_path = config["figure_six"]["six_c"]["data_path"],
+        western_data_path = config["figure_six"]["six_c"]["western_data_path"],
+        qpcr_data_path = config["figure_six"]["six_c"]["qpcr_data_path"],
     output:
         svg = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-RTqPCR.svg",
         pdf = "figure6/figure6C/spt6_2018_figure6C-spt6-depletion-RTqPCR.pdf",

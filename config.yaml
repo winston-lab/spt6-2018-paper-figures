@@ -334,10 +334,10 @@ figure_six:
     #     height: 4.5
     #     width: 9.5
     six_c:
-        spt6_blot_path: ../spt6-small-data/spt6-depletion-ssa4-rtqpcr/Spt6-AID-blot.png
-        pgk1_blot_path: ../spt6-small-data/spt6-depletion-ssa4-rtqpcr/Pgk1-blot.png
-        # data_path: ../small-data/spt6-depletion-ssa4-rtqpcr/spt6_depletion_RTqPCR.tsv
-        data_path: ../spt6-small-data/spt6-depletion-ssa4-rtqpcr/spt6_depletion_RTqPCR_experiment2.tsv
+        spt6_blot_path: ../spt6-small-data/spt6-depletion-rtqpcr/Spt6_depletion_Spt6_blot.png
+        pgk1_blot_path: ../spt6-small-data/spt6-depletion-rtqpcr/Spt6_depletion_Pgk1_blot.png
+        western_data_path: ../spt6-small-data/spt6-depletion-rtqpcr/spt6_depletion_western_quantification.tsv
+        qpcr_data_path: ../spt6-small-data/spt6-depletion-rtqpcr/spt6_depletion_RTqPCR_experiment2.tsv
         height: 8
         width: 10
 

@@ -1,11 +1,83 @@
 
 main = function(theme_spec,
                 spt6_blot_path, pgk1_blot_path,
-                data_path,
+                western_data_path,
+                qpcr_data_path,
                 fig_width, fig_height,
                 svg_out, pdf_out, png_out, grob_out){
     source(theme_spec)
     library(png)
+
+    df = read_tsv(western_data_path) %>%
+        select(1,2,3,4,5,18,19,20,21,22) %>%
+        magrittr::set_colnames(c("temperature", "time", "condition", "replicate", "antigen",
+                               "gray_min", "gray_max", "gray_mean", "gray_median", "integrated_density")) %>%
+        select(temperature, time, condition, replicate, antigen, integrated_density)
+
+    bg_df = df %>% filter(antigen=="background")
+
+    df %<>%
+        filter(antigen != "background") %>%
+        left_join(bg_df, by=c("temperature", "time", "condition", "replicate")) %>%
+        mutate(norm_signal = integrated_density.x-integrated_density.y) %>%
+        select(-c(integrated_density.x, integrated_density.y, antigen.y)) %>%
+        rename(antigen = antigen.x) %>%
+        group_by(temperature, time, condition) %>%
+        spread(antigen, norm_signal) %>%
+        mutate(norm_signal = Spt6/Pgk1) %>%
+        group_by(temperature, time, condition) %>%
+        mutate(group_mean = mean(norm_signal, na.rm=TRUE))
+
+    #rescale data so that mean of WT group is 1
+    wt_og_mean = df %>%
+        filter(condition=="DMSO", time==0, temperature==30) %>%
+        distinct(group_mean) %>%
+        pull(group_mean)
+
+    df %<>%
+        mutate(norm_scaled = scales::rescale(norm_signal, from=c(0, wt_og_mean)))
+
+    summary_df = df %>%
+        group_by(temperature, time, condition) %>%
+        summarise(group_mean_scaled = mean(norm_scaled, na.rm=TRUE),
+                  group_sd = sd(norm_scaled, na.rm=TRUE))
+
+    # barplot = ggplot() +
+    #     geom_hline(yintercept = 0) +
+    #     geom_col(data = summary_df, aes(x=interaction(condition, temperature),
+    #                                     y=group_mean_scaled,
+    #                                     group = time),
+    #              position = position_dodge(width=0.8),
+    #              color="black", fill=NA, width=0.8) +
+    #     geom_errorbar(data = summary_df, aes(x=interaction(condition, temperature),
+    #                                          ymax = group_mean_scaled+group_sd,
+    #                                          ymin = pmax(group_mean_scaled-group_sd, 0),
+    #                                          group = time),
+    #                   position = position_dodge(width=0.8),
+    #                   width = 0.2, size=0.8) +
+    #     geom_point(data = df, aes(x = interaction(condition, temperature),
+    #                               y = norm_scaled,
+    #                               group = time,
+    #                               color = factor(time),
+    #                               shape = factor(replicate)),
+    #                position = position_jitterdodge(dodge.width=0.8),
+    #                size=2, alpha=0.8) +
+    #     geom_text(data = summary_df, aes(x= interaction(condition, temperature),
+    #                                      y = -0.1,
+    #                                      group = time,
+    #                                      label = paste("atop(", round(group_mean_scaled,2), ", phantom(.)", "%+-%",
+    #                                                    round(group_sd, 2), "~ phantom(.))")),
+    #               parse = TRUE,
+    #               position = position_dodge(width=0.8),
+    #               size=7/72*25.4) +
+    #     scale_color_gdocs(name = "minutes", na.value="black") +
+    #     ggtitle("Spt6 levels normalized to Pgk1") +
+    #     theme_default +
+    #     theme(axis.title = element_blank(),
+    #           legend.title = element_text(size=9),
+    #           legend.position = c(0.9, 0.9))
+    # ggsave('spt6_depletion_western_quant.png', plot = barplot, width=20, height=10, units="cm")
+
 
     #diagram
     spt6_ellipse = ellipseGrob(x=0.27, y=0.45,
@@ -37,45 +109,35 @@ main = function(theme_spec,
     proteasome_bottom = ellipseGrob(x=0.665, y=0.31,
                                  ar=2.5, size=1.7, angle=0,
                                  gp = gpar(fill="#acd65b"))
-    proteasome_left = linesGrob(x = c(0.612, 0.612),
+    proteasome_left = linesGrob(x = c(0.60, 0.60),
                                 y = c(0.31, 0.79))
-    proteasome_right = linesGrob(x = c(0.718, 0.718),
+    proteasome_right = linesGrob(x = c(0.73, 0.73),
                                 y = c(0.31, 0.79))
     proteasome_body = rectGrob(hjust=0.5, vjust=0,
                                x=0.665, y=0.31,
-                               height=0.48, width=0.106,
+                               height=0.48, width=0.130,
                                gp = gpar(fill="#acd65b", lwd=NA))
     proteasome_body_two = rectGrob(hjust=0.5, vjust=0,
                                x=0.665, y=0.408,
-                               height=0.1, width=0.106,
+                               height=0.1, width=0.130,
                                gp = gpar(fill="#acd65b", lwd=NA))
     proteasome_body_three = rectGrob(hjust=0.5, vjust=0,
                                x=0.665, y=0.702,
-                               height=0.1, width=0.106,
+                               height=0.1, width=0.130,
                                gp = gpar(fill="#acd65b", lwd=NA))
     proteasome_text = textGrob(label = "proteasome",
                                x = 0.65, y=0.98, hjust=0, vjust=1,
                                gp = gpar(fontsize=7))
-    arc_one = curveGrob(x1=0.45, y1=0.8, x2=0.63, y2=0.87,
-                        square=FALSE, curvature=-0.5, ncp=10,
+    arc_one = curveGrob(x1=0.42, y1=0.81, x2=0.63, y2=0.87,
+                        square=FALSE, curvature=-0.6, ncp=10,
                         arrow = arrow(length=unit(0.07, "npc")))
-    arc_two = curveGrob(x1=0.7, y1=0.24, x2=0.88, y2=0.31,
-                        square=FALSE, curvature=0.5, ncp=10,
+    arc_two = curveGrob(x1=0.69, y1=0.23, x2=0.88, y2=0.31,
+                        square=FALSE, curvature=0.6, ncp=10,
                         arrow = arrow(length=unit(0.07, "npc")))
-    pep_one = ellipseGrob(x=0.88, y=0.5, size=0.6,
-                          gp = gpar(fill="#75d7f9"))
-    pep_two = ellipseGrob(x=0.84, y=0.6, size=0.6,
-                          gp = gpar(fill="#fbb03b"))
-    pep_three = ellipseGrob(x=0.86, y=0.4, size=0.6,
-                          gp = gpar(fill="#fbb03b"))
-    pep_four = ellipseGrob(x=0.89, y=0.64, size=0.6,
-                          gp = gpar(fill="#fbb03b"))
-    pep_five = ellipseGrob(x=0.90, y=0.42, size=0.6,
-                          gp = gpar(fill="#fbb03b"))
-    pep_six = ellipseGrob(x=0.93, y=0.58, size=0.6,
-                          gp = gpar(fill="#fbb03b"))
-    pep_seven = ellipseGrob(x=0.95, y=0.46, size=0.6,
-                          gp = gpar(fill="#fbb03b"))
+    peptides = ellipseGrob(x=c(0.88, 0.84, 0.86, 0.89, 0.90, 0.93, 0.95),
+                           y=c(0.50, 0.60, 0.40, 0.64, 0.42, 0.58, 0.46),
+                           size=0.6,
+                           gp = gpar(fill=c("#75d7f9", rep("#fbb03b", 6))))
     diagram = gTree(children = gList(linker,
                                      spt6_ellipse, spt6_ellipse_text,
                                      aid_ellipse, aid_ellipse_text,
@@ -86,77 +148,97 @@ main = function(theme_spec,
                                      proteasome_top,
                                      proteasome_left, proteasome_right,
                                      proteasome_text,
-                                     pep_one, pep_two, pep_three, pep_four,
-                                     pep_five, pep_six, pep_seven))
+                                     peptides))
 
     #western blot
-    dmso_label = textGrob(label="DMSO",
-                          x=0.292, y=0.98,
-                          vjust=1,
-                          gp=gpar(fontsize=7))
-    iaa_label = textGrob(label="IAA",
-                          x=0.58, y=0.98,
-                          vjust=1,
-                          gp=gpar(fontsize=7))
-
-
-    dmso_t15 = textGrob(label = "15",
-                        x=0.292, y=0.85, vjust=1,
-                        gp=gpar(fontsize=7))
-    dmso_t0 = textGrob(label = "0",
-                        x=0.197, y=0.85, vjust=1,
-                        gp=gpar(fontsize=7))
-    dmso_t80 = textGrob(label = "80",
-                        x=0.387, y=0.85, vjust=1,
-                        gp=gpar(fontsize=7))
-    iaa_t15 = textGrob(label = "15",
-                        x=0.58, y=0.85, vjust=1,
-                        gp=gpar(fontsize=7))
-    iaa_t0 = textGrob(label = "0",
-                        x=0.485, y=0.85, vjust=1,
-                        gp=gpar(fontsize=7))
-    iaa_t80 = textGrob(label = expression(80 ~ min ~ at ~ 37*degree*C),
-                        x=0.648, y=0.85, hjust=0, vjust=0.95,
-                        gp=gpar(fontsize=7))
+    right_align = 0.83
+    increment = (right_align-0.04)/10
+    start = increment/2+0.02
 
     pgk1_blot = rasterGrob(readPNG(pgk1_blot_path),
-                      width=0.78, x=0.482,
-                      height=0.2, y=0.26,
+                      width=right_align-0.01, x=right_align/2,
+                      height=0.2, y=0.32,
+                      hjust=0.4875,
                       vjust=0.57)
-    pgk1_outline = rectGrob(width=0.65, x=0.11,
-                            height=0.3, y=0.26,
-                            hjust=0, vjust=0.5,
+    pgk1_outline = rectGrob(width=right_align-0.04, x=right_align/2,
+                            height=0.2, y=0.32,
                             gp=gpar(lwd=0.5,fill=NA))
     spt6_blot = rasterGrob(readPNG(spt6_blot_path),
-                      width=0.79, x=0.482,
-                      height=0.2, y=0.57,
+                      width=right_align+0.01, x=right_align/2,
+                      height=0.2, y=0.54,
+                      hjust=0.46,
                       vjust=0.5)
-    spt6_outline = rectGrob(width=0.65, x=0.11,
-                            height=0.3, y=0.59,
-                            hjust=0, vjust=0.5,
+    spt6_outline = rectGrob(width=right_align-0.04, x=right_align/2,
+                            height=0.2, y=0.54,
                             gp=gpar(lwd=0.5,fill=NA))
+
+    min_at_temp = textGrob(label = "min at temp.",
+                           x=start+9*increment+0.025,
+                           y=0.695,
+                           hjust=0,
+                           gp = gpar(fontsize=6))
+    time_labels = textGrob(label = c(0, 20, 80, 0, 20, 80, 20, 80, 20, 80),
+                        x=seq(start, start+9*increment, increment),
+                        y=0.70,
+                        gp=gpar(fontsize=7))
+    condition_lines = segmentsGrob(x0 = start+c(0, 3, 6, 8)*increment-0.01,
+                                   x1 = start+c(2, 5, 7, 9)*increment+0.01,
+                                   y0 = 0.76, y1=0.76,
+                                   gp = gpar(lwd = 0.5))
+    condition_labels = textGrob(label = c("DMSO", "IAA", "DMSO", "IAA"),
+                                x = start+c(1,4,6.5,8.5)*increment,
+                                y = 0.82,
+                                gp = gpar(fontsize=7))
+    temperature_lines = segmentsGrob(x0 = start+c(0, 6)*increment-0.01,
+                                   x1 = start+c(5, 9)*increment+0.01,
+                                   y0 = 0.88, y1=0.88,
+                                   gp = gpar(lwd=0.5))
+    temperature_labels = textGrob(label = c(expression(30*degree*C), expression(37*degree*C)),
+                                x = start+c(2.5, 7.5)*increment,
+                                y = 0.94,
+                                gp = gpar(fontsize=7))
+    summary_df %<>%
+        filter(! is.na(time)) %>%
+        arrange(temperature, condition, time) %>%
+        mutate(mean_label = sprintf("%.2f", round(group_mean_scaled, 2)),
+               sd_label = sprintf("%.2f", round(group_sd, 2)))
+
+    quant_labels = textGrob(label =  c(expression(textstyle(atop("1.00", phantom(.) %+-% 0.47 ~  phantom(.)))),
+                                       expression(textstyle(atop(0.95, phantom(.) %+-% 0.22 ~  phantom(.)))),
+                                       expression(textstyle(atop(0.92, phantom(.) %+-% 0.25 ~  phantom(.)))),
+                                       expression(textstyle(atop(0.25, phantom(.) %+-% 0.02 ~  phantom(.)))),
+                                       expression(textstyle(atop(0.14, phantom(.) %+-% 0.02 ~  phantom(.)))),
+                                       expression(textstyle(atop(0.07, phantom(.) %+-% 0.05 ~  phantom(.)))),
+                                       expression(textstyle(atop(0.99, phantom(.) %+-% 0.08 ~  phantom(.)))),
+                                       expression(textstyle(atop(0.96, phantom(.) %+-% 0.33 ~  phantom(.)))),
+                                       expression(textstyle(atop(0.24, phantom(.) %+-% 0.06 ~  phantom(.)))),
+                                       expression(textstyle(atop(0.49, phantom(.) %+-% 0.17 ~  phantom(.))))),
+                        x=seq(start, start+9*increment, increment),
+                        y=0.10, gp=gpar(fontsize=7))
+
     spt6_label = textGrob(label="Spt6-AID",
-                          x=0.77, y=0.59,
-                          hjust=0, vjust=0.5,
+                          x=right_align-0.01, y=0.54,
+                          hjust=0,
                           gp=gpar(fontsize=7))
     pgk1_label = textGrob(label="Pgk1",
-                          x=0.77, y=0.26,
-                          hjust=0, vjust=0.5,
+                          x=right_align-0.01, y=0.31,
+                          hjust=0,
                           gp=gpar(fontsize=7))
-    dmso_line = linesGrob(x=c(0.157, 0.407), y=c(0.87, 0.87))
-    iaa_line = linesGrob(x=c(0.455, 0.705), y=c(0.87, 0.87))
-    align = linesGrob(x=c(0.485, 0.485), y=c(0,1))
     western = gTree(children = gList(spt6_blot, pgk1_blot,
                                      spt6_outline, pgk1_outline,
-                                     dmso_label, iaa_label,
-                                     dmso_line, iaa_line,
-                                     dmso_t15, iaa_t15,
-                                     dmso_t80, iaa_t80,
-                                     dmso_t0, iaa_t0,
+                                     time_labels,
+                                     min_at_temp,
+                                     condition_lines,
+                                     condition_labels,
+                                     temperature_lines,
+                                     temperature_labels,
+                                     quant_labels,
                                      spt6_label, pgk1_label))
 
+    # ggsave("test.pdf", plot=western, width=5.075, height=2.22, units="cm")
+
     #rt-qpcr
-    df = read_tsv(data_path,
+    df = read_tsv(qpcr_data_path,
                   col_types = 'cciid') %>%
         mutate(strain = ordered(strain,
                                 levels = c("spt6-AID2 IAA", "spt6-AID2 DMSO"),
@@ -315,13 +397,12 @@ main = function(theme_spec,
               # strip.text = element_text(size=7, color="black", hjust=0,
               #                           face="italic"),
               legend.title = element_text(size=7, color="black"),
-              plot.margin = margin(0,0,2,0,"pt"))
+              plot.margin = margin(4,0,0,0,"pt"))
 
     fig_six_c = arrangeGrob(diagram, western,
-                            barplot, layout_matrix = rbind(c(1,2),
-                            # lineplot, layout_matrix = rbind(c(1,2),
-                                                           c(3,3),
-                                                           c(3,3))) %>%
+                            barplot, layout_matrix = rbind(c(1,1,2,2,2),
+                                                           c(3,3,3,3,3),
+                                                           c(3,3,3,3,3))) %>%
         add_label("C")
 
     ggsave(svg_out, plot=fig_six_c, width=fig_width, height=fig_height, units="cm")
@@ -333,7 +414,8 @@ main = function(theme_spec,
 main(theme_spec = snakemake@input[["theme"]],
      spt6_blot_path = snakemake@input[["spt6_blot_path"]],
      pgk1_blot_path = snakemake@input[["pgk1_blot_path"]],
-     data_path = snakemake@input[["data_path"]],
+     western_data_path = snakemake@input[["western_data_path"]],
+     qpcr_data_path = snakemake@input[["qpcr_data_path"]],
      fig_width = snakemake@params[["width"]],
      fig_height = snakemake@params[["height"]],
      svg_out = snakemake@output[["svg"]],

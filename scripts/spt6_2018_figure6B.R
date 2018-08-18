@@ -75,7 +75,7 @@ main = function(theme_spec,
               legend.position = c(0.99, 0.98),
               legend.justification = c(1,0.85),
               legend.background = element_blank(),
-              plot.margin = margin(0, 11/2, 2, 0, "pt"))
+              plot.margin = margin(0, 11/2, 0, 0, "pt"))
 
     fig_six_b %<>% add_label("B")
 
