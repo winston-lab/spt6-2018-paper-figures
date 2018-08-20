@@ -1,6 +1,6 @@
 
 main = function(theme_spec,
-                spt6_blot_path, pgk1_blot_path,
+                blot_path,
                 western_data_path,
                 qpcr_data_path,
                 fig_width, fig_height,
@@ -155,21 +155,21 @@ main = function(theme_spec,
     increment = (right_align-0.04)/10
     start = increment/2+0.02
 
-    pgk1_blot = rasterGrob(readPNG(pgk1_blot_path),
-                      width=right_align-0.01, x=right_align/2,
-                      height=0.2, y=0.32,
-                      hjust=0.4875,
-                      vjust=0.57)
-    pgk1_outline = rectGrob(width=right_align-0.04, x=right_align/2,
-                            height=0.2, y=0.32,
-                            gp=gpar(lwd=0.5,fill=NA))
-    spt6_blot = rasterGrob(readPNG(spt6_blot_path),
-                      width=right_align+0.01, x=right_align/2,
-                      height=0.2, y=0.54,
-                      hjust=0.46,
+    blot = rasterGrob(readPNG(blot_path),
+                      width=right_align+0.02, x=right_align/2+0.002,
+                      height=0.55, y=0.42,
+                      hjust=0.5,
                       vjust=0.5)
+    pgk1_outline = rectGrob(width=right_align-0.04, x=right_align/2,
+                            height=0.175, y=0.305,
+                            gp=gpar(lwd=0.5,fill=NA))
+    # spt6_blot = rasterGrob(readPNG(spt6_blot_path),
+    #                   width=right_align+0.01, x=right_align/2,
+    #                   height=0.2, y=0.54,
+    #                   hjust=0.46,
+    #                   vjust=0.5)
     spt6_outline = rectGrob(width=right_align-0.04, x=right_align/2,
-                            height=0.2, y=0.54,
+                            height=0.175, y=0.545,
                             gp=gpar(lwd=0.5,fill=NA))
 
     min_at_temp = textGrob(label = "min at temp.",
@@ -217,14 +217,14 @@ main = function(theme_spec,
                         y=0.10, gp=gpar(fontsize=7))
 
     spt6_label = textGrob(label="Spt6-AID",
-                          x=right_align-0.01, y=0.54,
+                          x=right_align-0.01, y=0.545,
                           hjust=0,
                           gp=gpar(fontsize=7))
     pgk1_label = textGrob(label="Pgk1",
-                          x=right_align-0.01, y=0.31,
+                          x=right_align-0.01, y=0.305,
                           hjust=0,
                           gp=gpar(fontsize=7))
-    western = gTree(children = gList(spt6_blot, pgk1_blot,
+    western = gTree(children = gList(blot,
                                      spt6_outline, pgk1_outline,
                                      time_labels,
                                      min_at_temp,
@@ -235,7 +235,7 @@ main = function(theme_spec,
                                      quant_labels,
                                      spt6_label, pgk1_label))
 
-    # ggsave("test.pdf", plot=western, width=5.075, height=2.22, units="cm")
+    # ggsave("test.pdf", plot=western, width=6.09, height=2.22, units="cm")
 
     #rt-qpcr
     df = read_tsv(qpcr_data_path,
@@ -412,8 +412,7 @@ main = function(theme_spec,
 }
 
 main(theme_spec = snakemake@input[["theme"]],
-     spt6_blot_path = snakemake@input[["spt6_blot_path"]],
-     pgk1_blot_path = snakemake@input[["pgk1_blot_path"]],
+     blot_path = snakemake@input[["blot_path"]],
      western_data_path = snakemake@input[["western_data_path"]],
      qpcr_data_path = snakemake@input[["qpcr_data_path"]],
      fig_width = snakemake@params[["width"]],

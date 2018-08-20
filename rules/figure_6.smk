@@ -59,8 +59,7 @@ rule figure_six_b:
 rule figure_six_c:
     input:
         theme = config["theme_spec"],
-        spt6_blot_path = config["figure_six"]["six_c"]["spt6_blot_path"],
-        pgk1_blot_path = config["figure_six"]["six_c"]["pgk1_blot_path"],
+        blot_path = config["figure_six"]["six_c"]["blot_path"],
         western_data_path = config["figure_six"]["six_c"]["western_data_path"],
         qpcr_data_path = config["figure_six"]["six_c"]["qpcr_data_path"],
     output:

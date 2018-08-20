@@ -329,13 +329,8 @@ figure_six:
         mnase_data: ../spt6-data-integration/datavis/spt6-genic-TSSs/spt6-genic-TSSs_MNase-seq.tsv.gz
         height: 10
         width: 8
-    # six_c:
-    #     go_results: ../tss-seq/gene_ontology/spt6-1004-37C-v-WT-37C/spikenorm/genic/spt6-1004-37C-v-WT-37C-GO-spikenorm-up-genic-results.tsv
-    #     height: 4.5
-    #     width: 9.5
     six_c:
-        spt6_blot_path: ../spt6-small-data/spt6-depletion-rtqpcr/Spt6_depletion_Spt6_blot.png
-        pgk1_blot_path: ../spt6-small-data/spt6-depletion-rtqpcr/Spt6_depletion_Pgk1_blot.png
+        blot_path: ../spt6-small-data/spt6-depletion-rtqpcr/Spt6_depletion_Spt6_and_Pgk1_blot.png
         western_data_path: ../spt6-small-data/spt6-depletion-rtqpcr/spt6_depletion_western_quantification.tsv
         qpcr_data_path: ../spt6-small-data/spt6-depletion-rtqpcr/spt6_depletion_RTqPCR_experiment2.tsv
         height: 8
