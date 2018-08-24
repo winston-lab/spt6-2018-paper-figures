@@ -41,6 +41,7 @@ main = function(theme_spec,
         group_by(temperature, time, condition) %>%
         summarise(group_mean_scaled = mean(norm_scaled, na.rm=TRUE),
                   group_sd = sd(norm_scaled, na.rm=TRUE))
+    print(summary_df)
 
     # barplot = ggplot() +
     #     geom_hline(yintercept = 0) +
@@ -193,7 +194,7 @@ main = function(theme_spec,
                                    x1 = start+c(5, 9)*increment+0.01,
                                    y0 = 0.88, y1=0.88,
                                    gp = gpar(lwd=0.5))
-    temperature_labels = textGrob(label = c(expression(30*degree*C), expression(37*degree*C)),
+    temperature_labels = textGrob(label = c(expression(37*degree*C), expression(30*degree*C)),
                                 x = start+c(2.5, 7.5)*increment,
                                 y = 0.94,
                                 gp = gpar(fontsize=7))
@@ -204,15 +205,15 @@ main = function(theme_spec,
                sd_label = sprintf("%.2f", round(group_sd, 2)))
 
     quant_labels = textGrob(label =  c(expression(textstyle(atop("1.00", phantom(.) %+-% 0.47 ~  phantom(.)))),
-                                       expression(textstyle(atop(0.95, phantom(.) %+-% 0.22 ~  phantom(.)))),
-                                       expression(textstyle(atop(0.92, phantom(.) %+-% 0.25 ~  phantom(.)))),
-                                       expression(textstyle(atop(0.25, phantom(.) %+-% 0.02 ~  phantom(.)))),
-                                       expression(textstyle(atop(0.14, phantom(.) %+-% 0.02 ~  phantom(.)))),
-                                       expression(textstyle(atop(0.07, phantom(.) %+-% 0.05 ~  phantom(.)))),
                                        expression(textstyle(atop(0.99, phantom(.) %+-% 0.08 ~  phantom(.)))),
                                        expression(textstyle(atop(0.96, phantom(.) %+-% 0.33 ~  phantom(.)))),
+                                       expression(textstyle(atop(0.25, phantom(.) %+-% 0.02 ~  phantom(.)))),
                                        expression(textstyle(atop(0.24, phantom(.) %+-% 0.06 ~  phantom(.)))),
-                                       expression(textstyle(atop(0.49, phantom(.) %+-% 0.17 ~  phantom(.))))),
+                                       expression(textstyle(atop(0.49, phantom(.) %+-% 0.17 ~  phantom(.)))),
+                                       expression(textstyle(atop(0.95, phantom(.) %+-% 0.22 ~  phantom(.)))),
+                                       expression(textstyle(atop(0.92, phantom(.) %+-% 0.25 ~  phantom(.)))),
+                                       expression(textstyle(atop(0.14, phantom(.) %+-% 0.02 ~  phantom(.)))),
+                                       expression(textstyle(atop(0.07, phantom(.) %+-% 0.05 ~  phantom(.))))),
                         x=seq(start, start+9*increment, increment),
                         y=0.10, gp=gpar(fontsize=7))
 
