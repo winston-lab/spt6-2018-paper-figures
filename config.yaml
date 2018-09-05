@@ -15,7 +15,7 @@ figure_one:
     # SPT6 western blot
     one_b:
         data_path: ../spt6-small-data/spt6-western/Spt6_western_quantification_2.tsv
-        blot_path: ../spt6-small-data/spt6-western/spt6-western-2.png
+        blot_path: ../spt6-small-data/spt6-western/spt6-western-3.png
         height: 5.83
         width: 2.9
     # TSS-seq differential expression double barplot

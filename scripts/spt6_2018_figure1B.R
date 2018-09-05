@@ -6,33 +6,33 @@ main = function(theme_spec, data_path, blot_path,
     library(png)
 
     df = read_tsv(data_path) %>%
-        select(1,2,3,4,5,18,19,20,21,22) %>% 
+        select(1,2,3,4,5,18,19,20,21,22) %>%
         magrittr::set_colnames(c("strain", "temperature", "antigen", "background", "replicate",
-                                 "gray_min", "grey_max", "gray_mean", "gray_median", "auc")) %>% 
-        select(strain, temperature, antigen, background, replicate, auc) %>% 
-        spread(background, auc) %>% 
-        mutate(signal = pmax(`FALSE`-`TRUE`, 0)) %>% 
-        select(-c(`FALSE`, `TRUE`)) %>% 
-        spread(antigen, signal) %>% 
-        mutate(spikenorm = Spt6/spikein) %>% 
-        group_by(strain, temperature) %>% 
+                                 "gray_min", "grey_max", "gray_mean", "gray_median", "auc")) %>%
+        select(strain, temperature, antigen, background, replicate, auc) %>%
+        spread(background, auc) %>%
+        mutate(signal = pmax(`FALSE`-`TRUE`, 0)) %>%
+        select(-c(`FALSE`, `TRUE`)) %>%
+        spread(antigen, signal) %>%
+        mutate(spikenorm = Spt6/spikein) %>%
+        group_by(strain, temperature) %>%
         mutate(group_mean = mean(spikenorm, na.rm=TRUE)) %>%
-        ungroup() %>% 
+        ungroup() %>%
         mutate(strain = ordered(strain, levels = c("WT", "spt6-1004")))
-    
+
     #rescale data so that mean of WT group is 1
     wt_og_mean = df %>%
         filter(strain=="WT", temperature==30) %>%
         distinct(group_mean) %>%
         pull(group_mean)
-    
+
     df %<>% mutate(spikenorm_scaled = scales::rescale(spikenorm, from=c(0, wt_og_mean)))
-    
+
     summary_df = df %>%
-        group_by(strain, temperature) %>% 
+        group_by(strain, temperature) %>%
         summarise(group_mean_scaled = mean(spikenorm_scaled),
                   group_sd = sd(spikenorm_scaled))
-    
+
     # barplot = ggplot() +
     #     geom_hline(yintercept = 0) +
     #     geom_col(data = summary_df, aes(x=interaction(strain, temperature),
@@ -66,7 +66,7 @@ main = function(theme_spec, data_path, blot_path,
     text_edge = 0.3
     increment = (1-text_edge-0.04)/4
     start = increment/2+0.02
-    
+
     align1 = segmentsGrob(x0=text_edge+start,
                           x1=text_edge+start, y0=0, y1=1,
                           gp = gpar(lty="dashed"))
@@ -120,9 +120,9 @@ main = function(theme_spec, data_path, blot_path,
                           gp = gpar(fontsize = 7,
                                     fontface = "italic"))
     blot = rasterGrob(readPNG(blot_path),
-                      width=1-text_edge+.02,
-                      x=text_edge + (1-text_edge)/2,
-                      height=0.37,
+                      width=1-text_edge+.05,
+                      x=text_edge + (1-text_edge)/2 + 0.01,
+                      height=0.39,
                       y=unit(0.58, "npc"))
     spt6_outline = rectGrob(width=1-text_edge-0.04,
                             x=text_edge + (1-text_edge)/2,
@@ -150,7 +150,7 @@ main = function(theme_spec, data_path, blot_path,
                                gp = gpar(fontsize=8),
                                x = text_edge+start+3*increment,
                                y = 0.365)
-    
+
     western = gTree(children = gList(
         blot,
         # align1, align2, align3, align4,
@@ -163,7 +163,7 @@ main = function(theme_spec, data_path, blot_path,
         quant_label_one, quant_label_two, quant_label_three, quant_label_four))
     fig_one_b = western %>%
         add_label("B")
-    
+
     ggsave(svg_out, plot=fig_one_b, width=fig_width, height=fig_height, units="cm")
     ggsave(pdf_out, plot=fig_one_b, width=fig_width, height=fig_height, units="cm")
     ggsave(png_out, plot=fig_one_b, width=fig_width, height=fig_height, units="cm", dpi=326)
