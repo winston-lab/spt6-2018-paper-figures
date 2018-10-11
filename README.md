@@ -3,7 +3,7 @@
 
 ## description
 
-The code used to produce the figures and supplemental tables for [our publication](https://doi.org/10.1016/j.molcel.2018.09.005). An archived version suitable for reproducing the paper's figures starting from raw data is available at [Zenodo](https://doi.org/10.5281/zenodo.1325930).
+The code used to produce the figures and supplemental tables for [our publication](https://doi.org/10.1016/j.molcel.2018.09.005). An archived version suitable for reproducing the paper's figures starting from raw data is available at [Zenodo](https://doi.org/10.5281/zenodo.1409826).
 
 ## requirements
 
